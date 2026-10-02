@@ -68,7 +68,7 @@ Bộ kiểm thử gồm **53 bệnh án giả lập**, thuộc 12 nhóm phân lo
 * Cấp thường: 5 ca
 * 8 nhóm con của CindU và CSU: 3 ca/nhóm, tổng cộng 24 ca
 * Phản vệ: 10 ca
-* Sốc phản vệ: 9 ca  
+* Sốc phản vệ: 9 ca  ### đang chạy thì hết token =}}
 
 Kết quả cho thấy hệ thống phân loại đúng **43/53 ca**, tương ứng:
 
