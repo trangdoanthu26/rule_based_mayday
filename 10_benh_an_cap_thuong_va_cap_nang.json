@@ -1,0 +1,1190 @@
+[
+  {
+    "id": "BA_7642",
+    "nhan": "Cấp thường",
+    "du_lieu": {
+      "ma_benh_nhan": "BN09182",
+      "ma_ho_so": "HS88120",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Nguyễn Bích Ngọc",
+      "ngay_sinh": "1999-06-15",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0981234567",
+      "nghe_nghiep": "Nhân viên văn phòng",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 25 ngõ 12",
+      "dia_chi_xa_phuong": "Phường Kim Mã",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Công ty phần mềm",
+      "bhyt_so_the": "DN4019283746555",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Nguyễn Văn Hùng",
+      "nguoi_nha_so_dien_thoai": "0987654321",
+      "thoi_diem_kham_lan_dau": "2026-09-20 08:30",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-20",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-22",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-20",
+      "bac_si_kham": "BS. Nguyễn Văn Bình",
+      "chan_doan_chinh_cap": "",
+      "chan_doan_xac_dinh_cap": "",
+      "dau_hieu_nang_chi_tiet": [],
+      "thoi_gian_khoi_phat_gio": 12,
+      "trieu_chung_da_hien_tai": [
+        "Sẩn phù"
+      ],
+      "tien_su_benh_nen_lien_quan_da": [
+        "Không có"
+      ],
+      "dien_bien_da": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu": "Có",
+      "anh_san_phu": "Có",
+      "dac_diem_san_phu_cap": "Sẩn phù dạng tròn bờ rõ, rải rác ở tay và bụng",
+      "so_luong_san_phu": "20-50 nốt",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong": "≤50% BSA",
+      "hien_tai_co_phu_mach": "Không",
+      "anh_phu_mach": "Không",
+      "so_lan_phu_mach_tung_xay_ra": 0,
+      "so_lan_phu_mach_nang_can_vien": 0,
+      "vi_tri_phu_mach": [],
+      "thoi_gian_ton_tai_phu_mach": "",
+      "trieu_chung_ho_hap_co_khong": "Không",
+      "trieu_chung_ho_hap_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_ho_hap": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap": "",
+      "trieu_chung_tieu_hoa_co_khong": "Không",
+      "trieu_chung_tieu_hoa_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa": "",
+      "yeu_to_nghi_ngo_thuc_an": "Có (Cua biển)",
+      "yeu_to_nghi_ngo_thuoc": "Không",
+      "yeu_to_nghi_ngo_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_khac": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_thuc_an": 2,
+      "tien_su_phan_ung_yeu_to_thuc_an": "Không",
+      "tien_su_phan_ve_di_ung_khac_thuc_an": [
+        "Không"
+      ],
+      "can_nguyen_yeu_to_nghi_ngo": "Thức ăn (Cua biển)",
+      "wbc": 7.5,
+      "eo": 0.3,
+      "ba_bach_cau": 0.05,
+      "crp": 3.2,
+      "mau_lang_1h": 8,
+      "mau_lang_2h": 16,
+      "ft3": 4.5,
+      "ft4": 15.2,
+      "tsh": 2.1,
+      "ige_toan_phan": 120,
+      "anti_tpo": 10.0,
+      "ana_hep2": "Âm tính",
+      "sieu_am_tuyen_giap": "Bình thường",
+      "xet_nghiem_khac": "",
+      "can_lam_sang_chu_y_cap": "Chỉ số viêm trong giới hạn bình thường",
+      "da_dieu_tri_dot_nay": "Có",
+      "danh_sach_thuoc_da_dieu_tri": [
+        {
+          "ten_thuoc": "Loratadine 10mg",
+          "lieu_dung": "1 viên/ngày",
+          "thoi_gian_dung": "1 ngày"
+        }
+      ],
+      "so_lan_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh": 27,
+      "dot_gan_nhat_cach": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot": "",
+      "tien_su_gia_dinh_cap": "Không",
+      "dien_dieu_tri": "Ngoại trú",
+      "theo_doi_ngoai_tru_lan_kham": [
+        {
+          "lan_kham": 1,
+          "ngay_kham": "2026-09-20",
+          "bac_si_kham": "BS. Nguyễn Văn Bình"
+        }
+      ],
+      "ket_qua_cuoi_dot_ngoai_tru": "Khỏi bệnh"
+    }
+  },
+  {
+    "id": "BA_8319",
+    "nhan": "Cấp thường",
+    "du_lieu": {
+      "ma_benh_nhan": "BN04811",
+      "ma_ho_so": "HS33219",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Trần Minh Đức",
+      "ngay_sinh": "2018-11-20",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0912348899",
+      "nghe_nghiep": "Học sinh",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 10 phố Huế",
+      "dia_chi_xa_phuong": "Phường Hàng Bài",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Trường Tiểu học",
+      "bhyt_so_the": "TE1019283746111",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Trần Văn Nam",
+      "nguoi_nha_so_dien_thoai": "0912348899",
+      "thoi_diem_kham_lan_dau": "2026-09-21 10:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-21",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-23",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-21",
+      "bac_si_kham": "BS. Lê Thị Hà",
+      "chan_doan_chinh_cap": "",
+      "chan_doan_xac_dinh_cap": "",
+      "dau_hieu_nang_chi_tiet": [],
+      "thoi_gian_khoi_phat_gio": 24,
+      "trieu_chung_da_hien_tai": [
+        "Sẩn phù"
+      ],
+      "tien_su_benh_nen_lien_quan_da": [
+        "Không có"
+      ],
+      "dien_bien_da": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu": "Có",
+      "anh_san_phu": "Có",
+      "dac_diem_san_phu_cap": "Sẩn nốt nhỏ rải rác đùi và lưng",
+      "so_luong_san_phu": "<20 nốt",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong": "≤50% BSA",
+      "hien_tai_co_phu_mach": "Không",
+      "anh_phu_mach": "Không",
+      "so_lan_phu_mach_tung_xay_ra": 0,
+      "so_lan_phu_mach_nang_can_vien": 0,
+      "vi_tri_phu_mach": [],
+      "thoi_gian_ton_tai_phu_mach": "",
+      "trieu_chung_ho_hap_co_khong": "Không",
+      "trieu_chung_ho_hap_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_ho_hap": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap": "",
+      "trieu_chung_tieu_hoa_co_khong": "Không",
+      "trieu_chung_tieu_hoa_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa": "",
+      "yeu_to_nghi_ngo_thuc_an": "Không",
+      "yeu_to_nghi_ngo_thuoc": "Không",
+      "yeu_to_nghi_ngo_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_khac": "Có (Sốt vi rút / Thời tiết thay đổi)",
+      "thoi_gian_tiep_xuc_khoi_phat_khac": 24,
+      "tien_su_phan_ung_yeu_to_khac": "Không",
+      "tien_su_phan_ve_di_ung_khac_khac": [
+        "Không"
+      ],
+      "can_nguyen_yeu_to_nghi_ngo": "Nhiễm trùng (Nhiễm siêu vi)",
+      "wbc": 8.2,
+      "eo": 0.2,
+      "ba_bach_cau": 0.04,
+      "crp": 4.5,
+      "mau_lang_1h": 10,
+      "mau_lang_2h": 18,
+      "ft3": 4.2,
+      "ft4": 14.8,
+      "tsh": 1.9,
+      "ige_toan_phan": 95,
+      "anti_tpo": 8.0,
+      "ana_hep2": "Âm tính",
+      "sieu_am_tuyen_giap": "",
+      "xet_nghiem_khac": "",
+      "can_lam_sang_chu_y_cap": "BC bình thường, CRP tăng nhẹ do siêu vi",
+      "da_dieu_tri_dot_nay": "Có",
+      "danh_sach_thuoc_da_dieu_tri": [
+        {
+          "ten_thuoc": "Siro Desloratadine 2.5mg",
+          "lieu_dung": "5ml/ngày",
+          "thoi_gian_dung": "2 ngày"
+        }
+      ],
+      "so_lan_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh": 8,
+      "dot_gan_nhat_cach": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot": "",
+      "tien_su_gia_dinh_cap": "Không",
+      "dien_dieu_tri": "Ngoại trú",
+      "theo_doi_ngoai_tru_lan_kham": [
+        {
+          "lan_kham": 1,
+          "ngay_kham": "2026-09-21",
+          "bac_si_kham": "BS. Lê Thị Hà"
+        }
+      ],
+      "ket_qua_cuoi_dot_ngoai_tru": "Khỏi bệnh"
+    }
+  },
+  {
+    "id": "BA_5129",
+    "nhan": "Cấp thường",
+    "du_lieu": {
+      "ma_benh_nhan": "BN02201",
+      "ma_ho_so": "HS44102",
+      "de_tai_ai": "",
+      "ho_ten": "Hoàng Văn Tuấn",
+      "ngay_sinh": "1985-03-10",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0977000111",
+      "nghe_nghiep": "",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "",
+      "dia_chi_xa_phuong": "",
+      "dia_chi_tinh_tp": "Bắc Ninh",
+      "noi_lam_viec": "",
+      "bhyt_so_the": "",
+      "bhyt_gia_tri_den": "",
+      "nguoi_nha_ho_ten_dia_chi": "",
+      "nguoi_nha_so_dien_thoai": "",
+      "thoi_diem_kham_lan_dau": "2026-09-22 14:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-22",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "",
+      "ngay_kham": "2026-09-22",
+      "bac_si_kham": "BS. Nguyễn Văn Bình",
+      "chan_doan_chinh_cap": "",
+      "chan_doan_xac_dinh_cap": "",
+      "dau_hieu_nang_chi_tiet": [],
+      "thoi_gian_khoi_phat_gio": 18,
+      "trieu_chung_da_hien_tai": [
+        "Sẩn phù"
+      ],
+      "tien_su_benh_nen_lien_quan_da": [],
+      "dien_bien_da": "",
+      "hien_tai_co_san_phu": "Có",
+      "anh_san_phu": "Không",
+      "dac_diem_san_phu_cap": "",
+      "so_luong_san_phu": "<20 nốt",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong": "≤50% BSA",
+      "hien_tai_co_phu_mach": "Không",
+      "anh_phu_mach": "Không",
+      "so_lan_phu_mach_tung_xay_ra": null,
+      "so_lan_phu_mach_nang_can_vien": null,
+      "vi_tri_phu_mach": [],
+      "thoi_gian_ton_tai_phu_mach": "",
+      "trieu_chung_ho_hap_co_khong": "Không",
+      "trieu_chung_ho_hap_hien_tai": [],
+      "tien_su_benh_nen_ho_hap": [],
+      "dien_bien_ho_hap": "",
+      "trieu_chung_tieu_hoa_co_khong": "Không",
+      "trieu_chung_tieu_hoa_hien_tai": [],
+      "tien_su_benh_nen_tieu_hoa": [],
+      "dien_bien_tieu_hoa": "",
+      "yeu_to_nghi_ngo_thuc_an": "Không rõ",
+      "yeu_to_nghi_ngo_thuoc": "Không rõ",
+      "yeu_to_nghi_ngo_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_khac": "Không",
+      "can_nguyen_yeu_to_nghi_ngo": "Chưa xác định",
+      "wbc": null,
+      "eo": null,
+      "ba_bach_cau": null,
+      "crp": null,
+      "mau_lang_1h": null,
+      "mau_lang_2h": null,
+      "ft3": null,
+      "ft4": null,
+      "tsh": null,
+      "ige_toan_phan": null,
+      "anti_tpo": null,
+      "ana_hep2": "",
+      "sieu_am_tuyen_giap": "",
+      "xet_nghiem_khac": "",
+      "can_lam_sang_chu_y_cap": "",
+      "da_dieu_tri_dot_nay": "Không rõ",
+      "danh_sach_thuoc_da_dieu_tri": [],
+      "so_lan_may_day_cap_truoc_do": null,
+      "tuoi_lan_dau_bi_benh": null,
+      "dot_gan_nhat_cach": "",
+      "thoi_gian_keo_dai_trung_binh_moi_dot": "",
+      "tien_su_gia_dinh_cap": "Không rõ",
+      "dien_dieu_tri": "Ngoại trú",
+      "theo_doi_ngoai_tru_lan_kham": [],
+      "ket_qua_cuoi_dot_ngoai_tru": ""
+    }
+  },
+  {
+    "id": "BA_8303",
+    "nhan": "Cấp thường",
+    "du_lieu": {
+      "ma_benh_nhan": "BN07712",
+      "ma_ho_so": "HS99281",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Lê Thị Hồng",
+      "ngay_sinh": "1972-08-04",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0988223344",
+      "nghe_nghiep": "Kế toán",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 40 ngách 15",
+      "dia_chi_xa_phuong": "Phường Đống Đa",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Công ty xây dựng",
+      "bhyt_so_the": "DN4019283748822",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Lê Văn Thành",
+      "nguoi_nha_so_dien_thoai": "0988556677",
+      "thoi_diem_kham_lan_dau": "2026-09-23 09:15",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-23",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-25",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "Thoái hóa khớp gối hai bên, Tê bì đầu ngón tay trái kéo dài",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-23",
+      "bac_si_kham": "BS. Phạm Thị Tâm",
+      "chan_doan_chinh_cap": "",
+      "chan_doan_xac_dinh_cap": "",
+      "dau_hieu_nang_chi_tiet": [],
+      "thoi_gian_khoi_phat_gio": 16,
+      "trieu_chung_da_hien_tai": [
+        "Sẩn phù"
+      ],
+      "tien_su_benh_nen_lien_quan_da": [
+        "Không có"
+      ],
+      "dien_bien_da": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu": "Có",
+      "anh_san_phu": "Có",
+      "dac_diem_san_phu_cap": "Sẩn đỏ kích thước 10-20mm ở hai cẳng tay",
+      "so_luong_san_phu": "20-50 nốt",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong": "≤50% BSA",
+      "hien_tai_co_phu_mach": "Không",
+      "anh_phu_mach": "Không",
+      "so_lan_phu_mach_tung_xay_ra": 0,
+      "so_lan_phu_mach_nang_can_vien": 0,
+      "vi_tri_phu_mach": [],
+      "thoi_gian_ton_tai_phu_mach": "",
+      "trieu_chung_ho_hap_co_khong": "Không",
+      "trieu_chung_ho_hap_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_ho_hap": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap": "",
+      "trieu_chung_tieu_hoa_co_khong": "Không",
+      "trieu_chung_tieu_hoa_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa": "",
+      "yeu_to_nghi_ngo_thuc_an": "Không",
+      "yeu_to_nghi_ngo_thuoc": "Có (Glucosamine 1500mg uống bổ sung khớp)",
+      "yeu_to_nghi_ngo_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_khac": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_thuoc": 4,
+      "tien_su_phan_ung_yeu_to_thuoc": "Không",
+      "tien_su_phan_ve_di_ung_khac_thuoc": [
+        "Không"
+      ],
+      "can_nguyen_yeu_to_nghi_ngo": "Thuốc (Glucosamine)",
+      "wbc": 6.8,
+      "eo": 0.4,
+      "ba_bach_cau": 0.03,
+      "crp": 2.8,
+      "mau_lang_1h": 12,
+      "mau_lang_2h": 22,
+      "ft3": 4.0,
+      "ft4": 15.0,
+      "tsh": 2.0,
+      "ige_toan_phan": 150,
+      "anti_tpo": 12.0,
+      "ana_hep2": "Âm tính",
+      "sieu_am_tuyen_giap": "",
+      "xet_nghiem_khac": "X-quang khớp gối: hẹp khe khớp nhẹ hai bên",
+      "can_lam_sang_chu_y_cap": "X-quang ghi nhận thoái hóa khớp gối, xét nghiệm máu trong giới hạn bình thường",
+      "da_dieu_tri_dot_nay": "Có",
+      "danh_sach_thuoc_da_dieu_tri": [
+        {
+          "ten_thuoc": "Glucosamine Sulfate 1500mg",
+          "lieu_dung": "1 gói/ngày",
+          "thoi_gian_dung": "Dùng 1 tháng nay"
+        },
+        {
+          "ten_thuoc": "Fexofenadine 180mg",
+          "lieu_dung": "1 viên/ngày",
+          "thoi_gian_dung": "1 ngày"
+        }
+      ],
+      "so_lan_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh": 54,
+      "dot_gan_nhat_cach": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot": "",
+      "tien_su_gia_dinh_cap": "Không",
+      "dien_dieu_tri": "Ngoại trú",
+      "theo_doi_ngoai_tru_lan_kham": [
+        {
+          "lan_kham": 1,
+          "ngay_kham": "2026-09-23",
+          "bac_si_kham": "BS. Phạm Thị Tâm"
+        }
+      ],
+      "ket_qua_cuoi_dot_ngoai_tru": "Khỏi bệnh"
+    }
+  },
+  {
+    "id": "BA_9273",
+    "nhan": "Cấp thường",
+    "du_lieu": {
+      "ma_benh_nhan": "BN05521",
+      "ma_ho_so": "HS77112",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Đặng Quốc Bảo",
+      "ngay_sinh": "1994-10-12",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0915112233",
+      "nghe_nghiep": "Kỹ sư cơ khí",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 88 đường Giải Phóng",
+      "dia_chi_xa_phuong": "Phường Phương Mai",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Xưởng cơ khí",
+      "bhyt_so_the": "DN4019283749922",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Đặng Văn Vinh",
+      "nguoi_nha_so_dien_thoai": "0915445566",
+      "thoi_diem_kham_lan_dau": "2026-09-24 11:30",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-24",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-27",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-24",
+      "bac_si_kham": "BS. Vũ Hoàng Anh",
+      "chan_doan_chinh_cap": "",
+      "chan_doan_xac_dinh_cap": "",
+      "dau_hieu_nang_chi_tiet": [],
+      "thoi_gian_khoi_phat_gio": 8,
+      "trieu_chung_da_hien_tai": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da": [
+        "Không có"
+      ],
+      "dien_bien_da": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu": "Có",
+      "anh_san_phu": "Có",
+      "dac_diem_san_phu_cap": "Mẩn đỏ sẩn phù nhiều nốt ngứa rát, sắp đạt ngưỡng lan rộng",
+      "so_luong_san_phu": "20-50 nốt",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong": "≤50% BSA",
+      "hien_tai_co_phu_mach": "Có",
+      "anh_phu_mach": "Có",
+      "so_lan_phu_mach_tung_xay_ra": 0,
+      "so_lan_phu_mach_nang_can_vien": 0,
+      "vi_tri_phu_mach": [
+        "Bàn tay"
+      ],
+      "thoi_gian_ton_tai_phu_mach": "1-6",
+      "trieu_chung_ho_hap_co_khong": "Không",
+      "trieu_chung_ho_hap_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_ho_hap": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap": "",
+      "trieu_chung_tieu_hoa_co_khong": "Không",
+      "trieu_chung_tieu_hoa_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa": "",
+      "yeu_to_nghi_ngo_thuc_an": "Không",
+      "yeu_to_nghi_ngo_thuoc": "Không",
+      "yeu_to_nghi_ngo_con_trung_dot": "Có (Ong vò vẽ đốt 1 nốt ở mu bàn tay)",
+      "yeu_to_nghi_ngo_khac": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_con_trung_dot": 2,
+      "tien_su_phan_ung_yeu_to_con_trung_dot": "Không",
+      "tien_su_phan_ve_di_ung_khac_con_trung_dot": [
+        "Không"
+      ],
+      "can_nguyen_yeu_to_nghi_ngo": "Côn trùng đốt (Ong vò vẽ)",
+      "wbc": 9.2,
+      "eo": 0.5,
+      "ba_bach_cau": 0.06,
+      "crp": 5.1,
+      "mau_lang_1h": 14,
+      "mau_lang_2h": 28,
+      "ft3": 4.1,
+      "ft4": 15.1,
+      "tsh": 1.8,
+      "ige_toan_phan": 210,
+      "anti_tpo": 11.0,
+      "ana_hep2": "Âm tính",
+      "sieu_am_tuyen_giap": "",
+      "xet_nghiem_khac": "",
+      "can_lam_sang_chu_y_cap": "Phù nhẹ mu bàn tay chỗ ong đốt, chưa có dấu hiệu nguy hiểm vùng mặt/cổ/hô hấp",
+      "da_dieu_tri_dot_nay": "Có",
+      "danh_sach_thuoc_da_dieu_tri": [
+        {
+          "ten_thuoc": "Cetirizine 10mg",
+          "lieu_dung": "1 viên/ngày",
+          "thoi_gian_dung": "1 ngày"
+        }
+      ],
+      "so_lan_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh": 32,
+      "dot_gan_nhat_cach": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot": "",
+      "tien_su_gia_dinh_cap": "Không",
+      "dien_dieu_tri": "Ngoại trú",
+      "theo_doi_ngoai_tru_lan_kham": [
+        {
+          "lan_kham": 1,
+          "ngay_kham": "2026-09-24",
+          "bac_si_kham": "BS. Vũ Hoàng Anh"
+        }
+      ],
+      "ket_qua_cuoi_dot_ngoai_tru": "Khỏi bệnh"
+    }
+  },
+  {
+    "id": "BA_8180",
+    "nhan": "Cấp nặng",
+    "du_lieu": {
+      "ma_benh_nhan": "BN03341",
+      "ma_ho_so": "HS88901",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Phạm Quốc Anh",
+      "ngay_sinh": "1991-05-18",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0912998811",
+      "nghe_nghiep": "Kinh doanh",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 15 phố Bà Triệu",
+      "dia_chi_xa_phuong": "Phường Hàng Bài",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Công ty thương mại",
+      "bhyt_so_the": "DN4019283741100",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Phạm Văn Minh",
+      "nguoi_nha_so_dien_thoai": "0912667788",
+      "thoi_diem_kham_lan_dau": "2026-09-21 15:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-21",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-25",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-21",
+      "bac_si_kham": "BS. Nguyễn Văn Bình",
+      "chan_doan_chinh_cap": "",
+      "chan_doan_xac_dinh_cap": "",
+      "dau_hieu_nang_chi_tiet": [],
+      "thoi_gian_khoi_phat_gio": 6,
+      "trieu_chung_da_hien_tai": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da": [
+        "Không có"
+      ],
+      "dien_bien_da": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu": "Có",
+      "anh_san_phu": "Có",
+      "dac_diem_san_phu_cap": "Sẩn phù bản đồ lan rộng toàn thân, ngứa dữ dội",
+      "so_luong_san_phu": ">50 nốt",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong": ">50% BSA",
+      "hien_tai_co_phu_mach": "Có",
+      "anh_phu_mach": "Có",
+      "so_lan_phu_mach_tung_xay_ra": 1,
+      "so_lan_phu_mach_nang_can_vien": 1,
+      "vi_tri_phu_mach": [
+        "Môi",
+        "Mi mắt"
+      ],
+      "thoi_gian_ton_tai_phu_mach": "1-6",
+      "trieu_chung_ho_hap_co_khong": "Không",
+      "trieu_chung_ho_hap_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_ho_hap": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap": "",
+      "trieu_chung_tieu_hoa_co_khong": "Không",
+      "trieu_chung_tieu_hoa_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa": "",
+      "yeu_to_nghi_ngo_thuc_an": "Không",
+      "yeu_to_nghi_ngo_thuoc": "Có (Ibuprofen 400mg uống do đau đầu)",
+      "yeu_to_nghi_ngo_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_khac": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_thuoc": 1,
+      "tien_su_phan_ung_yeu_to_thuoc": "Không",
+      "tien_su_phan_ve_di_ung_khac_thuoc": [
+        "Không"
+      ],
+      "can_nguyen_yeu_to_nghi_ngo": "Thuốc (Ibuprofen)",
+      "wbc": 11.5,
+      "eo": 0.8,
+      "ba_bach_cau": 0.08,
+      "crp": 8.5,
+      "mau_lang_1h": 20,
+      "mau_lang_2h": 42,
+      "ft3": 4.3,
+      "ft4": 15.5,
+      "tsh": 2.2,
+      "ige_toan_phan": 380,
+      "anti_tpo": 14.0,
+      "ana_hep2": "Âm tính",
+      "sieu_am_tuyen_giap": "",
+      "xet_nghiem_khac": "",
+      "can_lam_sang_chu_y_cap": "Bạch cầu và CRP tăng, sẩn phù rầm rộ toàn thân, phù môi rõ",
+      "da_dieu_tri_dot_nay": "Có",
+      "danh_sach_thuoc_da_dieu_tri": [
+        {
+          "ten_thuoc": "Methylprednisolon 40mg",
+          "lieu_dung": "1 lọ tiêm IV",
+          "thoi_gian_dung": "Tại cấp cứu"
+        },
+        {
+          "ten_thuoc": "Dimedrol 10mg",
+          "lieu_dung": "1 ống tiêm bắp",
+          "thoi_gian_dung": "Tại cấp cứu"
+        }
+      ],
+      "so_lan_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh": 35,
+      "dot_gan_nhat_cach": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot": "",
+      "tien_su_gia_dinh_cap": "Không",
+      "dien_dieu_tri": "Nội trú",
+      "theo_doi_noi_tru_ngay_dieu_tri": [
+        {
+          "ngay_dieu_tri": 1,
+          "ngay": "2026-09-21",
+          "bac_si_kham": "BS. Nguyễn Văn Bình"
+        },
+        {
+          "ngay_dieu_tri": 2,
+          "ngay": "2026-09-22",
+          "bac_si_kham": "BS. Nguyễn Văn Bình"
+        }
+      ],
+      "ket_qua_cuoi_dot_noi_tru": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_8086",
+    "nhan": "Cấp nặng",
+    "du_lieu": {
+      "ma_benh_nhan": "BN08822",
+      "ma_ho_so": "HS55112",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Vũ Thị Mới",
+      "ngay_sinh": "1960-03-22",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0978334411",
+      "nghe_nghiep": "Hưu trí",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 102 phố Huế",
+      "dia_chi_xa_phuong": "Phường Ngô Quyền",
+      "dia_chi_tinh_tp": "Hải Phòng",
+      "noi_lam_viec": "Đã nghỉ hưu",
+      "bhyt_so_the": "HT3019283745500",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Vũ Văn Long",
+      "nguoi_nha_so_dien_thoai": "0978667788",
+      "thoi_diem_kham_lan_dau": "2026-09-22 10:30",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-22",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-26",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-22",
+      "bac_si_kham": "BS. Lê Thị Hà",
+      "chan_doan_chinh_cap": "",
+      "chan_doan_xac_dinh_cap": "",
+      "dau_hieu_nang_chi_tiet": [],
+      "thoi_gian_khoi_phat_gio": 10,
+      "trieu_chung_da_hien_tai": [
+        "Phù mạch",
+        "Sẩn phù"
+      ],
+      "tien_su_benh_nen_lien_quan_da": [
+        "Tiền sử phù mạch tái diễn"
+      ],
+      "dien_bien_da": "Lần thứ 2, diễn biến tăng nặng",
+      "hien_tai_co_san_phu": "Có",
+      "anh_san_phu": "Có",
+      "dac_diem_san_phu_cap": "Sẩn phù to lan rộng lưng và bụng",
+      "so_luong_san_phu": ">50 nốt",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong": ">50% BSA",
+      "hien_tai_co_phu_mach": "Có",
+      "anh_phu_mach": "Có",
+      "so_lan_phu_mach_tung_xay_ra": 2,
+      "so_lan_phu_mach_nang_can_vien": 1,
+      "vi_tri_phu_mach": [
+        "Mi mắt",
+        "Môi"
+      ],
+      "thoi_gian_ton_tai_phu_mach": "6-12",
+      "trieu_chung_ho_hap_co_khong": "Không",
+      "trieu_chung_ho_hap_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_ho_hap": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap": "",
+      "trieu_chung_tieu_hoa_co_khong": "Không",
+      "trieu_chung_tieu_hoa_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa": "",
+      "yeu_to_nghi_ngo_thuc_an": "Có (Tôm hùm)",
+      "yeu_to_nghi_ngo_thuoc": "Không",
+      "yeu_to_nghi_ngo_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_khac": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_thuc_an": 3,
+      "tien_su_phan_ung_yeu_to_thuc_an": "Có (Mẩn ngứa nhẹ năm ngoái)",
+      "tien_su_phan_ve_di_ung_khac_thuc_an": [
+        "Dị ứng"
+      ],
+      "can_nguyen_yeu_to_nghi_ngo": "Thức ăn (Tôm hùm)",
+      "wbc": 10.2,
+      "eo": 0.7,
+      "ba_bach_cau": 0.07,
+      "crp": 7.2,
+      "mau_lang_1h": 18,
+      "mau_lang_2h": 36,
+      "ft3": 4.0,
+      "ft4": 14.9,
+      "tsh": 2.0,
+      "ige_toan_phan": 410,
+      "anti_tpo": 11.0,
+      "ana_hep2": "Âm tính",
+      "sieu_am_tuyen_giap": "",
+      "xet_nghiem_khac": "",
+      "can_lam_sang_chu_y_cap": "IgE toàn phần tăng cao 410 U/mL, phù mi mắt và môi rõ rệt",
+      "da_dieu_tri_dot_nay": "Có",
+      "danh_sach_thuoc_da_dieu_tri": [
+        {
+          "ten_thuoc": "Methylprednisolon 40mg",
+          "lieu_dung": "1 lọ tiêm tĩnh mạch",
+          "thoi_gian_dung": "Ngày 1"
+        }
+      ],
+      "so_lan_may_day_cap_truoc_do": 1,
+      "tuoi_lan_dau_bi_benh": 65,
+      "dot_gan_nhat_cach": "12 tháng",
+      "thoi_gian_keo_dai_trung_binh_moi_dot": "3 ngày",
+      "tien_su_gia_dinh_cap": "Không",
+      "dien_dieu_tri": "Nội trú",
+      "theo_doi_noi_tru_ngay_dieu_tri": [
+        {
+          "ngay_dieu_tri": 1,
+          "ngay": "2026-09-22",
+          "bac_si_kham": "BS. Lê Thị Hà"
+        },
+        {
+          "ngay_dieu_tri": 2,
+          "ngay": "2026-09-23",
+          "bac_si_kham": "BS. Lê Thị Hà"
+        }
+      ],
+      "ket_qua_cuoi_dot_noi_tru": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_3755",
+    "nhan": "Cấp nặng",
+    "du_lieu": {
+      "ma_benh_nhan": "BN01109",
+      "ma_ho_so": "HS77201",
+      "de_tai_ai": "",
+      "ho_ten": "Nguyễn Văn Khiêm",
+      "ngay_sinh": "1975-09-12",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0913000222",
+      "nghe_nghiep": "",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "",
+      "dia_chi_xa_phuong": "",
+      "dia_chi_tinh_tp": "Hưng Yên",
+      "noi_lam_viec": "",
+      "bhyt_so_the": "",
+      "bhyt_gia_tri_den": "",
+      "nguoi_nha_ho_ten_dia_chi": "",
+      "nguoi_nha_so_dien_thoai": "",
+      "thoi_diem_kham_lan_dau": "2026-09-23 16:20",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-23",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "",
+      "ngay_kham": "2026-09-23",
+      "bac_si_kham": "BS. Phạm Thị Tâm",
+      "chan_doan_chinh_cap": "",
+      "chan_doan_xac_dinh_cap": "",
+      "dau_hieu_nang_chi_tiet": [],
+      "thoi_gian_khoi_phat_gio": 14,
+      "trieu_chung_da_hien_tai": [
+        "Phù mạch",
+        "Sẩn phù"
+      ],
+      "tien_su_benh_nen_lien_quan_da": [],
+      "dien_bien_da": "",
+      "hien_tai_co_san_phu": "Có",
+      "anh_san_phu": "Không",
+      "dac_diem_san_phu_cap": "",
+      "so_luong_san_phu": ">50 nốt",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong": ">50% BSA",
+      "hien_tai_co_phu_mach": "Có",
+      "anh_phu_mach": "Không",
+      "so_lan_phu_mach_tung_xay_ra": null,
+      "so_lan_phu_mach_nang_can_vien": 1,
+      "vi_tri_phu_mach": [
+        "Môi"
+      ],
+      "thoi_gian_ton_tai_phu_mach": "",
+      "trieu_chung_ho_hap_co_khong": "Không",
+      "trieu_chung_ho_hap_hien_tai": [],
+      "tien_su_benh_nen_ho_hap": [],
+      "dien_bien_ho_hap": "",
+      "trieu_chung_tieu_hoa_co_khong": "Không",
+      "trieu_chung_tieu_hoa_hien_tai": [],
+      "tien_su_benh_nen_tieu_hoa": [],
+      "dien_bien_tieu_hoa": "",
+      "yeu_to_nghi_ngo_thuc_an": "Không rõ",
+      "yeu_to_nghi_ngo_thuoc": "Không rõ",
+      "yeu_to_nghi_ngo_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_khac": "Không",
+      "can_nguyen_yeu_to_nghi_ngo": "Chưa xác định",
+      "wbc": null,
+      "eo": null,
+      "ba_bach_cau": null,
+      "crp": null,
+      "mau_lang_1h": null,
+      "mau_lang_2h": null,
+      "ft3": null,
+      "ft4": null,
+      "tsh": null,
+      "ige_toan_phan": null,
+      "anti_tpo": null,
+      "ana_hep2": "",
+      "sieu_am_tuyen_giap": "",
+      "xet_nghiem_khac": "",
+      "can_lam_sang_chu_y_cap": "",
+      "da_dieu_tri_dot_nay": "Không rõ",
+      "danh_sach_thuoc_da_dieu_tri": [],
+      "so_lan_may_day_cap_truoc_do": null,
+      "tuoi_lan_dau_bi_benh": null,
+      "dot_gan_nhat_cach": "",
+      "thoi_gian_keo_dai_trung_binh_moi_dot": "",
+      "tien_su_gia_dinh_cap": "Không rõ",
+      "dien_dieu_tri": "Nội trú",
+      "theo_doi_noi_tru_ngay_dieu_tri": [
+        {
+          "ngay_dieu_tri": 1,
+          "ngay": "2026-09-23",
+          "bac_si_kham": "BS. Phạm Thị Tâm"
+        }
+      ],
+      "ket_qua_cuoi_dot_noi_tru": ""
+    }
+  },
+  {
+    "id": "BA_7632",
+    "nhan": "Cấp nặng",
+    "du_lieu": {
+      "ma_benh_nhan": "BN09923",
+      "ma_ho_so": "HS44332",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Ngô Thị Thu",
+      "ngay_sinh": "1968-11-05",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0987112233",
+      "nghe_nghiep": "Nội trợ",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 55 phố Nguyễn Trãi",
+      "dia_chi_xa_phuong": "Phường Thanh Xuân Trung",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Tại nhà",
+      "bhyt_so_the": "HT3019283749911",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Đỗ Văn Toàn",
+      "nguoi_nha_so_dien_thoai": "0987445566",
+      "thoi_diem_kham_lan_dau": "2026-09-24 14:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-24",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-28",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "Đái tháo đường týp 2, Tăng huyết áp, Đau dạ dày mạn tính, Đau vai nông kéo dài",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-24",
+      "bac_si_kham": "BS. Vũ Hoàng Anh",
+      "chan_doan_chinh_cap": "",
+      "chan_doan_xac_dinh_cap": "",
+      "dau_hieu_nang_chi_tiet": [],
+      "thoi_gian_khoi_phat_gio": 12,
+      "trieu_chung_da_hien_tai": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da": [
+        "Không có"
+      ],
+      "dien_bien_da": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu": "Có",
+      "anh_san_phu": "Có",
+      "dac_diem_san_phu_cap": "Sẩn phù to dạng bản đồ rải rác lồng ngực và chi",
+      "so_luong_san_phu": ">50 nốt",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong": ">50% BSA",
+      "hien_tai_co_phu_mach": "Có",
+      "anh_phu_mach": "Có",
+      "so_lan_phu_mach_tung_xay_ra": 1,
+      "so_lan_phu_mach_nang_can_vien": 1,
+      "vi_tri_phu_mach": [
+        "Môi",
+        "Lưỡi"
+      ],
+      "thoi_gian_ton_tai_phu_mach": "1-6",
+      "trieu_chung_ho_hap_co_khong": "Không",
+      "trieu_chung_ho_hap_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_ho_hap": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap": "",
+      "trieu_chung_tieu_hoa_co_khong": "Không",
+      "trieu_chung_tieu_hoa_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa": [
+        "Bệnh tiêu hoá mạn tính (Viêm dạ dày)"
+      ],
+      "dien_bien_tieu_hoa": "",
+      "yeu_to_nghi_ngo_thuc_an": "Không",
+      "yeu_to_nghi_ngo_thuoc": "Có (Meloxicam 15mg uống do đau vai)",
+      "yeu_to_nghi_ngo_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_khac": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_thuoc": 4,
+      "tien_su_phan_ung_yeu_to_thuoc": "Không",
+      "tien_su_phan_ve_di_ung_khac_thuoc": [
+        "Không"
+      ],
+      "can_nguyen_yeu_to_nghi_ngo": "Thuốc (Meloxicam)",
+      "wbc": 12.0,
+      "eo": 0.6,
+      "ba_bach_cau": 0.06,
+      "crp": 12.5,
+      "mau_lang_1h": 22,
+      "mau_lang_2h": 45,
+      "ft3": 4.1,
+      "ft4": 15.0,
+      "tsh": 2.1,
+      "ige_toan_phan": 290,
+      "anti_tpo": 15.0,
+      "ana_hep2": "Âm tính",
+      "sieu_am_tuyen_giap": "",
+      "xet_nghiem_khac": "Siêu âm khớp vai: Viêm gân cơ nhị đầu nhẹ; Đường huyết mao mạch 8.2 mmol/L",
+      "can_lam_sang_chu_y_cap": "Đường huyết tăng nhẹ do đái tháo đường, CRP tăng do phản ứng dị ứng rầm rộ",
+      "da_dieu_tri_dot_nay": "Có",
+      "danh_sach_thuoc_da_dieu_tri": [
+        {
+          "ten_thuoc": "Metformin 850mg",
+          "lieu_dung": "2 viên/ngày",
+          "thoi_gian_dung": "Thuốc nền ĐTĐ"
+        },
+        {
+          "ten_thuoc": "Amlodipine 5mg",
+          "lieu_dung": "1 viên/ngày",
+          "thoi_gian_dung": "Thuốc nền HA"
+        },
+        {
+          "ten_thuoc": "Methylprednisolon 40mg",
+          "lieu_dung": "1 lọ tiêm IV",
+          "thoi_gian_dung": "Tại bệnh viện"
+        }
+      ],
+      "so_lan_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh": 58,
+      "dot_gan_nhat_cach": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot": "",
+      "tien_su_gia_dinh_cap": "Không",
+      "dien_dieu_tri": "Nội trú",
+      "theo_doi_noi_tru_ngay_dieu_tri": [
+        {
+          "ngay_dieu_tri": 1,
+          "ngay": "2026-09-24",
+          "bac_si_kham": "BS. Vũ Hoàng Anh"
+        },
+        {
+          "ngay_dieu_tri": 2,
+          "ngay": "2026-09-25",
+          "bac_si_kham": "BS. Vũ Hoàng Anh"
+        }
+      ],
+      "ket_qua_cuoi_dot_noi_tru": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_8435",
+    "nhan": "Cấp nặng",
+    "du_lieu": {
+      "ma_benh_nhan": "BN04412",
+      "ma_ho_so": "HS99301",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Nguyễn Hoàng My",
+      "ngay_sinh": "2003-07-20",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0936223344",
+      "nghe_nghiep": "Sinh viên",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 12 ngõ 45",
+      "dia_chi_xa_phuong": "Phường Cầu Giấy",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Trường Đại học",
+      "bhyt_so_the": "DN4019283747711",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Nguyễn Văn Hùng",
+      "nguoi_nha_so_dien_thoai": "0936556677",
+      "thoi_diem_kham_lan_dau": "2026-09-25 16:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-25",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-28",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-25",
+      "bac_si_kham": "BS. Nguyễn Văn Bình",
+      "chan_doan_chinh_cap": "",
+      "chan_doan_xac_dinh_cap": "",
+      "dau_hieu_nang_chi_tiet": [],
+      "thoi_gian_khoi_phat_gio": 5,
+      "trieu_chung_da_hien_tai": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da": [
+        "Không có"
+      ],
+      "dien_bien_da": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu": "Có",
+      "anh_san_phu": "Có",
+      "dac_diem_san_phu_cap": "Mẩn ngứa sẩn phù mức độ trung bình (20-50 nốt)",
+      "so_luong_san_phu": "20-50 nốt",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong": "≤50% BSA",
+      "hien_tai_co_phu_mach": "Có",
+      "anh_phu_mach": "Có",
+      "so_lan_phu_mach_tung_xay_ra": 1,
+      "so_lan_phu_mach_nang_can_vien": 1,
+      "vi_tri_phu_mach": [
+        "Môi"
+      ],
+      "thoi_gian_ton_tai_phu_mach": "1-6",
+      "trieu_chung_ho_hap_co_khong": "Không",
+      "trieu_chung_ho_hap_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_ho_hap": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap": "",
+      "trieu_chung_tieu_hoa_co_khong": "Không",
+      "trieu_chung_tieu_hoa_hien_tai": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa": "",
+      "yeu_to_nghi_ngo_thuc_an": "Có (Sữa tươi)",
+      "yeu_to_nghi_ngo_thuoc": "Không",
+      "yeu_to_nghi_ngo_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_khac": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_thuc_an": 2,
+      "tien_su_phan_ung_yeu_to_thuc_an": "Không",
+      "tien_su_phan_ve_di_ung_khac_thuc_an": [
+        "Không"
+      ],
+      "can_nguyen_yeu_to_nghi_ngo": "Thức ăn (Sữa tươi)",
+      "wbc": 8.9,
+      "eo": 0.4,
+      "ba_bach_cau": 0.05,
+      "crp": 4.2,
+      "mau_lang_1h": 12,
+      "mau_lang_2h": 24,
+      "ft3": 4.2,
+      "ft4": 15.0,
+      "tsh": 2.0,
+      "ige_toan_phan": 180,
+      "anti_tpo": 10.0,
+      "ana_hep2": "Âm tính",
+      "sieu_am_tuyen_giap": "",
+      "xet_nghiem_khac": "",
+      "can_lam_sang_chu_y_cap": "Sẩn phù vừa phải nhưng có phù môi (phù mạch vùng mặt) đòi hỏi nhập viện theo dõi sát",
+      "da_dieu_tri_dot_nay": "Có",
+      "danh_sach_thuoc_da_dieu_tri": [
+        {
+          "ten_thuoc": "Methylprednisolon 40mg",
+          "lieu_dung": "1 lọ tiêm tĩnh mạch",
+          "thoi_gian_dung": "Ngày 1"
+        }
+      ],
+      "so_lan_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh": 23,
+      "dot_gan_nhat_cach": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot": "",
+      "tien_su_gia_dinh_cap": "Không",
+      "dien_dieu_tri": "Nội trú",
+      "theo_doi_noi_tru_ngay_dieu_tri": [
+        {
+          "ngay_dieu_tri": 1,
+          "ngay": "2026-09-25",
+          "bac_si_kham": "BS. Nguyễn Văn Bình"
+        }
+      ],
+      "ket_qua_cuoi_dot_noi_tru": "Ra viện"
+    }
+  }
+]

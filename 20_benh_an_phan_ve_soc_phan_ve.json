@@ -1,0 +1,2748 @@
+[
+  {
+    "id": "BA_4190",
+    "nhan": "Phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN09124",
+      "ma_ho_so": "HS88123",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Lê Thị Mai",
+      "ngay_sinh": "2002-05-14",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0912345678",
+      "nghe_nghiep": "Sinh viên",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 12 ngõ 45",
+      "dia_chi_xa_phuong": "Phường Cầu Giấy",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Trường Đại học Quốc gia",
+      "bhyt_so_the": "DN4010123456789",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Lê Văn Tám",
+      "nguoi_nha_so_dien_thoai": "0987654321",
+      "thoi_diem_kham_lan_dau": "2026-09-18 19:30",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-18",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-20",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-18",
+      "bac_si_kham": "BS. Nguyễn Văn Bình",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 20,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Hình bản đồ, kích thước 2-5cm",
+      "so_luong_san_phu_pv": ">50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": ">50% BSA",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Có",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [
+        "Môi",
+        "Mi mắt"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "1-6",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Khó thở",
+        "Nghẹn họng"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Không",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Không có"
+      ],
+      "dien_bien_tuan_hoan_pv": "",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Không",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "19:30",
+          "mach": 98,
+          "huyet_ap": "115/75"
+        },
+        {
+          "thoi_diem": "20:00",
+          "mach": 88,
+          "huyet_ap": "120/80"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 120,
+      "huyet_ap_tam_thu_thap_nhat": 115,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Có (Tôm biển)",
+      "yeu_to_nghi_ngo_pv_thuoc": "Không",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuc_an": 20,
+      "tien_su_phan_ung_yeu_to_pv_thuc_an": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_thuc_an": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "19:35"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 24,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 9.5,
+      "neu_gl": 6.2,
+      "lym_gl": 2.1,
+      "plt_gl": 240,
+      "crp_mgl": 4.1,
+      "ige_toan_phan_uiml": 210,
+      "nlr": 2.95,
+      "plr": 114.29,
+      "tryptase_cap_ngml": 18.2,
+      "tryptase_nen_ngml": 3.8,
+      "khi_mau_pv": "SpO2 96% khí trời",
+      "can_lam_sang_khac_pv": "ECG nhịp xoang 98 chu kỳ/phút",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "21:00",
+          "dien_bien": "Đỡ khó thở, sẩn phù giảm 50%",
+          "thuoc": "Diphenhydramin 10mg"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_2452",
+    "nhan": "Phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN03412",
+      "ma_ho_so": "HS77219",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Trần Văn Hùng",
+      "ngay_sinh": "1991-08-22",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0934567890",
+      "nghe_nghiep": "Nông dân",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Thôn 3",
+      "dia_chi_xa_phuong": "Xã Gia Lâm",
+      "dia_chi_tinh_tp": "Ninh Bình",
+      "noi_lam_viec": "Tự do",
+      "bhyt_so_the": "HT2370192837465",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Nguyễn Thị Hoa",
+      "nguoi_nha_so_dien_thoai": "0976543210",
+      "thoi_diem_kham_lan_dau": "2026-09-19 10:15",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-19",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-21",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-19",
+      "bac_si_kham": "BS. Phạm Thị Tâm",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 15,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Hình tròn bờ rõ, lan toàn thân",
+      "so_luong_san_phu_pv": ">50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "Toàn thân",
+      "hien_tai_co_phu_mach_pv": "Không",
+      "anh_phu_mach_pv": "Không",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [],
+      "thoi_gian_ton_tai_phu_mach_pv": "",
+      "trieu_chung_ho_hap_co_khong_pv": "Không",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap_pv": "",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Không",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Không có"
+      ],
+      "dien_bien_tuan_hoan_pv": "",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Có",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Nôn",
+        "Đau bụng quặn thắt"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "Lần đầu xuất hiện",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "10:15",
+          "mach": 92,
+          "huyet_ap": "120/80"
+        },
+        {
+          "thoi_diem": "11:00",
+          "mach": 84,
+          "huyet_ap": "125/80"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 120,
+      "huyet_ap_tam_thu_thap_nhat": 120,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Không",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Có (Ong vò vẽ đốt vào tay)",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_con_trung_dot": 15,
+      "tien_su_phan_ung_yeu_to_pv_con_trung_dot": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_con_trung_dot": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "10:20"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 35,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 10.2,
+      "neu_gl": 7.0,
+      "lym_gl": 2.0,
+      "plt_gl": 260,
+      "crp_mgl": 5.0,
+      "ige_toan_phan_uiml": 150,
+      "nlr": 3.5,
+      "plr": 130.0,
+      "tryptase_cap_ngml": 16.5,
+      "tryptase_nen_ngml": 3.2,
+      "khi_mau_pv": "SpO2 98% khí trời",
+      "can_lam_sang_khac_pv": "Siêu âm bụng bình thường",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "14:00",
+          "dien_bien": "Hết đau bụng, nôn giảm hẳn",
+          "thuoc": "Methylprednisolon 40mg"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_9983",
+    "nhan": "Phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN08123",
+      "ma_ho_so": "HS66102",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Hoàng Minh Trí",
+      "ngay_sinh": "2018-03-10",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0918273645",
+      "nghe_nghiep": "Học sinh",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 5 phố Huế",
+      "dia_chi_xa_phuong": "Phường Hàng Bài",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Trường Tiểu học",
+      "bhyt_so_the": "TE1019283746500",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Hoàng Văn Nam",
+      "nguoi_nha_so_dien_thoai": "0918273645",
+      "thoi_diem_kham_lan_dau": "2026-09-20 08:30",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-20",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-22",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-20",
+      "bac_si_kham": "BS. Lê Thị Hà",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 30,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Nốt rải rác toàn thân",
+      "so_luong_san_phu_pv": "20-50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "≤50% BSA",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Có",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [
+        "Mi mắt"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "1-6",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Thở khò khè",
+        "Khàn giọng"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Viêm mũi dị ứng"
+      ],
+      "dien_bien_ho_hap_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Không",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Không có"
+      ],
+      "dien_bien_tuan_hoan_pv": "",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Không",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "08:30",
+          "mach": 105,
+          "huyet_ap": "95/60"
+        },
+        {
+          "thoi_diem": "09:00",
+          "mach": 95,
+          "huyet_ap": "100/65"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 100,
+      "huyet_ap_tam_thu_thap_nhat": 95,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Có (Siro Amoxicillin 250mg)",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuoc": 30,
+      "tien_su_phan_ung_yeu_to_pv_thuoc": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_thuoc": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.2mg tiêm bắp",
+          "thoi_gian": "08:35"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 8,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 8.8,
+      "neu_gl": 5.1,
+      "lym_gl": 2.8,
+      "plt_gl": 280,
+      "crp_mgl": 3.0,
+      "ige_toan_phan_uiml": 190,
+      "nlr": 1.82,
+      "plr": 100.0,
+      "tryptase_cap_ngml": 14.0,
+      "tryptase_nen_ngml": 3.0,
+      "khi_mau_pv": "SpO2 97% khí trời",
+      "can_lam_sang_khac_pv": "",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "11:00",
+          "dien_bien": "Trẻ hết khò khè, còn sẩn phù nhẹ",
+          "thuoc": "Siro Desloratadin 2.5mg"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_4413",
+    "nhan": "Phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN06899",
+      "ma_ho_so": "HS55412",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Nguyễn Thị Lan",
+      "ngay_sinh": "1958-11-03",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0988112233",
+      "nghe_nghiep": "Hưu trí",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 88 phố Huế",
+      "dia_chi_xa_phuong": "Phường Ngô Quyền",
+      "dia_chi_tinh_tp": "Hải Phòng",
+      "noi_lam_viec": "Đã nghỉ hưu",
+      "bhyt_so_the": "HT3019283746511",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Đỗ Văn Đức",
+      "nguoi_nha_so_dien_thoai": "0988445566",
+      "thoi_diem_kham_lan_dau": "2026-09-21 14:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-21",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-23",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-21",
+      "bac_si_kham": "BS. Vũ Hoàng Anh",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 10,
+      "trieu_chung_da_hien_tai_pv": [
+        "Phù mạch",
+        "Ban dát sẩn"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Không",
+      "anh_san_phu_pv": "Không",
+      "dac_diem_san_phu_pv": "",
+      "so_luong_san_phu_pv": "",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "≤50% BSA",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Có",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [
+        "Môi",
+        "Lưỡi"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "1-6",
+      "trieu_chung_ho_hap_co_khong_pv": "Không",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap_pv": "",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Không",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Không có"
+      ],
+      "dien_bien_tuan_hoan_pv": "",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Có",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Nôn"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "Lần đầu xuất hiện",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "14:00",
+          "mach": 90,
+          "huyet_ap": "130/80"
+        },
+        {
+          "thoi_diem": "14:30",
+          "mach": 82,
+          "huyet_ap": "125/80"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 130,
+      "huyet_ap_tam_thu_thap_nhat": 125,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Có (Thuốc cản quang Ultravist tiêm IV)",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuoc": 10,
+      "tien_su_phan_ung_yeu_to_pv_thuoc": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_thuoc": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "14:05"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 68,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 8.0,
+      "neu_gl": 5.5,
+      "lym_gl": 1.9,
+      "plt_gl": 210,
+      "crp_mgl": 6.2,
+      "ige_toan_phan_uiml": 110,
+      "nlr": 2.89,
+      "plr": 110.53,
+      "tryptase_cap_ngml": 22.1,
+      "tryptase_nen_ngml": 4.1,
+      "khi_mau_pv": "SpO2 98%",
+      "can_lam_sang_khac_pv": "",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "16:00",
+          "dien_bien": "Môi bớt phù, hết nôn",
+          "thuoc": "Solu-Medrol 40mg"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_3511",
+    "nhan": "Phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN04200",
+      "ma_ho_so": "HS44100",
+      "de_tai_ai": "",
+      "ho_ten": "Đặng Văn Nam",
+      "ngay_sinh": "1984-01-01",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0912000111",
+      "nghe_nghiep": "",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "",
+      "dia_chi_xa_phuong": "",
+      "dia_chi_tinh_tp": "Bắc Ninh",
+      "noi_lam_viec": "",
+      "bhyt_so_the": "",
+      "bhyt_gia_tri_den": "",
+      "nguoi_nha_ho_ten_dia_chi": "",
+      "nguoi_nha_so_dien_thoai": "",
+      "thoi_diem_kham_lan_dau": "2026-09-22 11:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-22",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "",
+      "ngay_kham": "2026-09-22",
+      "bac_si_kham": "BS. Nguyễn Văn Bình",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": true,
+      "thoi_gian_khoi_phat_pv": 45,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [],
+      "dien_bien_da_pv": "",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Không",
+      "dac_diem_san_phu_pv": "",
+      "so_luong_san_phu_pv": ">50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "Toàn thân",
+      "hien_tai_co_phu_mach_pv": "Không",
+      "anh_phu_mach_pv": "Không",
+      "so_lan_phu_mach_tung_xay_ra_pv": null,
+      "so_lan_phu_mach_nang_can_vien_pv": null,
+      "vi_tri_phu_mach_pv": [],
+      "thoi_gian_ton_tai_phu_mach_pv": "",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Khó thở"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [],
+      "dien_bien_ho_hap_pv": "",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Không",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [],
+      "tien_su_benh_nen_tuan_hoan_pv": [],
+      "dien_bien_tuan_hoan_pv": "",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Không",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [],
+      "tien_su_benh_nen_tieu_hoa_pv": [],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "11:00",
+          "mach": 90,
+          "huyet_ap": "110/70"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": null,
+      "huyet_ap_tam_thu_thap_nhat": 110,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Có (Không rõ loại)",
+      "yeu_to_nghi_ngo_pv_thuoc": "Không",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuc_an": 45,
+      "tien_su_phan_ung_yeu_to_pv_thuc_an": "Không rõ",
+      "tien_su_phan_ve_di_ung_khac_pv_thuc_an": [],
+      "da_dieu_tri_dot_nay_pv": "Không rõ",
+      "danh_sach_thuoc_da_dieu_tri_pv": [],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": null,
+      "tuoi_lan_dau_bi_benh_pv": null,
+      "dot_gan_nhat_cach_pv": "",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không rõ",
+      "wbc_gl": null,
+      "neu_gl": null,
+      "lym_gl": null,
+      "plt_gl": null,
+      "crp_mgl": null,
+      "ige_toan_phan_uiml": null,
+      "nlr": null,
+      "plr": null,
+      "tryptase_cap_ngml": null,
+      "tryptase_nen_ngml": null,
+      "khi_mau_pv": "",
+      "can_lam_sang_khac_pv": "",
+      "theo_doi_phan_ve_dieu_tri": [],
+      "ket_qua_cuoi_ngay_pv": "",
+      "ket_qua_cuoi_dot_pv": ""
+    }
+  },
+  {
+    "id": "BA_7997",
+    "nhan": "Phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN02988",
+      "ma_ho_so": "HS33211",
+      "de_tai_ai": "",
+      "ho_ten": "Phạm Thị Ngọc",
+      "ngay_sinh": "1997-04-12",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0977223344",
+      "nghe_nghiep": "Công nhân",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "",
+      "dia_chi_xa_phuong": "",
+      "dia_chi_tinh_tp": "Hưng Yên",
+      "noi_lam_viec": "",
+      "bhyt_so_the": "",
+      "bhyt_gia_tri_den": "",
+      "nguoi_nha_ho_ten_dia_chi": "",
+      "nguoi_nha_so_dien_thoai": "",
+      "thoi_diem_kham_lan_dau": "2026-09-22 16:20",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-22",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "",
+      "ngay_kham": "2026-09-22",
+      "bac_si_kham": "BS. Phạm Thị Tâm",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": true,
+      "thoi_gian_khoi_phat_pv": 30,
+      "trieu_chung_da_hien_tai_pv": [
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [],
+      "dien_bien_da_pv": "",
+      "hien_tai_co_san_phu_pv": "Không",
+      "anh_san_phu_pv": "Không",
+      "dac_diem_san_phu_pv": "",
+      "so_luong_san_phu_pv": "",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Không",
+      "so_lan_phu_mach_tung_xay_ra_pv": null,
+      "so_lan_phu_mach_nang_can_vien_pv": null,
+      "vi_tri_phu_mach_pv": [
+        "Môi",
+        "Mi mắt"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "1-6",
+      "trieu_chung_ho_hap_co_khong_pv": "Không",
+      "trieu_chung_ho_hap_hien_tai_pv": [],
+      "tien_su_benh_nen_ho_hap_pv": [],
+      "dien_bien_ho_hap_pv": "",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Không",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [],
+      "tien_su_benh_nen_tuan_hoan_pv": [],
+      "dien_bien_tuan_hoan_pv": "",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Có",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Nôn",
+        "Đau bụng quặn thắt"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "16:20",
+          "mach": 86,
+          "huyet_ap": "105/65"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": null,
+      "huyet_ap_tam_thu_thap_nhat": 105,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Có (Ibuprofen 400mg)",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuoc": 30,
+      "tien_su_phan_ung_yeu_to_pv_thuoc": "Không rõ",
+      "tien_su_phan_ve_di_ung_khac_pv_thuoc": [],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "16:25"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": null,
+      "tuoi_lan_dau_bi_benh_pv": null,
+      "dot_gan_nhat_cach_pv": "",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không rõ",
+      "wbc_gl": null,
+      "neu_gl": null,
+      "lym_gl": null,
+      "plt_gl": null,
+      "crp_mgl": null,
+      "ige_toan_phan_uiml": null,
+      "nlr": null,
+      "plr": null,
+      "tryptase_cap_ngml": null,
+      "tryptase_nen_ngml": null,
+      "khi_mau_pv": "",
+      "can_lam_sang_khac_pv": "",
+      "theo_doi_phan_ve_dieu_tri": [],
+      "ket_qua_cuoi_ngay_pv": "",
+      "ket_qua_cuoi_dot_pv": ""
+    }
+  },
+  {
+    "id": "BA_5806",
+    "nhan": "Phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN05543",
+      "ma_ho_so": "HS99881",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Vũ Đình Cường",
+      "ngay_sinh": "1971-09-09",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0913998877",
+      "nghe_nghiep": "Kỹ sư",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 40 ngõ 102",
+      "dia_chi_xa_phuong": "Phường Đống Đa",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Công ty Xây dựng",
+      "bhyt_so_the": "DN4019283746112",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Vũ Thị Nga",
+      "nguoi_nha_so_dien_thoai": "0913112233",
+      "thoi_diem_kham_lan_dau": "2026-09-23 18:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-23",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-25",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "Tăng huyết áp, Đái tháo đường týp 2, Đau khớp cổ chân trái",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-23",
+      "bac_si_kham": "BS. Nguyễn Văn Bình",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 25,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Sẩn phù hình bản đồ khắp thân mình",
+      "so_luong_san_phu_pv": ">50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": ">50% BSA",
+      "hien_tai_co_phu_mach_pv": "Không",
+      "anh_phu_mach_pv": "Không",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [],
+      "thoi_gian_ton_tai_phu_mach_pv": "",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Khó thở",
+        "Thở khò khè"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Có",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Chóng mặt"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Bệnh tim mạch (Tăng huyết áp 5 năm)"
+      ],
+      "dien_bien_tuan_hoan_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Không",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "18:00",
+          "mach": 102,
+          "huyet_ap": "135/85"
+        },
+        {
+          "thoi_diem": "18:30",
+          "mach": 90,
+          "huyet_ap": "130/80"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 140,
+      "huyet_ap_tam_thu_thap_nhat": 135,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Có (Đậu phụng/Lạc rang)",
+      "yeu_to_nghi_ngo_pv_thuoc": "Không",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuc_an": 25,
+      "tien_su_phan_ung_yeu_to_pv_thuc_an": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_thuc_an": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Amlodipine 5mg",
+          "lieu_dung": "1 viên/ngày",
+          "thoi_gian": "Hàng ngày (thuốc nền)"
+        },
+        {
+          "ten_thuoc": "Metformin 850mg",
+          "lieu_dung": "2 viên/ngày",
+          "thoi_gian": "Hàng ngày (thuốc nền)"
+        },
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "18:05"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 55,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 11.0,
+      "neu_gl": 7.8,
+      "lym_gl": 2.0,
+      "plt_gl": 230,
+      "crp_mgl": 8.5,
+      "ige_toan_phan_uiml": 320,
+      "nlr": 3.9,
+      "plr": 115.0,
+      "tryptase_cap_ngml": 25.0,
+      "tryptase_nen_ngml": 4.5,
+      "khi_mau_pv": "SpO2 95% (khí trời)",
+      "can_lam_sang_khac_pv": "X-quang khớp cổ chân: thoái hóa nhẹ",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "20:00",
+          "dien_bien": "Hết khò khè, còn sẩn phù nhẹ",
+          "thuoc": "Methylprednisolon 40mg"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_5587",
+    "nhan": "Phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN06211",
+      "ma_ho_so": "HS88772",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Ngô Thị Tuyết",
+      "ngay_sinh": "1964-02-18",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0987123987",
+      "nghe_nghiep": "Nội trợ",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 15 ngách 8",
+      "dia_chi_xa_phuong": "Phường Thanh Xuân",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Tại nhà",
+      "bhyt_so_the": "HT3019283748899",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Đinh Văn Long",
+      "nguoi_nha_so_dien_thoai": "0987334455",
+      "thoi_diem_kham_lan_dau": "2026-09-24 09:10",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-24",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-26",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "Hen phế quản kiểm soát kém, Viêm mũi dị ứng, Sâu răng hàm dưới",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-24",
+      "bac_si_kham": "BS. Lê Thị Hà",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 15,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Nốt sẩn phù đỏ rải rác mặt và cổ",
+      "so_luong_san_phu_pv": "20-50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "≤50% BSA",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Có",
+      "so_lan_phu_mach_tung_xay_ra_pv": 1,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [
+        "Mi mắt",
+        "Môi"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "1-6",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Khó thở",
+        "Thở khò khè",
+        "Nghẹn họng"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Hen phế quản",
+        "Viêm mũi dị ứng"
+      ],
+      "dien_bien_ho_hap_pv": "Tăng nặng",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Không",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Không có"
+      ],
+      "dien_bien_tuan_hoan_pv": "",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Không",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "09:10",
+          "mach": 108,
+          "huyet_ap": "125/80"
+        },
+        {
+          "thoi_diem": "09:40",
+          "mach": 92,
+          "huyet_ap": "120/75"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 120,
+      "huyet_ap_tam_thu_thap_nhat": 120,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Có (Ketoprofen 50mg - uống do đau răng)",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuoc": 15,
+      "tien_su_phan_ung_yeu_to_pv_thuoc": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_thuoc": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Salbutamol xịt 100mcg",
+          "lieu_dung": "2 nhát xịt",
+          "thoi_gian": "09:00"
+        },
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "09:15"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 62,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Có (Con gái dị ứng hải sản)",
+      "wbc_gl": 10.8,
+      "neu_gl": 6.9,
+      "lym_gl": 2.2,
+      "plt_gl": 250,
+      "crp_mgl": 7.0,
+      "ige_toan_phan_uiml": 410,
+      "nlr": 3.14,
+      "plr": 113.64,
+      "tryptase_cap_ngml": 28.0,
+      "tryptase_nen_ngml": 4.0,
+      "khi_mau_pv": "SpO2 94% (khí trời) -> 98% (thở O2 2l/p)",
+      "can_lam_sang_khac_pv": "Khám Răng-Hàm-Mặt: Sâu răng 46",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "11:30",
+          "dien_bien": "Phổi hết khò khè, bớt nghẹn họng",
+          "thuoc": "Khí dung Ventolin 2.5mg"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_2323",
+    "nhan": "Phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN04566",
+      "ma_ho_so": "HS11223",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Phùng Văn Thắng",
+      "ngay_sinh": "1981-06-30",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0912334455",
+      "nghe_nghiep": "Lái xe",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 7 đường Giải Phóng",
+      "dia_chi_xa_phuong": "Phường Bách Khoa",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Hợp tác tác vận tải",
+      "bhyt_so_the": "DN4019283749900",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Nguyễn Thị Lệ",
+      "nguoi_nha_so_dien_thoai": "0912556677",
+      "thoi_diem_kham_lan_dau": "2026-09-25 10:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-25",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-27",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-25",
+      "bac_si_kham": "BS. Vũ Hoàng Anh",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 5,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Mẩn đỏ sẩn phù toàn thân phát triển cấp tính",
+      "so_luong_san_phu_pv": ">50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "Toàn thân",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Có",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [
+        "Mi mắt",
+        "Môi",
+        "Lưỡi"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "1-6",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Tiếng rít thanh quản",
+        "Khó thở",
+        "Nghẹn họng"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Có",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Chóng mặt"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Không có"
+      ],
+      "dien_bien_tuan_hoan_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Có",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Nôn"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "Lần đầu xuất hiện",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "10:00",
+          "mach": 112,
+          "huyet_ap": "95/60"
+        },
+        {
+          "thoi_diem": "10:15",
+          "mach": 100,
+          "huyet_ap": "110/70"
+        },
+        {
+          "thoi_diem": "10:45",
+          "mach": 88,
+          "huyet_ap": "120/75"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 130,
+      "huyet_ap_tam_thu_thap_nhat": 95,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Có (Ceftriaxone 1g tiêm IV)",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuoc": 5,
+      "tien_su_phan_ung_yeu_to_pv_thuoc": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_thuoc": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "10:02"
+        },
+        {
+          "ten_thuoc": "Truyền NaCl 0.9%",
+          "lieu_dung": "500ml chảy nhanh",
+          "thoi_gian": "10:03"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 45,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 12.5,
+      "neu_gl": 8.5,
+      "lym_gl": 2.2,
+      "plt_gl": 220,
+      "crp_mgl": 12.0,
+      "ige_toan_phan_uiml": 280,
+      "nlr": 3.86,
+      "plr": 100.0,
+      "tryptase_cap_ngml": 35.0,
+      "tryptase_nen_ngml": 5.0,
+      "khi_mau_pv": "SpO2 93% -> 98% sau thở O2 4l/p",
+      "can_lam_sang_khac_pv": "ECG: Nhịp xoang nhanh 112 ckp",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "12:00",
+          "dien_bien": "Huyết áp ổn định 115/70, thở dễ chịu",
+          "thuoc": "Methylprednisolon 40mg IV"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_5952",
+    "nhan": "Phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN03109",
+      "ma_ho_so": "HS77334",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Đỗ Thu Trang",
+      "ngay_sinh": "1995-12-05",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0936112233",
+      "nghe_nghiep": "Giáo viên",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 23 ngõ 12",
+      "dia_chi_xa_phuong": "Phường Giảng Võ",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Trường THCS",
+      "bhyt_so_the": "DN4019283745544",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Đỗ Quốc Anh",
+      "nguoi_nha_so_dien_thoai": "0936445566",
+      "thoi_diem_kham_lan_dau": "2026-09-26 15:30",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-26",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-28",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-26",
+      "bac_si_kham": "BS. Phạm Thị Tâm",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 15,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Sẩn đỏ lan rộng toàn thân, ngứa dữ dội",
+      "so_luong_san_phu_pv": ">50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "Toàn thân",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Có",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [
+        "Mi mắt",
+        "Môi"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "1-6",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Khó thở nhẹ"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Có",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Chóng mặt"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Không có"
+      ],
+      "dien_bien_tuan_hoan_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Có",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Nôn",
+        "Đau bụng quặn thắt"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "Lần đầu xuất hiện",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "15:30",
+          "mach": 118,
+          "huyet_ap": "92/60"
+        },
+        {
+          "thoi_diem": "15:45",
+          "mach": 102,
+          "huyet_ap": "105/65"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 120,
+      "huyet_ap_tam_thu_thap_nhat": 92,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Không",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Có (Ong bắp cày đốt vào cổ)",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_con_trung_dot": 15,
+      "tien_su_phan_ung_yeu_to_pv_con_trung_dot": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_con_trung_dot": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "15:32"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 31,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 11.2,
+      "neu_gl": 7.8,
+      "lym_gl": 2.1,
+      "plt_gl": 240,
+      "crp_mgl": 6.8,
+      "ige_toan_phan_uiml": 230,
+      "nlr": 3.71,
+      "plr": 114.29,
+      "tryptase_cap_ngml": 31.0,
+      "tryptase_nen_ngml": 4.2,
+      "khi_mau_pv": "SpO2 96% khí trời",
+      "can_lam_sang_khac_pv": "ECG nhịp xoang nhanh 118 ckp",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "18:00",
+          "dien_bien": "Hết chóng mặt, da dịu bớt",
+          "thuoc": "Diphenhydramin 10mg tiêm Bắp"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_9371",
+    "nhan": "Sốc phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN03011",
+      "ma_ho_so": "HS99101",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Nguyễn Văn Hoàn",
+      "ngay_sinh": "1996-07-11",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0912998877",
+      "nghe_nghiep": "Thợ điện",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 100 phố Định Công",
+      "dia_chi_xa_phuong": "Phường Định Công",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Công ty Điện lực",
+      "bhyt_so_the": "DN4019283741122",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Nguyễn Văn Hùng",
+      "nguoi_nha_so_dien_thoai": "0912445566",
+      "thoi_diem_kham_lan_dau": "2026-09-20 10:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-20",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-24",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-20",
+      "bac_si_kham": "BS. Nguyễn Văn Bình",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 5,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Mẩn ngứa lan toàn thân",
+      "so_luong_san_phu_pv": ">50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "Toàn thân",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Có",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [
+        "Môi",
+        "Mi mắt"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "1-6",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Thở khò khè",
+        "Khó thở"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Có",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Tụt huyết áp / sốc",
+        "Ngất",
+        "Tím tái"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Không có"
+      ],
+      "dien_bien_tuan_hoan_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Không",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "10:00",
+          "mach": 130,
+          "huyet_ap": "75/45"
+        },
+        {
+          "thoi_diem": "10:05",
+          "mach": 120,
+          "huyet_ap": "85/50"
+        },
+        {
+          "thoi_diem": "10:20",
+          "mach": 105,
+          "huyet_ap": "105/65"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 120,
+      "huyet_ap_tam_thu_thap_nhat": 75,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Có (Penicillin G 1 triệu Đơn vị tiêm bắp)",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuoc": 5,
+      "tien_su_phan_ung_yeu_to_pv_thuoc": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_thuoc": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp đùi",
+          "thoi_gian": "10:01"
+        },
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp lần 2",
+          "thoi_gian": "10:06"
+        },
+        {
+          "ten_thuoc": "NaCl 0.9%",
+          "lieu_dung": "1000ml truyền xả dây",
+          "thoi_gian": "10:02"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 30,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 14.2,
+      "neu_gl": 10.1,
+      "lym_gl": 1.8,
+      "plt_gl": 210,
+      "crp_mgl": 15.0,
+      "ige_toan_phan_uiml": 350,
+      "nlr": 5.61,
+      "plr": 116.67,
+      "tryptase_cap_ngml": 48.0,
+      "tryptase_nen_ngml": 4.5,
+      "khi_mau_pv": "pH 7.31, PaO2 65mmHg, PaCO2 42mmHg, Lactate 3.8 mmol/L",
+      "can_lam_sang_khac_pv": "ECG: Nhịp xoang nhanh 130 ckp, ST chênh xuống nhẹ",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "14:00",
+          "dien_bien": "BN tỉnh, HA 115/70, tự thở tốt",
+          "thuoc": "Methylprednisolon 40mg IV"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_2814",
+    "nhan": "Sốc phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN02877",
+      "ma_ho_so": "HS88112",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Hoàng Thị Thảo",
+      "ngay_sinh": "1998-03-25",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0978112233",
+      "nghe_nghiep": "Kế toán",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 18 đường Láng",
+      "dia_chi_xa_phuong": "Phường Ngã Tư Sở",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Công ty Thương mại",
+      "bhyt_so_the": "DN4019283743322",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Hoàng Văn Bách",
+      "nguoi_nha_so_dien_thoai": "0978445566",
+      "thoi_diem_kham_lan_dau": "2026-09-21 20:15",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-21",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-25",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-21",
+      "bac_si_kham": "BS. Phạm Thị Tâm",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 15,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Nổi ban đỏ sẩn phù toàn thân",
+      "so_luong_san_phu_pv": ">50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "Toàn thân",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Có",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [
+        "Môi",
+        "Lưỡi"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "1-6",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Khó thở",
+        "Nghẹn họng"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Có",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Tụt huyết áp / sốc",
+        "Chóng mặt",
+        "Ngất"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Không có"
+      ],
+      "dien_bien_tuan_hoan_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Có",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Nôn",
+        "Đau bụng quặn thắt"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "Lần đầu xuất hiện",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "20:15",
+          "mach": 125,
+          "huyet_ap": "80/50"
+        },
+        {
+          "thoi_diem": "20:25",
+          "mach": 110,
+          "huyet_ap": "95/60"
+        },
+        {
+          "thoi_diem": "21:00",
+          "mach": 95,
+          "huyet_ap": "110/70"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 115,
+      "huyet_ap_tam_thu_thap_nhat": 80,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Có (Cua biển)",
+      "yeu_to_nghi_ngo_pv_thuoc": "Không",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuc_an": 15,
+      "tien_su_phan_ung_yeu_to_pv_thuc_an": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_thuc_an": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "20:17"
+        },
+        {
+          "ten_thuoc": "Truyền dung dịch NaCl 0.9%",
+          "lieu_dung": "500ml",
+          "thoi_gian": "20:18"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 28,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 13.0,
+      "neu_gl": 9.2,
+      "lym_gl": 2.0,
+      "plt_gl": 230,
+      "crp_mgl": 11.2,
+      "ige_toan_phan_uiml": 290,
+      "nlr": 4.6,
+      "plr": 115.0,
+      "tryptase_cap_ngml": 42.0,
+      "tryptase_nen_ngml": 3.9,
+      "khi_mau_pv": "SpO2 92% -> 98% thở oxy",
+      "can_lam_sang_khac_pv": "ECG nhịp xoang nhanh 125 ckp",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "22:00",
+          "dien_bien": "Huyết áp ổn định 110/70, tỉnh táo hoàn toàn",
+          "thuoc": "Solu-Medrol 40mg IV"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_8625",
+    "nhan": "Sốc phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN00612",
+      "ma_ho_so": "HS11009",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Ngô Bách Khoa",
+      "ngay_sinh": "2020-10-10",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0912887766",
+      "nghe_nghiep": "Trẻ em",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 45 phố Nguyễn Trãi",
+      "dia_chi_xa_phuong": "Phường Thanh Xuân Trung",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Mầm non",
+      "bhyt_so_the": "TE1019283749911",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Ngô Văn Tuấn",
+      "nguoi_nha_so_dien_thoai": "0912887766",
+      "thoi_diem_kham_lan_dau": "2026-09-22 09:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-22",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-26",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-22",
+      "bac_si_kham": "BS. Lê Thị Hà",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 3,
+      "trieu_chung_da_hien_tai_pv": [
+        "Ban dát sẩn",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Không",
+      "anh_san_phu_pv": "Không",
+      "dac_diem_san_phu_pv": "",
+      "so_luong_san_phu_pv": "",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "Toàn thân",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Có",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [
+        "Mi mắt",
+        "Môi"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "1-6",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Tiếng rít thanh quản",
+        "Khó thở"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Có",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Tụt huyết áp / sốc",
+        "Tím tái"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Không có"
+      ],
+      "dien_bien_tuan_hoan_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Không",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "09:00",
+          "mach": 145,
+          "huyet_ap": "60/35"
+        },
+        {
+          "thoi_diem": "09:05",
+          "mach": 130,
+          "huyet_ap": "75/45"
+        },
+        {
+          "thoi_diem": "09:20",
+          "mach": 110,
+          "huyet_ap": "90/55"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 95,
+      "huyet_ap_tam_thu_thap_nhat": 60,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Có (Cefotaxime 1g IV)",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuoc": 3,
+      "tien_su_phan_ung_yeu_to_pv_thuoc": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_thuoc": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.15mg tiêm bắp",
+          "thoi_gian": "09:01"
+        },
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.15mg tiêm bắp lần 2",
+          "thoi_gian": "09:06"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 6,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 12.0,
+      "neu_gl": 8.1,
+      "lym_gl": 2.5,
+      "plt_gl": 290,
+      "crp_mgl": 9.0,
+      "ige_toan_phan_uiml": 180,
+      "nlr": 3.24,
+      "plr": 116.0,
+      "tryptase_cap_ngml": 52.0,
+      "tryptase_nen_ngml": 3.5,
+      "khi_mau_pv": "pH 7.32, PaO2 60mmHg, PaCO2 40mmHg",
+      "can_lam_sang_khac_pv": "ECG nhịp xoang nhanh 145 ckp",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "12:00",
+          "dien_bien": "Bé tỉnh, môi hồng, HA 95/60",
+          "thuoc": "Hydrocortisone 50mg IV"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_6486",
+    "nhan": "Sốc phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN07244",
+      "ma_ho_so": "HS66778",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Phạm Văn Lương",
+      "ngay_sinh": "1954-04-12",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0982334455",
+      "nghe_nghiep": "Hưu trí",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Xóm 2",
+      "dia_chi_xa_phuong": "Xã Hải Hậu",
+      "dia_chi_tinh_tp": "Nam Định",
+      "noi_lam_viec": "Đã nghỉ hưu",
+      "bhyt_so_the": "HT3019283745588",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Phạm Văn Minh",
+      "nguoi_nha_so_dien_thoai": "0982667788",
+      "thoi_diem_kham_lan_dau": "2026-09-23 16:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-23",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-27",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-23",
+      "bac_si_kham": "BS. Vũ Hoàng Anh",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 10,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Sẩn đỏ ngứa toàn thân",
+      "so_luong_san_phu_pv": ">50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "Toàn thân",
+      "hien_tai_co_phu_mach_pv": "Không",
+      "anh_phu_mach_pv": "Không",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [],
+      "thoi_gian_ton_tai_phu_mach_pv": "",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Khó thở"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Có",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Tụt huyết áp / sốc",
+        "Ngất"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Không có"
+      ],
+      "dien_bien_tuan_hoan_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Không",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "16:00",
+          "mach": 118,
+          "huyet_ap": "70/40"
+        },
+        {
+          "thoi_diem": "16:10",
+          "mach": 105,
+          "huyet_ap": "85/50"
+        },
+        {
+          "thoi_diem": "16:40",
+          "mach": 90,
+          "huyet_ap": "110/70"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 130,
+      "huyet_ap_tam_thu_thap_nhat": 70,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Không",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Có (Kiến lửa đốt nhiều nốt)",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_con_trung_dot": 10,
+      "tien_su_phan_ung_yeu_to_pv_con_trung_dot": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_con_trung_dot": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "16:02"
+        },
+        {
+          "ten_thuoc": "Truyền NaCl 0.9%",
+          "lieu_dung": "500ml",
+          "thoi_gian": "16:03"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 72,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 10.5,
+      "neu_gl": 7.2,
+      "lym_gl": 1.9,
+      "plt_gl": 200,
+      "crp_mgl": 10.0,
+      "ige_toan_phan_uiml": 220,
+      "nlr": 3.79,
+      "plr": 105.26,
+      "tryptase_cap_ngml": 45.0,
+      "tryptase_nen_ngml": 4.1,
+      "khi_mau_pv": "SpO2 94% -> 98% thở O2",
+      "can_lam_sang_khac_pv": "ECG nhịp xoang 118 ckp",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "18:00",
+          "dien_bien": "BN tỉnh táo, HA 115/70",
+          "thuoc": "Solu-Medrol 40mg IV"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_6608",
+    "nhan": "Sốc phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN03899",
+      "ma_ho_so": "HS22334",
+      "de_tai_ai": "",
+      "ho_ten": "Nguyễn Hoàng Nam",
+      "ngay_sinh": "1988-08-18",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0912111222",
+      "nghe_nghiep": "",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "",
+      "dia_chi_xa_phuong": "",
+      "dia_chi_tinh_tp": "Hải Dương",
+      "noi_lam_viec": "",
+      "bhyt_so_the": "",
+      "bhyt_gia_tri_den": "",
+      "nguoi_nha_ho_ten_dia_chi": "",
+      "nguoi_nha_so_dien_thoai": "",
+      "thoi_diem_kham_lan_dau": "2026-09-24 14:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-24",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "",
+      "ngay_kham": "2026-09-24",
+      "bac_si_kham": "BS. Nguyễn Văn Bình",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": true,
+      "thoi_gian_khoi_phat_pv": 20,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [],
+      "dien_bien_da_pv": "",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Không",
+      "dac_diem_san_phu_pv": "",
+      "so_luong_san_phu_pv": ">50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "Toàn thân",
+      "hien_tai_co_phu_mach_pv": "Không",
+      "anh_phu_mach_pv": "Không",
+      "so_lan_phu_mach_tung_xay_ra_pv": null,
+      "so_lan_phu_mach_nang_can_vien_pv": null,
+      "vi_tri_phu_mach_pv": [],
+      "thoi_gian_ton_tai_phu_mach_pv": "",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Khó thở"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [],
+      "dien_bien_ho_hap_pv": "",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Có",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Tụt huyết áp / sốc"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [],
+      "dien_bien_tuan_hoan_pv": "",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Không",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [],
+      "tien_su_benh_nen_tieu_hoa_pv": [],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "14:00",
+          "mach": 120,
+          "huyet_ap": "80/40"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": null,
+      "huyet_ap_tam_thu_thap_nhat": 80,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Có (Meloxicam 15mg)",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuoc": 20,
+      "tien_su_phan_ung_yeu_to_pv_thuoc": "Không rõ",
+      "tien_su_phan_ve_di_ung_khac_pv_thuoc": [],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "14:02"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": null,
+      "tuoi_lan_dau_bi_benh_pv": null,
+      "dot_gan_nhat_cach_pv": "",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không rõ",
+      "wbc_gl": null,
+      "neu_gl": null,
+      "lym_gl": null,
+      "plt_gl": null,
+      "crp_mgl": null,
+      "ige_toan_phan_uiml": null,
+      "nlr": null,
+      "plr": null,
+      "tryptase_cap_ngml": null,
+      "tryptase_nen_ngml": null,
+      "khi_mau_pv": "",
+      "can_lam_sang_khac_pv": "",
+      "theo_doi_phan_ve_dieu_tri": [],
+      "ket_qua_cuoi_ngay_pv": "",
+      "ket_qua_cuoi_dot_pv": ""
+    }
+  },
+  {
+    "id": "BA_7353",
+    "nhan": "Sốc phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN05033",
+      "ma_ho_so": "HS11445",
+      "de_tai_ai": "",
+      "ho_ten": "Lý Thị Hương",
+      "ngay_sinh": "1976-02-20",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0988000999",
+      "nghe_nghiep": "",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "",
+      "dia_chi_xa_phuong": "",
+      "dia_chi_tinh_tp": "Vĩnh Phúc",
+      "noi_lam_viec": "",
+      "bhyt_so_the": "",
+      "bhyt_gia_tri_den": "",
+      "nguoi_nha_ho_ten_dia_chi": "",
+      "nguoi_nha_so_dien_thoai": "",
+      "thoi_diem_kham_lan_dau": "2026-09-25 08:30",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-25",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "",
+      "ket_qua_dieu_tri_bao_hiem": "",
+      "ngay_kham": "2026-09-25",
+      "bac_si_kham": "BS. Phạm Thị Tâm",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": true,
+      "thoi_gian_khoi_phat_pv": 15,
+      "trieu_chung_da_hien_tai_pv": [
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [],
+      "dien_bien_da_pv": "",
+      "hien_tai_co_san_phu_pv": "Không",
+      "anh_san_phu_pv": "Không",
+      "dac_diem_san_phu_pv": "",
+      "so_luong_san_phu_pv": "",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Không",
+      "so_lan_phu_mach_tung_xay_ra_pv": null,
+      "so_lan_phu_mach_nang_can_vien_pv": null,
+      "vi_tri_phu_mach_pv": [
+        "Môi",
+        "Mi mắt"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Khó thở"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [],
+      "dien_bien_ho_hap_pv": "",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Có",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Tụt huyết áp / sốc",
+        "Chóng mặt"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [],
+      "dien_bien_tuan_hoan_pv": "",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Không",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [],
+      "tien_su_benh_nen_tieu_hoa_pv": [],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "08:30",
+          "mach": 128,
+          "huyet_ap": "75/50"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": null,
+      "huyet_ap_tam_thu_thap_nhat": 75,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Có (Thuốc uống không rõ tên)",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuoc": 15,
+      "tien_su_phan_ung_yeu_to_pv_thuoc": "Không rõ",
+      "tien_su_phan_ve_di_ung_khac_pv_thuoc": [],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "08:32"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": null,
+      "tuoi_lan_dau_bi_benh_pv": null,
+      "dot_gan_nhat_cach_pv": "",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không rõ",
+      "wbc_gl": null,
+      "neu_gl": null,
+      "lym_gl": null,
+      "plt_gl": null,
+      "crp_mgl": null,
+      "ige_toan_phan_uiml": null,
+      "nlr": null,
+      "plr": null,
+      "tryptase_cap_ngml": null,
+      "tryptase_nen_ngml": null,
+      "khi_mau_pv": "",
+      "can_lam_sang_khac_pv": "",
+      "theo_doi_phan_ve_dieu_tri": [],
+      "ket_qua_cuoi_ngay_pv": "",
+      "ket_qua_cuoi_dot_pv": ""
+    }
+  },
+  {
+    "id": "BA_8367",
+    "nhan": "Sốc phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN06577",
+      "ma_ho_so": "HS77889",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Nguyễn Tiến Dũng",
+      "ngay_sinh": "1961-05-30",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0913223344",
+      "nghe_nghiep": "Hưu trí",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 56 đường Nguyễn Chí Thanh",
+      "dia_chi_xa_phuong": "Phường Láng Hạ",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Đã nghỉ hưu",
+      "bhyt_so_the": "HT3019283749988",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Nguyễn Tiến Minh",
+      "nguoi_nha_so_dien_thoai": "0913556677",
+      "thoi_diem_kham_lan_dau": "2026-09-25 11:30",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-25",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-29",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "Bệnh tim cục bộ mạn tính, COPD giai đoạn B, Đau thắt lưng mạn tính",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-25",
+      "bac_si_kham": "BS. Vũ Hoàng Anh",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 10,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Sẩn phù rải rác lồng ngực và tay",
+      "so_luong_san_phu_pv": "20-50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "≤50% BSA",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Có",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [
+        "Mi mắt"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "1-6",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Tiếng rít thanh quản",
+        "Khó thở"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Bệnh phổi tắc nghẽn mạn tính"
+      ],
+      "dien_bien_ho_hap_pv": "Tăng nặng",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Có",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Tụt huyết áp / sốc",
+        "Ngất"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Bệnh tim mạch (Bệnh tim cục bộ)"
+      ],
+      "dien_bien_tuan_hoan_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Không",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "11:30",
+          "mach": 110,
+          "huyet_ap": "80/50"
+        },
+        {
+          "thoi_diem": "11:40",
+          "mach": 100,
+          "huyet_ap": "90/60"
+        },
+        {
+          "thoi_diem": "12:15",
+          "mach": 88,
+          "huyet_ap": "110/70"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 130,
+      "huyet_ap_tam_thu_thap_nhat": 80,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Có (Thuốc cản quang Xenetix tiêm IV)",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuoc": 10,
+      "tien_su_phan_ung_yeu_to_pv_thuoc": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_thuoc": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Bisoprolol 2.5mg",
+          "lieu_dung": "1 viên/ngày",
+          "thoi_gian": "Hàng ngày (thuốc nền)"
+        },
+        {
+          "ten_thuoc": "Aspirin 81mg",
+          "lieu_dung": "1 viên/ngày",
+          "thoi_gian": "Hàng ngày (thuốc nền)"
+        },
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "11:32"
+        },
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp lần 2",
+          "thoi_gian": "11:38"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 65,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 13.8,
+      "neu_gl": 9.5,
+      "lym_gl": 1.7,
+      "plt_gl": 210,
+      "crp_mgl": 18.0,
+      "ige_toan_phan_uiml": 240,
+      "nlr": 5.59,
+      "plr": 123.53,
+      "tryptase_cap_ngml": 55.0,
+      "tryptase_nen_ngml": 5.1,
+      "khi_mau_pv": "pH 7.30, PaO2 58mmHg, PaCO2 48mmHg",
+      "can_lam_sang_khac_pv": "X-quang thắt lưng: thoái hóa L4-L5",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "15:00",
+          "dien_bien": "Thở dễ hơn, huyết áp 115/70",
+          "thuoc": "Solu-Medrol 40mg IV"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_9281",
+    "nhan": "Sốc phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN05833",
+      "ma_ho_so": "HS33445",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Lê Thị Thanh",
+      "ngay_sinh": "1968-04-14",
+      "gioi_tinh": "Nữ",
+      "so_dien_thoai": "0977334455",
+      "nghe_nghiep": "Buôn bán",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 12 chợ Đồng Xuân",
+      "dia_chi_xa_phuong": "Phường Đồng Xuân",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Tự do",
+      "bhyt_so_the": "DN4019283741199",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Lê Văn Hân",
+      "nguoi_nha_so_dien_thoai": "0977667788",
+      "thoi_diem_kham_lan_dau": "2026-09-26 09:30",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-26",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-30",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "Viêm dạ dày mạn tính, Rối loạn giấc ngủ, Ù tai trái kéo dài",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-26",
+      "bac_si_kham": "BS. Nguyễn Văn Bình",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 20,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Sẩn phù toàn thân",
+      "so_luong_san_phu_pv": ">50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "Toàn thân",
+      "hien_tai_co_phu_mach_pv": "Không",
+      "anh_phu_mach_pv": "Không",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [],
+      "thoi_gian_ton_tai_phu_mach_pv": "",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Khó thở"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Có",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Tụt huyết áp / sốc",
+        "Chóng mặt"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Không có"
+      ],
+      "dien_bien_tuan_hoan_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Có",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Nôn"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Bệnh tiêu hoá mạn tính (Viêm dạ dày)"
+      ],
+      "dien_bien_tieu_hoa_pv": "Tăng nặng",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "09:30",
+          "mach": 135,
+          "huyet_ap": "70/45"
+        },
+        {
+          "thoi_diem": "09:40",
+          "mach": 115,
+          "huyet_ap": "85/55"
+        },
+        {
+          "thoi_diem": "10:15",
+          "mach": 95,
+          "huyet_ap": "110/70"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 120,
+      "huyet_ap_tam_thu_thap_nhat": 70,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Không",
+      "yeu_to_nghi_ngo_pv_thuoc": "Có (Amoxicillin 500mg - uống sau ăn)",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuoc": 20,
+      "tien_su_phan_ung_yeu_to_pv_thuoc": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_thuoc": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Omeprazole 20mg",
+          "lieu_dung": "1 viên/ngày",
+          "thoi_gian": "Hàng ngày (thuốc nền)"
+        },
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "09:32"
+        },
+        {
+          "ten_thuoc": "Truyền NaCl 0.9%",
+          "lieu_dung": "500ml",
+          "thoi_gian": "09:33"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 58,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 12.8,
+      "neu_gl": 8.9,
+      "lym_gl": 2.0,
+      "plt_gl": 240,
+      "crp_mgl": 14.0,
+      "ige_toan_phan_uiml": 310,
+      "nlr": 4.45,
+      "plr": 120.0,
+      "tryptase_cap_ngml": 46.0,
+      "tryptase_nen_ngml": 4.3,
+      "khi_mau_pv": "SpO2 93% -> 98% thở O2",
+      "can_lam_sang_khac_pv": "Đo thính lực đồ: Giảm thính lực nhẹ tai trái",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "12:00",
+          "dien_bien": "Tỉnh táo, Huyết áp 110/70",
+          "thuoc": "Methylprednisolon 40mg IV"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  },
+  {
+    "id": "BA_2355",
+    "nhan": "Sốc phản vệ",
+    "du_lieu": {
+      "ma_benh_nhan": "BN05288",
+      "ma_ho_so": "HS88990",
+      "de_tai_ai": "Lần 1",
+      "ho_ten": "Trịnh Văn Tuấn",
+      "ngay_sinh": "1974-03-15",
+      "gioi_tinh": "Nam",
+      "so_dien_thoai": "0912778899",
+      "nghe_nghiep": "Kinh doanh",
+      "dan_toc": "Kinh",
+      "dia_chi_so_nha_thon_pho": "Số 88 phố Bà Triệu",
+      "dia_chi_xa_phuong": "Phường Hàng Bài",
+      "dia_chi_tinh_tp": "Hà Nội",
+      "noi_lam_viec": "Công ty Xuất nhập khẩu",
+      "bhyt_so_the": "DN4019283748811",
+      "bhyt_gia_tri_den": "2026-12-31",
+      "nguoi_nha_ho_ten_dia_chi": "Trịnh Thị Loan",
+      "nguoi_nha_so_dien_thoai": "0912113355",
+      "thoi_diem_kham_lan_dau": "2026-09-27 11:00",
+      "ngay_bat_dau_dieu_tri_ngoai_tru": "2026-09-27",
+      "ngay_ket_thuc_dieu_tri_ngoai_tru": "2026-09-29",
+      "chan_doan_tuyen_truoc": "",
+      "chan_doan_ban_dau_phong_kham": "",
+      "chan_doan_tai_kham": "",
+      "benh_phu": "Tăng huyết áp",
+      "ket_qua_dieu_tri_bao_hiem": "Khỏi bệnh",
+      "ngay_kham": "2026-09-27",
+      "bac_si_kham": "BS. Phạm Thị Tâm",
+      "chan_doan_chinh_pv": "",
+      "muc_do_phan_ve": "",
+      "soc_phan_ve_tieu_chi": [],
+      "phan_ve_tieu_chi": [],
+      "tiep_tuc_theo_doi_chua_du_du_kien": false,
+      "thoi_gian_khoi_phat_pv": 10,
+      "trieu_chung_da_hien_tai_pv": [
+        "Sẩn phù",
+        "Phù mạch"
+      ],
+      "tien_su_benh_nen_lien_quan_da_pv": [
+        "Không có"
+      ],
+      "dien_bien_da_pv": "Lần đầu xuất hiện",
+      "hien_tai_co_san_phu_pv": "Có",
+      "anh_san_phu_pv": "Có",
+      "dac_diem_san_phu_pv": "Ban sẩn phù ngứa toàn thân",
+      "so_luong_san_phu_pv": ">50",
+      "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": "Toàn thân",
+      "hien_tai_co_phu_mach_pv": "Có",
+      "anh_phu_mach_pv": "Có",
+      "so_lan_phu_mach_tung_xay_ra_pv": 0,
+      "so_lan_phu_mach_nang_can_vien_pv": 0,
+      "vi_tri_phu_mach_pv": [
+        "Mi mắt"
+      ],
+      "thoi_gian_ton_tai_phu_mach_pv": "1-6",
+      "trieu_chung_ho_hap_co_khong_pv": "Có",
+      "trieu_chung_ho_hap_hien_tai_pv": [
+        "Khó thở",
+        "Thở khò khè"
+      ],
+      "tien_su_benh_nen_ho_hap_pv": [
+        "Không có"
+      ],
+      "dien_bien_ho_hap_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tuan_hoan_co_khong_pv": "Có",
+      "trieu_chung_tuan_hoan_hien_tai_pv": [
+        "Tụt huyết áp / sốc",
+        "Chóng mặt"
+      ],
+      "tien_su_benh_nen_tuan_hoan_pv": [
+        "Bệnh tim mạch (Tăng huyết áp)"
+      ],
+      "dien_bien_tuan_hoan_pv": "Lần đầu xuất hiện",
+      "trieu_chung_tieu_hoa_co_khong_pv": "Không",
+      "trieu_chung_tieu_hoa_hien_tai_pv": [
+        "Không có"
+      ],
+      "tien_su_benh_nen_tieu_hoa_pv": [
+        "Không có"
+      ],
+      "dien_bien_tieu_hoa_pv": "",
+      "bang_theo_doi_dau_hieu_sinh_ton": [
+        {
+          "thoi_diem": "11:00",
+          "mach": 115,
+          "huyet_ap": "98/60"
+        },
+        {
+          "thoi_diem": "11:15",
+          "mach": 100,
+          "huyet_ap": "115/70"
+        },
+        {
+          "thoi_diem": "12:00",
+          "mach": 85,
+          "huyet_ap": "130/80"
+        }
+      ],
+      "huyet_ap_tam_thu_nen": 150,
+      "huyet_ap_tam_thu_thap_nhat": 98,
+      "yeu_to_nghi_ngo_pv_thuc_an": "Có (Nhộng tằm)",
+      "yeu_to_nghi_ngo_pv_thuoc": "Không",
+      "yeu_to_nghi_ngo_pv_con_trung_dot": "Không",
+      "yeu_to_nghi_ngo_pv_khac": "Không",
+      "tac_nhan_hit_vao_pv": "Không",
+      "thoi_gian_tiep_xuc_khoi_phat_pv_thuc_an": 10,
+      "tien_su_phan_ung_yeu_to_pv_thuc_an": "Không",
+      "tien_su_phan_ve_di_ung_khac_pv_thuc_an": [
+        "Không"
+      ],
+      "da_dieu_tri_dot_nay_pv": "Có",
+      "danh_sach_thuoc_da_dieu_tri_pv": [
+        {
+          "ten_thuoc": "Adrenaline 1mg/1ml",
+          "lieu_dung": "0.5mg tiêm bắp",
+          "thoi_gian": "11:02"
+        },
+        {
+          "ten_thuoc": "Truyền NaCl 0.9%",
+          "lieu_dung": "500ml",
+          "thoi_gian": "11:03"
+        }
+      ],
+      "so_lan_phan_ve_hoac_may_day_cap_truoc_do": 0,
+      "tuoi_lan_dau_bi_benh_pv": 52,
+      "dot_gan_nhat_cach_pv": "Chưa từng bị",
+      "thoi_gian_keo_dai_trung_binh_moi_dot_pv": "",
+      "tien_su_gia_dinh_pv": "Không",
+      "wbc_gl": 11.8,
+      "neu_gl": 8.0,
+      "lym_gl": 2.1,
+      "plt_gl": 230,
+      "crp_mgl": 9.5,
+      "ige_toan_phan_uiml": 270,
+      "nlr": 3.81,
+      "plr": 109.52,
+      "tryptase_cap_ngml": 38.0,
+      "tryptase_nen_ngml": 4.0,
+      "khi_mau_pv": "SpO2 95% khí trời",
+      "can_lam_sang_khac_pv": "ECG nhịp xoang 115 ckp",
+      "theo_doi_phan_ve_dieu_tri": [
+        {
+          "ngay": 1,
+          "thoi_diem": "13:30",
+          "dien_bien": "Huyết áp trở về mức nền 135/85",
+          "thuoc": "Methylprednisolon 40mg IV"
+        }
+      ],
+      "ket_qua_cuoi_ngay_pv": "Cải thiện một phần",
+      "ket_qua_cuoi_dot_pv": "Ra viện"
+    }
+  }
+]
+
+
