@@ -1,0 +1,792 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EHR_May_Day_Cap_Schema",
+  "description": "JSON Schema kỹ thuật cho Bệnh án Mày đay cấp tính - Bệnh viện Da liễu Trung ương",
+  "type": "object",
+  "required": [
+    "ma_benh_nhan",
+    "ho_ten",
+    "so_dien_thoai",
+    "chan_doan_xac_dinh_cap"
+  ],
+  "properties": {
+    "ma_benh_nhan": {
+      "type": "string",
+      "description": "Mã bệnh nhân HIS"
+    },
+    "chan_doan_chinh_cap": {
+      "type": ["object", "null"],
+      "description": "Chẩn đoán chính hiển thị badge đầu trang",
+      "properties": {
+        "danh_sach_chon": {
+          "type": ["string", "null"],
+          "enum": [
+            "Mày đay cấp có dấu hiệu nặng",
+            "Mày đay cấp thông thường",
+            "Ban và phát ban khác",
+            "unknown",
+            "N/A",
+            null
+          ]
+        },
+        "ghi_ro_phat_ban_khac": { "type": ["string", "null"] }
+      }
+    },
+    "ma_ho_so": {
+      "type": ["string", "null"],
+      "description": "Mã hồ sơ bệnh án tự sinh"
+    },
+    "de_tai_ai": {
+      "type": ["string", "null"],
+      "enum": ["Lần 1", "Lần 2", "Kiểm tra lại", "unknown", "N/A", null]
+    },
+
+    "ho_ten": {
+      "type": "string",
+      "description": "Họ và tên bệnh nhân"
+    },
+    "ngay_sinh": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "gioi_tinh": {
+      "type": ["string", "null"]
+    },
+    "so_dien_thoai": {
+      "type": "string"
+    },
+    "nghe_nghiep": {
+      "type": ["string", "null"]
+    },
+    "dan_toc": {
+      "type": ["string", "null"]
+    },
+    "dia_chi_so_nha_thon_pho": {
+      "type": ["string", "null"]
+    },
+    "dia_chi_xa_phuong": {
+      "type": ["string", "null"]
+    },
+    "dia_chi_tinh_tp": {
+      "type": ["string", "null"]
+    },
+    "noi_lam_viec": {
+      "type": ["string", "null"]
+    },
+    "bhyt_so_the": {
+      "type": ["string", "null"]
+    },
+    "bhyt_gia_tri_den": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "nguoi_nha_ho_ten_dia_chi": {
+      "type": ["string", "null"]
+    },
+    "nguoi_nha_so_dien_thoai": {
+      "type": ["string", "null"]
+    },
+    "thoi_diem_kham_lan_dau": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "ngay_bat_dau_dieu_tri_ngoai_tru": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "ngay_ket_thuc_dieu_tri_ngoai_tru": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+
+    "chan_doan_tuyen_truoc": {
+      "type": ["string", "null"]
+    },
+    "chan_doan_ban_dau_phong_kham": {
+      "type": ["string", "null"]
+    },
+    "chan_doan_tai_kham": {
+      "type": ["array", "null"],
+      "items": { "type": "object" }
+    },
+    "benh_phu": {
+      "type": ["string", "null"]
+    },
+    "ket_qua_dieu_tri_bao_hiem": {
+      "type": ["object", "null"],
+      "properties": {
+        "danh_sach_chon": {
+          "type": ["string", "null"],
+          "enum": [
+            "Khỏi bệnh",
+            "Đỡ",
+            "Không đỡ",
+            "Nặng hơn",
+            "Chết",
+            "Biến chứng (ghi rõ)",
+            "unknown",
+            "N/A",
+            null
+          ]
+        },
+        "ghi_ro_bien_chung": { "type": ["string", "null"] }
+      }
+    },
+
+    "ngay_kham": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "bac_si_kham": {
+      "type": ["string", "null"]
+    },
+
+    "thoi_gian_khoi_phat_gio": {
+      "type": ["number", "null"],
+      "description": "Thời gian từ khi khởi phát quy đổi về giờ"
+    },
+
+    "trieu_chung_da_hien_tai": {
+      "type": ["object", "null"],
+      "properties": {
+        "danh_sach_chon": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["Phù mạch", "Sẩn phù", "Ban dát sẩn", "Không có", "Khác"]
+          }
+        },
+        "khac_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "tien_su_benh_nen_lien_quan_da": {
+      "type": ["object", "null"],
+      "properties": {
+        "danh_sach_chon": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Mày đay mạn tính",
+              "Tiền sử phù mạch tái diễn",
+              "Rối loạn tế bào mast",
+              "Viêm da cơ địa",
+              "Không có",
+              "Khác"
+            ]
+          }
+        },
+        "khac_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "dien_bien_da": {
+      "type": ["object", "null"],
+      "properties": {
+        "lan_dau_xuat_hien": { "type": ["boolean", "null"] },
+        "lan_thu_may": { "type": ["integer", "null"] },
+        "dien_bien_so_dot_truoc": {
+          "type": ["string", "null"],
+          "enum": ["Tăng nặng", "Không đổi", "unknown", "N/A", null]
+        }
+      }
+    },
+    "hien_tai_co_san_phu": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", "unknown", "N/A", null]
+    },
+    "anh_san_phu": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", "unknown", "N/A", null]
+    },
+    "dac_diem_san_phu_cap": {
+      "type": ["array", "null"],
+      "description": "Lưới chi tiết dạng tổn thương sẩn phù",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dang_ton_thuong": {
+            "type": "string",
+            "enum": [
+              "Hình vòng (bờ rõ)",
+              "Hình đứt đoạn (bờ rõ)",
+              "Hình bản đồ (bờ rõ)",
+              "Hình tròn (bờ rõ)",
+              "Dát sẩn (bờ không rõ)",
+              "Khác"
+            ]
+          },
+          "khac_ghi_ro": { "type": ["string", "null"] },
+          "kich_thuoc_mm": { "type": ["number", "null"] },
+          "thoi_gian_ton_tai_trung_binh": { "type": ["string", "null"] },
+          "thoi_diem_xuat_hien": {
+            "type": "string",
+            "enum": ["Ban ngày", "Chiều tối", "Đêm", "Không cố định"]
+          }
+        }
+      }
+    },
+    "so_luong_san_phu": {
+      "type": ["string", "null"],
+      "enum": ["<20 nốt", "20-50 nốt", ">50 nốt", "unknown", "N/A", null]
+    },
+    "muc_do_lan_rong_va_phan_bo_ton_thuong": {
+      "type": ["object", "null"],
+      "properties": {
+        "muc_do_lan_rong": {
+          "type": ["string", "null"],
+          "enum": [">50% BSA", "≤50% BSA", "unknown", "N/A", null]
+        },
+        "phan_bo": {
+          "type": ["string", "null"],
+          "enum": ["Bất kỳ", "Toàn thân", "Đặc biệt", "unknown", "N/A", null]
+        },
+        "dac_biet_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "hien_tai_co_phu_mach": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", "unknown", "N/A", null]
+    },
+    "anh_phu_mach": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", "unknown", "N/A", null]
+    },
+    "so_lan_phu_mach_tung_xay_ra": {
+      "type": ["integer", "null"],
+      "minimum": 0
+    },
+    "so_lan_phu_mach_nang_can_vien": {
+      "type": ["integer", "null"],
+      "minimum": 0
+    },
+    "vi_tri_phu_mach": {
+      "type": ["object", "null"],
+      "properties": {
+        "danh_sach_chon": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Một bên",
+              "Hai bên",
+              "Mi mắt",
+              "Lưỡi",
+              "Thanh quản",
+              "Môi",
+              "Bàn tay",
+              "Bàn chân",
+              "Các phần khác của mặt",
+              "Sinh dục",
+              "Vị trí khác"
+            ]
+          }
+        },
+        "vi_tri_khac_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "thoi_gian_ton_tai_phu_mach": {
+      "type": ["string", "null"],
+      "enum": [
+        "<1",
+        "1-6",
+        "6-12",
+        "12-24",
+        "24-48",
+        "48-72",
+        ">72",
+        "Không rõ",
+        "N/A",
+        null
+      ]
+    },
+
+    "trieu_chung_ho_hap_co_khong": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", "unknown", "N/A", null]
+    },
+    "trieu_chung_ho_hap_hien_tai": {
+      "type": ["object", "null"],
+      "properties": {
+        "danh_sach_chon": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Thở khò khè",
+              "Nghẹn họng",
+              "Khó thở / thở rít",
+              "Đau / tức ngực",
+              "Không có",
+              "Khác"
+            ]
+          }
+        },
+        "khac_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "tien_su_benh_nen_ho_hap": {
+      "type": ["object", "null"],
+      "properties": {
+        "danh_sach_chon": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Hen phế quản",
+              "Bệnh phổi tắc nghẽn mạn tính",
+              "Viêm mũi dị ứng",
+              "Không có",
+              "Khác"
+            ]
+          }
+        },
+        "khac_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "dien_bien_ho_hap": {
+      "type": ["object", "null"],
+      "properties": {
+        "lan_dau_xuat_hien": { "type": ["boolean", "null"] },
+        "lan_thu_may": { "type": ["integer", "null"] },
+        "dien_bien_so_dot_truoc": {
+          "type": ["string", "null"],
+          "enum": ["Tăng nặng", "Không đổi", "unknown", "N/A", null]
+        }
+      }
+    },
+
+    "trieu_chung_tieu_hoa_co_khong": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", "unknown", "N/A", null]
+    },
+    "trieu_chung_tieu_hoa_hien_tai": {
+      "type": ["object", "null"],
+      "properties": {
+        "non": { "type": ["boolean", "null"] },
+        "non_so_lan": { "type": ["integer", "null"] },
+        "dau_bung_quan_that": { "type": ["boolean", "null"] },
+        "buon_non_tieu_chay": { "type": ["boolean", "null"] },
+        "khong_co": { "type": ["boolean", "null"] },
+        "khac_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "tien_su_benh_nen_tieu_hoa": {
+      "type": ["object", "null"],
+      "properties": {
+        "benh_tieu_hoa_man_tinh_ghi_ro": { "type": ["string", "null"] },
+        "khong_co": { "type": ["boolean", "null"] },
+        "khac_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "dien_bien_tieu_hoa": {
+      "type": ["object", "null"],
+      "properties": {
+        "lan_dau_xuat_hien": { "type": ["boolean", "null"] },
+        "lan_thu_may": { "type": ["integer", "null"] },
+        "dien_bien_so_dot_truoc": {
+          "type": ["string", "null"],
+          "enum": ["Tăng nặng", "Không đổi", "unknown", "N/A", null]
+        }
+      }
+    },
+
+    "yeu_to_nghi_ngo_thuc_an": {
+      "type": ["object", "null"],
+      "properties": {
+        "co_khong": { "type": ["string", "null"], "enum": ["Có", "Không"] },
+        "ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "thoi_gian_tiep_xuc_khoi_phat_thuc_an": { "type": ["number", "null"] },
+    "tien_su_phan_ung_yeu_to_thuc_an": {
+      "type": ["object", "null"],
+      "properties": {
+        "ket_qua": { "type": ["string", "null"], "enum": ["Có", "Không", "Không rõ"] },
+        "ghi_ro_bieu_hien": { "type": ["string", "null"] }
+      }
+    },
+    "tien_su_phan_ve_di_ung_khac_thuc_an": {
+      "type": ["object", "null"],
+      "properties": {
+        "khong": { "type": ["boolean", "null"] },
+        "phan_ve_ghi_ro": { "type": ["string", "null"] },
+        "di_ung_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+
+    "yeu_to_nghi_ngo_thuoc": {
+      "type": ["object", "null"],
+      "properties": {
+        "co_khong": { "type": ["string", "null"], "enum": ["Có", "Không"] },
+        "ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "thoi_gian_tiep_xuc_khoi_phat_thuoc": { "type": ["number", "null"] },
+    "tien_su_phan_ung_yeu_to_thuoc": {
+      "type": ["object", "null"],
+      "properties": {
+        "ket_qua": { "type": ["string", "null"], "enum": ["Có", "Không", "Không rõ"] },
+        "ghi_ro_bieu_hien": { "type": ["string", "null"] }
+      }
+    },
+    "tien_su_phan_ve_di_ung_khac_thuoc": {
+      "type": ["object", "null"],
+      "properties": {
+        "khong": { "type": ["boolean", "null"] },
+        "phan_ve_ghi_ro": { "type": ["string", "null"] },
+        "di_ung_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+
+    "yeu_to_nghi_ngo_con_trung_dot": {
+      "type": ["object", "null"],
+      "properties": {
+        "co_khong": { "type": ["string", "null"], "enum": ["Có", "Không"] },
+        "ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "thoi_gian_tiep_xuc_khoi_phat_con_trung_dot": { "type": ["number", "null"] },
+    "tien_su_phan_ung_yeu_to_con_trung_dot": {
+      "type": ["object", "null"],
+      "properties": {
+        "ket_qua": { "type": ["string", "null"], "enum": ["Có", "Không", "Không rõ"] },
+        "ghi_ro_bieu_hien": { "type": ["string", "null"] }
+      }
+    },
+    "tien_su_phan_ve_di_ung_khac_con_trung_dot": {
+      "type": ["object", "null"],
+      "properties": {
+        "khong": { "type": ["boolean", "null"] },
+        "phan_ve_ghi_ro": { "type": ["string", "null"] },
+        "di_ung_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+
+    "yeu_to_nghi_ngo_khac": {
+      "type": ["object", "null"],
+      "properties": {
+        "co_khong": { "type": ["string", "null"], "enum": ["Có", "Không"] },
+        "ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "thoi_gian_tiep_xuc_khoi_phat_khac": { "type": ["number", "null"] },
+    "tien_su_phan_ung_yeu_to_khac": {
+      "type": ["object", "null"],
+      "properties": {
+        "ket_qua": { "type": ["string", "null"], "enum": ["Có", "Không", "Không rõ"] },
+        "ghi_ro_bieu_hien": { "type": ["string", "null"] }
+      }
+    },
+    "tien_su_phan_ve_di_ung_khac_khac": {
+      "type": ["object", "null"],
+      "properties": {
+        "khong": { "type": ["boolean", "null"] },
+        "phan_ve_ghi_ro": { "type": ["string", "null"] },
+        "di_ung_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+
+    "sot": {
+      "type": ["object", "null"],
+      "properties": {
+        "co_khong": { "type": ["string", "null"], "enum": ["Có", "Không"] },
+        "nhiet_do_c": { "type": ["number", "null"] }
+      }
+    },
+    "sot_nhiet_do_c": {
+      "type": ["number", "null"]
+    },
+    "nhiem_trung_ho_hap": {
+      "type": ["object", "null"],
+      "properties": {
+        "co": { "type": ["boolean", "null"] },
+        "ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "lien_quan_thoi_gian_nhiem_trung_ho_hap": {
+      "type": ["object", "null"],
+      "properties": {
+        "moi_quan_he": {
+          "type": ["string", "null"],
+          "enum": ["Đồng thời", "Trước", "Sau", "unknown", "N/A", null]
+        },
+        "khoang_cach_thoi_gian": { "type": ["string", "null"] }
+      }
+    },
+    "nhiem_trung_tieu_hoa": {
+      "type": ["object", "null"],
+      "properties": {
+        "co": { "type": ["boolean", "null"] },
+        "ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "lien_quan_thoi_gian_nhiem_trung_tieu_hoa": {
+      "type": ["object", "null"],
+      "properties": {
+        "moi_quan_he": {
+          "type": ["string", "null"],
+          "enum": ["Đồng thời", "Trước", "Sau", "unknown", "N/A", null]
+        },
+        "khoang_cach_thoi_gian": { "type": ["string", "null"] }
+      }
+    },
+    "nhiem_trung_tiet_nieu": {
+      "type": ["object", "null"],
+      "properties": {
+        "co": { "type": ["boolean", "null"] },
+        "ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "lien_quan_thoi_gian_nhiem_trung_tiet_nieu": {
+      "type": ["object", "null"],
+      "properties": {
+        "moi_quan_he": {
+          "type": ["string", "null"],
+          "enum": ["Đồng thời", "Trước", "Sau", "unknown", "N/A", null]
+        },
+        "khoang_cach_thoi_gian": { "type": ["string", "null"] }
+      }
+    },
+    "nhiem_trung_da": {
+      "type": ["object", "null"],
+      "properties": {
+        "co": { "type": ["boolean", "null"] },
+        "ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "lien_quan_thoi_gian_nhiem_trung_da": {
+      "type": ["object", "null"],
+      "properties": {
+        "moi_quan_he": {
+          "type": ["string", "null"],
+          "enum": ["Đồng thời", "Trước", "Sau", "unknown", "N/A", null]
+        },
+        "khoang_cach_thoi_gian": { "type": ["string", "null"] }
+      }
+    },
+    "nhiem_trung_khac": {
+      "type": ["object", "null"],
+      "properties": {
+        "co": { "type": ["boolean", "null"] },
+        "ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "lien_quan_thoi_gian_nhiem_trung_khac": {
+      "type": ["object", "null"],
+      "properties": {
+        "moi_quan_he": {
+          "type": ["string", "null"],
+          "enum": ["Đồng thời", "Trước", "Sau", "unknown", "N/A", null]
+        },
+        "khoang_cach_thoi_gian": { "type": ["string", "null"] }
+      }
+    },
+
+    "wbc": { "type": ["number", "null"] },
+    "eo": { "type": ["number", "null"] },
+    "ba_bach_cau": { "type": ["number", "null"] },
+    "crp": { "type": ["number", "null"] },
+    "mau_lang_1h": { "type": ["number", "null"] },
+    "mau_lang_2h": { "type": ["number", "null"] },
+    "ft3": { "type": ["number", "null"] },
+    "ft4": { "type": ["number", "null"] },
+    "tsh": { "type": ["number", "null"] },
+    "ige_toan_phan": { "type": ["number", "null"] },
+    "anti_tpo": { "type": ["number", "null"] },
+    "ana_hep2": { "type": ["string", "null"] },
+    "sieu_am_tuyen_giap": { "type": ["string", "null"] },
+    "xet_nghiem_khac": { "type": ["string", "null"] },
+    "can_lam_sang_chu_y_cap": { "type": ["string", "null"] },
+
+    "chan_doan_xac_dinh_cap": {
+      "type": "object",
+      "description": "Chẩn đoán xác định thể mày đay cấp (BẮT BUỘC)",
+      "required": ["danh_sach_chon"],
+      "properties": {
+        "danh_sach_chon": {
+          "type": "string",
+          "enum": [
+            "Mày đay cấp có dấu hiệu nặng",
+            "Mày đay cấp thông thường",
+            "Ban và phát ban khác"
+          ]
+        },
+        "ghi_ro_phat_ban": { "type": ["string", "null"] }
+      }
+    },
+    "dau_hieu_nang_chi_tiet": {
+      "type": ["array", "null"],
+      "description": "Hiện khi chan_doan_xac_dinh_cap = Mày đay cấp có dấu hiệu nặng",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Phù mạch đáng kể",
+          "Sẩn phù lan rộng >50% BSA hoặc >50 nốt/24h",
+          "Triệu chứng hô hấp nhưng chưa đủ tiêu chuẩn phản vệ",
+          "Triệu chứng tiêu hóa nhưng chưa đủ tiêu chuẩn phản vệ"
+        ]
+      }
+    },
+    "can_nguyen_yeu_to_nghi_ngo": {
+      "type": ["object", "null"],
+      "properties": {
+        "chua_xac_dinh": { "type": ["boolean", "null"] },
+        "thuc_an_ghi_ro": { "type": ["string", "null"] },
+        "thuoc_ghi_ro": { "type": ["string", "null"] },
+        "nhiem_trung_ghi_ro": { "type": ["string", "null"] },
+        "khac_ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+
+    "da_dieu_tri_dot_nay": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", "Không rõ", null]
+    },
+    "danh_sach_thuoc_da_dieu_tri": {
+      "type": ["array", "null"],
+      "description": "Hiện khi da_dieu_tri_dot_nay = 'Có'",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ten_thuoc": { "type": "string" },
+          "lieu_dung": { "type": "string" },
+          "thoi_gian_dung": { "type": "string" },
+          "tuan_thu": {
+            "type": "string",
+            "enum": ["Đều", "Không đều", "Không rõ"]
+          },
+          "dap_ung": {
+            "type": "string",
+            "enum": ["Hoàn toàn", "Một phần", "Không đáp ứng", "Không rõ"]
+          }
+        }
+      }
+    },
+    "so_lan_may_day_cap_truoc_do": {
+      "type": ["integer", "null"],
+      "minimum": 0
+    },
+    "tuoi_lan_dau_bi_benh": {
+      "type": ["integer", "null"]
+    },
+    "dot_gan_nhat_cach": {
+      "type": ["string", "null"]
+    },
+    "thoi_gian_keo_dai_trung_binh_moi_dot": {
+      "type": ["string", "null"]
+    },
+    "tien_su_gia_dinh_cap": {
+      "type": ["object", "null"],
+      "properties": {
+        "co_khong": {
+          "type": ["string", "null"],
+          "enum": ["Có", "Không", "Không rõ"]
+        },
+        "ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+
+    "dien_dieu_tri": {
+      "type": ["string", "null"],
+      "enum": ["Ngoại trú", "Nội trú", "unknown", "N/A", null]
+    },
+    "theo_doi_ngoai_tru_lan_kham": {
+      "type": ["array", "null"],
+      "description": "Hiện khi dien_dieu_tri = 'Ngoại trú'",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lan_kham": { "type": "integer" },
+          "ngay_kham": { "type": "string", "format": "date" },
+          "bs_kham": { "type": "string" },
+          "dien_bien_benh": {
+            "type": "string",
+            "enum": ["Hết triệu chứng", "Cải thiện một phần", "Không thay đổi", "Nặng hơn"]
+          },
+          "phuong_an_dieu_tri": {
+            "type": "object",
+            "properties": {
+              "huong": {
+                "type": "string",
+                "enum": ["Tăng liều", "Giảm liều", "Giữ nguyên", "Ngừng thuốc"]
+              },
+              "ly_do_ngung": { "type": ["string", "null"] }
+            }
+          },
+          "thuoc": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ten_thuoc": { "type": "string" },
+                "lieu_dung": { "type": "string" },
+                "thoi_gian_dung": { "type": "string" }
+              }
+            }
+          },
+          "ghi_chu_theo_doi_cls": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "ket_qua_cuoi_dot_ngoai_tru": {
+      "type": ["string", "null"],
+      "description": "Hiện khi dien_dieu_tri = 'Ngoại trú'",
+      "enum": ["Khỏi bệnh", "Nhập viện", "Chuyển mày đay mạn tính", "unknown", "N/A", null]
+    },
+    "theo_doi_noi_tru_ngay_dieu_tri": {
+      "type": ["array", "null"],
+      "description": "Hiện khi dien_dieu_tri = 'Nội trú'",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ngay_dieu_tri": { "type": "integer" },
+          "ngay": { "type": "string", "format": "date" },
+          "bs_kham": { "type": "string" },
+          "dien_bien_san_phu": {
+            "type": "string",
+            "enum": ["Hết", "Không đổi", "Giảm", "Tăng"]
+          },
+          "dien_bien_phu_mach": {
+            "type": "string",
+            "enum": ["Không", "Có"]
+          },
+          "trieu_chung_co_quan_khac": { "type": ["string", "null"] },
+          "dau_hieu_sinh_ton": {
+            "type": "object",
+            "properties": {
+              "nhiet_do_c": { "type": ["number", "null"] },
+              "huyet_ap": { "type": ["string", "null"] },
+              "mach_lan_phut": { "type": ["number", "null"] },
+              "nhip_tho_lan_phut": { "type": ["number", "null"] },
+              "spo2_phan_tram": { "type": ["number", "null"], "minimum": 0, "maximum": 100 }
+            }
+          },
+          "thuoc": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ten_thuoc": { "type": "string" },
+                "lieu_dung": { "type": "string" },
+                "duong_dung": { "type": "string" },
+                "thoi_gian_dung": { "type": "string" }
+              }
+            }
+          },
+          "ghi_chu_theo_doi_cls": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "ket_qua_cuoi_dot_noi_tru": {
+      "type": ["object", "null"],
+      "description": "Hiện khi dien_dieu_tri = 'Nội trú'",
+      "properties": {
+        "danh_sach_chon": {
+          "type": ["string", "null"],
+          "enum": ["Ra viện", "Chuyển viện", "Khác", "unknown", "N/A", null]
+        },
+        "khac_ghi_ro": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

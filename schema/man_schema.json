@@ -1,0 +1,203 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EHR_May_Day_Man_Schema",
+  "description": "JSON Schema kỹ thuật cho Bệnh án Mày đay mạn tính - Bệnh viện Da liễu Trung ương",
+  "type": "object",
+  "required": [
+    "ma_benh_nhan",
+    "ho_ten",
+    "so_dien_thoai"
+  ],
+  "properties": {
+    "ma_benh_nhan": { "type": "string" },
+    "chan_doan_chinh": {
+      "type": ["object", "null"],
+      "properties": {
+        "csu": {
+          "type": ["array", "null"],
+          "items": { "type": "string", "enum": ["Type I", "Type IIb", "Chồng lấp", "Không xác định"] }
+        },
+        "cindu": {
+          "type": ["array", "null"],
+          "items": { "type": "string", "enum": ["Da vẽ nổi", "Mày đay cholinergic", "Mày đay do lạnh", "Mày đay adrenergic", "Mày đay do ánh sáng", "Mày đay do nước", "Khác"] }
+        },
+        "cindu_khac_ghi_ro": { "type": ["string", "null"] },
+        "phu_mach_don_thuan": { "type": ["boolean", "null"] }
+      }
+    },
+    "ma_ho_so": { "type": ["string", "null"] },
+    "de_tai_ai": {
+      "type": ["string", "null"],
+      "enum": ["Lần 1", "Lần 2", "Kiểm tra lại", "unknown", "N/A", null]
+    },
+
+    "ho_ten": { "type": "string" },
+    "ngay_sinh": { "type": ["string", "null"], "format": "date" },
+    "gioi_tinh": { "type": ["string", "null"] },
+    "so_dien_thoai": { "type": "string" },
+    "nghe_nghiep": { "type": ["string", "null"] },
+    "dan_toc": { "type": ["string", "null"] },
+    "dia_chi_so_nha_thon_pho": { "type": ["string", "null"] },
+    "dia_chi_xa_phuong": { "type": ["string", "null"] },
+    "dia_chi_tinh_tp": { "type": ["string", "null"] },
+    "noi_lam_viec": { "type": ["string", "null"] },
+    "bhyt_so_the": { "type": ["string", "null"] },
+    "bhyt_gia_tri_den": { "type": ["string", "null"], "format": "date" },
+    "nguoi_nha_ho_ten_dia_chi": { "type": ["string", "null"] },
+    "nguoi_nha_so_dien_thoai": { "type": ["string", "null"] },
+    "thoi_diem_kham_lan_dau": { "type": ["string", "null"], "format": "date-time" },
+    "ngay_bat_dau_dieu_tri_ngoai_tru": { "type": ["string", "null"], "format": "date" },
+    "ngay_ket_thuc_dieu_tri_ngoai_tru": { "type": ["string", "null"], "format": "date" },
+
+    "chan_doan_tuyen_truoc": { "type": ["string", "null"] },
+    "chan_doan_ban_dau_phong_kham": { "type": ["string", "null"] },
+    "chan_doan_tai_kham": { "type": ["array", "null"], "items": { "type": "object" } },
+    "benh_phu": { "type": ["string", "null"] },
+    "ket_qua_dieu_tri_bao_hiem": { "type": ["object", "null"] },
+
+    "ngay_kham": { "type": ["string", "null"], "format": "date" },
+    "bac_si_kham": { "type": ["string", "null"] },
+
+    "thoi_gian_khoi_phat_tuan": { "type": ["number", "null"] },
+    "bieu_hien_qua_trinh_benh": {
+      "type": ["string", "null"],
+      "enum": ["Chỉ sẩn phù", "Chỉ phù mạch", "Sẩn phù + phù mạch", "unknown", "N/A", null]
+    },
+    "uu_the_san_phu_va_phu_mach": {
+      "type": ["string", "null"],
+      "enum": ["Sẩn phù", "Phù mạch", "Tương đương", "unknown", "N/A", null]
+    },
+    "trieu_chung_xuat_hien_truoc": {
+      "type": ["string", "null"],
+      "enum": ["Sẩn phù", "Phù mạch", "Đồng thời", "unknown", "N/A", null]
+    },
+
+    "hoan_canh_xuat_hien_san_phu": { "type": ["object", "null"] },
+    "trong_dot_co_san_phu": { "type": ["string", "null"], "enum": ["Có", "Không", null] },
+    "anh_san_phu": { "type": ["string", "null"], "enum": ["Có", "Không", null] },
+    "dac_diem_san_phu": { "type": ["object", "null"] },
+    "yeu_to_lam_nang_san_phu": { "type": ["object", "null"] },
+
+    "trong_dot_co_phu_mach": { "type": ["string", "null"], "enum": ["Có", "Không", null] },
+    "anh_phu_mach": { "type": ["string", "null"], "enum": ["Có", "Không", null] },
+    "so_lan_phu_mach_tung_xay_ra": { "type": ["integer", "null"] },
+    "so_lan_phu_mach_nang_can_vien": { "type": ["integer", "null"] },
+    "vi_tri_phu_mach": { "type": ["object", "null"] },
+    "hoan_canh_xuat_hien_phu_mach": { "type": ["object", "null"] },
+    "thoi_gian_ton_tai_phu_mach": { "type": ["object", "null"] },
+    "yeu_to_lam_nang_phu_mach": { "type": ["object", "null"] },
+
+    "luu_huyet_thanh": { "type": ["string", "null"], "enum": ["Có", "Không", null] },
+    "ngay_thuc_hien_uas7_luu_huyet_thanh": { "type": ["string", "null"], "format": "date" },
+    "asst_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", "(+/−)", null] },
+    "ngung_khang_histamine_truoc_asst": { "type": ["string", "null"] },
+    "thoi_gian_ngung_khang_histamine_asst": { "type": ["integer", "null"] },
+    "ngung_corticoid_truoc_asst": { "type": ["string", "null"] },
+    "thoi_gian_ngung_corticoid_asst": { "type": ["integer", "null"] },
+    "asst_duong_kinh_histamin": { "type": ["number", "null"] },
+    "asst_duong_kinh_nacl": { "type": ["number", "null"] },
+    "asst_duong_kinh_huyet_thanh": { "type": ["number", "null"] },
+
+    "da_ve_noi_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", "(+/−)", null] },
+    "fric_score": { "type": ["number", "null"] },
+    "cholinergic_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", "(+/−)", null] },
+    "cholinergic_xuat_hien_sau_phut": { "type": ["number", "null"] },
+    "lanh_temptest_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", "(+/−)", null] },
+    "lanh_temptest_nguong_nhiet_do": { "type": ["number", "null"] },
+    "lanh_cucda_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", "(+/−)", null] },
+    "lanh_cucda_xuat_hien_sau_phut": { "type": ["number", "null"] },
+    "ap_luc_cham_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", "(+/−)", null] },
+    "adrenergic_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", "(+/−)", null] },
+    "anh_sang_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", "(+/−)", null] },
+    "nuoc_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", "(+/−)", null] },
+
+    "uas7_bang_hang_ngay": { "type": ["array", "null"], "items": { "type": "object" } },
+    "iss7_tong": { "type": ["integer", "null"], "minimum": 0, "maximum": 21 },
+    "hss7_tong": { "type": ["integer", "null"], "minimum": 0, "maximum": 21 },
+    "uas7_tong": { "type": ["integer", "null"], "minimum": 0, "maximum": 42 },
+    "aas7_bang_hang_ngay": { "type": ["array", "null"], "items": { "type": "object" } },
+    "aas7_tong": { "type": ["integer", "null"], "minimum": 0, "maximum": 105 },
+
+    "ngay_thuc_hien_dlqi": { "type": ["string", "null"], "format": "date" },
+    "dlqi_diem": { "type": ["integer", "null"], "minimum": 0, "maximum": 30 },
+    "uct_diem": { "type": ["integer", "null"], "minimum": 0, "maximum": 16 },
+    "aect_diem": { "type": ["integer", "null"], "minimum": 0, "maximum": 16 },
+
+    "tien_su_phan_ve": { "type": ["object", "null"] },
+    "tien_su_benh_ly_co_dia": { "type": ["object", "null"] },
+    "tien_su_di_ung": { "type": ["object", "null"] },
+    "tien_su_benh_ly_tuyen_giap": { "type": ["object", "null"] },
+    "tien_su_benh_tu_mien": { "type": ["object", "null"] },
+    "tien_su_viem_nhiem_man": { "type": ["object", "null"] },
+    "tien_su_benh_ly_khac": { "type": ["object", "null"] },
+    "tien_su_gia_dinh": { "type": ["object", "null"] },
+
+    "asst_hieu_so_mm": { "type": ["number", "null"] },
+    "asst_phan_loai_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", null] },
+    "igg_khang_fceria_nong_do": { "type": ["number", "null"] },
+    "igg_khang_fceria_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", null] },
+    "igg_khang_ige_nong_do": { "type": ["number", "null"] },
+    "igg_khang_ige_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", null] },
+    "ige_khang_il24_nong_do": { "type": ["number", "null"] },
+    "ige_khang_il24_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", null] },
+    "bat_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", "Không làm", null] },
+    "ige_khang_tpo_nong_do": { "type": ["number", "null"] },
+    "ige_khang_tpo_ket_qua": { "type": ["string", "null"], "enum": ["(+)", "(−)", null] },
+    "phan_loai_the_benh_asst": {
+      "type": ["string", "null"],
+      "enum": ["Type I", "Type IIb", "Chồng lấp", "Không xác định", "unknown", "N/A", null]
+    },
+
+    "wbc": { "type": ["number", "null"] },
+    "eo": { "type": ["number", "null"] },
+    "ba_bach_cau": { "type": ["number", "null"] },
+    "crp": { "type": ["number", "null"] },
+    "mau_lang_1h": { "type": ["number", "null"] },
+    "mau_lang_2h": { "type": ["number", "null"] },
+    "ft3": { "type": ["number", "null"] },
+    "ft4": { "type": ["number", "null"] },
+    "tsh": { "type": ["number", "null"] },
+    "ige_toan_phan": { "type": ["number", "null"] },
+    "anti_tpo": { "type": ["number", "null"] },
+    "ana_hep2": { "type": ["string", "null"] },
+    "sieu_am_tuyen_giap": { "type": ["string", "null"] },
+    "xet_nghiem_khac": { "type": ["string", "null"] },
+
+    "tung_co_dot_benh_tuong_tu": { "type": ["string", "null"], "enum": ["Có", "Không", null] },
+    "so_lan_dot_benh_tuong_tu": { "type": ["integer", "null"] },
+    "tuoi_lan_dau_bi_benh_man": { "type": ["integer", "null"] },
+    "kieu_dien_bien": {
+      "type": ["string", "null"],
+      "enum": ["Gần như liên tục, hiếm khi hết hẳn", "Từng đợt, giữa các đợt hết hoàn toàn", null]
+    },
+    "da_tung_cap_cuu_nhap_vien": { "type": ["object", "null"] },
+    "mo_ta_them_dien_bien_dot_truoc": { "type": ["string", "null"] },
+    "thoi_gian_trung_binh_moi_dot_benh": { "type": ["number", "null"] },
+    "thuoc_da_dung_dot_nay": { "type": ["string", "null"], "enum": ["Có", "Không", null] },
+    "danh_sach_thuoc_da_dung_dot_nay": { "type": ["array", "null"], "items": { "type": "object" } },
+    "tuan_thu_dieu_tri": {
+      "type": ["string", "null"],
+      "enum": ["Đều đúng đơn", "Không đều", "Tự dừng giữa chừng", "Không được kê đơn lần trước", "Không rõ", null]
+    },
+    "dap_ung_dieu_tri": {
+      "type": ["string", "null"],
+      "enum": ["Hết hẳn (=Hoàn toàn)", "Đỡ nhiều", "Đỡ một phần (=Một phần)", "Không đỡ (=Không đáp ứng)", "Nặng hơn", "Không rõ", null]
+    },
+    "theo_doi_tai_kham_lan_kham": { "type": ["array", "null"], "items": { "type": "object" } },
+
+    "theo_doi_tac_dung_phu_thuoc": { "type": ["array", "null"], "items": { "type": "object" } },
+
+    "sot": { "type": ["string", "null"], "enum": ["Có", "Không", null] },
+    "sot_nhiet_do_c": { "type": ["number", "null"] },
+    "mach": { "type": ["number", "null"] },
+    "huyet_ap_tam_thu": { "type": ["number", "null"] },
+    "huyet_ap_tam_truong": { "type": ["number", "null"] },
+    "bat_thuong_co_quan_khac": { "type": ["object", "null"] },
+    "bang_thuoc_dieu_tri": { "type": ["array", "null"], "items": { "type": "object" } },
+    "ngung_thuoc_lan_sau": { "type": ["object", "null"] },
+    "ngay_hen_tai_kham": { "type": ["string", "null"], "format": "date" },
+    "tom_tat_buoi_kham": { "type": ["string", "null"] },
+    "huong_xu_tri_lan_sau": { "type": ["string", "null"] },
+    "dan_do": { "type": ["string", "null"] }
+  }
+}

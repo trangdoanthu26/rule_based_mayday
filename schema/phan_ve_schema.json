@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EHR_Phan_Ve_Schema",
+  "description": "JSON Schema kỹ thuật cho Bệnh án Sốc phản vệ / Phản vệ",
+  "type": "object",
+  "required": [
+    "ma_benh_nhan",
+    "ho_ten",
+    "so_dien_thoai"
+  ],
+  "properties": {
+    "ma_benh_nhan": { "type": "string" },
+    "chan_doan_chinh_pv": {
+      "type": ["string", "null"],
+      "enum": ["Sốc phản vệ", "Phản vệ", "unknown", "N/A", null]
+    },
+    "ma_ho_so": { "type": ["string", "null"] },
+    "de_tai_ai": {
+      "type": ["string", "null"],
+      "enum": ["Lần 1", "Lần 2", "Kiểm tra lại", "unknown", "N/A", null]
+    },
+    "ho_ten": { "type": "string" },
+    "ngay_sinh": { "type": ["string", "null"], "format": "date" },
+    "gioi_tinh": { "type": ["string", "null"] },
+    "so_dien_thoai": { "type": "string" },
+    "muc_do_phan_ve": {
+      "type": ["string", "null"],
+      "enum": ["Sốc phản vệ", "Phản vệ", "unknown", "N/A", null]
+    },
+    "soc_phan_ve_tieu_chi": {
+      "type": ["array", "null"],
+      "items": { "type": "string" }
+    },
+    "phan_ve_tieu_chi": {
+      "type": ["array", "null"],
+      "items": { "type": "string" }
+    },
+    "tiep_tuc_theo_doi_chua_du_du_kien": { "type": ["boolean", "null"] },
+    "thoi_gian_khoi_phat_pv": { "type": ["number", "null"] },
+    "hien_tai_co_san_phu_pv": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", "unknown", "N/A", null]
+    },
+    "so_luong_san_phu_pv": {
+      "type": ["string", "null"],
+      "enum": ["<20 nốt", "20-50 nốt", ">50 nốt", "unknown", "N/A", null]
+    },
+    "muc_do_lan_rong_va_phan_bo_ton_thuong_pv": {
+      "type": ["object", "null"],
+      "properties": {
+        "muc_do_lan_rong": { "type": "string", "enum": [">50% BSA", "≤50% BSA"] },
+        "phan_bo": { "type": "string", "enum": ["Bất kỳ", "Toàn thân", "Đặc biệt"] },
+        "dac_biet_ghi_ro": { "type": "string" }
+      }
+    },
+    "hien_tai_co_phu_mach_pv": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", "unknown", "N/A", null]
+    },
+    "so_lan_phu_mach_tung_xay_ra_pv": { "type": ["integer", "null"] },
+    "so_lan_phu_mach_nang_can_vien_pv": { "type": ["integer", "null"] },
+    "thoi_gian_ton_tai_phu_mach_pv": {
+      "type": ["string", "null"],
+      "enum": ["<1", "1-6", "6-12", "12-24", "24-48", "48-72", ">72", "Không rõ", null]
+    },
+    "trieu_chung_ho_hap_co_khong_pv": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", null]
+    },
+    "trieu_chung_tuan_hoan_co_khong_pv": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", null]
+    },
+    "trieu_chung_tieu_hoa_co_khong_pv": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", null]
+    },
+    "bang_theo_doi_dau_hieu_sinh_ton": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "properties": {
+          "thoi_diem": { "type": "string" },
+          "mach_lan_phut": { "type": "number" },
+          "huyet_ap": { "type": "string" },
+          "nhip_tho_lan_phut": { "type": "number" },
+          "spo2_phan_tram": { "type": "number", "minimum": 0, "maximum": 100 },
+          "nhiet_do_c": { "type": "number" },
+          "tri_giac": { "type": "string" },
+          "xu_tri_ghi_chu": { "type": "string" }
+        }
+      }
+    },
+    "huyet_ap_tam_thu_nen": { "type": ["number", "null"] },
+    "huyet_ap_tam_thu_thap_nhat": { "type": ["number", "null"] },
+    "wbc_gl": { "type": ["number", "null"] },
+    "neu_gl": { "type": ["number", "null"] },
+    "lym_gl": { "type": ["number", "null"] },
+    "plt_gl": { "type": ["number", "null"] },
+    "crp_mgl": { "type": ["number", "null"] },
+    "ige_toan_phan_uiml": { "type": ["number", "null"] },
+    "nlr": { "type": ["number", "null"] },
+    "plr": { "type": ["number", "null"] },
+    "tryptase_cap_ngml": { "type": ["number", "null"] },
+    "tryptase_nen_ngml": { "type": ["number", "null"] },
+    "khi_mau_pv": { "type": ["string", "null"] },
+    "theo_doi_phan_ve_dieu_tri": { "type": ["array", "null"] },
+    "ket_qua_cuoi_ngay_pv": { "type": ["object", "null"] },
+    "ket_qua_cuoi_dot_pv": { "type": ["object", "null"] }
+  }
+}
