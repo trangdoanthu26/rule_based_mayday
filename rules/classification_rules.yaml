@@ -1,14 +1,4 @@
-Dưới đây là nội dung hoàn chỉnh của tệp **`rules/classification_rules.yaml`** được viết hợp nhất cho **cả 3 bệnh án**:
-1. **Phân hệ Phản vệ & Sốc phản vệ** (`R-SOC`, `R01-PV` $\to$ `R03-PV`, `R-PV-THEODOI`)
-2. **Phân hệ Mày đay cấp tính** (`R-SANGLOC-CAP`, `R01-CAP-NANG`, `R02-CAP-NANG`, `R01-CAP-THUONG`)
-3. **Phân hệ Mày đay mạn tính (CIndU & CSU)**:
-   * **CIndU (Mày đay cảm ứng)**: Da vẽ nổi, Cholinergic, Do lạnh, CIndU khác (`R-CindU-00` $\to$ `R-CindU-04`).
-   * **CSU (Mày đay tự phát)**: Cây quyết định ASST và kháng thể ELISA: Type I, Type IIb, Chồng lấp (Overlap), Không xác định (Unknown) (`R-CSU-00`, `R-GD-01` $\to$ `R-GD-03`, `R-CSU-T1-01` $\to$ `R-CSU-UNK-02`).
-   * **Quy tắc mặc định**: Chưa phân loại / Tiếp tục theo dõi (`R-DEFAULT`).
 
-Bạn có thể sao chép trực tiếp nội dung dưới đây dán đè vào file **`rules/classification_rules.yaml`** trong VS Code:
-
-```yaml
 version: "1.2.0"
 module: "all_urticaria_and_anaphylaxis_classification"
 description: "Hệ tri thức Rule-based phân loại chuẩn cho cả 3 bệnh án: Phản vệ, Mày đay cấp và Mày đay mạn (CIndU & CSU)"
