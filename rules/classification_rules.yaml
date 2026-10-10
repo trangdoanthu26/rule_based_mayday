@@ -1,5 +1,5 @@
 
-version: "1.2.0"
+version: "1.2.1"
 module: "all_urticaria_and_anaphylaxis_classification"
 description: "Hệ tri thức Rule-based phân loại chuẩn cho cả 3 bệnh án: Phản vệ, Mày đay cấp và Mày đay mạn (CIndU & CSU)"
 
@@ -181,6 +181,7 @@ rules:
   - rule_id: "R-PV-THEODOI"
     name: "Theo dõi sát phản vệ"
     target_label: "Theo dõi phản vệ (Chưa đủ dữ kiện)"
+    target_status: "INSUFFICIENT_DATA"
     priority: 3
     conditions:
       any_of:
@@ -558,6 +559,7 @@ rules:
   - rule_id: "R-DEFAULT"
     name: "Chưa đủ dữ liệu phân loại, tiếp tục theo dõi"
     target_label: "Chưa phân loại (Tiếp tục theo dõi)"
+    target_status: "INSUFFICIENT_DATA"
     priority: 8
     conditions:
       any_of:
@@ -570,4 +572,3 @@ rules:
               operator: "<"
               value: 60
     decision_trace: "Dữ liệu chưa đủ điều kiện phân type chuyên sâu (thiếu kết quả ASST, chưa đủ 60 ngày theo dõi hoặc thiếu kết quả ELISA)."
-```
