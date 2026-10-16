@@ -1,6 +1,8 @@
 """Streamlit demo of the existing engine, not the unimplemented RAW pipeline."""
 
 import json
+import re
+from html import escape
 from pathlib import Path
 from typing import Any, Dict
 
@@ -26,10 +28,16 @@ ISSUE_HELP = {
     "F-13": "Lý do UNKNOWN có thể bị lẫn với lỗi kiểu từ nhánh OR đã đủ bằng chứng, làm sai lý do cần rà soát.",
 }
 STATUS_HELP = {
-    "CLASSIFIED": "Có nhãn theo YAML hiện tại.",
+    "CLASSIFIED": "Hệ thống đã xác định nhóm phân loại từ dữ liệu đã nhập.",
     "INSUFFICIENT_DATA": "Thiếu dữ kiện hoặc chưa đủ thời gian; xem rule chặn và trường cần bổ sung.",
     "NEEDS_REVIEW": "Chưa có kết luận bệnh: có xung đột hoặc dữ liệu cần rà soát; xem điều kiện và trace của các rule chặn.",
     "UNRESOLVED": "Không có rule đích phù hợp sau đánh giá hiện tại.",
+}
+STATUS_LABELS = {
+    "CLASSIFIED": "ĐÃ PHÂN LOẠI",
+    "INSUFFICIENT_DATA": "CHƯA ĐỦ DỮ KIỆN",
+    "NEEDS_REVIEW": "CẦN RÀ SOÁT",
+    "UNRESOLVED": "CHƯA XÁC ĐỊNH PHÂN LOẠI",
 }
 LAYERS = (
     ("T1 · Sốc phản vệ", ("R-SOC",)),
@@ -66,6 +74,63 @@ def parse_patient(text: str) -> Dict[str, Any]:
     return {key: value for key, value in patient.items() if key not in metadata}
 
 
+def patient_html(patient: Dict[str, Any]) -> str:
+    """Present the supplied fields without deriving or filling clinical data."""
+    labels = {}
+    for path in sorted((ROOT / "docs/01_data_dictionary").glob("*.md")):
+        for line in path.read_text(encoding="utf-8").splitlines():
+            cells = line.split("|")
+            if len(cells) > 5:
+                field = re.fullmatch(r"\s*\*\*`([^`]+)`\*\*\s*", cells[1])
+                if field:
+                    label = cells[2].strip().replace("**", "").replace("`", "")
+                    unit = cells[4].strip()
+                    if "_pv" in field[1]:
+                        label += " (phản vệ)"
+                    labels[field[1]] = label + (f" ({unit})" if unit not in {"null", "", "-"} else "")
+    labels.update({
+        "tuoi": "Tuổi (năm)", "so_ngay_theo_doi": "Số ngày theo dõi (ngày)",
+        "danh_sach_chon": "Các mục được chọn", "co_khong": "Ghi nhận",
+        "dau_bung_quan_that": "Đau bụng quặn thắt", "non_so_lan": "Số lần nôn",
+        "non": "Nôn", "buon_non_tieu_chay": "Buồn nôn / tiêu chảy",
+        "stella_dat": "Đạt tiêu chuẩn Stella", "dang_ton_thuong": "Dạng tổn thương",
+        "muc_do_lan_rong": "Mức độ lan rộng", "phan_bo": "Phân bố tổn thương",
+        "khac_ghi_ro": "Thông tin khác", "dac_biet_ghi_ro": "Chi tiết vị trí đặc biệt",
+    })
+
+    def render_value(value: Any) -> str:
+        if isinstance(value, dict):
+            if not value:
+                return "Chưa có thông tin"
+            return "<dl>" + "".join(
+                f"<dt>{escape(labels.get(key, key))}</dt><dd>{render_value(item)}</dd>"
+                for key, item in value.items()
+            ) + "</dl>"
+        if isinstance(value, list):
+            return ("<ul>" + "".join(f"<li>{render_value(item)}</li>" for item in value) + "</ul>"
+                    if value else "Không có mục được chọn")
+        if value is None or value == "":
+            return "Chưa cung cấp"
+        if isinstance(value, bool):
+            return "Có" if value else "Không"
+        if value == -1 or (isinstance(value, str) and value.strip().lower() == "unknown"):
+            return "Không rõ"
+        if isinstance(value, str) and value.strip().lower() == "n/a":
+            return "Không áp dụng"
+        return escape(str(value))
+
+    return (
+        '<section class="patient-sheet" aria-label="Bệnh án đang kiểm tra">'
+        '<style>.patient-sheet{max-height:520px;overflow:auto;padding:0 1rem 0 0;'
+        'font-size:1rem}.patient-sheet dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);'
+        'gap:.5rem 1rem;margin:.5rem 0}.patient-sheet dt{font-weight:600;overflow-wrap:anywhere}'
+        '.patient-sheet dd{margin:0;overflow-wrap:anywhere}.patient-sheet ul{padding-left:1.2rem;margin:0}'
+        '.patient-sheet>dl>dt,.patient-sheet>dl>dd{border-bottom:1px solid #8884;padding:.5rem 0}'
+        '@media(max-width:600px){.patient-sheet dl{grid-template-columns:1fr;gap:.25rem}}'
+        '</style>' + render_value(patient) + '</section>'
+    )
+
+
 def render() -> None:
     st.set_page_config(page_title="Rule-based · Mề đay", page_icon="🔎", layout="wide")
     st.title("Hệ thốngRule-based mề đay")
@@ -73,6 +138,8 @@ def render() -> None:
     st.info(
         "14 đầu ra mặt bệnh = 12 nhóm bệnh + 2 nhãn theo dõi."
     )
+    st.warning("Demo dùng bệnh án giả định để kiểm tra logic. Còn lỗi đã biết: F-01 (nhánh cấp thường), "
+               "F-12 (kiểu dữ liệu huyết áp). Xem lưu ý của từng ca trước khi đối chiếu kết quả.")
     with st.expander("Cách đọc kết quả và check logic"):
         st.markdown(
             "1. Chọn đầu ra và ca giả định; bấm **Phân loại và giải thích**.\n"
@@ -80,7 +147,8 @@ def render() -> None:
             "3. Sửa một biến mỗi lần, thử trước/tại/sau ngưỡng hoặc xóa một trường rồi chạy lại.\n"
             "4. Kết quả kỳ vọng chỉ thuộc **ca gốc**; JSON đã sửa có thể có kết quả riêng. Ghi ca sai lệch (lưu **JSON đã sửa + kết quả mong đợi + kết quả thực tế**) để re-check."
         )
-        st.table([{"Trạng thái": status, "Ý nghĩa": explanation} for status, explanation in STATUS_HELP.items()])
+        st.table([{"Trạng thái": STATUS_LABELS[status], "Ý nghĩa": explanation}
+                  for status, explanation in STATUS_HELP.items()])
         st.caption("TRUE/FALSE/UNKNOWN là trạng thái điều kiện, không phải nhãn bệnh. Ưu tiên số nhỏ hơn được xét trước.")
         st.caption("INVALID_DATA / OUT_OF_SCOPE thuộc pipeline chưa triển khai; JSON sai hiện được demo báo lỗi nhập.")
         st.caption("Hướng dẫn và nhật ký thay đổi: docs/05_changelog.md. Phân tích đầy đủ: docs/06_rule_logic_review.md.")
@@ -132,6 +200,8 @@ def render() -> None:
             st.write(selected_case["mo_ta"])
             st.text_area("JSON bệnh án · có thể sửa để thử ca biên", height=380,
                          key="patient_json", on_change=clear_result)
+            st.caption("Sau khi sửa JSON, nhấn Ctrl+Enter (Windows) hoặc ⌘+Enter (macOS), "
+                       "hoặc bấm ra ngoài ô để cập nhật bệnh án bên cạnh. Sau đó chạy phân loại lại.")
             try:
                 current_patient = parse_patient(st.session_state["patient_json"])
             except (ValueError, RecursionError):
@@ -161,8 +231,19 @@ def render() -> None:
                 st.json(selected_case["expected_engine"])
                 st.caption("Kỳ vọng mô tả hành vi hiện tại, không phải nhãn chuẩn lâm sàng; không truyền vào engine.")
 
-        result = st.session_state["result"]
         with right:
+            st.subheader("Bệnh án đang kiểm tra")
+            st.caption("Bản đọc của JSON hiện tại. Trường không có trong JSON không được tự bổ sung.")
+            if current_patient is None:
+                st.warning("Không thể hiển thị bệnh án: JSON chưa hợp lệ. Hãy sửa dữ liệu ở bên trái.")
+            else:
+                try:
+                    st.html(patient_html(current_patient))
+                except RecursionError:
+                    st.warning("Không thể hiển thị bệnh án: cấu trúc JSON lồng quá nhiều tầng.")
+
+        result = st.session_state["result"]
+        with st.container(border=True):
             st.subheader("Kết quả hệ thống")
             if st.session_state["run_error"]:
                 st.error(st.session_state["run_error"])
@@ -170,18 +251,16 @@ def render() -> None:
                 st.info("Bấm Phân loại và giải thích để xem kết quả cho JSON hiện tại.")
             else:
                 a, b = st.columns(2)
-                a.metric("Trạng thái", result["status"])
-                b.metric("Ưu tiên", result["priority"])
-                explanation = f"**{result['status']}** — {STATUS_HELP[result['status']]}"
+                a.metric("Trạng thái", STATUS_LABELS[result["status"]])
+                b.metric("Mức ưu tiên", result["priority"])
+                explanation = f"**{STATUS_LABELS[result['status']]}** — {STATUS_HELP[result['status']]}"
                 if result["status"] == "NEEDS_REVIEW":
                     st.error(explanation)
                 elif result["status"] in {"INSUFFICIENT_DATA", "UNRESOLVED"}:
                     st.warning(explanation)
-                else:
-                    st.info(explanation)
                 if current_patient and isinstance(current_patient.get("huyet_ap_tam_thu_thap_nhat"), bool):
                     st.error("**F-12 · HATT boolean: nhãn bên dưới không đáng tin cậy.** Engine có thể coi true/false là số khi tính công thức; cần sửa kiểu dữ liệu và chạy lại.")
-                st.subheader(result["predicted_label"] or "Chưa kết luận bệnh")
+                st.subheader("KẾT LUẬN: " + (result["predicted_label"] or "Chưa kết luận bệnh").upper())
                 st.write(result["decision_trace"])
                 st.write("**Rule được chọn:**", result["matched_rule_id"] or "Không có")
                 st.write("**Rule cùng khớp:**", ", ".join(result["matched_rule_ids"]) or "Không có")
@@ -240,7 +319,7 @@ def render() -> None:
                         marker = " · KHỚP"
                     st.markdown(f"**{identifier} — {rule['name']}** · `{state}`{marker}")
                     st.caption("Điều kiện cơ sở" if rule.get("is_base_condition") else
-                               f"Ưu tiên {rule['priority']} · {rule['target_label']}")
+                               f"Mức ưu tiên {rule['priority']} · {rule['target_label']}")
                     with st.expander(f"Điều kiện và bằng chứng · {identifier}"):
                         st.json(rule["conditions"])
                         if result:
@@ -257,7 +336,8 @@ def render() -> None:
             associated = [rule for rule in targets if rule["target_label"] == label]
             with st.expander(label, expanded=label == selected_label):
                 for rule in associated:
-                    st.write(f"**{rule['rule_id']}** · ưu tiên {rule['priority']} · {rule.get('target_status', 'CLASSIFIED')}")
+                    st.write(f"**{rule['rule_id']}** · Mức ưu tiên {rule['priority']} · "
+                             f"{STATUS_LABELS[rule.get('target_status', 'CLASSIFIED')]}")
                     st.write(rule.get("decision_trace", ""))
                     st.json(rule["conditions"])
                 if label == "Mày đay cấp thông thường":

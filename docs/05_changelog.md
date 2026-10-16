@@ -16,6 +16,19 @@ Review: <họ tên, ngày, kết luận khi đã xác nhận>
 
 Không sửa ngày hoặc gán tên cho các lần thay đổi không có bằng chứng. Các phần hướng dẫn phía dưới được cập nhật cùng giao diện; kết quả kiểm tra của từng mục nhật ký vẫn giữ theo thời điểm đã chạy.
 
+## Nhật ký — 17/10/2026: giao diện đọc bệnh án
+
+- **Ngày ghi nhận:** 2026-10-17, múi giờ Asia/Ho_Chi_Minh (UTC+07:00).
+- **Họ tên người sửa đổi:** **Đồng Minh Dương**.
+- **Branch:** `Feat-doctor-friendly-demo`.
+- **File:** `main.py`, `tests/test_main.py`, `docs/05_changelog.md`.
+- **Thay đổi:** JSON ở cột trái, bản bệnh án HTML ở cột phải, kết quả nằm bên dưới. Tên trường lấy từ từ điển dữ liệu; trường phản vệ được phân biệt rõ. Bản đọc chỉ trình bày dữ liệu đang nhập, không tự bổ sung hoặc suy diễn dữ kiện; giá trị thiếu/không rõ/không áp dụng được hiển thị riêng. Nội dung HTML trong JSON được escape để chỉ hiện như văn bản.
+- **Kết quả:** hiển thị `KẾT LUẬN: PHẢN VỆ` theo nhãn thực tế, `ĐÃ PHÂN LOẠI` và `Mức ưu tiên`; bỏ khung thông báo CLASSIFIED cũ. Các trạng thái khác cũng có tên tiếng Việt. Mã trạng thái gốc vẫn có trong kết quả JSON để audit.
+- **Kiểm tra:** 12 test giao diện đạt; bộ test cục bộ có 45 methods, 43 đạt và 2 expectedFailure cho F-12. `pip check` không có dependency hỏng. Test bảo đảm bản đọc cập nhật khi sửa JSON, xóa kết quả cũ, xử lý JSON lỗi và escape HTML. Trước thay đổi có một test cảnh báo không khớp giao diện hiện tại; đã cập nhật và hiển thị lưu ý F-01/F-12 trước phân loại.
+- **Re-check trên Edge tại cổng 8510:** phân loại PV-01; sửa tuổi thành 47 và xem bản HTML cập nhật; kiểm tra null/unknown và chuỗi HTML hiển thị nguyên văn; phân loại bản ghi thiếu dữ liệu; nhập JSON lỗi; đổi sang CINDU-TIE và kiểm tra cảnh báo cần rà soát, không giữ kết luận cũ.
+- **Giới hạn:** engine/YAML và các lỗi chuyên môn hiện có chưa được sửa. Chưa triển khai định tuyến ba biểu mẫu của issue #6–#8 hoặc deploy web. Các file từ điển trong `docs/01_data_dictionary/` cần đi cùng ứng dụng để giữ tên trường dễ đọc; trường chưa có tên trong từ điển sẽ hiển thị khóa JSON.
+- **Review:** đã kiểm tra kỹ thuật; chưa ghi nhận phê duyệt chuyên môn.
+
 ## Nhật ký — 10/10/2026, 09:10:41
 
 - **Ngày giờ ghi nhận:** 2026-10-10 09:10:41 +07:00.
@@ -91,8 +104,9 @@ RAW validation, mapping, preprocessing, re-check lâm sàng, anonymization, batc
 | **Đầu ra cần minh họa** ở sidebar | Lọc ca gốc liên quan theo metadata để dễ review; lựa chọn này không được truyền làm đáp án hay điều kiện vào engine. Ca được lọc có thể minh họa trường hợp FALSE/UNKNOWN, không nhất thiết cho nhãn đã chọn. |
 | **Bệnh án giả định** | Chọn một ca cố định trong bộ 138 ca. Đổi ca sẽ nạp lại JSON và xóa kết quả cũ. |
 | **JSON bệnh án** | Dữ liệu thực sự đưa vào engine. Chấp nhận object trực tiếp hoặc `{"du_lieu": {...}}`. `nhan`, `expected_engine` và metadata không dùng suy diễn. |
+| **Bệnh án đang kiểm tra** | Bản HTML bên cạnh JSON, dùng tên trường và đơn vị từ từ điển dữ liệu. Sửa JSON rồi nhấn Ctrl+Enter/⌘+Enter hoặc bấm ra ngoài để cập nhật. `null` → Chưa cung cấp; `unknown`/`-1` → Không rõ; `N/A` → Không áp dụng. Danh sách rỗng chỉ có nghĩa là không có mục được chọn. |
 | **Kỳ vọng của ca gốc** | Kỳ vọng hành vi engine đã ghi cho ca nguyên bản, không phải ground truth y khoa. JSON đã sửa có cảnh báo kỳ vọng không tự cập nhật. |
-| **Trạng thái / Ưu tiên** | Trạng thái là kết quả xử lý; priority nhỏ hơn được xét trước. Không phải xác suất, độ tin cậy hoặc mức điểm bệnh. |
+| **Trạng thái / Mức ưu tiên** | Trạng thái hiển thị bằng tiếng Việt; priority nhỏ hơn được xét trước. Không phải xác suất, độ tin cậy hoặc mức điểm bệnh. Mã gốc được giữ trong JSON tải xuống. |
 | **Rule được chọn** | Rule đại diện cho kết quả; có thể là rule theo dõi, không nhất thiết kết luận bệnh. Có thể null khi bị chặn/xung đột. |
 | **Rule cùng khớp** | Các rule đích TRUE trong toàn bộ lần chạy, kể cả ưu tiên thấp hơn; không có nghĩa tất cả là nhãn chính. |
 | **Rule chặn / xung đột** | Rule UNKNOWN có thể đổi kết luận hoặc các rule TRUE khác nhãn cùng ưu tiên. Xem điều kiện/trace; không tự chọn theo thứ tự YAML. |
@@ -108,7 +122,7 @@ RAW validation, mapping, preprocessing, re-check lâm sàng, anonymization, batc
 | Trạng thái | Ý nghĩa trong demo |
 | --- | --- |
 | TRUE / FALSE / UNKNOWN | Trạng thái của **điều kiện**: đủ bằng chứng đúng / đủ bằng chứng sai / chưa đánh giá được. UNKNOWN không phải FALSE. |
-| CLASSIFIED | Có nhãn theo YAML hiện tại; vẫn có thể sai do rule hoặc dữ liệu chưa được validate, như F-12 với HATT boolean. |
+| CLASSIFIED → ĐÃ PHÂN LOẠI | Đã có kết quả phân loại; vẫn có thể sai do rule hoặc dữ liệu chưa được validate, như F-12 với HATT boolean. |
 | INSUFFICIENT_DATA | Thiếu dữ kiện hoặc chưa đủ thời gian; chưa có kết luận bệnh. |
 | NEEDS_REVIEW | Có xung đột hoặc lỗi dữ liệu cần rà soát; chưa có kết luận bệnh. |
 | UNRESOLVED | Không có rule đích phù hợp theo đánh giá hiện tại; không chứng minh không mắc bệnh hoặc input đã hợp lệ. |

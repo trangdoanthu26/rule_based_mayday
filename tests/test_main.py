@@ -1,0 +1,162 @@
+import json
+import unittest
+from pathlib import Path
+
+from streamlit.testing.v1 import AppTest
+
+import main as demo
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+class TestStreamlitDemo(unittest.TestCase):
+    def test_patient_preview_preserves_values_and_escapes_untrusted_html(self):
+        renderer = getattr(demo, "patient_html", None)
+        self.assertTrue(callable(renderer), "Cần bản bệnh án HTML bên cạnh JSON")
+        preview = renderer({
+            "tuoi": 30,
+            "trieu_chung_da_hien_tai_pv": {"danh_sach_chon": ["Sẩn phù", "<img src=x onerror=alert(1)>"]},
+            "asst_ket_qua": None, "test_unknown": "unknown", "test_na": "N/A",
+            "stella_dat": True,
+            "<script>field</script>": False,
+        })
+        self.assertIn("Tuổi", preview)
+        self.assertIn("Sẩn phù", preview)
+        self.assertIn("Triệu chứng da đợt hiện tại (phản vệ)", preview)
+        self.assertIn("Đạt tiêu chuẩn Stella", preview)
+        self.assertIn("Chưa cung cấp", preview)
+        self.assertIn("Không rõ", preview)
+        self.assertIn("Không áp dụng", preview)
+        self.assertNotIn("<img", preview)
+        self.assertNotIn("<script>", preview)
+        self.assertIn("&lt;img", preview)
+
+    def test_doctor_result_and_preview_follow_edited_json(self):
+        app = self.start_app()
+        app.selectbox(key="case_id").select("PV-01").run()
+        app.button(key="classify").click().run()
+        self.assertFalse(app.exception)
+        self.assertTrue(any(item.value == "KẾT LUẬN: PHẢN VỆ" for item in app.subheader))
+        self.assertEqual(app.metric[0].value, "ĐÃ PHÂN LOẠI")
+        self.assertEqual(app.metric[1].label, "Mức ưu tiên")
+        self.assertFalse(any("Có nhãn theo YAML hiện tại" in item.value for item in app.info))
+        app.text_area(key="patient_json").set_value('{"tuoi": 47, "asst_ket_qua": null}').run()
+        self.assertFalse(app.exception)
+        self.assertIsNone(app.session_state["result"])
+        html = app.get("html")[0].proto.body
+        self.assertIn("47", html)
+        self.assertIn("Chưa cung cấp", html)
+        app.text_area(key="patient_json").set_value("{").run()
+        self.assertFalse(app.get("html"))
+        self.assertTrue(any("Không thể hiển thị bệnh án" in item.value for item in app.warning))
+
+    def start_app(self):
+        return AppTest.from_file(str(ROOT / "main.py"), default_timeout=15).run()
+
+    def test_shock_and_all_six_layers_are_displayed(self):
+        app = self.start_app()
+        app.selectbox(key="case_id").select("SOC-NEN-NOTNEEDED").run()
+        app.button(key="classify").click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(app.session_state["result"]["matched_rule_id"], "R-SOC")
+        self.assertEqual(app.session_state["result"]["predicted_label"], "Sốc phản vệ")
+        self.assertEqual(len(app.selectbox(key="output_label").options), 15)
+        self.assertTrue(any("T1" in item.label for item in app.expander))
+        self.assertTrue(any("T6" in item.label for item in app.expander))
+
+    def test_csu_and_cindu_use_the_real_engine(self):
+        app = self.start_app()
+        for case_id, expected_rule in (
+            ("CSU-T1-GD1", "R-CSU-T1-01"),
+            ("CINDU-da_ve_noi", "R-CindU-01"),
+            ("CINDU-TIE", None),
+        ):
+            with self.subTest(case=case_id):
+                app.selectbox(key="case_id").select(case_id).run()
+                app.button(key="classify").click().run()
+                self.assertFalse(app.exception)
+                self.assertEqual(app.session_state["result"]["matched_rule_id"], expected_rule)
+        self.assertEqual(app.session_state["result"]["status"], "NEEDS_REVIEW")
+
+    def test_engine_exception_is_displayed_without_crashing_app(self):
+        app = self.start_app()
+        app.selectbox(key="case_id").select("SOC-MISSING-80").run()
+        app.button(key="classify").click().run()
+        self.assertFalse(app.exception)
+        self.assertIsNone(app.session_state["result"])
+        self.assertIn("Engine không hoàn tất", app.session_state["run_error"])
+        self.assertTrue(any("Engine không hoàn tất" in message.value for message in app.error))
+
+    def test_json_envelope_does_not_leak_expected_label_into_inference(self):
+        app = self.start_app()
+        fixture = json.loads((ROOT / "data/synthetic/rule_logic_cases.json").read_text())
+        case = next(case for case in fixture["cases"] if case["id"] == "CSU-T1-GD1")
+        app.text_area(key="patient_json").set_value(json.dumps({
+            "du_lieu": case["du_lieu"], "nhan": "Sốc phản vệ",
+            "expected_engine": {"predicted_label": "Sốc phản vệ"},
+        })).run()
+        app.button(key="classify").click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(app.session_state["result"]["predicted_label"], "Mày đay CSU type 1")
+
+    def test_invalid_json_and_changed_input_clear_old_result(self):
+        app = self.start_app()
+        app.button(key="classify").click().run()
+        self.assertIsNotNone(app.session_state["result"])
+        for text in ("{", "[]", '{"du_lieu": []}', '{"tuoi": NaN}'):
+            with self.subTest(text=text):
+                app.text_area(key="patient_json").set_value(text).run()
+                self.assertIsNone(app.session_state["result"])
+                app.button(key="classify").click().run()
+                self.assertFalse(app.exception)
+                self.assertIsNone(app.session_state["result"])
+                self.assertIn("JSON không hợp lệ", app.session_state["run_error"])
+                self.assertTrue(any("JSON không hợp lệ" in message.value for message in app.error))
+
+    def test_acute_normal_catalog_exposes_current_limitation(self):
+        app = self.start_app()
+        app.selectbox(key="output_label").select("Mày đay cấp thông thường").run()
+        app.button(key="classify").click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(app.session_state["result"]["status"], "NEEDS_REVIEW")
+        self.assertTrue(any("F-01" in message.value for message in app.warning))
+
+    def test_critical_issues_are_visible_before_classification(self):
+        app = self.start_app()
+        messages = "\n".join(message.value for message in app.warning)
+        self.assertIn("F-01", messages)
+        self.assertIn("F-12", messages)
+        self.assertTrue(any("Cách đọc kết quả" in item.label for item in app.expander))
+
+    def test_selected_case_issue_has_an_explanation(self):
+        app = self.start_app()
+        app.selectbox(key="case_id").select("CSU-STELLA-False-39.9").run()
+        messages = "\n".join(message.value for message in app.warning)
+        self.assertIn("F-08", messages)
+        self.assertIn("Stella", messages)
+        self.assertIn("IgE", messages)
+
+    def test_boolean_pressure_error_is_highlighted_for_edited_json(self):
+        app = self.start_app()
+        fixture = json.loads((ROOT / "data/synthetic/rule_logic_cases.json").read_text())
+        data = next(case["du_lieu"] for case in fixture["cases"] if case["id"] == "PV-01")
+        data["huyet_ap_tam_thu_thap_nhat"] = True
+        app.text_area(key="patient_json").set_value(json.dumps(data)).run()
+        app.button(key="classify").click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(app.session_state["result"]["matched_rule_id"], "R-SOC")
+        self.assertTrue(any("HATT boolean" in message.value for message in app.error))
+        self.assertTrue(any("đã khác ca gốc" in message.value for message in app.warning))
+
+    def test_status_explanation_and_conflict_warning_are_visible(self):
+        app = self.start_app()
+        app.selectbox(key="case_id").select("CINDU-TIE").run()
+        app.button(key="classify").click().run()
+        self.assertFalse(app.exception)
+        self.assertTrue(any("CẦN RÀ SOÁT" in message.value and "kết luận" in message.value
+                            for message in app.error))
+
+
+if __name__ == "__main__":
+    unittest.main()
