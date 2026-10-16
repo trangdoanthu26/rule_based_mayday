@@ -4,7 +4,7 @@ import json
 import re
 from html import escape
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 import streamlit as st
 
@@ -74,8 +74,7 @@ def parse_patient(text: str) -> Dict[str, Any]:
     return {key: value for key, value in patient.items() if key not in metadata}
 
 
-def patient_html(patient: Dict[str, Any]) -> str:
-    """Present the supplied fields without deriving or filling clinical data."""
+def clinical_field_labels() -> Dict[str, str]:
     labels = {}
     for path in sorted((ROOT / "docs/01_data_dictionary").glob("*.md")):
         for line in path.read_text(encoding="utf-8").splitlines():
@@ -97,17 +96,67 @@ def patient_html(patient: Dict[str, Any]) -> str:
         "muc_do_lan_rong": "Mức độ lan rộng", "phan_bo": "Phân bố tổn thương",
         "khac_ghi_ro": "Thông tin khác", "dac_biet_ghi_ro": "Chi tiết vị trí đặc biệt",
     })
+    return labels
 
-    def render_value(value: Any) -> str:
+
+def evidence_highlights(result: Dict[str, Any], rules: Dict[str, Any]) -> Dict[str, str]:
+    """Mark evaluated fields, including dependencies, without re-running rules."""
+    related = ({result["matched_rule_id"]} if result["matched_rule_id"]
+               else set(result["blocking_rule_ids"]))
+    pending = [rules[identifier]["conditions"] for identifier in related]
+    while pending:
+        node = pending.pop()
+        if isinstance(node, dict):
+            reference = node.get("ref_rule")
+            if reference in rules and reference not in related:
+                related.add(reference)
+                pending.append(rules[reference]["conditions"])
+            pending.extend(value for value in node.values() if isinstance(value, (dict, list)))
+        elif isinstance(node, list):
+            pending.extend(node)
+    highlights = {
+        event["field_path"]: "matched" for event in result["trace"]
+        if event["rule_id"] in related and event["field_path"] and event["result"] is True
+    }
+    if result["status"] == "NEEDS_REVIEW":
+        highlights.update({
+            event["field_path"]: "review" for event in result["trace"]
+            if event["rule_id"] in related and event["field_path"] and event["result"] is None
+            and event["reason"] in {"INVALID_TYPE", "NON_FINITE"}
+        })
+    highlights.update({path: "missing" for path in result["missing_fields"]})
+    return highlights
+
+
+def patient_html(patient: Dict[str, Any], highlights: Optional[Dict[str, str]] = None) -> str:
+    """Present the supplied fields without deriving or filling clinical data."""
+    labels = clinical_field_labels()
+    highlights = highlights or {}
+    rendered_paths = set()
+    badges = {"matched": "Khớp điều kiện", "missing": "Cần bổ sung", "review": "Cần rà soát"}
+
+    def render_value(value: Any, path: str = "") -> str:
         if isinstance(value, dict):
             if not value:
                 return "Chưa có thông tin"
-            return "<dl>" + "".join(
-                f"<dt>{escape(labels.get(key, key))}</dt><dd>{render_value(item)}</dd>"
-                for key, item in value.items()
-            ) + "</dl>"
+            rows = []
+            items = list(value.items())
+            if not path:
+                items.sort(key=lambda item: not any(
+                    field == item[0] or field.startswith(item[0] + ".") for field in highlights
+                ))
+            for key, item in items:
+                field = f"{path}.{key}" if path else key
+                rendered_paths.add(field)
+                state = highlights.get(field, "")
+                marker = (f' data-field="{escape(field)}" data-evidence="{state}"'
+                          if state in badges else "")
+                badge = f"<small>{badges[state]}</small>" if state in badges else ""
+                rows.append(f"<dt{marker}>{escape(labels.get(key, key))}{badge}</dt>"
+                            f"<dd{marker}>{render_value(item, field)}</dd>")
+            return "<dl>" + "".join(rows) + "</dl>"
         if isinstance(value, list):
-            return ("<ul>" + "".join(f"<li>{render_value(item)}</li>" for item in value) + "</ul>"
+            return ("<ul>" + "".join(f"<li>{render_value(item, path)}</li>" for item in value) + "</ul>"
                     if value else "Không có mục được chọn")
         if value is None or value == "":
             return "Chưa cung cấp"
@@ -119,27 +168,35 @@ def patient_html(patient: Dict[str, Any]) -> str:
             return "Không áp dụng"
         return escape(str(value))
 
+    content = render_value(patient)
+    missing = "".join(
+        f'<p data-field="{escape(field)}" data-evidence="missing">'
+        + escape(" › ".join(labels.get(part, part) for part in field.split(".")))
+        + "<small>Cần bổ sung</small>Chưa có trong JSON</p>"
+        for field, state in highlights.items() if state == "missing" and field not in rendered_paths
+    )
     return (
         '<section class="patient-sheet" aria-label="Bệnh án đang kiểm tra">'
-        '<style>.patient-sheet{max-height:520px;overflow:auto;padding:0 1rem 0 0;'
+        '<style>.patient-sheet{padding:0 .5rem 0 0;'
         'font-size:1rem}.patient-sheet dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);'
         'gap:.5rem 1rem;margin:.5rem 0}.patient-sheet dt{font-weight:600;overflow-wrap:anywhere}'
         '.patient-sheet dd{margin:0;overflow-wrap:anywhere}.patient-sheet ul{padding-left:1.2rem;margin:0}'
+        '.patient-sheet dd dl{grid-template-columns:1fr;gap:.15rem}'
         '.patient-sheet>dl>dt,.patient-sheet>dl>dd{border-bottom:1px solid #8884;padding:.5rem 0}'
+        '.patient-sheet [data-evidence="matched"]{background:#168a6430}'
+        '.patient-sheet [data-evidence="missing"]{background:#c58a1630}'
+        '.patient-sheet [data-evidence="review"]{background:#c9424230}'
+        '.patient-sheet small{display:block;font-size:.75rem;font-weight:normal}'
         '@media(max-width:600px){.patient-sheet dl{grid-template-columns:1fr;gap:.25rem}}'
-        '</style>' + render_value(patient) + '</section>'
+        '</style>' + missing + content + '</section>'
     )
 
 
 def render() -> None:
     st.set_page_config(page_title="Rule-based · Mề đay", page_icon="🔎", layout="wide")
     st.title("Hệ thốngRule-based mề đay")
-    st.caption("Bệnh án giả định → đánh giá phụ thuộc → chọn kết luận → giải thích từng tầng")
-    st.info(
-        "14 đầu ra mặt bệnh = 12 nhóm bệnh + 2 nhãn theo dõi."
-    )
-    st.warning("Demo dùng bệnh án giả định để kiểm tra logic. Còn lỗi đã biết: F-01 (nhánh cấp thường), "
-               "F-12 (kiểu dữ liệu huyết áp). Xem lưu ý của từng ca trước khi đối chiếu kết quả.")
+    st.caption("Chọn bệnh án giả định, phân loại và đối chiếu dữ kiện với kết luận.")
+    st.warning("Dữ liệu giả định · Còn lỗi F-01 (cấp thường), F-12 (huyết áp). Xem lưu ý theo ca.")
     with st.expander("Cách đọc kết quả và check logic"):
         st.markdown(
             "1. Chọn đầu ra và ca giả định; bấm **Phân loại và giải thích**.\n"
@@ -190,21 +247,30 @@ def render() -> None:
     st.sidebar.caption(f"{len(fixture['cases'])} ca · YAML {engine.rules_version}")
     st.sidebar.caption("Chỉ sử dụng bệnh án giả định trong demo này.")
 
-    input_tab, layers_tab, catalog_tab, diagrams_tab = st.tabs([
-        "Bệnh án & kết quả", "6 tầng phân loại", "14 mặt bệnh & điều kiện", "Workflow & diagram",
+    input_tab, editor_tab, layers_tab, catalog_tab, diagrams_tab = st.tabs([
+        "Bệnh án & kết quả", "Chỉnh sửa dữ liệu (tùy chọn)", "6 tầng phân loại",
+        "14 mặt bệnh & điều kiện", "Workflow & diagram",
     ])
+    with editor_tab:
+        st.subheader("Chỉnh sửa JSON bệnh án")
+        st.text_area("JSON bệnh án · có thể sửa để thử ca biên", height=380,
+                     key="patient_json", on_change=clear_result)
+        st.caption("Sửa JSON rồi nhấn Ctrl+Enter/⌘+Enter hoặc bấm ra ngoài để cập nhật. "
+                   "Quay về tab Bệnh án & kết quả và chạy phân loại lại.")
+    try:
+        current_patient = parse_patient(st.session_state["patient_json"])
+    except (ValueError, RecursionError):
+        current_patient = None
+    input_changed = current_patient != selected_case["du_lieu"]
+    with editor_tab:
+        with st.expander("Kỳ vọng của ca gốc — để đối chiếu sau suy diễn"):
+            if input_changed:
+                st.warning("JSON hiện tại đã khác ca gốc: kỳ vọng bên dưới không tự cập nhật; hãy xác định kỳ vọng cho biến thể mới.")
+            st.json(selected_case["expected_engine"])
+            st.caption("Kỳ vọng mô tả hành vi hiện tại, không phải nhãn chuẩn lâm sàng; không truyền vào engine.")
+
     with input_tab:
         st.write(selected_case["mo_ta"])
-        with st.expander("Hiển thị và chỉnh sửa JSON", expanded=False):
-            st.text_area("JSON bệnh án · có thể sửa để thử ca biên", height=380,
-                         key="patient_json", on_change=clear_result)
-            st.caption("Sau khi sửa JSON, nhấn Ctrl+Enter (Windows) hoặc ⌘+Enter (macOS), "
-                       "hoặc bấm ra ngoài ô để cập nhật bệnh án bên dưới. Sau đó chạy phân loại lại.")
-        try:
-            current_patient = parse_patient(st.session_state["patient_json"])
-        except (ValueError, RecursionError):
-            current_patient = None
-        input_changed = current_patient != selected_case["du_lieu"]
         if st.button("Phân loại và giải thích", key="classify", type="primary"):
             clear_result()
             try:
@@ -223,34 +289,32 @@ def render() -> None:
                         f"Engine không hoàn tất ({type(exc).__name__}). Kiểm tra kiểu dữ liệu; "
                         "lỗi công thức HATT F-12 đã được ghi nhận. Không có kết luận bệnh."
                     )
-        with st.expander("Kỳ vọng của ca gốc — để đối chiếu sau suy diễn"):
-            if input_changed:
-                st.warning("JSON hiện tại đã khác ca gốc: kỳ vọng bên dưới không tự cập nhật; hãy xác định kỳ vọng cho biến thể mới.")
-            st.json(selected_case["expected_engine"])
-            st.caption("Kỳ vọng mô tả hành vi hiện tại, không phải nhãn chuẩn lâm sàng; không truyền vào engine.")
-
-        with st.container():
+        result = st.session_state["result"]
+        highlights = evidence_highlights(result, rules) if result else {}
+        st.caption("Xanh: khớp điều kiện · Vàng: cần bổ sung · Đỏ: cần rà soát. "
+                   "Các dữ kiện được đánh dấu được đưa lên trước để dễ đối chiếu.")
+        left, right = st.columns([1.1, 1], gap="large")
+        with left, st.container(height=500, border=True):
             st.subheader("Bệnh án đang kiểm tra")
             st.caption("Bản đọc của JSON hiện tại. Trường không có trong JSON không được tự bổ sung.")
             if current_patient is None:
-                st.warning("Không thể hiển thị bệnh án: JSON chưa hợp lệ. Mở “Hiển thị và chỉnh sửa JSON” để sửa dữ liệu.")
+                st.warning("Không thể hiển thị bệnh án: JSON chưa hợp lệ. Mở tab “Chỉnh sửa dữ liệu” để sửa dữ liệu.")
             else:
                 try:
-                    st.html(patient_html(current_patient))
+                    st.html(patient_html(current_patient, highlights))
                 except RecursionError:
                     st.warning("Không thể hiển thị bệnh án: cấu trúc JSON lồng quá nhiều tầng.")
 
-        result = st.session_state["result"]
-        with st.container(border=True):
+        with right, st.container(height=500, border=True):
             st.subheader("Kết quả hệ thống")
             if st.session_state["run_error"]:
                 st.error(st.session_state["run_error"])
             elif result is None:
                 st.info("Bấm Phân loại và giải thích để xem kết quả cho JSON hiện tại.")
             else:
-                a, b = st.columns(2)
-                a.metric("Trạng thái", STATUS_LABELS[result["status"]])
-                b.metric("Mức ưu tiên", result["priority"])
+                st.subheader("KẾT LUẬN: " + (result["predicted_label"] or "Chưa kết luận bệnh").upper())
+                st.markdown(f"**Trạng thái:** {STATUS_LABELS[result['status']]}")
+                st.caption(f"Mức ưu tiên: {result['priority']}")
                 explanation = f"**{STATUS_LABELS[result['status']]}** — {STATUS_HELP[result['status']]}"
                 if result["status"] == "NEEDS_REVIEW":
                     st.error(explanation)
@@ -258,16 +322,18 @@ def render() -> None:
                     st.warning(explanation)
                 if current_patient and isinstance(current_patient.get("huyet_ap_tam_thu_thap_nhat"), bool):
                     st.error("**F-12 · HATT boolean: nhãn bên dưới không đáng tin cậy.** Engine có thể coi true/false là số khi tính công thức; cần sửa kiểu dữ liệu và chạy lại.")
-                st.subheader("KẾT LUẬN: " + (result["predicted_label"] or "Chưa kết luận bệnh").upper())
-                st.write(result["decision_trace"])
-                st.write("**Rule được chọn:**", result["matched_rule_id"] or "Không có")
-                st.write("**Rule cùng khớp:**", ", ".join(result["matched_rule_ids"]) or "Không có")
-                st.write("**Rule chặn / xung đột:**", ", ".join(result["blocking_rule_ids"]) or "Không có")
+                if not result["missing_fields"]:
+                    st.write(result["decision_trace"])
                 if result["missing_fields"]:
                     st.write("**Trường cần bổ sung:**")
-                    st.write(result["missing_fields"])
-                st.caption(f"YAML {result['rules_version']} · SHA-256 {result['rules_sha256']}")
+                    field_labels = clinical_field_labels()
+                    for field in result["missing_fields"]:
+                        st.write("• " + " › ".join(field_labels.get(part, part) for part in field.split(".")))
                 with st.expander("Kết quả và trace đầy đủ"):
+                    st.write("**Rule được chọn:**", result["matched_rule_id"] or "Không có")
+                    st.write("**Rule cùng khớp:**", ", ".join(result["matched_rule_ids"]) or "Không có")
+                    st.write("**Rule chặn / xung đột:**", ", ".join(result["blocking_rule_ids"]) or "Không có")
+                    st.caption(f"YAML {result['rules_version']} · SHA-256 {result['rules_sha256']}")
                     st.json(result)
                 st.download_button("Tải kết quả JSON", json.dumps(result, ensure_ascii=False, indent=2),
                                    file_name="rule_result.json", mime="application/json")

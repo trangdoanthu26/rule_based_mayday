@@ -16,6 +16,17 @@ Review: <họ tên, ngày, kết luận khi đã xác nhận>
 
 Không sửa ngày hoặc gán tên cho các lần thay đổi không có bằng chứng. Các phần hướng dẫn phía dưới được cập nhật cùng giao diện; kết quả kiểm tra của từng mục nhật ký vẫn giữ theo thời điểm đã chạy.
 
+## Nhật ký — 17/10/2026: hai panel đối chiếu và highlight
+
+- **Họ tên người sửa đổi:** **Đồng Minh Dương**.
+- **Branch:** `Feat-side-by-side-clinical-review`.
+- **Giao diện:** tab Bệnh án & kết quả chia hai panel có vùng cuộn riêng: bệnh án bên trái, kết luận bên phải. Kết luận ở đầu panel; trạng thái dùng chữ đầy đủ để không bị cắt trong cột hẹp. Bằng chứng kỹ thuật/JSON kết quả thu gọn trong mục chi tiết.
+- **JSON tùy chọn:** chuyển toàn bộ editor và kỳ vọng ca gốc sang tab Chỉnh sửa dữ liệu (tùy chọn); không cần mở tab này để phân loại. Sửa dữ liệu sẽ xóa kết quả và highlight cũ.
+- **Highlight:** xanh cho phép kiểm tra TRUE trong rule được chọn và các rule phụ thuộc; vàng cho các trường engine báo cần bổ sung; đỏ cho các trường sai kiểu/không hữu hạn ở rule đang chặn. Dữ kiện liên quan được đưa lên trước. Trường chưa có trong JSON được ghi riêng là Chưa có trong JSON; không thêm dữ liệu vào đầu vào suy diễn. Màu sắc kèm nhãn chữ, không chỉ dùng màu để phân biệt.
+- **Ý nghĩa:** highlight mô tả trace engine, không phải bằng chứng đã validate dữ liệu hoặc phê duyệt chẩn đoán; các phép kiểm tra trong nhánh OR vẫn được engine tính đầy đủ. Không diễn giải xanh là xác nhận y khoa.
+- **Kiểm tra:** bộ test cục bộ có 48 methods, 46 đạt và 2 expectedFailure F-12; 15 test giao diện đạt. Có test phạm vi hai panel/JSON, highlight ASST qua ref_rule, không highlight rule không liên quan, xóa highlight sau sửa và không tự điền trường thiếu. Re-check trên Edge với PV-01 và JSON tuổi sai kiểu: xanh/vàng/đỏ, trạng thái đầy đủ, chuyển tab, xóa kết quả cũ.
+- **Giới hạn:** engine/YAML, điều kiện bệnh và các lỗi đã biết giữ nguyên; chưa deploy hoặc kiểm tra giao diện trên điện thoại.
+
 ## Nhật ký — 17/10/2026: ẩn JSON mặc định
 
 - **Họ tên người sửa đổi:** **Đồng Minh Dương**.
@@ -111,8 +122,8 @@ RAW validation, mapping, preprocessing, re-check lâm sàng, anonymization, batc
 | **Khung lỗi đỏ đầu trang** | F-01/F-12 đang mở trên toàn bộ demo, không khẳng định chúng xảy ra với mọi ca. Cảnh báo hiện trước khi bấm phân loại. |
 | **Đầu ra cần minh họa** ở sidebar | Lọc ca gốc liên quan theo metadata để dễ review; lựa chọn này không được truyền làm đáp án hay điều kiện vào engine. Ca được lọc có thể minh họa trường hợp FALSE/UNKNOWN, không nhất thiết cho nhãn đã chọn. |
 | **Bệnh án giả định** | Chọn một ca cố định trong bộ 138 ca. Đổi ca sẽ nạp lại JSON và xóa kết quả cũ. |
-| **Hiển thị và chỉnh sửa JSON** | Mặc định đóng. Bấm để mở/đóng dữ liệu và chỉnh sửa khi cần. Chấp nhận object trực tiếp hoặc `{"du_lieu": {...}}`. `nhan`, `expected_engine` và metadata không dùng suy diễn. Nút phân loại vẫn dùng được khi JSON đang ẩn. |
-| **Bệnh án đang kiểm tra** | Bản HTML luôn hiện, dùng tên trường và đơn vị từ từ điển dữ liệu. Sửa JSON rồi nhấn Ctrl+Enter/⌘+Enter hoặc bấm ra ngoài để cập nhật. `null` → Chưa cung cấp; `unknown`/`-1` → Không rõ; `N/A` → Không áp dụng. Danh sách rỗng chỉ có nghĩa là không có mục được chọn. |
+| **Chỉnh sửa dữ liệu (tùy chọn)** | Tab riêng chứa JSON và kỳ vọng ca gốc. Chấp nhận object trực tiếp hoặc `{"du_lieu": {...}}`. `nhan`, `expected_engine` và metadata không dùng suy diễn. Sửa xong quay về tab Bệnh án & kết quả để phân loại. |
+| **Bệnh án đang kiểm tra** | Panel trái, cuộn độc lập với kết quả. Bản HTML dùng tên trường và đơn vị từ từ điển; đánh dấu dữ kiện liên quan theo trace. `null` → Chưa cung cấp; `unknown`/`-1` → Không rõ; `N/A` → Không áp dụng. Danh sách rỗng chỉ có nghĩa là không có mục được chọn. |
 | **Kỳ vọng của ca gốc** | Kỳ vọng hành vi engine đã ghi cho ca nguyên bản, không phải ground truth y khoa. JSON đã sửa có cảnh báo kỳ vọng không tự cập nhật. |
 | **Trạng thái / Mức ưu tiên** | Trạng thái hiển thị bằng tiếng Việt; priority nhỏ hơn được xét trước. Không phải xác suất, độ tin cậy hoặc mức điểm bệnh. Mã gốc được giữ trong JSON tải xuống. |
 | **Rule được chọn** | Rule đại diện cho kết quả; có thể là rule theo dõi, không nhất thiết kết luận bệnh. Có thể null khi bị chặn/xung đột. |

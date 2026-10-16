@@ -11,18 +11,38 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class TestStreamlitDemo(unittest.TestCase):
-    def test_json_editor_is_collapsed_and_classification_stays_accessible(self):
+    def test_json_editor_is_separate_from_the_two_clinical_panels(self):
         app = self.start_app()
-        editors = [item for item in app.expander if item.label == "Hiển thị và chỉnh sửa JSON"]
-        self.assertTrue(editors, "JSON cần được ẩn trong mục có thể mở khi cần")
-        editor = editors[0]
-        self.assertFalse(editor.proto.expanded)
-        self.assertEqual(len(editor.text_area), 1)
-        self.assertFalse(editor.button)
-        self.assertFalse(editor.get("html"))
+        self.assertEqual(app.tabs[1].label, "Chỉnh sửa dữ liệu (tùy chọn)")
+        self.assertEqual(len(app.tabs[1].text_area), 1)
+        self.assertFalse(app.tabs[0].text_area)
+        self.assertEqual(len(app.tabs[0].columns[0].get("html")), 1)
         app.button(key="classify").click().run()
         self.assertFalse(app.exception)
         self.assertEqual(app.session_state["result"]["predicted_label"], "Phản vệ")
+        self.assertTrue(any(item.value == "**Trạng thái:** ĐÃ PHÂN LOẠI"
+                            for item in app.tabs[0].columns[1].markdown))
+
+    def test_highlight_includes_referenced_rules_and_clears_after_edit(self):
+        app = self.start_app()
+        app.selectbox(key="case_id").select("CSU-T1-GD1").run()
+        app.button(key="classify").click().run()
+        html = app.get("html")[0].proto.body
+        self.assertIn('data-field="asst_ket_qua" data-evidence="matched"', html)
+        self.assertIn('data-field="ige_khang_il24_ket_qua" data-evidence="matched"', html)
+        self.assertNotIn('data-field="da_ve_noi_ket_qua" data-evidence="matched"', html)
+        app.text_area(key="patient_json").set_value('{"tuoi": 47}').run()
+        self.assertIsNone(app.session_state["result"])
+        self.assertNotIn('data-evidence="matched">', app.get("html")[0].proto.body)
+
+    def test_missing_fields_are_highlighted_without_filling_input(self):
+        app = self.start_app()
+        app.text_area(key="patient_json").set_value('{"tuoi": 47}').run()
+        app.button(key="classify").click().run()
+        html = app.get("html")[0].proto.body
+        self.assertIn('data-field="huyet_ap_tam_thu_thap_nhat" data-evidence="missing"', html)
+        self.assertIn("Chưa có trong JSON", html)
+        self.assertEqual(json.loads(app.session_state["patient_json"]), {"tuoi": 47})
 
     def test_patient_preview_preserves_values_and_escapes_untrusted_html(self):
         renderer = getattr(demo, "patient_html", None)
@@ -51,8 +71,8 @@ class TestStreamlitDemo(unittest.TestCase):
         app.button(key="classify").click().run()
         self.assertFalse(app.exception)
         self.assertTrue(any(item.value == "KẾT LUẬN: PHẢN VỆ" for item in app.subheader))
-        self.assertEqual(app.metric[0].value, "ĐÃ PHÂN LOẠI")
-        self.assertEqual(app.metric[1].label, "Mức ưu tiên")
+        self.assertTrue(any(item.value == "**Trạng thái:** ĐÃ PHÂN LOẠI" for item in app.markdown))
+        self.assertTrue(any(item.value == "Mức ưu tiên: 2" for item in app.caption))
         self.assertFalse(any("Có nhãn theo YAML hiện tại" in item.value for item in app.info))
         app.text_area(key="patient_json").set_value('{"tuoi": 47, "asst_ket_qua": null}').run()
         self.assertFalse(app.exception)
