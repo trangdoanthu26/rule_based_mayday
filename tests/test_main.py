@@ -11,6 +11,19 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class TestStreamlitDemo(unittest.TestCase):
+    def test_json_editor_is_collapsed_and_classification_stays_accessible(self):
+        app = self.start_app()
+        editors = [item for item in app.expander if item.label == "Hiển thị và chỉnh sửa JSON"]
+        self.assertTrue(editors, "JSON cần được ẩn trong mục có thể mở khi cần")
+        editor = editors[0]
+        self.assertFalse(editor.proto.expanded)
+        self.assertEqual(len(editor.text_area), 1)
+        self.assertFalse(editor.button)
+        self.assertFalse(editor.get("html"))
+        app.button(key="classify").click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(app.session_state["result"]["predicted_label"], "Phản vệ")
+
     def test_patient_preview_preserves_values_and_escapes_untrusted_html(self):
         renderer = getattr(demo, "patient_html", None)
         self.assertTrue(callable(renderer), "Cần bản bệnh án HTML bên cạnh JSON")

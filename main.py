@@ -194,48 +194,46 @@ def render() -> None:
         "Bệnh án & kết quả", "6 tầng phân loại", "14 mặt bệnh & điều kiện", "Workflow & diagram",
     ])
     with input_tab:
-        left, right = st.columns([1, 1])
-        with left:
-            st.subheader("Dữ liệu đầu vào")
-            st.write(selected_case["mo_ta"])
+        st.write(selected_case["mo_ta"])
+        with st.expander("Hiển thị và chỉnh sửa JSON", expanded=False):
             st.text_area("JSON bệnh án · có thể sửa để thử ca biên", height=380,
                          key="patient_json", on_change=clear_result)
             st.caption("Sau khi sửa JSON, nhấn Ctrl+Enter (Windows) hoặc ⌘+Enter (macOS), "
-                       "hoặc bấm ra ngoài ô để cập nhật bệnh án bên cạnh. Sau đó chạy phân loại lại.")
+                       "hoặc bấm ra ngoài ô để cập nhật bệnh án bên dưới. Sau đó chạy phân loại lại.")
+        try:
+            current_patient = parse_patient(st.session_state["patient_json"])
+        except (ValueError, RecursionError):
+            current_patient = None
+        input_changed = current_patient != selected_case["du_lieu"]
+        if st.button("Phân loại và giải thích", key="classify", type="primary"):
+            clear_result()
             try:
-                current_patient = parse_patient(st.session_state["patient_json"])
+                patient = parse_patient(st.session_state["patient_json"])
             except (ValueError, RecursionError):
-                current_patient = None
-            input_changed = current_patient != selected_case["du_lieu"]
-            if st.button("Phân loại và giải thích", key="classify", type="primary"):
-                clear_result()
+                st.session_state["run_error"] = (
+                    "JSON không hợp lệ. Cần một object CANONICAL hoặc object có du_lieu là object; "
+                    "không dùng NaN/Infinity."
+                )
+            else:
                 try:
-                    patient = parse_patient(st.session_state["patient_json"])
-                except (ValueError, RecursionError):
+                    st.session_state["result"] = engine.classify_patient(patient)
+                except (TypeError, ValueError, OverflowError, RecursionError) as exc:
+                    # F-12 remains in the engine; the demo must show the failure, not invent a label.
                     st.session_state["run_error"] = (
-                        "JSON không hợp lệ. Cần một object CANONICAL hoặc object có du_lieu là object; "
-                        "không dùng NaN/Infinity."
+                        f"Engine không hoàn tất ({type(exc).__name__}). Kiểm tra kiểu dữ liệu; "
+                        "lỗi công thức HATT F-12 đã được ghi nhận. Không có kết luận bệnh."
                     )
-                else:
-                    try:
-                        st.session_state["result"] = engine.classify_patient(patient)
-                    except (TypeError, ValueError, OverflowError, RecursionError) as exc:
-                        # F-12 remains in the engine; the demo must show the failure, not invent a label.
-                        st.session_state["run_error"] = (
-                            f"Engine không hoàn tất ({type(exc).__name__}). Kiểm tra kiểu dữ liệu; "
-                            "lỗi công thức HATT F-12 đã được ghi nhận. Không có kết luận bệnh."
-                        )
-            with st.expander("Kỳ vọng của ca gốc — để đối chiếu sau suy diễn"):
-                if input_changed:
-                    st.warning("JSON hiện tại đã khác ca gốc: kỳ vọng bên dưới không tự cập nhật; hãy xác định kỳ vọng cho biến thể mới.")
-                st.json(selected_case["expected_engine"])
-                st.caption("Kỳ vọng mô tả hành vi hiện tại, không phải nhãn chuẩn lâm sàng; không truyền vào engine.")
+        with st.expander("Kỳ vọng của ca gốc — để đối chiếu sau suy diễn"):
+            if input_changed:
+                st.warning("JSON hiện tại đã khác ca gốc: kỳ vọng bên dưới không tự cập nhật; hãy xác định kỳ vọng cho biến thể mới.")
+            st.json(selected_case["expected_engine"])
+            st.caption("Kỳ vọng mô tả hành vi hiện tại, không phải nhãn chuẩn lâm sàng; không truyền vào engine.")
 
-        with right:
+        with st.container():
             st.subheader("Bệnh án đang kiểm tra")
             st.caption("Bản đọc của JSON hiện tại. Trường không có trong JSON không được tự bổ sung.")
             if current_patient is None:
-                st.warning("Không thể hiển thị bệnh án: JSON chưa hợp lệ. Hãy sửa dữ liệu ở bên trái.")
+                st.warning("Không thể hiển thị bệnh án: JSON chưa hợp lệ. Mở “Hiển thị và chỉnh sửa JSON” để sửa dữ liệu.")
             else:
                 try:
                     st.html(patient_html(current_patient))

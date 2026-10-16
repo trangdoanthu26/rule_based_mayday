@@ -16,6 +16,14 @@ Review: <họ tên, ngày, kết luận khi đã xác nhận>
 
 Không sửa ngày hoặc gán tên cho các lần thay đổi không có bằng chứng. Các phần hướng dẫn phía dưới được cập nhật cùng giao diện; kết quả kiểm tra của từng mục nhật ký vẫn giữ theo thời điểm đã chạy.
 
+## Nhật ký — 17/10/2026: ẩn JSON mặc định
+
+- **Họ tên người sửa đổi:** **Đồng Minh Dương**.
+- **Branch:** `Feat-collapse-patient-json`.
+- **Thay đổi:** JSON mặc định thu gọn trong mục **Hiển thị và chỉnh sửa JSON**. Bệnh án HTML dùng toàn chiều rộng; nút phân loại luôn hiện và không yêu cầu mở JSON. Mở/đóng mục chỉnh sửa không xóa dữ liệu; sửa dữ liệu vẫn cập nhật bản đọc và xóa kết quả cũ.
+- **Kiểm tra:** 13 test giao diện đạt, gồm ca phân loại khi mục JSON đang đóng; kiểm tra trên Edge việc ẩn/mở JSON, phân loại và chỉnh sửa dữ liệu. Bộ test cục bộ: 46 methods, 44 đạt, 2 expectedFailure cho F-12.
+- **Giới hạn:** thay đổi cách hiển thị; các lỗi engine đã biết chưa được sửa.
+
 ## Nhật ký — 17/10/2026: giao diện đọc bệnh án
 
 - **Ngày ghi nhận:** 2026-10-17, múi giờ Asia/Ho_Chi_Minh (UTC+07:00).
@@ -103,8 +111,8 @@ RAW validation, mapping, preprocessing, re-check lâm sàng, anonymization, batc
 | **Khung lỗi đỏ đầu trang** | F-01/F-12 đang mở trên toàn bộ demo, không khẳng định chúng xảy ra với mọi ca. Cảnh báo hiện trước khi bấm phân loại. |
 | **Đầu ra cần minh họa** ở sidebar | Lọc ca gốc liên quan theo metadata để dễ review; lựa chọn này không được truyền làm đáp án hay điều kiện vào engine. Ca được lọc có thể minh họa trường hợp FALSE/UNKNOWN, không nhất thiết cho nhãn đã chọn. |
 | **Bệnh án giả định** | Chọn một ca cố định trong bộ 138 ca. Đổi ca sẽ nạp lại JSON và xóa kết quả cũ. |
-| **JSON bệnh án** | Dữ liệu thực sự đưa vào engine. Chấp nhận object trực tiếp hoặc `{"du_lieu": {...}}`. `nhan`, `expected_engine` và metadata không dùng suy diễn. |
-| **Bệnh án đang kiểm tra** | Bản HTML bên cạnh JSON, dùng tên trường và đơn vị từ từ điển dữ liệu. Sửa JSON rồi nhấn Ctrl+Enter/⌘+Enter hoặc bấm ra ngoài để cập nhật. `null` → Chưa cung cấp; `unknown`/`-1` → Không rõ; `N/A` → Không áp dụng. Danh sách rỗng chỉ có nghĩa là không có mục được chọn. |
+| **Hiển thị và chỉnh sửa JSON** | Mặc định đóng. Bấm để mở/đóng dữ liệu và chỉnh sửa khi cần. Chấp nhận object trực tiếp hoặc `{"du_lieu": {...}}`. `nhan`, `expected_engine` và metadata không dùng suy diễn. Nút phân loại vẫn dùng được khi JSON đang ẩn. |
+| **Bệnh án đang kiểm tra** | Bản HTML luôn hiện, dùng tên trường và đơn vị từ từ điển dữ liệu. Sửa JSON rồi nhấn Ctrl+Enter/⌘+Enter hoặc bấm ra ngoài để cập nhật. `null` → Chưa cung cấp; `unknown`/`-1` → Không rõ; `N/A` → Không áp dụng. Danh sách rỗng chỉ có nghĩa là không có mục được chọn. |
 | **Kỳ vọng của ca gốc** | Kỳ vọng hành vi engine đã ghi cho ca nguyên bản, không phải ground truth y khoa. JSON đã sửa có cảnh báo kỳ vọng không tự cập nhật. |
 | **Trạng thái / Mức ưu tiên** | Trạng thái hiển thị bằng tiếng Việt; priority nhỏ hơn được xét trước. Không phải xác suất, độ tin cậy hoặc mức điểm bệnh. Mã gốc được giữ trong JSON tải xuống. |
 | **Rule được chọn** | Rule đại diện cho kết quả; có thể là rule theo dõi, không nhất thiết kết luận bệnh. Có thể null khi bị chặn/xung đột. |
