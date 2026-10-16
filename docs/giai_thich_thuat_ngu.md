@@ -27,7 +27,7 @@ python -c "import sys; print(sys.executable); assert sys.prefix != sys.base_pref
 python -m pip install -r requirements.txt
 python -m pip check
 python -m unittest discover -s tests -v
-python -m streamlit run main.py --server.address 127.0.0.1 --server.port 8501 --browser.gatherUsageStats false
+python -m streamlit run main.py --server.address 127.0.0.1 --server.port 8501 --browser.therUsageStats false
 ```
 
 Nếu chọn một phiên bản Python cụ thể đã cài trên máy, dùng executable tương ứng ở bước tạo, ví dụ `python3.12 -m venv .venv`. Không tạo lại đè môi trường đang dùng bằng Python khác; cần một môi trường mới riêng cho phiên bản đó.
