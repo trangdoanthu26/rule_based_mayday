@@ -5,11 +5,11 @@
 ---
 
 ## I. THỨ TỰ ƯU TIÊN SUY DIỄN (DIAGNOSTIC HIERARCHY)
-Bộ máy suy luận (`src/classify.py`) duyệt các luật theo 5 tầng ưu tiên từ khẩn cấp đến mạn tính:
+Bộ máy suy luận (`src/classify.py`) dùng ba bộ YAML độc lập theo mẫu bệnh án được chọn: `phan_ve_rules.yaml`, `cap_rules.yaml`, `man_rules.yaml`. Priority chỉ so sánh các rule trong cùng mẫu. Các tầng dưới đây là nhóm trình bày của từng phân hệ, không phải thứ tự xuyên ba biểu mẫu:
 * **Tầng 1 (Tối khẩn):** Sốc phản vệ (`R-SOC`)
 * **Tầng 2 (Cấp cứu đe dọa tính mạng):** Phản vệ (`R01-PV`, `R02-PV`, `R03-PV`)
 * **Tầng 3 (Khởi phát cấp tính < 6 tuần):** 
-  * Mày đay cấp có dấu hiệu nặng (`R01-CAP-NANG`, `R02-CAP-NANG`)
+  * Mày đay cấp có dấu hiệu nặng (`R01-CAP-NANG-NGUA`, `R02-CAP-NANG-PHUMACH`, `R03-CAP-NANG-CONLAI`)
   * Mày đay cấp thông thường (`R01-CAP-THUONG`)
 * **Tầng 4 (Khởi phát mạn tính > 6 tuần có yếu tố kích thích - CIndU):**
   * CIndU Da vẽ nổi (`R-CindU-01`)
@@ -21,7 +21,7 @@ Bộ máy suy luận (`src/classify.py`) duyệt các luật theo 5 tầng ưu t
   * CSU Type IIb (`R-CSU-T2-01`)
   * CSU Chồng lấp / Overlap (`R-CSU-OVL-01`)
   * CSU Không xác định / Unknown (`R-CSU-UNK-01`, `R-CSU-UNK-02`)
-* **Tầng 6 (Mặc định / Ngoại lệ):** Chưa đủ dữ liệu / Tiếp tục theo dõi (`R-DEFAULT`, `R-PV-THEODOI`)
+* **Fallback theo phân hệ:** `R-PV-THEODOI` chỉ trong mẫu Phản vệ; `R-DEFAULT` chỉ trong mẫu Mạn.
 
 ---
 
@@ -34,8 +34,8 @@ Bộ máy suy luận (`src/classify.py`) duyệt các luật theo 5 tầng ưu t
 | **`R01-PV`** | **Phản vệ** (Kịch bản 1) | `(yeu_to_nghi_ngo_pv_thuc_an == "Không" AND yeu_to_nghi_ngo_pv_thuoc == "Không" AND yeu_to_nghi_ngo_pv_con_trung_dot == "Không" AND yeu_to_nghi_ngo_pv_khac == "Không")` <br>AND `trieu_chung_da_hien_tai_pv IN ("Phù mạch", "Sẩn phù", "Ban dát sẩn")` <br>AND `(trieu_chung_ho_hap_hien_tai_pv IN ("Khó thở", "Thở khò khè", "Khàn giọng", "Tiếng rít thanh quản", "Ngừng thở") OR trieu_chung_tuan_hoan_hien_tai_pv IN ("Tụt huyết áp / sốc", "Tím tái", "Ngất"))` | **Không rõ tác nhân dị ứng**:<br>Da/niêm mạc cấp tính VÀ có biểu hiện Hô hấp hoặc Tuần hoàn. |
 | **`R02-PV`** | **Phản vệ** (Kịch bản 2) | `(yeu_to_nghi_ngo_pv_thuc_an == "Có" OR yeu_to_nghi_ngo_pv_thuoc == "Có" OR yeu_to_nghi_ngo_pv_con_trung_dot == "Có" OR yeu_to_nghi_ngo_pv_khac == "Có")` <br>AND **Đạt $\ge$ 2 trong 4 hệ thống cơ quan:**<br>1. Da: `Phù mạch`, `Sẩn phù`, `Ban dát sẩn`<br>2. Hô hấp: `Khó thở`, `Thở khò khè`, `Khàn giọng`, `Tiếng rít thanh quản`, `Ngừng thở`<br>3. Tuần hoàn: `Tụt huyết áp / sốc`, `Ngất`<br>4. Tiêu hóa nặng: `dau_bung_quan_that == true` OR `non_so_lan >= 2` | **Tiếp xúc tác nhân nguy cơ cao**:<br>Xuất hiện tổn thương $\ge 2/4$ hệ thống: Da, Hô hấp, Tuần hoàn, Tiêu hóa nặng. |
 | **`R03-PV`** | **Phản vệ** (Kịch bản 3) | `(yeu_to_nghi_ngo_pv_* == "Có")` <br>AND `[` `(tac_nhan_hit_vao_pv == "Không" AND trieu_chung_ho_hap_hien_tai_pv IN ("Khó thở", "Thở khò khè", "Khàn giọng", "Tiếng rít thanh quản", "Ngừng thở"))` <br>OR `trieu_chung_tuan_hoan_hien_tai_pv IN ("Tụt huyết áp / sốc", "Ngất")` `]` | **Tiếp xúc dị nguyên đã biết**:<br>Xuất hiện Hô hấp (khi dị nguyên không qua đường hít) HOẶC Tuần hoàn. |
-| **`R-SOC`** | **Sốc phản vệ** | `(R02-PV == True OR R03-PV == True)` <br>AND Tụt huyết áp theo tuổi:<br>• `tuoi >= 0.083 AND tuoi < 1`: `huyet_ap_tam_thu_thap_nhat < 70`<br>• `tuoi >= 1 AND tuoi <= 10`: `huyet_ap_tam_thu_thap_nhat < (70 + 2 * tuoi)`<br>• `tuoi >= 11 AND tuoi <= 17`: `huyet_ap_tam_thu_thap_nhat < 90`<br>• `tuoi >= 18`: `(huyet_ap_tam_thu_thap_nhat < 90 OR huyet_ap_tam_thu_thap_nhat < 0.7 * huyet_ap_tam_thu_nen)` | **Phản vệ kèm tụt huyết áp:**<br>1 tháng - 1 tuổi: HATT < 70 mmHg<br>1 - 10 tuổi: HATT < (70 + 2*tuổi)<br>11 - 17 tuổi: HATT < 90 mmHg<br>$\ge 18$ tuổi: HATT < 90 mmHg hoặc giảm > 30% nền. |
-| **`R-PV-THEODOI`** | **Cảnh báo theo dõi phản vệ** | `tiep_tuc_theo_doi_chua_du_du_kien == true` OR (Tiếp xúc dị nguyên AND có 1 triệu chứng da nhưng chưa đủ tiêu chuẩn 2 hệ cơ quan) | Chưa đủ dữ kiện để phân loại tại thời điểm đánh giá, nhắc nhở theo dõi sát. |
+| **`R-SOC`** | **Sốc phản vệ** | `(R01-PV OR R02-PV OR R03-PV)` AND tụt HATT: từ lúc sinh đến `<1` tuổi `<70`; `1≤tuổi<11` `<70+2×tuổi`; `11≤tuổi<18` `<90`; `tuổi≥18` `<90` hoặc `<0.7×HATT nền`. | Trục tuổi liên tục theo xác nhận chuyên môn ngày 18/10/2026. HATT bằng ngưỡng chưa thỏa điều kiện `<`. |
+| **`R-PV-THEODOI`** | **Theo dõi phản vệ** (`THEODOIPV`) | `NOT(R-SOC OR R01-PV OR R02-PV OR R03-PV)` chỉ khi cả bốn rule đều FALSE và bệnh án đã được chọn là mẫu Phản vệ. | Nếu rule còn UNKNOWN, giữ `INSUFFICIENT_DATA` và `missing_fields`; không khẳng định đã loại trừ phản vệ. Không dùng cờ tích tay. |
 
 ---
 
@@ -46,9 +46,10 @@ Bộ máy suy luận (`src/classify.py`) duyệt các luật theo 5 tầng ưu t
 
 | Rule ID | Kết luận | Logic điều kiện (Pseudocode) | Tiêu chí y khoa |
 | :--- | :--- | :--- | :--- |
-| **`R01-CAP-NANG`** | **Mày đay cấp có dấu hiệu nặng** | `R-SANGLOC-CAP == True` <br>AND `[` `trieu_chung_da_hien_tai == "Phù mạch đáng kể"` OR `so_lan_phu_mach_nang_can_vien >= 1` OR `vi_tri_phu_mach IN ("Mi mắt", "Lưỡi", "Thanh quản", "Môi")` `]` | Phù mạch đáng kể ở vùng mặt/cổ/thanh quản hoặc phù mạch nặng phải cấp cứu. |
-| **`R02-CAP-NANG`** | **Mày đay cấp có dấu hiệu nặng** | `R-SANGLOC-CAP == True` <br>AND `[` `trieu_chung_da_hien_tai == "Ngứa nhiều"` OR `(` `trieu_chung_da_hien_tai == "Sẩn phù"` AND `[` `trieu_chung_tieu_hoa_hien_tai IN ("nôn", "đau bụng quặn thắt")` OR `trieu_chung_ho_hap_hien_tai IN ("thở khò khè", "nghẹn họng")` OR `muc_do_lan_rong_va_phan_bo_ton_thuong == ">50% BSA"` OR `so_luong_san_phu == ">50 nốt"` `]` `)` `]` | Ngứa nhiều HOẶC sẩn phù diện rộng > 50% BSA / > 50 nốt HOẶC kèm triệu chứng tiêu hóa/hô hấp nhẹ. |
-| **`R01-CAP-THUONG`** | **Mày đay cấp thông thường** | `R-SANGLOC-CAP == True` <br>AND `trieu_chung_da_hien_tai == "Sẩn phù"` <br>AND NOT `[ Tiêu chí nặng của R01-CAP-NANG và R02-CAP-NANG ]` | Sẩn phù cấp tính đơn thuần, không phù mạch đáng kể, không triệu chứng toàn thân. |
+| **`R01-CAP-NANG-NGUA`** | **Mày đay cấp có dấu hiệu nặng** | Qua `R-SANGLOC-CAP` AND `trieu_chung_da_hien_tai.danh_sach_chon` chứa `Ngứa nhiều`. | Priority 4. |
+| **`R02-CAP-NANG-PHUMACH`** | **Mày đay cấp có dấu hiệu nặng** | Qua cổng AND (`danh_sach_chon` chứa `Phù mạch đáng kể` OR vị trí Mi mắt/Lưỡi/Thanh quản/Môi OR số lần cần viện ≥1 OR `dau_hieu_nang_chi_tiet` chứa `Phù mạch đáng kể`). | Priority 4; trường chi tiết phải có bằng chứng âm tính rõ để loại dấu nặng. |
+| **`R03-CAP-NANG-CONLAI`** | **Mày đay cấp có dấu hiệu nặng** | Qua cổng AND `trieu_chung_da_hien_tai.danh_sach_chon` chứa `Sẩn phù` AND (tiêu hóa, hô hấp, BSA >50% hoặc >50 nốt). | Priority 4; yêu cầu cả cổng `hien_tai_co_san_phu` và triệu chứng `Sẩn phù` theo xác nhận ngày 18/10/2026. |
+| **`R01-CAP-THUONG`** | **Mày đay cấp thông thường** | Qua cổng AND danh sách da chứa `Sẩn phù` AND NOT(any_of ba `ref_rule` Cấp nặng). | Priority 5; UNKNOWN ở bất kỳ nhánh nặng cần thiết vẫn chặn kết luận thường. |
 
 ---
 

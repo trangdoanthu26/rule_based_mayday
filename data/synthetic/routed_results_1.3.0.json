@@ -1,0 +1,1179 @@
+{
+  "rules_version": "1.3.0",
+  "fixture_sha256": "86db3adbcb2ac909a0060bf8e773342d7ed72a56b1e87deba6769645e8cbe393",
+  "engine_sha256": "50cd7316151281154c05ac47948cf3bd9bab116571d2458099f94fda57c5236a",
+  "rules_sha256": {
+    "phan_ve": "a8355d0685efdf4b37225dd94a968c6a676e9bf06188d295ec993aa3900c2e78",
+    "cap": "53f00902732294eac62eb07c5009b7f70b46ddc1a50b2c9879524e62d9966392",
+    "man": "c1e46bf03e6450fb176ab5e9d74254be3fdea67206c8c6270caed487af80e109"
+  },
+  "case_count": 138,
+  "status_counts": {
+    "CLASSIFIED": 95,
+    "INSUFFICIENT_DATA": 17,
+    "NEEDS_REVIEW": 8,
+    "THEODOIPV": 5,
+    "UNRESOLVED": 13
+  },
+  "classified_labels": {
+    "Mày đay CSU overlap": 3,
+    "Mày đay CSU type 1": 2,
+    "Mày đay CSU type 2": 2,
+    "Mày đay CSU unknown": 12,
+    "Mày đay CindU Choline (do nóng)": 1,
+    "Mày đay CindU da vẽ nổi": 3,
+    "Mày đay CindU do lạnh": 2,
+    "Mày đay CindU khác": 5,
+    "Mày đay cấp có dấu hiệu nặng": 18,
+    "Mày đay cấp thông thường": 1,
+    "Phản vệ": 30,
+    "Sốc phản vệ": 16
+  },
+  "cases": [
+    {
+      "id": "PV-01",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "PV-02",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R01-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "PV-03",
+      "form_type": "phan_ve",
+      "status": "THEODOIPV",
+      "matched_rule_id": "R-PV-THEODOI",
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "PV-04",
+      "form_type": "phan_ve",
+      "status": "THEODOIPV",
+      "matched_rule_id": "R-PV-THEODOI",
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "PV-NON-1",
+      "form_type": "phan_ve",
+      "status": "THEODOIPV",
+      "matched_rule_id": "R-PV-THEODOI",
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "PV-NON-2",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "PV-05",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "PV-HIT-CO",
+      "form_type": "phan_ve",
+      "status": "THEODOIPV",
+      "matched_rule_id": "R-PV-THEODOI",
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "PV-HIT-KHONG",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R03-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "PV-06",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R03-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "PV-07",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "PV-08",
+      "form_type": "phan_ve",
+      "status": "THEODOIPV",
+      "matched_rule_id": "R-PV-THEODOI",
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "PV-09",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "PV-10",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "PV-TACNHAN-thuc_an",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "PV-TACNHAN-thuoc",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "PV-TACNHAN-con_trung_dot",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "PV-TACNHAN-khac",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-0.083--0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-0.083-0",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-0.083-0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-0.99--0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-0.99-0",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-0.99-0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-1--0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-1-0",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-1-0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-5--0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-5-0",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-5-0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-10--0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-10-0",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-10-0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-11--0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-11-0",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-11-0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-17--0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-17-0",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-17-0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-18--0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-18-0",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-18-0.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-GAP-0.05",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-GAP-10.5",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-GAP-17.5",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-NEN-139.9",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-NEN-140",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-NEN-140.1",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-PV",
+      "predicted_label": "Phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-MISSING-None",
+      "form_type": "phan_ve",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "huyet_ap_tam_thu_thap_nhat"
+      ]
+    },
+    {
+      "id": "SOC-MISSING--1",
+      "form_type": "phan_ve",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "huyet_ap_tam_thu_thap_nhat"
+      ]
+    },
+    {
+      "id": "SOC-MISSING-unknown",
+      "form_type": "phan_ve",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "huyet_ap_tam_thu_thap_nhat"
+      ]
+    },
+    {
+      "id": "SOC-MISSING-80",
+      "form_type": "phan_ve",
+      "status": "NEEDS_REVIEW",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-NEN-MISSING",
+      "form_type": "phan_ve",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "huyet_ap_tam_thu_thap_nhat"
+      ]
+    },
+    {
+      "id": "SOC-NEN-NOTNEEDED",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-THUONG-OBJECT",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R01-CAP-THUONG",
+      "predicted_label": "Mày đay cấp thông thường",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-THUONG-STRING",
+      "form_type": "cap",
+      "status": "NEEDS_REVIEW",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-PHUMACH",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-CAP-NANG-PHUMACH",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-NGUA",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R01-CAP-NANG-NGUA",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-CANVIEN",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-CAP-NANG-PHUMACH",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-CHITIET",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-CAP-NANG-PHUMACH",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-BSA",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R03-CAP-NANG-CONLAI",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-NOT",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R03-CAP-NANG-CONLAI",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-NON",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R03-CAP-NANG-CONLAI",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-DAUBUNG",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R03-CAP-NANG-CONLAI",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-BUONNON",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R03-CAP-NANG-CONLAI",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-VITRI-Mi mắt",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-CAP-NANG-PHUMACH",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-VITRI-Lưỡi",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-CAP-NANG-PHUMACH",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-VITRI-Thanh quản",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-CAP-NANG-PHUMACH",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-VITRI-Môi",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-CAP-NANG-PHUMACH",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-HOHAP-Thở khò khè",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R03-CAP-NANG-CONLAI",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-NANG-HOHAP-Nghẹn họng",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R03-CAP-NANG-CONLAI",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-6TUAN-1007.9",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-CAP-NANG-PHUMACH",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-6TUAN-1008",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-CAP-NANG-PHUMACH",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-6TUAN-1008.1",
+      "form_type": "cap",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-ANH-Không",
+      "form_type": "cap",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CAP-ANH-None",
+      "form_type": "cap",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "anh_san_phu"
+      ]
+    },
+    {
+      "id": "CAP-ARRAY",
+      "form_type": "cap",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R02-CAP-NANG-PHUMACH",
+      "predicted_label": "Mày đay cấp có dấu hiệu nặng",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-PRIORITY",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-da_ve_noi",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CindU-01",
+      "predicted_label": "Mày đay CindU da vẽ nổi",
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-cholinergic",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CindU-02",
+      "predicted_label": "Mày đay CindU Choline (do nóng)",
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-lanh_temptest",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CindU-03",
+      "predicted_label": "Mày đay CindU do lạnh",
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-lanh_cucda",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CindU-03",
+      "predicted_label": "Mày đay CindU do lạnh",
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-ap_luc_cham",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CindU-04",
+      "predicted_label": "Mày đay CindU khác",
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-anh_sang",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CindU-04",
+      "predicted_label": "Mày đay CindU khác",
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-nuoc",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CindU-04",
+      "predicted_label": "Mày đay CindU khác",
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-khac",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CindU-04",
+      "predicted_label": "Mày đay CindU khác",
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-TIE",
+      "form_type": "man",
+      "status": "NEEDS_REVIEW",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-ICE-OTHER",
+      "form_type": "man",
+      "status": "NEEDS_REVIEW",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-OTHER-MISSING",
+      "form_type": "man",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "da_ve_noi_ket_qua"
+      ]
+    },
+    {
+      "id": "CINDU-NONENUM",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CindU-04",
+      "predicted_label": "Mày đay CindU khác",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-T1-GD1",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-T1-01",
+      "predicted_label": "Mày đay CSU type 1",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-T2-FC",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-T2-01",
+      "predicted_label": "Mày đay CSU type 2",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-T2-IGE",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-T2-01",
+      "predicted_label": "Mày đay CSU type 2",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-OVL-FC",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-OVL-01",
+      "predicted_label": "Mày đay CSU overlap",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-OVL-IGE",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-OVL-01",
+      "predicted_label": "Mày đay CSU overlap",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-UNK-GD1",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-UNK-01",
+      "predicted_label": "Mày đay CSU unknown",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-OVL-ONE-MISSING",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-OVL-01",
+      "predicted_label": "Mày đay CSU overlap",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-DAYS-59",
+      "form_type": "man",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": "R-DEFAULT",
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-DAYS-60",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-UNK-01",
+      "predicted_label": "Mày đay CSU unknown",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-DAYS-61",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-UNK-01",
+      "predicted_label": "Mày đay CSU unknown",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-DAYS-None",
+      "form_type": "man",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "so_ngay_theo_doi"
+      ]
+    },
+    {
+      "id": "CSU-MISSING-igg_khang_fceria_ket_qua",
+      "form_type": "man",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "igg_khang_fceria_ket_qua"
+      ]
+    },
+    {
+      "id": "CSU-MISSING-igg_khang_ige_ket_qua",
+      "form_type": "man",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "igg_khang_ige_ket_qua"
+      ]
+    },
+    {
+      "id": "CSU-MISSING-ige_khang_il24_ket_qua",
+      "form_type": "man",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "ige_khang_il24_ket_qua"
+      ]
+    },
+    {
+      "id": "CSU-BOUND-tuoi-15.9",
+      "form_type": "man",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-BOUND-tuoi-16",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-UNK-01",
+      "predicted_label": "Mày đay CSU unknown",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-BOUND-thoi_gian_ngung_khang_histamine_asst-7.9",
+      "form_type": "man",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-BOUND-thoi_gian_ngung_khang_histamine_asst-8",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-UNK-01",
+      "predicted_label": "Mày đay CSU unknown",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-BOUND-thoi_gian_ngung_corticoid_asst-29.9",
+      "form_type": "man",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-BOUND-thoi_gian_ngung_corticoid_asst-30",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-UNK-01",
+      "predicted_label": "Mày đay CSU unknown",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-WEEKS-5.99",
+      "form_type": "man",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-WEEKS-6",
+      "form_type": "man",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-WEEKS-6.01",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-UNK-01",
+      "predicted_label": "Mày đay CSU unknown",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-GD2-(+)",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-T1-02",
+      "predicted_label": "Mày đay CSU type 1",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-GD2-(−)",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-UNK-02",
+      "predicted_label": "Mày đay CSU unknown",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-GD2-None",
+      "form_type": "man",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "ige_khang_il24_ket_qua"
+      ]
+    },
+    {
+      "id": "CSU-STELLA-False-39.9",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-UNK-02",
+      "predicted_label": "Mày đay CSU unknown",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-STELLA-False-40",
+      "form_type": "man",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-STELLA-None-39.9",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-UNK-02",
+      "predicted_label": "Mày đay CSU unknown",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-STELLA-None-40",
+      "form_type": "man",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "stella_dat"
+      ]
+    },
+    {
+      "id": "CSU-STELLA-False--1",
+      "form_type": "man",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "ige_toan_phan"
+      ]
+    },
+    {
+      "id": "CSU-STELLA-True-None",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-UNK-02",
+      "predicted_label": "Mày đay CSU unknown",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-ASST-None",
+      "form_type": "man",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "asst_ket_qua"
+      ]
+    },
+    {
+      "id": "CSU-ASST-(+/−)",
+      "form_type": "man",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-ASST-(-)",
+      "form_type": "man",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-NO-PV",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CSU-UNK-01",
+      "predicted_label": "Mày đay CSU unknown",
+      "missing_fields": []
+    },
+    {
+      "id": "CSU-CINDU",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CindU-01",
+      "predicted_label": "Mày đay CindU da vẽ nổi",
+      "missing_fields": []
+    },
+    {
+      "id": "EMPTY",
+      "form_type": "phan_ve",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": [
+        "huyet_ap_tam_thu_thap_nhat",
+        "tac_nhan_hit_vao_pv",
+        "trieu_chung_da_hien_tai_pv.danh_sach_chon",
+        "trieu_chung_ho_hap_hien_tai_pv.danh_sach_chon",
+        "trieu_chung_tieu_hoa_hien_tai_pv.dau_bung_quan_that",
+        "trieu_chung_tieu_hoa_hien_tai_pv.non_so_lan",
+        "trieu_chung_tuan_hoan_hien_tai_pv.danh_sach_chon",
+        "tuoi",
+        "yeu_to_nghi_ngo_pv_con_trung_dot.co_khong",
+        "yeu_to_nghi_ngo_pv_khac.co_khong",
+        "yeu_to_nghi_ngo_pv_thuc_an.co_khong",
+        "yeu_to_nghi_ngo_pv_thuoc.co_khong"
+      ]
+    },
+    {
+      "id": "DEFAULT-NO-CSU",
+      "form_type": "man",
+      "status": "INSUFFICIENT_DATA",
+      "matched_rule_id": "R-DEFAULT",
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "NEGATIVE-SBP",
+      "form_type": "phan_ve",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-SOC",
+      "predicted_label": "Sốc phản vệ",
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-INVALID-BOOL-TRUE",
+      "form_type": "phan_ve",
+      "status": "NEEDS_REVIEW",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-INVALID-BOOL-FALSE",
+      "form_type": "phan_ve",
+      "status": "NEEDS_REVIEW",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-INVALID-LIST",
+      "form_type": "phan_ve",
+      "status": "NEEDS_REVIEW",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "SOC-INVALID-OBJECT",
+      "form_type": "phan_ve",
+      "status": "NEEDS_REVIEW",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-WEEKS-5.99",
+      "form_type": "man",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-WEEKS-6",
+      "form_type": "man",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-WEEKS-6.01",
+      "form_type": "man",
+      "status": "CLASSIFIED",
+      "matched_rule_id": "R-CindU-01",
+      "predicted_label": "Mày đay CindU da vẽ nổi",
+      "missing_fields": []
+    },
+    {
+      "id": "CINDU-ADRENERGIC",
+      "form_type": "man",
+      "status": "UNRESOLVED",
+      "matched_rule_id": null,
+      "predicted_label": null,
+      "missing_fields": []
+    }
+  ]
+}

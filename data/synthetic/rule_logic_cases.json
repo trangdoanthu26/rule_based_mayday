@@ -1,10 +1,11 @@
 {
   "description": "Bệnh án tổng hợp theo đường dẫn YAML; không phải hợp đồng RAW/schema đã duyệt hoặc ground truth lâm sàng.",
-  "rules_version": "1.2.1",
-  "expectation_policy": "expected_engine ghi hành vi hiện tại đã suy ra độc lập từ YAML/source; workflow_gap trỏ tới sai khác cần review, không mặc nhiên duyệt chúng.",
+  "rules_version": "1.3.0",
+  "expectation_policy": "expected_engine ghi hành vi suy diễn theo đúng form_type và YAML 1.3.0; nhan là ground truth riêng, không truyền vào engine.",
   "cases": [
     {
       "id": "PV-01",
+      "form_type": "phan_ve",
       "mo_ta": "Dị nguyên nghi ngờ, da + hô hấp, huyết áp bình thường",
       "du_lieu": {
         "tuoi": 30,
@@ -102,6 +103,7 @@
     },
     {
       "id": "PV-02",
+      "form_type": "phan_ve",
       "mo_ta": "Da + hô hấp, không ghi nhận tác nhân nghi ngờ",
       "du_lieu": {
         "tuoi": 30,
@@ -188,13 +190,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R01-PV",
-        "rule_results": {},
+        "rule_results": {
+          "R01-PV": true
+        },
         "predicted_label": "Phản vệ"
       },
       "workflow_gap": null
     },
     {
       "id": "PV-03",
+      "form_type": "phan_ve",
       "mo_ta": "Một hệ da đơn lẻ chưa đạt phản vệ",
       "du_lieu": {
         "tuoi": 30,
@@ -277,11 +282,12 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "status": "UNRESOLVED",
-        "matched_rule_id": null,
+        "status": "THEODOIPV",
+        "matched_rule_id": "R-PV-THEODOI",
         "rule_results": {
           "R02-PV": false,
-          "R03-PV": false
+          "R03-PV": false,
+          "R-PV-THEODOI": true
         },
         "predicted_label": null
       },
@@ -289,6 +295,7 @@
     },
     {
       "id": "PV-04",
+      "form_type": "phan_ve",
       "mo_ta": "Hai triệu chứng da vẫn chỉ tính một hệ",
       "du_lieu": {
         "tuoi": 30,
@@ -372,10 +379,11 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "status": "UNRESOLVED",
-        "matched_rule_id": null,
+        "status": "THEODOIPV",
+        "matched_rule_id": "R-PV-THEODOI",
         "rule_results": {
-          "R02-PV": false
+          "R02-PV": false,
+          "R-PV-THEODOI": true
         },
         "predicted_label": null
       },
@@ -383,6 +391,7 @@
     },
     {
       "id": "PV-NON-1",
+      "form_type": "phan_ve",
       "mo_ta": "Da + nôn 1 lần",
       "du_lieu": {
         "tuoi": 30,
@@ -465,10 +474,11 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "status": "UNRESOLVED",
-        "matched_rule_id": null,
+        "status": "THEODOIPV",
+        "matched_rule_id": "R-PV-THEODOI",
         "rule_results": {
-          "R02-PV": false
+          "R02-PV": false,
+          "R-PV-THEODOI": true
         },
         "predicted_label": null
       },
@@ -476,6 +486,7 @@
     },
     {
       "id": "PV-NON-2",
+      "form_type": "phan_ve",
       "mo_ta": "Da + nôn 2 lần",
       "du_lieu": {
         "tuoi": 30,
@@ -569,6 +580,7 @@
     },
     {
       "id": "PV-05",
+      "form_type": "phan_ve",
       "mo_ta": "Da + đau bụng quặn, không nôn",
       "du_lieu": {
         "tuoi": 30,
@@ -653,13 +665,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
-        "rule_results": {},
+        "rule_results": {
+          "R02-PV": true
+        },
         "predicted_label": "Phản vệ"
       },
       "workflow_gap": null
     },
     {
       "id": "PV-HIT-CO",
+      "form_type": "phan_ve",
       "mo_ta": "Một hệ hô hấp, tác nhân qua đường hít: Có",
       "du_lieu": {
         "tuoi": 30,
@@ -742,10 +757,11 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "status": "UNRESOLVED",
-        "matched_rule_id": null,
+        "status": "THEODOIPV",
+        "matched_rule_id": "R-PV-THEODOI",
         "rule_results": {
-          "R03-PV": false
+          "R03-PV": false,
+          "R-PV-THEODOI": true
         },
         "predicted_label": null
       },
@@ -753,6 +769,7 @@
     },
     {
       "id": "PV-HIT-KHONG",
+      "form_type": "phan_ve",
       "mo_ta": "Một hệ hô hấp, tác nhân qua đường hít: Không",
       "du_lieu": {
         "tuoi": 30,
@@ -846,6 +863,7 @@
     },
     {
       "id": "PV-06",
+      "form_type": "phan_ve",
       "mo_ta": "Tác nhân nghi ngờ + ngất đơn độc",
       "du_lieu": {
         "tuoi": 30,
@@ -930,13 +948,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R03-PV",
-        "rule_results": {},
+        "rule_results": {
+          "R03-PV": true
+        },
         "predicted_label": "Phản vệ"
       },
       "workflow_gap": "F-04"
     },
     {
       "id": "PV-07",
+      "form_type": "phan_ve",
       "mo_ta": "Không rõ dị nguyên, da + tụt huyết áp đo được",
       "du_lieu": {
         "tuoi": 30,
@@ -1022,16 +1043,17 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-PV",
+        "matched_rule_id": "R-SOC",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": true
         },
-        "predicted_label": "Phản vệ"
+        "predicted_label": "Sốc phản vệ"
       },
-      "workflow_gap": "F-05"
+      "workflow_gap": null
     },
     {
       "id": "PV-08",
+      "form_type": "phan_ve",
       "mo_ta": "Cờ theo dõi khi sàng lọc nguy hiểm đã âm",
       "du_lieu": {
         "tuoi": 30,
@@ -1112,15 +1134,18 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "status": "INSUFFICIENT_DATA",
+        "status": "THEODOIPV",
         "matched_rule_id": "R-PV-THEODOI",
-        "rule_results": {},
+        "rule_results": {
+          "R-PV-THEODOI": true
+        },
         "predicted_label": null
       },
       "workflow_gap": null
     },
     {
       "id": "PV-09",
+      "form_type": "phan_ve",
       "mo_ta": "Cờ theo dõi không thay thế sốc đã xác định",
       "du_lieu": {
         "tuoi": 30,
@@ -1207,13 +1232,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-SOC",
-        "rule_results": {},
+        "rule_results": {
+          "R-SOC": true
+        },
         "predicted_label": "Sốc phản vệ"
       },
       "workflow_gap": null
     },
     {
       "id": "PV-10",
+      "form_type": "phan_ve",
       "mo_ta": "Hai hệ đã đủ dù hệ tiêu hóa thiếu",
       "du_lieu": {
         "tuoi": 30,
@@ -1306,6 +1334,7 @@
     },
     {
       "id": "PV-TACNHAN-thuc_an",
+      "form_type": "phan_ve",
       "mo_ta": "Kích hoạt R02 bằng tác nhân thuc_an",
       "du_lieu": {
         "tuoi": 30,
@@ -1392,13 +1421,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
-        "rule_results": {},
+        "rule_results": {
+          "R02-PV": true
+        },
         "predicted_label": "Phản vệ"
       },
       "workflow_gap": null
     },
     {
       "id": "PV-TACNHAN-thuoc",
+      "form_type": "phan_ve",
       "mo_ta": "Kích hoạt R02 bằng tác nhân thuoc",
       "du_lieu": {
         "tuoi": 30,
@@ -1485,13 +1517,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
-        "rule_results": {},
+        "rule_results": {
+          "R02-PV": true
+        },
         "predicted_label": "Phản vệ"
       },
       "workflow_gap": null
     },
     {
       "id": "PV-TACNHAN-con_trung_dot",
+      "form_type": "phan_ve",
       "mo_ta": "Kích hoạt R02 bằng tác nhân con_trung_dot",
       "du_lieu": {
         "tuoi": 30,
@@ -1578,13 +1613,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
-        "rule_results": {},
+        "rule_results": {
+          "R02-PV": true
+        },
         "predicted_label": "Phản vệ"
       },
       "workflow_gap": null
     },
     {
       "id": "PV-TACNHAN-khac",
+      "form_type": "phan_ve",
       "mo_ta": "Kích hoạt R02 bằng tác nhân khac",
       "du_lieu": {
         "tuoi": 30,
@@ -1671,13 +1709,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
-        "rule_results": {},
+        "rule_results": {
+          "R02-PV": true
+        },
         "predicted_label": "Phản vệ"
       },
       "workflow_gap": null
     },
     {
       "id": "SOC-0.083--0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 0.083; HATT 69.9, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 0.083,
@@ -1773,6 +1814,7 @@
     },
     {
       "id": "SOC-0.083-0",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 0.083; HATT 70, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 0.083,
@@ -1860,7 +1902,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -1868,6 +1911,7 @@
     },
     {
       "id": "SOC-0.083-0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 0.083; HATT 70.1, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 0.083,
@@ -1955,7 +1999,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -1963,6 +2008,7 @@
     },
     {
       "id": "SOC-0.99--0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 0.99; HATT 69.9, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 0.99,
@@ -2058,6 +2104,7 @@
     },
     {
       "id": "SOC-0.99-0",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 0.99; HATT 70, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 0.99,
@@ -2145,7 +2192,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -2153,6 +2201,7 @@
     },
     {
       "id": "SOC-0.99-0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 0.99; HATT 70.1, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 0.99,
@@ -2240,7 +2289,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -2248,6 +2298,7 @@
     },
     {
       "id": "SOC-1--0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 1; HATT 71.9, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 1,
@@ -2343,6 +2394,7 @@
     },
     {
       "id": "SOC-1-0",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 1; HATT 72, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 1,
@@ -2430,7 +2482,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -2438,6 +2491,7 @@
     },
     {
       "id": "SOC-1-0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 1; HATT 72.1, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 1,
@@ -2525,7 +2579,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -2533,6 +2588,7 @@
     },
     {
       "id": "SOC-5--0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 5; HATT 79.9, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 5,
@@ -2628,6 +2684,7 @@
     },
     {
       "id": "SOC-5-0",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 5; HATT 80, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 5,
@@ -2715,7 +2772,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -2723,6 +2781,7 @@
     },
     {
       "id": "SOC-5-0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 5; HATT 80.1, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 5,
@@ -2810,7 +2869,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -2818,6 +2878,7 @@
     },
     {
       "id": "SOC-10--0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 10; HATT 89.9, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 10,
@@ -2913,6 +2974,7 @@
     },
     {
       "id": "SOC-10-0",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 10; HATT 90, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 10,
@@ -3000,7 +3062,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3008,6 +3071,7 @@
     },
     {
       "id": "SOC-10-0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 10; HATT 90.1, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 10,
@@ -3095,7 +3159,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3103,6 +3168,7 @@
     },
     {
       "id": "SOC-11--0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 11; HATT 89.9, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 11,
@@ -3198,6 +3264,7 @@
     },
     {
       "id": "SOC-11-0",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 11; HATT 90, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 11,
@@ -3285,7 +3352,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3293,6 +3361,7 @@
     },
     {
       "id": "SOC-11-0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 11; HATT 90.1, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 11,
@@ -3380,7 +3449,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3388,6 +3458,7 @@
     },
     {
       "id": "SOC-17--0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 17; HATT 89.9, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 17,
@@ -3483,6 +3554,7 @@
     },
     {
       "id": "SOC-17-0",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 17; HATT 90, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 17,
@@ -3570,7 +3642,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3578,6 +3651,7 @@
     },
     {
       "id": "SOC-17-0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 17; HATT 90.1, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 17,
@@ -3665,7 +3739,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3673,6 +3748,7 @@
     },
     {
       "id": "SOC-18--0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 18; HATT 89.9, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 18,
@@ -3768,6 +3844,7 @@
     },
     {
       "id": "SOC-18-0",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 18; HATT 90, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 18,
@@ -3855,7 +3932,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3863,6 +3941,7 @@
     },
     {
       "id": "SOC-18-0.1",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 18; HATT 90.1, kiểm tra dấu <",
       "du_lieu": {
         "tuoi": 18,
@@ -3950,7 +4029,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3958,6 +4038,7 @@
     },
     {
       "id": "SOC-GAP-0.05",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 0.05 không thuộc khoảng tụt HA hiện tại",
       "du_lieu": {
         "tuoi": 0.05,
@@ -4045,14 +4126,16 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
-      "workflow_gap": "F-02"
+      "workflow_gap": null
     },
     {
       "id": "SOC-GAP-10.5",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 10.5 không thuộc khoảng tụt HA hiện tại",
       "du_lieu": {
         "tuoi": 10.5,
@@ -4138,16 +4221,17 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R-SOC",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": true
         },
-        "predicted_label": "Phản vệ"
+        "predicted_label": "Sốc phản vệ"
       },
-      "workflow_gap": "F-02"
+      "workflow_gap": null
     },
     {
       "id": "SOC-GAP-17.5",
+      "form_type": "phan_ve",
       "mo_ta": "Tuổi 17.5 không thuộc khoảng tụt HA hiện tại",
       "du_lieu": {
         "tuoi": 17.5,
@@ -4233,16 +4317,17 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R-SOC",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": true
         },
-        "predicted_label": "Phản vệ"
+        "predicted_label": "Sốc phản vệ"
       },
-      "workflow_gap": "F-02"
+      "workflow_gap": null
     },
     {
       "id": "SOC-NEN-139.9",
+      "form_type": "phan_ve",
       "mo_ta": "HA nền 200; HATT 139.9; kiểm tra giảm >30%",
       "du_lieu": {
         "tuoi": 30,
@@ -4338,6 +4423,7 @@
     },
     {
       "id": "SOC-NEN-140",
+      "form_type": "phan_ve",
       "mo_ta": "HA nền 200; HATT 140; kiểm tra giảm >30%",
       "du_lieu": {
         "tuoi": 30,
@@ -4425,7 +4511,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -4433,6 +4520,7 @@
     },
     {
       "id": "SOC-NEN-140.1",
+      "form_type": "phan_ve",
       "mo_ta": "HA nền 200; HATT 140.1; kiểm tra giảm >30%",
       "du_lieu": {
         "tuoi": 30,
@@ -4520,7 +4608,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R02-PV",
         "rule_results": {
-          "R-SOC": false
+          "R-SOC": false,
+          "R02-PV": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -4528,6 +4617,7 @@
     },
     {
       "id": "SOC-MISSING-None",
+      "form_type": "phan_ve",
       "mo_ta": "HATT thiếu/sentinel/sai kiểu: None",
       "du_lieu": {
         "tuoi": 30,
@@ -4623,6 +4713,7 @@
     },
     {
       "id": "SOC-MISSING--1",
+      "form_type": "phan_ve",
       "mo_ta": "HATT thiếu/sentinel/sai kiểu: -1",
       "du_lieu": {
         "tuoi": 30,
@@ -4718,6 +4809,7 @@
     },
     {
       "id": "SOC-MISSING-unknown",
+      "form_type": "phan_ve",
       "mo_ta": "HATT thiếu/sentinel/sai kiểu: unknown",
       "du_lieu": {
         "tuoi": 30,
@@ -4813,6 +4905,7 @@
     },
     {
       "id": "SOC-MISSING-80",
+      "form_type": "phan_ve",
       "mo_ta": "HATT thiếu/sentinel/sai kiểu: 80",
       "du_lieu": {
         "tuoi": 30,
@@ -4897,12 +4990,16 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "exception": "TypeError"
+        "status": "NEEDS_REVIEW",
+        "matched_rule_id": null,
+        "rule_results": {},
+        "predicted_label": null
       },
       "workflow_gap": "F-12"
     },
     {
       "id": "SOC-NEN-MISSING",
+      "form_type": "phan_ve",
       "mo_ta": "HATT 100, thiếu HA nền: chưa loại sốc theo giảm tương đối",
       "du_lieu": {
         "tuoi": 30,
@@ -4998,6 +5095,7 @@
     },
     {
       "id": "SOC-NEN-NOTNEEDED",
+      "form_type": "phan_ve",
       "mo_ta": "HATT 80 đủ kết luận, nền thiếu không chặn",
       "du_lieu": {
         "tuoi": 30,
@@ -5084,13 +5182,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-SOC",
-        "rule_results": {},
+        "rule_results": {
+          "R-SOC": true
+        },
         "predicted_label": "Sốc phản vệ"
       },
       "workflow_gap": null
     },
     {
       "id": "CAP-THUONG-OBJECT",
+      "form_type": "cap",
       "mo_ta": "Sẩn phù object, mọi dấu nặng còn lại âm",
       "du_lieu": {
         "tuoi": 30,
@@ -5103,11 +5204,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -5175,19 +5276,19 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "status": "NEEDS_REVIEW",
-        "matched_rule_id": null,
+        "status": "CLASSIFIED",
+        "matched_rule_id": "R01-CAP-THUONG",
         "rule_results": {
           "R-SANGLOC-CAP": true,
-          "R01-CAP-NANG": null,
-          "R01-CAP-THUONG": null
+          "R01-CAP-THUONG": true
         },
-        "predicted_label": null
+        "predicted_label": "Mày đay cấp thông thường"
       },
-      "workflow_gap": "F-01"
+      "workflow_gap": null
     },
     {
       "id": "CAP-THUONG-STRING",
+      "form_type": "cap",
       "mo_ta": "Triệu chứng scalar không thể đọc danh_sach_chon",
       "du_lieu": {
         "tuoi": 30,
@@ -5200,11 +5301,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -5271,15 +5372,15 @@
         "status": "NEEDS_REVIEW",
         "matched_rule_id": null,
         "rule_results": {
-          "R01-CAP-NANG": false,
           "R01-CAP-THUONG": null
         },
         "predicted_label": null
       },
-      "workflow_gap": "F-01"
+      "workflow_gap": null
     },
     {
       "id": "CAP-NANG-PHUMACH",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: PHUMACH",
       "du_lieu": {
         "tuoi": 30,
@@ -5292,15 +5393,19 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
-        "trieu_chung_da_hien_tai": "Phù mạch đáng kể",
+        "trieu_chung_da_hien_tai": {
+          "danh_sach_chon": [
+            "Phù mạch đáng kể"
+          ]
+        },
         "so_lan_phu_mach_nang_can_vien": 0,
         "vi_tri_phu_mach": {
           "danh_sach_chon": []
@@ -5361,9 +5466,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R02-CAP-NANG-PHUMACH",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R02-CAP-NANG-PHUMACH": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -5371,6 +5476,7 @@
     },
     {
       "id": "CAP-NANG-NGUA",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: NGUA",
       "du_lieu": {
         "tuoi": 30,
@@ -5383,15 +5489,19 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
-        "trieu_chung_da_hien_tai": "Ngứa nhiều",
+        "trieu_chung_da_hien_tai": {
+          "danh_sach_chon": [
+            "Ngứa nhiều"
+          ]
+        },
         "so_lan_phu_mach_nang_can_vien": 0,
         "vi_tri_phu_mach": {
           "danh_sach_chon": []
@@ -5452,9 +5562,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R01-CAP-NANG-NGUA",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R01-CAP-NANG-NGUA": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -5462,6 +5572,7 @@
     },
     {
       "id": "CAP-NANG-CANVIEN",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: CANVIEN",
       "du_lieu": {
         "tuoi": 30,
@@ -5474,11 +5585,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -5547,9 +5658,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R02-CAP-NANG-PHUMACH",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R02-CAP-NANG-PHUMACH": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -5557,6 +5668,7 @@
     },
     {
       "id": "CAP-NANG-CHITIET",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: CHITIET",
       "du_lieu": {
         "tuoi": 30,
@@ -5569,11 +5681,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -5644,9 +5756,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R02-CAP-NANG-PHUMACH",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R02-CAP-NANG-PHUMACH": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -5654,6 +5766,7 @@
     },
     {
       "id": "CAP-NANG-BSA",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: BSA",
       "du_lieu": {
         "tuoi": 30,
@@ -5666,11 +5779,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -5739,9 +5852,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R03-CAP-NANG-CONLAI",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R03-CAP-NANG-CONLAI": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -5749,6 +5862,7 @@
     },
     {
       "id": "CAP-NANG-NOT",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: NOT",
       "du_lieu": {
         "tuoi": 30,
@@ -5761,11 +5875,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -5834,9 +5948,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R03-CAP-NANG-CONLAI",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R03-CAP-NANG-CONLAI": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -5844,6 +5958,7 @@
     },
     {
       "id": "CAP-NANG-NON",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: NON",
       "du_lieu": {
         "tuoi": 30,
@@ -5856,11 +5971,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -5929,9 +6044,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R03-CAP-NANG-CONLAI",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R03-CAP-NANG-CONLAI": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -5939,6 +6054,7 @@
     },
     {
       "id": "CAP-NANG-DAUBUNG",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: DAUBUNG",
       "du_lieu": {
         "tuoi": 30,
@@ -5951,11 +6067,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -6024,9 +6140,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R03-CAP-NANG-CONLAI",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R03-CAP-NANG-CONLAI": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -6034,6 +6150,7 @@
     },
     {
       "id": "CAP-NANG-BUONNON",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: BUONNON",
       "du_lieu": {
         "tuoi": 30,
@@ -6046,11 +6163,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -6119,9 +6236,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R03-CAP-NANG-CONLAI",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R03-CAP-NANG-CONLAI": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -6129,6 +6246,7 @@
     },
     {
       "id": "CAP-NANG-VITRI-Mi mắt",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: VITRI-Mi mắt",
       "du_lieu": {
         "tuoi": 30,
@@ -6141,11 +6259,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -6216,9 +6334,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R02-CAP-NANG-PHUMACH",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R02-CAP-NANG-PHUMACH": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -6226,6 +6344,7 @@
     },
     {
       "id": "CAP-NANG-VITRI-Lưỡi",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: VITRI-Lưỡi",
       "du_lieu": {
         "tuoi": 30,
@@ -6238,11 +6357,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -6313,9 +6432,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R02-CAP-NANG-PHUMACH",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R02-CAP-NANG-PHUMACH": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -6323,6 +6442,7 @@
     },
     {
       "id": "CAP-NANG-VITRI-Thanh quản",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: VITRI-Thanh quản",
       "du_lieu": {
         "tuoi": 30,
@@ -6335,11 +6455,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -6410,9 +6530,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R02-CAP-NANG-PHUMACH",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R02-CAP-NANG-PHUMACH": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -6420,6 +6540,7 @@
     },
     {
       "id": "CAP-NANG-VITRI-Môi",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: VITRI-Môi",
       "du_lieu": {
         "tuoi": 30,
@@ -6432,11 +6553,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -6507,9 +6628,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R02-CAP-NANG-PHUMACH",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R02-CAP-NANG-PHUMACH": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -6517,6 +6638,7 @@
     },
     {
       "id": "CAP-NANG-HOHAP-Thở khò khè",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: HOHAP-Thở khò khè",
       "du_lieu": {
         "tuoi": 30,
@@ -6529,11 +6651,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -6604,9 +6726,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R03-CAP-NANG-CONLAI",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R03-CAP-NANG-CONLAI": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -6614,6 +6736,7 @@
     },
     {
       "id": "CAP-NANG-HOHAP-Nghẹn họng",
+      "form_type": "cap",
       "mo_ta": "Dấu nặng độc lập: HOHAP-Nghẹn họng",
       "du_lieu": {
         "tuoi": 30,
@@ -6626,11 +6749,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -6701,9 +6824,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R03-CAP-NANG-CONLAI",
         "rule_results": {
-          "R01-CAP-NANG": true
+          "R03-CAP-NANG-CONLAI": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -6711,6 +6834,7 @@
     },
     {
       "id": "CAP-6TUAN-1007.9",
+      "form_type": "cap",
       "mo_ta": "Thời gian cấp 1007.9 giờ",
       "du_lieu": {
         "tuoi": 30,
@@ -6723,11 +6847,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 1007.9,
         "thoi_gian_khoi_phat_tuan": 5.999404761904762,
@@ -6796,9 +6920,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R02-CAP-NANG-PHUMACH",
         "rule_results": {
-          "R-SANGLOC-CAP": true
+          "R-SANGLOC-CAP": true,
+          "R02-CAP-NANG-PHUMACH": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -6806,6 +6931,7 @@
     },
     {
       "id": "CAP-6TUAN-1008",
+      "form_type": "cap",
       "mo_ta": "Thời gian cấp 1008 giờ",
       "du_lieu": {
         "tuoi": 30,
@@ -6818,11 +6944,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 1008,
         "thoi_gian_khoi_phat_tuan": 6.0,
@@ -6891,9 +7017,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-CAP-NANG",
+        "matched_rule_id": "R02-CAP-NANG-PHUMACH",
         "rule_results": {
-          "R-SANGLOC-CAP": true
+          "R-SANGLOC-CAP": true,
+          "R02-CAP-NANG-PHUMACH": true
         },
         "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
@@ -6901,6 +7028,7 @@
     },
     {
       "id": "CAP-6TUAN-1008.1",
+      "form_type": "cap",
       "mo_ta": "Thời gian cấp 1008.1 giờ",
       "du_lieu": {
         "tuoi": 30,
@@ -6913,11 +7041,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Có",
         "thoi_gian_khoi_phat_gio": 1008.1,
         "thoi_gian_khoi_phat_tuan": 6.000595238095238,
@@ -6996,6 +7124,7 @@
     },
     {
       "id": "CAP-ANH-Không",
+      "form_type": "cap",
       "mo_ta": "Ảnh: Không",
       "du_lieu": {
         "tuoi": 30,
@@ -7008,11 +7137,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": "Không",
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -7091,6 +7220,7 @@
     },
     {
       "id": "CAP-ANH-None",
+      "form_type": "cap",
       "mo_ta": "Ảnh: None",
       "du_lieu": {
         "tuoi": 30,
@@ -7103,11 +7233,11 @@
           "non_so_lan": 0
         },
         "hien_tai_co_san_phu": "Có",
-        "dac_diem_san_phu_cap": {
-          "dang_ton_thuong": [
-            "Hình tròn (bờ rõ)"
-          ]
-        },
+        "dac_diem_san_phu_cap": [
+          {
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
+          }
+        ],
         "anh_san_phu": null,
         "thoi_gian_khoi_phat_gio": 24,
         "thoi_gian_khoi_phat_tuan": 0.14285714285714285,
@@ -7175,7 +7305,7 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "status": "NEEDS_REVIEW",
+        "status": "INSUFFICIENT_DATA",
         "matched_rule_id": null,
         "rule_results": {
           "R-SANGLOC-CAP": null
@@ -7186,6 +7316,7 @@
     },
     {
       "id": "CAP-ARRAY",
+      "form_type": "cap",
       "mo_ta": "Lưới tổn thương dạng array theo schema, chưa mapping",
       "du_lieu": {
         "tuoi": 30,
@@ -7200,9 +7331,7 @@
         "hien_tai_co_san_phu": "Có",
         "dac_diem_san_phu_cap": [
           {
-            "dang_ton_thuong": [
-              "Hình tròn (bờ rõ)"
-            ]
+            "dang_ton_thuong": "Hình tròn (bờ rõ)"
           }
         ],
         "anh_san_phu": "Có",
@@ -7272,17 +7401,19 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "status": "NEEDS_REVIEW",
-        "matched_rule_id": null,
+        "status": "CLASSIFIED",
+        "matched_rule_id": "R02-CAP-NANG-PHUMACH",
         "rule_results": {
-          "R-SANGLOC-CAP": null
+          "R-SANGLOC-CAP": true,
+          "R02-CAP-NANG-PHUMACH": true
         },
-        "predicted_label": null
+        "predicted_label": "Mày đay cấp có dấu hiệu nặng"
       },
       "workflow_gap": null
     },
     {
       "id": "SOC-PRIORITY",
+      "form_type": "phan_ve",
       "mo_ta": "Đồng thời sốc, phản vệ và cấp nặng",
       "du_lieu": {
         "tuoi": 30,
@@ -7373,13 +7504,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-SOC",
-        "rule_results": {},
+        "rule_results": {
+          "R-SOC": true
+        },
         "predicted_label": "Sốc phản vệ"
       },
       "workflow_gap": null
     },
     {
       "id": "CINDU-da_ve_noi",
+      "form_type": "man",
       "mo_ta": "Một test kích thích dương: da_ve_noi",
       "du_lieu": {
         "tuoi": 30,
@@ -7473,6 +7607,7 @@
     },
     {
       "id": "CINDU-cholinergic",
+      "form_type": "man",
       "mo_ta": "Một test kích thích dương: cholinergic",
       "du_lieu": {
         "tuoi": 30,
@@ -7566,6 +7701,7 @@
     },
     {
       "id": "CINDU-lanh_temptest",
+      "form_type": "man",
       "mo_ta": "Một test kích thích dương: lanh_temptest",
       "du_lieu": {
         "tuoi": 30,
@@ -7659,6 +7795,7 @@
     },
     {
       "id": "CINDU-lanh_cucda",
+      "form_type": "man",
       "mo_ta": "Một test kích thích dương: lanh_cucda",
       "du_lieu": {
         "tuoi": 30,
@@ -7752,6 +7889,7 @@
     },
     {
       "id": "CINDU-ap_luc_cham",
+      "form_type": "man",
       "mo_ta": "Một test kích thích dương: ap_luc_cham",
       "du_lieu": {
         "tuoi": 30,
@@ -7845,6 +7983,7 @@
     },
     {
       "id": "CINDU-anh_sang",
+      "form_type": "man",
       "mo_ta": "Một test kích thích dương: anh_sang",
       "du_lieu": {
         "tuoi": 30,
@@ -7938,6 +8077,7 @@
     },
     {
       "id": "CINDU-nuoc",
+      "form_type": "man",
       "mo_ta": "Một test kích thích dương: nuoc",
       "du_lieu": {
         "tuoi": 30,
@@ -8031,6 +8171,7 @@
     },
     {
       "id": "CINDU-khac",
+      "form_type": "man",
       "mo_ta": "Một test kích thích dương: khac",
       "du_lieu": {
         "tuoi": 30,
@@ -8124,6 +8265,7 @@
     },
     {
       "id": "CINDU-TIE",
+      "form_type": "man",
       "mo_ta": "Da vẽ nổi và cholinergic cùng dương",
       "du_lieu": {
         "tuoi": 30,
@@ -8218,6 +8360,7 @@
     },
     {
       "id": "CINDU-ICE-OTHER",
+      "form_type": "man",
       "mo_ta": "Ice cube và áp lực dương, TempTest âm",
       "du_lieu": {
         "tuoi": 30,
@@ -8312,6 +8455,7 @@
     },
     {
       "id": "CINDU-OTHER-MISSING",
+      "form_type": "man",
       "mo_ta": "Test khác dương nhưng thiếu da vẽ nổi",
       "du_lieu": {
         "tuoi": 30,
@@ -8405,6 +8549,7 @@
     },
     {
       "id": "CINDU-NONENUM",
+      "form_type": "man",
       "mo_ta": "Kết quả abc bị != (+) coi là không dương",
       "du_lieu": {
         "tuoi": 30,
@@ -8498,6 +8643,7 @@
     },
     {
       "id": "CSU-T1-GD1",
+      "form_type": "man",
       "mo_ta": "ASST dương, tổ hợp IgG/IL24: T1-GD1",
       "du_lieu": {
         "tuoi": 30,
@@ -8580,13 +8726,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-T1-01",
-        "rule_results": {},
+        "rule_results": {
+          "R-CSU-T1-01": true
+        },
         "predicted_label": "Mày đay CSU type 1"
       },
       "workflow_gap": null
     },
     {
       "id": "CSU-T2-FC",
+      "form_type": "man",
       "mo_ta": "ASST dương, tổ hợp IgG/IL24: T2-FC",
       "du_lieu": {
         "tuoi": 30,
@@ -8669,13 +8818,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-T2-01",
-        "rule_results": {},
+        "rule_results": {
+          "R-CSU-T2-01": true
+        },
         "predicted_label": "Mày đay CSU type 2"
       },
       "workflow_gap": null
     },
     {
       "id": "CSU-T2-IGE",
+      "form_type": "man",
       "mo_ta": "ASST dương, tổ hợp IgG/IL24: T2-IGE",
       "du_lieu": {
         "tuoi": 30,
@@ -8758,13 +8910,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-T2-01",
-        "rule_results": {},
+        "rule_results": {
+          "R-CSU-T2-01": true
+        },
         "predicted_label": "Mày đay CSU type 2"
       },
       "workflow_gap": null
     },
     {
       "id": "CSU-OVL-FC",
+      "form_type": "man",
       "mo_ta": "ASST dương, tổ hợp IgG/IL24: OVL-FC",
       "du_lieu": {
         "tuoi": 30,
@@ -8847,13 +9002,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-OVL-01",
-        "rule_results": {},
+        "rule_results": {
+          "R-CSU-OVL-01": true
+        },
         "predicted_label": "Mày đay CSU overlap"
       },
       "workflow_gap": null
     },
     {
       "id": "CSU-OVL-IGE",
+      "form_type": "man",
       "mo_ta": "ASST dương, tổ hợp IgG/IL24: OVL-IGE",
       "du_lieu": {
         "tuoi": 30,
@@ -8936,13 +9094,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-OVL-01",
-        "rule_results": {},
+        "rule_results": {
+          "R-CSU-OVL-01": true
+        },
         "predicted_label": "Mày đay CSU overlap"
       },
       "workflow_gap": null
     },
     {
       "id": "CSU-UNK-GD1",
+      "form_type": "man",
       "mo_ta": "ASST dương, tổ hợp IgG/IL24: UNK-GD1",
       "du_lieu": {
         "tuoi": 30,
@@ -9025,13 +9186,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-UNK-01",
-        "rule_results": {},
+        "rule_results": {
+          "R-CSU-UNK-01": true
+        },
         "predicted_label": "Mày đay CSU unknown"
       },
       "workflow_gap": null
     },
     {
       "id": "CSU-OVL-ONE-MISSING",
+      "form_type": "man",
       "mo_ta": "ASST dương, tổ hợp IgG/IL24: OVL-ONE-MISSING",
       "du_lieu": {
         "tuoi": 30,
@@ -9114,13 +9278,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-OVL-01",
-        "rule_results": {},
+        "rule_results": {
+          "R-CSU-OVL-01": true
+        },
         "predicted_label": "Mày đay CSU overlap"
       },
       "workflow_gap": null
     },
     {
       "id": "CSU-DAYS-59",
+      "form_type": "man",
       "mo_ta": "ASST dương, theo dõi 59",
       "du_lieu": {
         "tuoi": 30,
@@ -9203,13 +9370,16 @@
       "expected_engine": {
         "status": "INSUFFICIENT_DATA",
         "matched_rule_id": "R-DEFAULT",
-        "rule_results": {},
+        "rule_results": {
+          "R-DEFAULT": true
+        },
         "predicted_label": null
       },
       "workflow_gap": null
     },
     {
       "id": "CSU-DAYS-60",
+      "form_type": "man",
       "mo_ta": "ASST dương, theo dõi 60",
       "du_lieu": {
         "tuoi": 30,
@@ -9292,13 +9462,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-UNK-01",
-        "rule_results": {},
+        "rule_results": {
+          "R-CSU-UNK-01": true
+        },
         "predicted_label": "Mày đay CSU unknown"
       },
       "workflow_gap": null
     },
     {
       "id": "CSU-DAYS-61",
+      "form_type": "man",
       "mo_ta": "ASST dương, theo dõi 61",
       "du_lieu": {
         "tuoi": 30,
@@ -9381,13 +9554,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-UNK-01",
-        "rule_results": {},
+        "rule_results": {
+          "R-CSU-UNK-01": true
+        },
         "predicted_label": "Mày đay CSU unknown"
       },
       "workflow_gap": null
     },
     {
       "id": "CSU-DAYS-None",
+      "form_type": "man",
       "mo_ta": "ASST dương, theo dõi None",
       "du_lieu": {
         "tuoi": 30,
@@ -9477,6 +9653,7 @@
     },
     {
       "id": "CSU-MISSING-igg_khang_fceria_ket_qua",
+      "form_type": "man",
       "mo_ta": "ELISA thiếu không thành CSU unknown: igg_khang_fceria_ket_qua",
       "du_lieu": {
         "tuoi": 30,
@@ -9566,6 +9743,7 @@
     },
     {
       "id": "CSU-MISSING-igg_khang_ige_ket_qua",
+      "form_type": "man",
       "mo_ta": "ELISA thiếu không thành CSU unknown: igg_khang_ige_ket_qua",
       "du_lieu": {
         "tuoi": 30,
@@ -9655,6 +9833,7 @@
     },
     {
       "id": "CSU-MISSING-ige_khang_il24_ket_qua",
+      "form_type": "man",
       "mo_ta": "ELISA thiếu không thành CSU unknown: ige_khang_il24_ket_qua",
       "du_lieu": {
         "tuoi": 30,
@@ -9744,6 +9923,7 @@
     },
     {
       "id": "CSU-BOUND-tuoi-15.9",
+      "form_type": "man",
       "mo_ta": "tuoi: 15.9",
       "du_lieu": {
         "tuoi": 15.9,
@@ -9835,6 +10015,7 @@
     },
     {
       "id": "CSU-BOUND-tuoi-16",
+      "form_type": "man",
       "mo_ta": "tuoi: 16",
       "du_lieu": {
         "tuoi": 16,
@@ -9918,7 +10099,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-UNK-01",
         "rule_results": {
-          "R-CSU-00": true
+          "R-CSU-00": true,
+          "R-CSU-UNK-01": true
         },
         "predicted_label": "Mày đay CSU unknown"
       },
@@ -9926,6 +10108,7 @@
     },
     {
       "id": "CSU-BOUND-thoi_gian_ngung_khang_histamine_asst-7.9",
+      "form_type": "man",
       "mo_ta": "thoi_gian_ngung_khang_histamine_asst: 7.9",
       "du_lieu": {
         "tuoi": 30,
@@ -10017,6 +10200,7 @@
     },
     {
       "id": "CSU-BOUND-thoi_gian_ngung_khang_histamine_asst-8",
+      "form_type": "man",
       "mo_ta": "thoi_gian_ngung_khang_histamine_asst: 8",
       "du_lieu": {
         "tuoi": 30,
@@ -10100,7 +10284,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-UNK-01",
         "rule_results": {
-          "R-CSU-00": true
+          "R-CSU-00": true,
+          "R-CSU-UNK-01": true
         },
         "predicted_label": "Mày đay CSU unknown"
       },
@@ -10108,6 +10293,7 @@
     },
     {
       "id": "CSU-BOUND-thoi_gian_ngung_corticoid_asst-29.9",
+      "form_type": "man",
       "mo_ta": "thoi_gian_ngung_corticoid_asst: 29.9",
       "du_lieu": {
         "tuoi": 30,
@@ -10199,6 +10385,7 @@
     },
     {
       "id": "CSU-BOUND-thoi_gian_ngung_corticoid_asst-30",
+      "form_type": "man",
       "mo_ta": "thoi_gian_ngung_corticoid_asst: 30",
       "du_lieu": {
         "tuoi": 30,
@@ -10282,7 +10469,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-UNK-01",
         "rule_results": {
-          "R-CSU-00": true
+          "R-CSU-00": true,
+          "R-CSU-UNK-01": true
         },
         "predicted_label": "Mày đay CSU unknown"
       },
@@ -10290,6 +10478,7 @@
     },
     {
       "id": "CSU-WEEKS-5.99",
+      "form_type": "man",
       "mo_ta": "Thời gian mạn 5.99",
       "du_lieu": {
         "tuoi": 30,
@@ -10381,6 +10570,7 @@
     },
     {
       "id": "CSU-WEEKS-6",
+      "form_type": "man",
       "mo_ta": "Thời gian mạn 6",
       "du_lieu": {
         "tuoi": 30,
@@ -10472,6 +10662,7 @@
     },
     {
       "id": "CSU-WEEKS-6.01",
+      "form_type": "man",
       "mo_ta": "Thời gian mạn 6.01",
       "du_lieu": {
         "tuoi": 30,
@@ -10555,7 +10746,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-UNK-01",
         "rule_results": {
-          "R-CSU-00": true
+          "R-CSU-00": true,
+          "R-CSU-UNK-01": true
         },
         "predicted_label": "Mày đay CSU unknown"
       },
@@ -10563,6 +10755,7 @@
     },
     {
       "id": "CSU-GD2-(+)",
+      "form_type": "man",
       "mo_ta": "ASST âm, Stella TRUE; IL24: (+)",
       "du_lieu": {
         "tuoi": 30,
@@ -10645,13 +10838,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-T1-02",
-        "rule_results": {},
+        "rule_results": {
+          "R-CSU-T1-02": true
+        },
         "predicted_label": "Mày đay CSU type 1"
       },
       "workflow_gap": null
     },
     {
       "id": "CSU-GD2-(−)",
+      "form_type": "man",
       "mo_ta": "ASST âm, Stella TRUE; IL24: (−)",
       "du_lieu": {
         "tuoi": 30,
@@ -10734,13 +10930,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-UNK-02",
-        "rule_results": {},
+        "rule_results": {
+          "R-CSU-UNK-02": true
+        },
         "predicted_label": "Mày đay CSU unknown"
       },
       "workflow_gap": null
     },
     {
       "id": "CSU-GD2-None",
+      "form_type": "man",
       "mo_ta": "ASST âm, Stella TRUE; IL24: None",
       "du_lieu": {
         "tuoi": 30,
@@ -10830,6 +11029,7 @@
     },
     {
       "id": "CSU-STELLA-False-39.9",
+      "form_type": "man",
       "mo_ta": "Stella False, IgE 39.9",
       "du_lieu": {
         "tuoi": 30,
@@ -10913,7 +11113,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-UNK-02",
         "rule_results": {
-          "R-GD-02": true
+          "R-GD-02": true,
+          "R-CSU-UNK-02": true
         },
         "predicted_label": "Mày đay CSU unknown"
       },
@@ -10921,6 +11122,7 @@
     },
     {
       "id": "CSU-STELLA-False-40",
+      "form_type": "man",
       "mo_ta": "Stella False, IgE 40",
       "du_lieu": {
         "tuoi": 30,
@@ -11012,6 +11214,7 @@
     },
     {
       "id": "CSU-STELLA-None-39.9",
+      "form_type": "man",
       "mo_ta": "Stella None, IgE 39.9",
       "du_lieu": {
         "tuoi": 30,
@@ -11095,7 +11298,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-UNK-02",
         "rule_results": {
-          "R-GD-02": true
+          "R-GD-02": true,
+          "R-CSU-UNK-02": true
         },
         "predicted_label": "Mày đay CSU unknown"
       },
@@ -11103,6 +11307,7 @@
     },
     {
       "id": "CSU-STELLA-None-40",
+      "form_type": "man",
       "mo_ta": "Stella None, IgE 40",
       "du_lieu": {
         "tuoi": 30,
@@ -11194,6 +11399,7 @@
     },
     {
       "id": "CSU-STELLA-False--1",
+      "form_type": "man",
       "mo_ta": "Stella False, IgE -1",
       "du_lieu": {
         "tuoi": 30,
@@ -11285,6 +11491,7 @@
     },
     {
       "id": "CSU-STELLA-True-None",
+      "form_type": "man",
       "mo_ta": "Stella True, IgE None",
       "du_lieu": {
         "tuoi": 30,
@@ -11368,7 +11575,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CSU-UNK-02",
         "rule_results": {
-          "R-GD-02": true
+          "R-GD-02": true,
+          "R-CSU-UNK-02": true
         },
         "predicted_label": "Mày đay CSU unknown"
       },
@@ -11376,6 +11584,7 @@
     },
     {
       "id": "CSU-ASST-None",
+      "form_type": "man",
       "mo_ta": "ASST thiếu/chưa rõ/ASCII: None; UNKNOWN priority 7 chặn fallback priority 8",
       "du_lieu": {
         "tuoi": 30,
@@ -11465,6 +11674,7 @@
     },
     {
       "id": "CSU-ASST-(+/−)",
+      "form_type": "man",
       "mo_ta": "ASST thiếu/chưa rõ/ASCII: (+/−)",
       "du_lieu": {
         "tuoi": 30,
@@ -11554,6 +11764,7 @@
     },
     {
       "id": "CSU-ASST-(-)",
+      "form_type": "man",
       "mo_ta": "ASST thiếu/chưa rõ/ASCII: (-)",
       "du_lieu": {
         "tuoi": 30,
@@ -11643,6 +11854,7 @@
     },
     {
       "id": "CSU-NO-PV",
+      "form_type": "man",
       "mo_ta": "CSU đủ xét nghiệm nhưng không có dữ kiện sàng lọc phản vệ",
       "du_lieu": {
         "tuoi": 30,
@@ -11709,15 +11921,18 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "status": "INSUFFICIENT_DATA",
-        "matched_rule_id": null,
-        "rule_results": {},
-        "predicted_label": null
+        "status": "CLASSIFIED",
+        "matched_rule_id": "R-CSU-UNK-01",
+        "rule_results": {
+          "R-CSU-UNK-01": true
+        },
+        "predicted_label": "Mày đay CSU unknown"
       },
-      "workflow_gap": "F-09"
+      "workflow_gap": null
     },
     {
       "id": "CSU-CINDU",
+      "form_type": "man",
       "mo_ta": "Cùng khớp CIndU và CSU: ưu tiên CIndU, trace giữ CSU",
       "du_lieu": {
         "tuoi": 30,
@@ -11803,7 +12018,8 @@
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CindU-01",
         "rule_results": {
-          "R-CSU-UNK-01": true
+          "R-CSU-UNK-01": true,
+          "R-CindU-01": true
         },
         "predicted_label": "Mày đay CindU da vẽ nổi"
       },
@@ -11811,6 +12027,7 @@
     },
     {
       "id": "EMPTY",
+      "form_type": "phan_ve",
       "mo_ta": "Record rỗng: không được tính là đã phân loại",
       "du_lieu": {},
       "expected_engine": {
@@ -11823,6 +12040,7 @@
     },
     {
       "id": "DEFAULT-NO-CSU",
+      "form_type": "man",
       "mo_ta": "Không thuộc CSU nhưng ASST null vẫn kích hoạt fallback",
       "du_lieu": {
         "tuoi": 30,
@@ -11905,13 +12123,16 @@
       "expected_engine": {
         "status": "INSUFFICIENT_DATA",
         "matched_rule_id": "R-DEFAULT",
-        "rule_results": {},
+        "rule_results": {
+          "R-DEFAULT": true
+        },
         "predicted_label": null
       },
       "workflow_gap": "F-11"
     },
     {
       "id": "NEGATIVE-SBP",
+      "form_type": "phan_ve",
       "mo_ta": "HATT -2 không bị coi sentinel -1: cần validator range",
       "du_lieu": {
         "tuoi": 30,
@@ -11998,13 +12219,16 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-SOC",
-        "rule_results": {},
+        "rule_results": {
+          "R-SOC": true
+        },
         "predicted_label": "Sốc phản vệ"
       },
       "workflow_gap": "F-07"
     },
     {
       "id": "SOC-INVALID-BOOL-TRUE",
+      "form_type": "phan_ve",
       "mo_ta": "HATT sai kiểu BOOL-TRUE: thiếu kiểm tra actual ở công thức",
       "du_lieu": {
         "tuoi": 30,
@@ -12089,17 +12313,18 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "status": "CLASSIFIED",
-        "matched_rule_id": "R-SOC",
-        "predicted_label": "Sốc phản vệ",
+        "status": "NEEDS_REVIEW",
+        "matched_rule_id": null,
         "rule_results": {
-          "R-SOC": true
-        }
+          "R-SOC": null
+        },
+        "predicted_label": null
       },
       "workflow_gap": "F-12"
     },
     {
       "id": "SOC-INVALID-BOOL-FALSE",
+      "form_type": "phan_ve",
       "mo_ta": "HATT sai kiểu BOOL-FALSE: thiếu kiểm tra actual ở công thức",
       "du_lieu": {
         "tuoi": 30,
@@ -12184,17 +12409,18 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "status": "CLASSIFIED",
-        "matched_rule_id": "R-SOC",
-        "predicted_label": "Sốc phản vệ",
+        "status": "NEEDS_REVIEW",
+        "matched_rule_id": null,
         "rule_results": {
-          "R-SOC": true
-        }
+          "R-SOC": null
+        },
+        "predicted_label": null
       },
       "workflow_gap": "F-12"
     },
     {
       "id": "SOC-INVALID-LIST",
+      "form_type": "phan_ve",
       "mo_ta": "HATT sai kiểu LIST: thiếu kiểm tra actual ở công thức",
       "du_lieu": {
         "tuoi": 30,
@@ -12279,12 +12505,16 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "exception": "TypeError"
+        "status": "NEEDS_REVIEW",
+        "matched_rule_id": null,
+        "rule_results": {},
+        "predicted_label": null
       },
       "workflow_gap": "F-12"
     },
     {
       "id": "SOC-INVALID-OBJECT",
+      "form_type": "phan_ve",
       "mo_ta": "HATT sai kiểu OBJECT: thiếu kiểm tra actual ở công thức",
       "du_lieu": {
         "tuoi": 30,
@@ -12369,12 +12599,16 @@
         "khac_ket_qua": "(−)"
       },
       "expected_engine": {
-        "exception": "TypeError"
+        "status": "NEEDS_REVIEW",
+        "matched_rule_id": null,
+        "rule_results": {},
+        "predicted_label": null
       },
       "workflow_gap": "F-12"
     },
     {
       "id": "CINDU-WEEKS-5.99",
+      "form_type": "man",
       "mo_ta": "Ranh giới mạn CIndU 5.99 tuần",
       "du_lieu": {
         "tuoi": 30,
@@ -12459,15 +12693,16 @@
       "expected_engine": {
         "status": "UNRESOLVED",
         "matched_rule_id": null,
-        "predicted_label": null,
         "rule_results": {
           "R-CindU-00": false
-        }
+        },
+        "predicted_label": null
       },
       "workflow_gap": null
     },
     {
       "id": "CINDU-WEEKS-6",
+      "form_type": "man",
       "mo_ta": "Ranh giới mạn CIndU 6 tuần",
       "du_lieu": {
         "tuoi": 30,
@@ -12552,15 +12787,16 @@
       "expected_engine": {
         "status": "UNRESOLVED",
         "matched_rule_id": null,
-        "predicted_label": null,
         "rule_results": {
           "R-CindU-00": false
-        }
+        },
+        "predicted_label": null
       },
       "workflow_gap": null
     },
     {
       "id": "CINDU-WEEKS-6.01",
+      "form_type": "man",
       "mo_ta": "Ranh giới mạn CIndU 6.01 tuần",
       "du_lieu": {
         "tuoi": 30,
@@ -12645,15 +12881,17 @@
       "expected_engine": {
         "status": "CLASSIFIED",
         "matched_rule_id": "R-CindU-01",
-        "predicted_label": "Mày đay CindU da vẽ nổi",
         "rule_results": {
-          "R-CindU-00": true
-        }
+          "R-CindU-00": true,
+          "R-CindU-01": true
+        },
+        "predicted_label": "Mày đay CindU da vẽ nổi"
       },
       "workflow_gap": null
     },
     {
       "id": "CINDU-ADRENERGIC",
+      "form_type": "man",
       "mo_ta": "Adrenergic dương đơn độc, YAML không có nhánh đọc biến này",
       "du_lieu": {
         "tuoi": 30,
@@ -12739,8 +12977,8 @@
       "expected_engine": {
         "status": "UNRESOLVED",
         "matched_rule_id": null,
-        "predicted_label": null,
-        "rule_results": {}
+        "rule_results": {},
+        "predicted_label": null
       },
       "workflow_gap": "F-06"
     }

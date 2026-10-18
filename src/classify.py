@@ -1,6 +1,6 @@
 """
 Bộ máy suy diễn Rule-based (Clinical Inference Engine).
-Nạp quy tắc từ rules/classification_rules.yaml và đánh giá từng bản ghi bệnh nhân.
+Nạp một bộ quy tắc theo mẫu bệnh án và đánh giá từng bản ghi bệnh nhân.
 """
 
 import hashlib
@@ -12,7 +12,7 @@ import yaml
 class ClinicalRuleEngine:
     STATUSES = {
         "CLASSIFIED", "INSUFFICIENT_DATA", "INVALID_DATA",
-        "NEEDS_REVIEW", "OUT_OF_SCOPE", "UNRESOLVED",
+        "NEEDS_REVIEW", "OUT_OF_SCOPE", "UNRESOLVED", "THEODOIPV",
     }
     OPERATORS = {"==", "!=", "<", "<=", ">", ">=", "contains", "contains_any"}
     FORMULAS = {"70 + 2 * tuoi", "0.7 * huyet_ap_tam_thu_nen"}
@@ -145,6 +145,11 @@ class ClinicalRuleEngine:
                 raise ValueError(f"{source}: rule {rule_id} {path}.value must be a finite number")
         elif operator == "contains_any" and not isinstance(condition.get("value"), list):
             raise ValueError(f"{source}: rule {rule_id} {path}.value must be a list")
+        if "item_field" in condition and (
+            operator != "contains_any" or not isinstance(condition["item_field"], str)
+            or not condition["item_field"].strip()
+        ):
+            raise ValueError(f"{source}: rule {rule_id} {path}.item_field requires contains_any")
 
     @staticmethod
     def _validate_reference_cycles(references: Dict[str, Set[str]], source: str) -> None:
@@ -335,24 +340,43 @@ class ClinicalRuleEngine:
                     if not isinstance(actual, list):
                         reason = "INVALID_TYPE"
                     else:
+                        items = actual
+                        item_reason = None
+                        if "item_field" in cond:
+                            items = []
+                            for item in actual:
+                                if not isinstance(item, dict):
+                                    items.append(None)
+                                    item_reason = "INVALID_TYPE"
+                                elif cond["item_field"] not in item:
+                                    items.append(None)
+                                    item_reason = "MISSING_VALUE"
+                                else:
+                                    items.append(item[cond["item_field"]])
                         expected_values = [expected] if op == "contains" else expected
                         comparisons = [self._safe_equal(item, candidate)
-                                       for item in actual for candidate in expected_values]
+                                       for item in items for candidate in expected_values]
                         result = True if True in comparisons else (
                             None if None in comparisons else False
                         )
+                        if result is None:
+                            reason = item_reason or "INVALID_TYPE"
                 elif op == "<_formula":
                     measure_path = "tuoi" if cond["formula"] == "70 + 2 * tuoi" else "huyet_ap_tam_thu_nen"
-                    try:
-                        measure = self._get_nested_field(data, measure_path)
-                    except KeyError:
-                        reason = "MISSING_VALUE"
-                        field_path = measure_path
-                        measure = None
-                    except ValueError:
+                    if isinstance(actual, bool) or not isinstance(actual, (int, float)):
                         reason = "INVALID_TYPE"
-                        field_path = measure_path
                         measure = None
+                    else:
+                        try:
+                            measure = self._get_nested_field(data, measure_path)
+                        except KeyError:
+                            reason = "MISSING_VALUE"
+                            field_path = measure_path
+                            measure = None
+                        except ValueError:
+                            reason = "INVALID_TYPE"
+                            field_path = measure_path
+                            measure = None
                     if reason is None:
                         reason = self._unknown_reason(measure)
                     if reason is None and (isinstance(measure, bool) or not isinstance(measure, (int, float))):

@@ -74,7 +74,7 @@
 
 | Tên trường | Ý nghĩa lâm sàng | Kiểu dữ liệu | Đơn vị | Giá trị hợp lệ | Missing / Unknown / N/A | Bắt buộc? | Ghi chú logic & UI |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **`trieu_chung_da_hien_tai`** | Triệu chứng da đợt hiện tại | object (checkbox + text) | null | Danh sách: `Phù mạch`, `Sẩn phù`, `Ban dát sẩn`, `Không có`, `Khác (ghi rõ)` | Missing: `null`<br>Unknown: `"unknown"`<br>N/A: `"N/A"` | Không | Link với BN nhập. |
+| **`trieu_chung_da_hien_tai`** | Triệu chứng da đợt hiện tại | object (checkbox + text) | null | `danh_sach_chon`: `Phù mạch`, `Phù mạch đáng kể`, `Sẩn phù`, `Ngứa nhiều`, `Ban dát sẩn`, `Không có`, `Khác (ghi rõ)` | Missing: `null`<br>Unknown: `"unknown"`<br>N/A: `"N/A"` | Không | Bác sĩ xác nhận hai dấu nặng mới nằm trong danh sách chọn của form cấp. |
 | **`tien_su_benh_nen_lien_quan_da`** | Tiền sử/bệnh nền da liên quan | object (checkbox + text) | null | Danh sách: `Mày đay mạn tính`, `Tiền sử phù mạch tái diễn`, `Rối loạn tế bào mast`, `Viêm da cơ địa`, `Không có`, `Khác (ghi rõ)` | Missing: `null`<br>Unknown: `"unknown"`<br>N/A: `"N/A"` | Không | Link với BN nhập. |
 | **`dien_bien_da`** | Diễn biến triệu chứng da | object | null | • `Lần đầu xuất hiện`<br>• `Lần thứ ...` (kèm: `Tăng nặng` / `Không đổi`) | Missing: `null`<br>Unknown: `"unknown"`<br>N/A: `"N/A"` | Không | Link với BN nhập. |
 | **`hien_tai_co_san_phu`** | Hiện tại có sẩn phù | string | null | • `Có`<br>• `Không` | Missing: `null`<br>Unknown: `"unknown"`<br>N/A: `"N/A"` | Không | BS nhập. |
