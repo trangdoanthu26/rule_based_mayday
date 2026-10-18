@@ -1,6 +1,8 @@
 import json
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from streamlit.testing.v1 import AppTest
 
@@ -11,17 +13,17 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class TestStreamlitDemo(unittest.TestCase):
-    def test_json_editor_is_separate_from_the_two_clinical_panels(self):
+    def test_json_editor_and_preview_share_the_clinical_tab(self):
         app = self.start_app()
-        self.assertEqual(app.tabs[1].label, "Chỉnh sửa dữ liệu (tùy chọn)")
-        self.assertEqual(len(app.tabs[1].text_area), 1)
-        self.assertFalse(app.tabs[0].text_area)
+        self.assertEqual([tab.label for tab in app.tabs],
+                         ["Bệnh án & kết quả", "Logic suy luận", "Bảng quy tắc & Mức ưu tiên"])
+        self.assertEqual(len(app.tabs[0].text_area), 1)
         self.assertEqual(len(app.tabs[0].columns[0].get("html")), 1)
         app.button(key="classify").click().run()
         self.assertFalse(app.exception)
         self.assertEqual(app.session_state["result"]["predicted_label"], "Phản vệ")
         self.assertTrue(any(item.value == "**Trạng thái:** ĐÃ PHÂN LOẠI"
-                            for item in app.tabs[0].columns[1].markdown))
+                            for item in app.tabs[0].markdown))
 
     def test_highlight_includes_referenced_rules_and_clears_after_edit(self):
         app = self.start_app()
@@ -193,6 +195,89 @@ class TestStreamlitDemo(unittest.TestCase):
         self.assertFalse(app.exception)
         self.assertTrue(any("CẦN RÀ SOÁT" in message.value and "kết luận" in message.value
                             for message in app.error))
+
+
+    def test_uploaded_json_uses_selected_engine_and_preserves_editor_changes(self):
+        fixture = json.loads((ROOT / "data/synthetic/rule_logic_cases.json").read_text())
+        data = next(case["du_lieu"] for case in fixture["cases"] if case["id"] == "CSU-NO-PV")
+        envelope = {"du_lieu": data, "form_type": "phan_ve",
+                    "nhan": "Sốc phản vệ", "expected_engine": {"status": "CLASSIFIED"}}
+        uploaded = SimpleNamespace(
+            name="synthetic-man.json",
+            getvalue=lambda: json.dumps(envelope).encode("utf-8"),
+        )
+        app = self.start_app()
+        app.selectbox(key="form_type").select("man").run()
+        with patch("streamlit.delta_generator.DeltaGenerator.file_uploader", return_value=uploaded):
+            app.radio(key="source_mode").set_value("Tải file mới (.json, .csv)").run()
+            self.assertFalse(app.exception)
+            self.assertEqual(json.loads(app.session_state["patient_json"]), data)
+            app.button(key="classify").click().run()
+            self.assertFalse(app.exception)
+            result = app.session_state["result"]
+            self.assertEqual(result["predicted_label"], "Mày đay CSU unknown")
+            self.assertNotIn("R-PV-THEODOI", result["rule_results"])
+            self.assertNotIn("R-SANGLOC-CAP", result["rule_results"])
+            app.text_area(key="patient_json").set_value('{"tuoi": 47}').run()
+            app.button(key="classify").click().run()
+            self.assertFalse(app.exception)
+            self.assertEqual(json.loads(app.session_state["patient_json"]), {"tuoi": 47})
+            self.assertEqual(app.session_state["result"]["status"], "INSUFFICIENT_DATA")
+            app.selectbox(key="form_type").select("phan_ve").run()
+            self.assertIsNone(app.session_state["result"])
+            app.button(key="classify").click().run()
+            self.assertEqual(app.session_state["result"]["status"], "INSUFFICIENT_DATA")
+            self.assertTrue(app.session_state["result"]["missing_fields"])
+            self.assertNotIn("R-CSU-00", app.session_state["result"]["rule_results"])
+        app.radio(key="source_mode").set_value("Ca giả định mẫu").run()
+        self.assertEqual(app.session_state["patient_json"],
+                         json.dumps(fixture["cases"][0]["du_lieu"], ensure_ascii=False, indent=2))
+        self.assertIsNone(app.session_state["result"])
+
+    def test_invalid_upload_clears_previous_result_and_patient(self):
+        app = self.start_app()
+        app.button(key="classify").click().run()
+        self.assertIsNotNone(app.session_state["result"])
+        uploaded = SimpleNamespace(name="synthetic-invalid.json", getvalue=lambda: b'{"du_lieu": []}')
+        with patch("streamlit.delta_generator.DeltaGenerator.file_uploader", return_value=uploaded):
+            app.radio(key="source_mode").set_value("Tải file mới (.json, .csv)").run()
+            self.assertFalse(app.exception)
+            self.assertIsNone(app.session_state["result"])
+            self.assertEqual(app.session_state["patient_json"], "")
+            app.button(key="classify").click().run()
+            self.assertIsNone(app.session_state["result"])
+            self.assertIn("JSON không hợp lệ", app.session_state["run_error"])
+
+    def test_csv_upload_preserves_scalar_types_and_selected_form(self):
+        self.assertEqual(demo.parse_csv_patient(b"tuoi,stella_dat,ghi_chu\n10.5,true,synthetic\n"),
+                         {"tuoi": 10.5, "stella_dat": True, "ghi_chu": "synthetic"})
+        for content in (b"tuoi\n", b"tuoi\n10,20\n"):
+            with self.subTest(content=content), self.assertRaises(ValueError):
+                demo.parse_csv_patient(content)
+        app = self.start_app()
+        uploaded = SimpleNamespace(name="synthetic-missing.csv", getvalue=lambda: b"tuoi\n30\n")
+        with patch("streamlit.delta_generator.DeltaGenerator.file_uploader", return_value=uploaded):
+            app.radio(key="source_mode").set_value("Tải file mới (.json, .csv)").run()
+            app.button(key="classify").click().run()
+            self.assertFalse(app.exception)
+            self.assertEqual(json.loads(app.session_state["patient_json"]), {"tuoi": 30})
+            result = app.session_state["result"]
+            self.assertEqual(result["status"], "INSUFFICIENT_DATA")
+            self.assertIn("huyet_ap_tam_thu_thap_nhat", result["missing_fields"])
+            self.assertNotIn("R-CSU-00", result["rule_results"])
+
+    def test_followup_and_unknown_are_not_displayed_as_exclusion(self):
+        app = self.start_app()
+        app.selectbox(key="case_id").select("PV-03").run()
+        app.button(key="classify").click().run()
+        self.assertEqual(app.session_state["result"]["status"], "THEODOIPV")
+        self.assertTrue(any(item.value == "KẾT LUẬN: THEO DÕI PHẢN VỆ" for item in app.subheader))
+        app.text_area(key="patient_json").set_value('{"tuoi": 30}').run()
+        app.button(key="classify").click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(app.session_state["result"]["status"], "INSUFFICIENT_DATA")
+        self.assertIsNone(app.session_state["result"]["rule_results"]["R-SOC"])
+        self.assertFalse(any("Loại trừ Sốc phản vệ" in item.value for item in app.markdown))
 
 
 if __name__ == "__main__":

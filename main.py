@@ -1,5 +1,7 @@
 """Streamlit demo of the existing engine, not the unimplemented RAW pipeline."""
 
+import csv
+import io
 import json
 import re
 from html import escape
@@ -41,6 +43,34 @@ STATUS_LABELS = {
     "NEEDS_REVIEW": "CẦN RÀ SOÁT",
     "UNRESOLVED": "CHƯA XÁC ĐỊNH PHÂN LOẠI",
 }
+
+
+def parse_csv_patient(file_bytes: bytes) -> Dict[str, Any]:
+    text = file_bytes.decode("utf-8")
+    reader = csv.DictReader(io.StringIO(text))
+    for row in reader:
+        parsed = {}
+        for k, v in row.items():
+            if k is None:
+                raise ValueError("Dòng CSV có nhiều cột hơn tiêu đề.")
+            if v is None:
+                continue
+            v_strip = v.strip()
+            if v_strip.isdigit():
+                parsed[k] = int(v_strip)
+            elif v_strip.lower() == "true":
+                parsed[k] = True
+            elif v_strip.lower() == "false":
+                parsed[k] = False
+            else:
+                try:
+                    parsed[k] = float(v_strip)
+                except ValueError:
+                    parsed[k] = v_strip
+        return parsed
+    raise ValueError("File CSV trống hoặc không có dòng dữ liệu.")
+
+
 LAYERS = (
     ("T1 · Sốc phản vệ", ("R-SOC",)),
     ("T2 · Phản vệ và theo dõi", ("R01-PV", "R02-PV", "R03-PV", "R-PV-THEODOI")),
@@ -196,22 +226,19 @@ def patient_html(patient: Dict[str, Any], highlights: Optional[Dict[str, str]] =
 
 
 def render() -> None:
-    st.set_page_config(page_title="Rule-based · Mề đay", page_icon="🔎", layout="wide")
-    st.title("Hệ thốngRule-based mề đay")
-    st.caption("Chọn bệnh án giả định, phân loại và đối chiếu dữ kiện với kết luận.")
+    st.set_page_config(page_title="Hệ thống Rule-based Mày đay", page_icon="🩺", layout="wide")
+    st.title("HỆ THỐNG RULE-BASED MÀY ĐAY")
     st.warning("Dữ liệu giả định · Các khác biệt CIndU/CSU và mapping RAW vẫn cần rà soát. Xem lưu ý theo ca.")
-    with st.expander("Cách đọc kết quả và check logic"):
+    with st.expander("Cách sử dụng web · Cách đọc kết quả", expanded=True):
         st.markdown(
-            "1. Chọn đầu ra và ca giả định; bấm **Phân loại và giải thích**.\n"
-            "2. Xem trạng thái, rule được chọn và rule chặn; mở **Điều kiện theo mẫu** để đối chiếu.\n"
-            "3. Sửa một biến mỗi lần, thử trước/tại/sau ngưỡng hoặc xóa một trường rồi chạy lại.\n"
-            "4. Kết quả kỳ vọng chỉ thuộc **ca gốc**; JSON đã sửa có thể có kết quả riêng. Ghi ca sai lệch (lưu **JSON đã sửa + kết quả mong đợi + kết quả thực tế**) để re-check."
+            "1. Chọn mẫu bệnh án và ca giả định hoặc tải file JSON/CSV; bấm **Phân loại và giải thích**.\n"
+            "2. Xem kết quả và trường thiếu; mở **Logic suy luận** để đối chiếu rule và trace.\n"
+            "3. Sửa một biến trong JSON mỗi lần, thử trước/tại/sau ngưỡng hoặc xóa một trường rồi chạy lại.\n"
+            "4. Kỳ vọng chỉ thuộc ca gốc; JSON đã sửa cần xác định kỳ vọng riêng."
         )
         st.table([{"Trạng thái": STATUS_LABELS[status], "Ý nghĩa": explanation}
                   for status, explanation in STATUS_HELP.items()])
         st.caption("TRUE/FALSE/UNKNOWN là trạng thái điều kiện, không phải nhãn bệnh. Ưu tiên số nhỏ hơn được xét trước.")
-        st.caption("INVALID_DATA / OUT_OF_SCOPE thuộc pipeline chưa triển khai; JSON sai hiện được demo báo lỗi nhập.")
-        st.caption("Hướng dẫn và nhật ký thay đổi: docs/05_changelog.md. Phân tích đầy đủ: docs/06_rule_logic_review.md.")
     try:
         engines = load_engines()
         fixture = json.loads((ROOT / "data/synthetic/rule_logic_cases.json").read_text(encoding="utf-8"))
@@ -229,57 +256,87 @@ def render() -> None:
     rules = {rule["rule_id"]: rule for rule in engine.rules}
     targets = [rule for rule in engine.rules if "target_label" in rule]
     labels = list(dict.fromkeys(rule["target_label"] for rule in targets))
-    if st.session_state.get("output_label") not in ["Tất cả"] + labels:
-        st.session_state["output_label"] = "Tất cả"
-    selected_label = st.sidebar.selectbox(
-        "Đầu ra cần minh họa", ["Tất cả"] + labels, key="output_label", on_change=clear_result,
-    )
-    selected_rules = {rule["rule_id"] for rule in targets if rule["target_label"] == selected_label}
-    cases = [case for case in fixture["cases"] if case["form_type"] == form_type
-             and (selected_label == "Tất cả"
-                  or case["expected_engine"].get("matched_rule_id") in selected_rules
-                  or selected_rules.intersection(case["expected_engine"].get("rule_results", {})))]
-    if not cases:
-        st.warning("Chưa có ca minh họa cho đầu ra này trong bộ dữ liệu hiện tại.")
-        return
-    by_id = {case["id"]: case for case in cases}
-    if st.session_state.get("case_id") not in by_id:
-        st.session_state["case_id"] = cases[0]["id"]
-    case_id = st.sidebar.selectbox(
-        "Bệnh án giả định", list(by_id), key="case_id", on_change=clear_result,
-        format_func=lambda identifier: f"{identifier} · {by_id[identifier]['mo_ta']}" if identifier in by_id else identifier,
-    )
-    selected_case = by_id[case_id]
-    if st.session_state.get("loaded_case") != case_id:
-        st.session_state["patient_json"] = json.dumps(selected_case["du_lieu"], ensure_ascii=False, indent=2)
-        st.session_state["loaded_case"] = case_id
-        clear_result()
     st.session_state.setdefault("result", None)
     st.session_state.setdefault("run_error", None)
-    st.sidebar.caption(f"{len(cases)} ca trong mẫu · YAML {engine.rules_version}")
-    st.sidebar.caption("Chỉ sử dụng bệnh án giả định trong demo này.")
+    st.session_state.setdefault("patient_json", "{}")
+    data_source_mode = st.sidebar.radio(
+        "Chọn nguồn bệnh án", ["Ca giả định mẫu", "Tải file mới (.json, .csv)"],
+        key="source_mode", on_change=clear_result,
+    )
+    if st.session_state.get("active_source") != data_source_mode:
+        st.session_state["loaded_case"] = None
+        st.session_state["loaded_upload"] = None
+        st.session_state["patient_json"] = "{}"
+        st.session_state["active_source"] = data_source_mode
+        clear_result()
 
-    input_tab, editor_tab, layers_tab, catalog_tab, diagrams_tab = st.tabs([
-        "Bệnh án & kết quả", "Chỉnh sửa dữ liệu (tùy chọn)", "Điều kiện theo mẫu",
-        "Danh mục kết luận", "Workflow & diagram",
+    selected_label = "Tất cả"
+    if data_source_mode == "Tải file mới (.json, .csv)":
+        uploaded_file = st.sidebar.file_uploader(
+            "Tải file hồ sơ bệnh nhân", type=["json", "csv"],
+            key="sidebar_patient_uploader", on_change=clear_result,
+        )
+        case_id = uploaded_file.name if uploaded_file else "Bệnh án mới"
+        selected_case = {"mo_ta": f"Hồ sơ mới: {case_id}", "du_lieu": {},
+                         "workflow_gap": None, "expected_engine": {}}
+        if uploaded_file is not None:
+            upload_key = (uploaded_file.name, uploaded_file.getvalue())
+            if st.session_state.get("loaded_upload") != upload_key:
+                st.session_state["loaded_upload"] = upload_key
+                st.session_state["patient_json"] = ""
+                clear_result()
+                try:
+                    if uploaded_file.name.lower().endswith(".json"):
+                        patient_data = parse_patient(uploaded_file.getvalue().decode("utf-8"))
+                    else:
+                        patient_data = parse_patient(json.dumps(
+                            parse_csv_patient(uploaded_file.getvalue()), allow_nan=False,
+                        ))
+                    st.session_state["patient_json"] = json.dumps(patient_data, ensure_ascii=False, indent=2)
+                    st.sidebar.success(f"Đã nạp file: {case_id}")
+                except (ValueError, UnicodeError, RecursionError, csv.Error) as exc:
+                    st.sidebar.error(f"Không đọc được bệnh án ({type(exc).__name__}). Kiểm tra JSON/CSV.")
+        elif st.session_state.get("loaded_upload") is not None:
+            st.session_state["loaded_upload"] = None
+            st.session_state["patient_json"] = "{}"
+            clear_result()
+    else:
+        if st.session_state.get("output_label") not in ["Tất cả"] + labels:
+            st.session_state["output_label"] = "Tất cả"
+        selected_label = st.sidebar.selectbox(
+            "Đầu ra cần minh họa", ["Tất cả"] + labels, key="output_label", on_change=clear_result,
+        )
+        selected_rules = {rule["rule_id"] for rule in targets if rule["target_label"] == selected_label}
+        cases = [case for case in fixture["cases"] if case["form_type"] == form_type
+                 and (selected_label == "Tất cả"
+                      or case["expected_engine"].get("matched_rule_id") in selected_rules
+                      or selected_rules.intersection(case["expected_engine"].get("rule_results", {})))]
+        if not cases:
+            st.warning("Chưa có ca minh họa cho tiêu chí này trong mẫu đã chọn.")
+            return
+        by_id = {case["id"]: case for case in cases}
+        if st.session_state.get("case_id") not in by_id:
+            st.session_state["case_id"] = cases[0]["id"]
+        case_id = st.sidebar.selectbox(
+            "Bệnh án giả định", list(by_id), key="case_id", on_change=clear_result,
+            format_func=lambda identifier: f"{identifier} · {by_id[identifier]['mo_ta']}" if identifier in by_id else identifier,
+        )
+        selected_case = by_id[case_id]
+        if st.session_state.get("loaded_case") != case_id:
+            st.session_state["patient_json"] = json.dumps(selected_case["du_lieu"], ensure_ascii=False, indent=2)
+            st.session_state["loaded_case"] = case_id
+            clear_result()
+        st.sidebar.caption(f"{len(cases)} ca trong mẫu · YAML {engine.rules_version}")
+    st.sidebar.caption("Chỉ engine của mẫu đã chọn được chạy. Dùng bệnh án giả định để thử.")
+
+    input_tab, layers_tab, catalog_tab = st.tabs([
+        "Bệnh án & kết quả", "Logic suy luận", "Bảng quy tắc & Mức ưu tiên",
     ])
-    with editor_tab:
-        st.subheader("Chỉnh sửa JSON bệnh án")
-        st.text_area("JSON bệnh án · có thể sửa để thử ca biên", height=380,
-                     key="patient_json", on_change=clear_result)
-        st.caption("Sửa JSON rồi nhấn Ctrl+Enter/⌘+Enter hoặc bấm ra ngoài để cập nhật. "
-                   "Quay về tab Bệnh án & kết quả và chạy phân loại lại.")
     try:
         current_patient = parse_patient(st.session_state["patient_json"])
     except (ValueError, RecursionError):
         current_patient = None
     input_changed = current_patient != selected_case["du_lieu"]
-    with editor_tab:
-        with st.expander("Kỳ vọng của ca gốc — để đối chiếu sau suy diễn"):
-            if input_changed:
-                st.warning("JSON hiện tại đã khác ca gốc: kỳ vọng bên dưới không tự cập nhật; hãy xác định kỳ vọng cho biến thể mới.")
-            st.json(selected_case["expected_engine"])
-            st.caption("Kỳ vọng mô tả hành vi hiện tại, không phải nhãn chuẩn lâm sàng; không truyền vào engine.")
 
     with input_tab:
         st.write(selected_case["mo_ta"])
@@ -302,22 +359,32 @@ def render() -> None:
                     )
         result = st.session_state["result"]
         highlights = evidence_highlights(result, rules) if result else {}
-        st.caption("Xanh: khớp điều kiện · Vàng: cần bổ sung · Đỏ: cần rà soát. "
-                   "Các dữ kiện được đánh dấu được đưa lên trước để dễ đối chiếu.")
-        left, right = st.columns([1.1, 1], gap="large")
-        with left, st.container(height=500, border=True):
-            st.subheader("Bệnh án đang kiểm tra")
-            st.caption("Bản đọc của JSON hiện tại. Trường không có trong JSON không được tự bổ sung.")
-            if current_patient is None:
-                st.warning("Không thể hiển thị bệnh án: JSON chưa hợp lệ. Mở tab “Chỉnh sửa dữ liệu” để sửa dữ liệu.")
-            else:
-                try:
-                    st.html(patient_html(current_patient, highlights))
-                except RecursionError:
-                    st.warning("Không thể hiển thị bệnh án: cấu trúc JSON lồng quá nhiều tầng.")
+        st.caption("Xanh: khớp điều kiện · Vàng: cần bổ sung · Đỏ: cần rà soát.")
+        left, right = st.columns([1.4, 1], gap="large")
+        with left:
+            st.subheader("Dữ liệu bệnh án")
+            preview, editor = st.columns(2)
+            with preview:
+                st.caption(f"Phiếu khám: {case_id}")
+                if current_patient is None:
+                    st.warning("Không thể hiển thị bệnh án: JSON chưa hợp lệ. Sửa dữ liệu ở ô JSON.")
+                else:
+                    try:
+                        st.html(patient_html(current_patient, highlights))
+                    except RecursionError:
+                        st.warning("Không thể hiển thị bệnh án: cấu trúc JSON lồng quá nhiều tầng.")
+            with editor:
+                st.text_area("Mã JSON bệnh án", height=380, key="patient_json", on_change=clear_result)
+                st.caption("Trường thiếu không được tự bổ sung. Sửa JSON rồi chạy phân loại lại.")
+            if selected_case["expected_engine"]:
+                with st.expander("Kỳ vọng của ca gốc — để đối chiếu sau suy diễn"):
+                    if input_changed:
+                        st.warning("JSON hiện tại đã khác ca gốc: kỳ vọng bên dưới không tự cập nhật.")
+                    st.json(selected_case["expected_engine"])
+                    st.caption("Kỳ vọng mô tả hành vi hiện tại, không phải nhãn chuẩn lâm sàng; không truyền vào engine.")
 
-        with right, st.container(height=500, border=True):
-            st.subheader("Kết quả hệ thống")
+        with right:
+            st.subheader("Kết quả chẩn đoán của hệ thống")
             if st.session_state["run_error"]:
                 st.error(st.session_state["run_error"])
             elif result is None:
@@ -345,6 +412,19 @@ def render() -> None:
                     st.write("**Rule chặn / xung đột:**", ", ".join(result["blocking_rule_ids"]) or "Không có")
                     st.caption(f"YAML {result['rules_version']} · SHA-256 {result['rules_sha256']}")
                     st.json(result)
+                st.markdown("#### Bảng các quy tắc được đối chiếu ca này")
+                active_rules_rows = []
+                for rule_id, rule in rules.items():
+                    value = result["rule_results"][rule_id]
+                    if value is True or rule_id in result["blocking_rule_ids"]:
+                        active_rules_rows.append({
+                            "Mã Rule": rule_id, "Nội dung": rule["name"],
+                            "Đánh giá": "UNKNOWN" if value is None else "TRUE" if value else "FALSE",
+                            "Vai trò": "Kết luận chính" if rule_id == result["matched_rule_id"] else
+                                       "Chặn / xung đột" if rule_id in result["blocking_rule_ids"] else "Khớp",
+                        })
+                if active_rules_rows:
+                    st.table(active_rules_rows)
                 st.download_button("Tải kết quả JSON", json.dumps(result, ensure_ascii=False, indent=2),
                                    file_name="rule_result.json", mime="application/json")
             if selected_case["workflow_gap"]:
@@ -355,6 +435,10 @@ def render() -> None:
                 )
 
     with layers_tab:
+        st.subheader("Logic suy luận của hệ thống")
+        if result:
+            st.write("**Trạng thái:**", STATUS_LABELS[result["status"]])
+            st.write("**Lý do:**", result["decision_trace"])
         st.subheader("Pha 1 · Đánh giá điều kiện và phụ thuộc")
         st.markdown(
             "**Mục tiêu của pha này là biết từng rule TRUE, FALSE hay UNKNOWN; chưa chọn nhãn bệnh.**\n\n"
@@ -407,7 +491,12 @@ def render() -> None:
         st.caption("INVALID_DATA và OUT_OF_SCOPE cần validator/cohort trong pipeline; demo không tự suy ra hai trạng thái này.")
 
     with catalog_tab:
-        st.subheader("Mỗi output và các rule liên quan tới output đó")
+        st.subheader("Bảng quy tắc & Mức ưu tiên")
+        st.table([{
+            "Mã Rule": rule["rule_id"], "Nội dung": rule["name"],
+            "Mức ưu tiên": str(rule.get("priority", "Điều kiện tiên quyết")),
+            "Kết luận": rule.get("target_label", ""),
+        } for rule in engine.rules])
         st.caption("Theo dõi phản vệ có trạng thái THEODOIPV; thiếu dữ kiện có trạng thái INSUFFICIENT_DATA.")
         for label in labels:
             associated = [rule for rule in targets if rule["target_label"] == label]
@@ -418,7 +507,7 @@ def render() -> None:
                     st.write(rule.get("decision_trace", ""))
                     st.json(rule["conditions"])
 
-    with diagrams_tab:
+    with layers_tab, st.expander("Workflow & diagram"):
         st.subheader("Workflow đề xuất và phạm vi đang chạy")
         st.write("Demo chạy: chọn mẫu → JSON CANONICAL → engine của mẫu → giải thích. RAW validation, preprocessing, re-check, anonymization và đánh giá batch chưa được nối.")
         diagram_name = st.selectbox("Diagram Archify", ["Luồng phân tầng", "Cây CSU", "Quy trình chuẩn"])
@@ -432,7 +521,7 @@ def render() -> None:
             st.image(path.read_text(encoding="utf-8"), width="stretch")
         else:
             st.warning("Không tìm thấy SVG. Xem docs/02_workflow.md để đối chiếu workflow.")
-        st.caption("Bản SVG Archify hiện có mô tả workflow; tab Sáu tầng hiển thị kết quả YAML thực tế của ca đang chạy.")
+        st.caption("Bản SVG Archify hiện có mô tả workflow; tab Logic suy luận hiển thị kết quả YAML thực tế của ca đang chạy.")
 
 
 if __name__ == "__main__":
