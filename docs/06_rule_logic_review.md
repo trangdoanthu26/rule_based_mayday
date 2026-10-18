@@ -2,6 +2,8 @@
 
 **Ngày:** 10/10/2026. **Nguồn kiểm tra:** YAML `1.2.1`, engine hiện tại và [workflow](02_workflow.md). Chỉ kiểm tra tính nhất quán trong repo; không xác nhận tiêu chí y khoa từ nguồn bên ngoài. Không sửa source, schema hoặc điều kiện YAML trong đợt này.
 
+**Cập nhật 18/10/2026:** Báo cáo bên dưới là ảnh chụp hành vi phiên bản 1.2.1. [Kết quả từng ca của bộ 1.3.0](../data/synthetic/routed_results_1.3.0.json) định tuyến theo `form_type`; 138 ca giả định đã được cập nhật shape và kỳ vọng theo mẫu, gồm 95 CLASSIFIED, 17 INSUFFICIENT_DATA, 13 UNRESOLVED, 8 NEEDS_REVIEW, 5 THEODOIPV. Trong số ca CLASSIFIED có 16 Sốc phản vệ, 30 Phản vệ và 1 Cấp thường; `PV-07` vào R-SOC, `CAP-THUONG-OBJECT` vào Cấp thường, `CSU-NO-PV` được đánh giá trong mẫu Mạn. Đây là kết quả trên ca giả định đã viết theo rule, không phải độ chính xác lâm sàng. Điều kiện CIndU/CSU, Stella và R-GD-03 trong YAML Mạn được giữ nguyên khi tách, nên các lệch F-06/F-08/F-10/F-11 vẫn mở.
+
 ## Dữ liệu và cách chạy
 
 - [138 bệnh án giả định](../data/synthetic/rule_logic_cases.json): các bản ghi đầy đủ, cố định, không chứa tên/định danh bệnh nhân; dữ liệu suy diễn nằm trong `du_lieu`.

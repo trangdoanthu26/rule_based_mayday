@@ -1,0 +1,194 @@
+version: "1.3.0"
+module: "phan_ve"
+description: "Phản vệ và sốc phản vệ"
+
+rules:
+  # TẦNG 1: SỐC PHẢN VỆ (Ưu tiên 1 - Cấp cứu tối khẩn)
+  # =========================================================================
+  - rule_id: "R-SOC"
+    name: "Chẩn đoán Sốc phản vệ"
+    target_label: "Sốc phản vệ"
+    priority: 1
+    conditions:
+      all_of:
+        - any_of:
+            - ref_rule: "R01-PV"
+            - ref_rule: "R02-PV"
+            - ref_rule: "R03-PV"
+        - any_of:
+            # Từ lúc sinh đến <1 tuổi: HATT < 70 mmHg
+            - all_of:
+                - field: "tuoi"
+                  operator: ">="
+                  value: 0
+                - field: "tuoi"
+                  operator: "<"
+                  value: 1
+                - field: "huyet_ap_tam_thu_thap_nhat"
+                  operator: "<"
+                  value: 70
+            # Trẻ 1 - <11 tuổi: HATT < 70 + 2*tuổi mmHg
+            - all_of:
+                - field: "tuoi"
+                  operator: ">="
+                  value: 1
+                - field: "tuoi"
+                  operator: "<"
+                  value: 11
+                - field: "huyet_ap_tam_thu_thap_nhat"
+                  operator: "<_formula"
+                  formula: "70 + 2 * tuoi"
+            # Trẻ 11 - <18 tuổi: HATT < 90 mmHg
+            - all_of:
+                - field: "tuoi"
+                  operator: ">="
+                  value: 11
+                - field: "tuoi"
+                  operator: "<"
+                  value: 18
+                - field: "huyet_ap_tam_thu_thap_nhat"
+                  operator: "<"
+                  value: 90
+            # Người lớn >= 18 tuổi: HATT < 90 mmHg hoặc giảm > 30% so với HA nền
+            - all_of:
+                - field: "tuoi"
+                  operator: ">="
+                  value: 18
+                - any_of:
+                    - field: "huyet_ap_tam_thu_thap_nhat"
+                      operator: "<"
+                      value: 90
+                    - field: "huyet_ap_tam_thu_thap_nhat"
+                      operator: "<_formula"
+                      formula: "0.7 * huyet_ap_tam_thu_nen"
+    decision_trace: "Bệnh nhân thỏa mãn tiêu chuẩn phản vệ kèm tụt huyết áp nghiêm trọng theo độ tuổi hoặc giảm > 30% huyết áp nền."
+
+  # =========================================================================
+  # TẦNG 2: PHẢN VỆ (Ưu tiên 2 - Cấp cứu đe dọa tính mạng)
+  # =========================================================================
+  - rule_id: "R01-PV"
+    name: "Phản vệ - Kịch bản 1 (Không rõ dị nguyên)"
+    target_label: "Phản vệ"
+    priority: 2
+    conditions:
+      all_of:
+        # Không rõ tác nhân dị ứng
+        - field: "yeu_to_nghi_ngo_pv_thuc_an.co_khong"
+          operator: "=="
+          value: "Không"
+        - field: "yeu_to_nghi_ngo_pv_thuoc.co_khong"
+          operator: "=="
+          value: "Không"
+        - field: "yeu_to_nghi_ngo_pv_con_trung_dot.co_khong"
+          operator: "=="
+          value: "Không"
+        - field: "yeu_to_nghi_ngo_pv_khac.co_khong"
+          operator: "=="
+          value: "Không"
+        # Biểu hiện Da / Niêm mạc
+        - field: "trieu_chung_da_hien_tai_pv.danh_sach_chon"
+          operator: "contains_any"
+          value: ["Phù mạch", "Sẩn phù", "Ban dát sẩn"]
+        # Kèm Hô hấp HOẶC Tuần hoàn
+        - any_of:
+            - field: "trieu_chung_ho_hap_hien_tai_pv.danh_sach_chon"
+              operator: "contains_any"
+              value: ["Khó thở", "Thở khò khè", "Khàn giọng", "Tiếng rít thanh quản", "Ngừng thở"]
+            - field: "trieu_chung_tuan_hoan_hien_tai_pv.danh_sach_chon"
+              operator: "contains_any"
+              value: ["Tụt huyết áp / sốc", "Tím tái", "Ngất"]
+    decision_trace: "Xuất hiện triệu chứng Da cấp tính kết hợp suy Hô hấp hoặc Tuần hoàn khi không rõ dị nguyên."
+
+  - rule_id: "R02-PV"
+    name: "Phản vệ - Kịch bản 2 (Dị nguyên nghi ngờ + >= 2/4 hệ cơ quan)"
+    target_label: "Phản vệ"
+    priority: 2
+    conditions:
+      all_of:
+        # Tiếp xúc tác nhân nguy cơ cao
+        - any_of:
+            - field: "yeu_to_nghi_ngo_pv_thuc_an.co_khong"
+              operator: "=="
+              value: "Có"
+            - field: "yeu_to_nghi_ngo_pv_thuoc.co_khong"
+              operator: "=="
+              value: "Có"
+            - field: "yeu_to_nghi_ngo_pv_con_trung_dot.co_khong"
+              operator: "=="
+              value: "Có"
+            - field: "yeu_to_nghi_ngo_pv_khac.co_khong"
+              operator: "=="
+              value: "Có"
+        # Đạt >= 2 trong 4 hệ thống cơ quan
+        - operator: "count_matching_systems_gte"
+          min_count: 2
+          systems:
+            da_niem_mac:
+              field: "trieu_chung_da_hien_tai_pv.danh_sach_chon"
+              operator: "contains_any"
+              value: ["Phù mạch", "Sẩn phù", "Ban dát sẩn"]
+            ho_hap:
+              field: "trieu_chung_ho_hap_hien_tai_pv.danh_sach_chon"
+              operator: "contains_any"
+              value: ["Khó thở", "Thở khò khè", "Khàn giọng", "Tiếng rít thanh quản", "Ngừng thở"]
+            tuan_hoan:
+              field: "trieu_chung_tuan_hoan_hien_tai_pv.danh_sach_chon"
+              operator: "contains_any"
+              value: ["Tụt huyết áp / sốc", "Ngất"]
+            tieu_hoa_nang:
+              any_of:
+                - field: "trieu_chung_tieu_hoa_hien_tai_pv.dau_bung_quan_that"
+                  operator: "=="
+                  value: true
+                - field: "trieu_chung_tieu_hoa_hien_tai_pv.non_so_lan"
+                  operator: ">="
+                  value: 2
+    decision_trace: "Tiếp xúc dị nguyên nguy cơ cao kèm tổn thương đồng thời từ 2 hệ cơ quan trở lên."
+
+  - rule_id: "R03-PV"
+    name: "Phản vệ - Kịch bản 3 (Dị nguyên đã biết + Tụt HA hoặc Hô hấp ngoài đường hít)"
+    target_label: "Phản vệ"
+    priority: 2
+    conditions:
+      all_of:
+        - any_of:
+            - field: "yeu_to_nghi_ngo_pv_thuc_an.co_khong"
+              operator: "=="
+              value: "Có"
+            - field: "yeu_to_nghi_ngo_pv_thuoc.co_khong"
+              operator: "=="
+              value: "Có"
+            - field: "yeu_to_nghi_ngo_pv_con_trung_dot.co_khong"
+              operator: "=="
+              value: "Có"
+            - field: "yeu_to_nghi_ngo_pv_khac.co_khong"
+              operator: "=="
+              value: "Có"
+        - any_of:
+            - all_of:
+                - field: "tac_nhan_hit_vao_pv"
+                  operator: "=="
+                  value: "Không"
+                - field: "trieu_chung_ho_hap_hien_tai_pv.danh_sach_chon"
+                  operator: "contains_any"
+                  value: ["Khó thở", "Thở khò khè", "Khàn giọng", "Tiếng rít thanh quản", "Ngừng thở"]
+            - field: "trieu_chung_tuan_hoan_hien_tai_pv.danh_sach_chon"
+              operator: "contains_any"
+              value: ["Tụt huyết áp / sốc", "Ngất"]
+    decision_trace: "Tiếp xúc dị nguyên đã biết kèm suy hô hấp (dị nguyên không qua đường hít) hoặc suy tuần hoàn."
+
+  - rule_id: "R-PV-THEODOI"
+    name: "Theo dõi sát phản vệ"
+    target_label: "Theo dõi phản vệ"
+    target_status: "THEODOIPV"
+    priority: 3
+    conditions:
+      not:
+        any_of:
+          - ref_rule: "R-SOC"
+          - ref_rule: "R01-PV"
+          - ref_rule: "R02-PV"
+          - ref_rule: "R03-PV"
+    decision_trace: "Đã đánh giá đủ dữ kiện và chưa đạt tiêu chí sốc hoặc phản vệ; tiếp tục theo dõi."
+
+  # =========================================================================

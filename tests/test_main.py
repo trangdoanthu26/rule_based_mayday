@@ -25,6 +25,7 @@ class TestStreamlitDemo(unittest.TestCase):
 
     def test_highlight_includes_referenced_rules_and_clears_after_edit(self):
         app = self.start_app()
+        app.selectbox(key="form_type").select("man").run()
         app.selectbox(key="case_id").select("CSU-T1-GD1").run()
         app.button(key="classify").click().run()
         html = app.get("html")[0].proto.body
@@ -87,19 +88,20 @@ class TestStreamlitDemo(unittest.TestCase):
     def start_app(self):
         return AppTest.from_file(str(ROOT / "main.py"), default_timeout=15).run()
 
-    def test_shock_and_all_six_layers_are_displayed(self):
+    def test_shock_and_only_selected_form_layers_are_displayed(self):
         app = self.start_app()
         app.selectbox(key="case_id").select("SOC-NEN-NOTNEEDED").run()
         app.button(key="classify").click().run()
         self.assertFalse(app.exception)
         self.assertEqual(app.session_state["result"]["matched_rule_id"], "R-SOC")
         self.assertEqual(app.session_state["result"]["predicted_label"], "Sốc phản vệ")
-        self.assertEqual(len(app.selectbox(key="output_label").options), 15)
+        self.assertEqual(len(app.selectbox(key="output_label").options), 4)
         self.assertTrue(any("T1" in item.label for item in app.expander))
-        self.assertTrue(any("T6" in item.label for item in app.expander))
+        self.assertFalse(any("T6" in item.label for item in app.expander))
 
     def test_csu_and_cindu_use_the_real_engine(self):
         app = self.start_app()
+        app.selectbox(key="form_type").select("man").run()
         for case_id, expected_rule in (
             ("CSU-T1-GD1", "R-CSU-T1-01"),
             ("CINDU-da_ve_noi", "R-CindU-01"),
@@ -112,17 +114,17 @@ class TestStreamlitDemo(unittest.TestCase):
                 self.assertEqual(app.session_state["result"]["matched_rule_id"], expected_rule)
         self.assertEqual(app.session_state["result"]["status"], "NEEDS_REVIEW")
 
-    def test_engine_exception_is_displayed_without_crashing_app(self):
+    def test_wrong_pressure_type_is_reported_without_crashing_app(self):
         app = self.start_app()
         app.selectbox(key="case_id").select("SOC-MISSING-80").run()
         app.button(key="classify").click().run()
         self.assertFalse(app.exception)
-        self.assertIsNone(app.session_state["result"])
-        self.assertIn("Engine không hoàn tất", app.session_state["run_error"])
-        self.assertTrue(any("Engine không hoàn tất" in message.value for message in app.error))
+        self.assertEqual(app.session_state["result"]["status"], "NEEDS_REVIEW")
+        self.assertIsNone(app.session_state["run_error"])
 
     def test_json_envelope_does_not_leak_expected_label_into_inference(self):
         app = self.start_app()
+        app.selectbox(key="form_type").select("man").run()
         fixture = json.loads((ROOT / "data/synthetic/rule_logic_cases.json").read_text())
         case = next(case for case in fixture["cases"] if case["id"] == "CSU-T1-GD1")
         app.text_area(key="patient_json").set_value(json.dumps({
@@ -147,23 +149,24 @@ class TestStreamlitDemo(unittest.TestCase):
                 self.assertIn("JSON không hợp lệ", app.session_state["run_error"])
                 self.assertTrue(any("JSON không hợp lệ" in message.value for message in app.error))
 
-    def test_acute_normal_catalog_exposes_current_limitation(self):
+    def test_acute_normal_catalog_classifies_schema_shaped_case(self):
         app = self.start_app()
+        app.selectbox(key="form_type").select("cap").run()
         app.selectbox(key="output_label").select("Mày đay cấp thông thường").run()
         app.button(key="classify").click().run()
         self.assertFalse(app.exception)
-        self.assertEqual(app.session_state["result"]["status"], "NEEDS_REVIEW")
-        self.assertTrue(any("F-01" in message.value for message in app.warning))
+        self.assertEqual(app.session_state["result"]["matched_rule_id"], "R01-CAP-THUONG")
 
-    def test_critical_issues_are_visible_before_classification(self):
+    def test_form_specific_scope_is_visible_before_classification(self):
         app = self.start_app()
         messages = "\n".join(message.value for message in app.warning)
-        self.assertIn("F-01", messages)
-        self.assertIn("F-12", messages)
+        self.assertIn("Dữ liệu giả định", messages)
+        self.assertEqual(app.selectbox(key="form_type").value, "phan_ve")
         self.assertTrue(any("Cách đọc kết quả" in item.label for item in app.expander))
 
     def test_selected_case_issue_has_an_explanation(self):
         app = self.start_app()
+        app.selectbox(key="form_type").select("man").run()
         app.selectbox(key="case_id").select("CSU-STELLA-False-39.9").run()
         messages = "\n".join(message.value for message in app.warning)
         self.assertIn("F-08", messages)
@@ -178,12 +181,13 @@ class TestStreamlitDemo(unittest.TestCase):
         app.text_area(key="patient_json").set_value(json.dumps(data)).run()
         app.button(key="classify").click().run()
         self.assertFalse(app.exception)
-        self.assertEqual(app.session_state["result"]["matched_rule_id"], "R-SOC")
-        self.assertTrue(any("HATT boolean" in message.value for message in app.error))
+        self.assertNotEqual(app.session_state["result"]["matched_rule_id"], "R-SOC")
+        self.assertEqual(app.session_state["result"]["status"], "NEEDS_REVIEW")
         self.assertTrue(any("đã khác ca gốc" in message.value for message in app.warning))
 
     def test_status_explanation_and_conflict_warning_are_visible(self):
         app = self.start_app()
+        app.selectbox(key="form_type").select("man").run()
         app.selectbox(key="case_id").select("CINDU-TIE").run()
         app.button(key="classify").click().run()
         self.assertFalse(app.exception)

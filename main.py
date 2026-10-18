@@ -8,33 +8,35 @@ from typing import Any, Dict, Optional
 
 import streamlit as st
 
-from src.classify import ClinicalRuleEngine
+from src.pipeline import classify_form, load_engines
 
 
 ROOT = Path(__file__).resolve().parent
 ISSUE_HELP = {
-    "F-01": "Cấp thông thường chưa khả đạt: cùng biến triệu chứng đang được yêu cầu vừa là object vừa là chuỗi.",
-    "F-02": "Tuổi dưới một tháng, 10,5 và 17,5 chưa được các khoảng sốc hiện tại bao phủ; không tự làm tròn tuổi.",
+    "F-01": "Dữ liệu cấp dạng chuỗi cũ cần đổi sang danh sách triệu chứng đúng schema.",
+    "F-02": "Các khoảng tuổi sốc đã liên tục từ lúc sinh; không tự làm tròn tuổi.",
     "F-03": "Đúng 6 tuần: cấp dùng <=1008 giờ, mạn dùng >6 tuần; ranh giới và nguồn thời gian cần chốt.",
     "F-04": "R03 dùng tác nhân nghi ngờ thay tiêu chí dị nguyên đã biết; các rule phản vệ chưa kiểm tra thời điểm.",
-    "F-05": "Sốc chỉ tham chiếu R02/R03; ca chỉ đạt R01 dù HATT thấp vẫn không vào rule sốc hiện tại.",
+    "F-05": "Sốc tham chiếu R01/R02/R03 sau thay đổi của issue #7.",
     "F-06": "CIndU khác chưa loại Ice cube dương; Adrenergic chưa có nhánh; nhiều test dương cần chính sách phân thể.",
     "F-07": "Chưa có validator enum/range: giá trị test sai có thể được coi là không dương; HATT âm vẫn có thể thỏa rule.",
     "F-08": "Stella FALSE/UNKNOWN vẫn có thể vào CSU GĐ2 vì IgE <40; YAML khác workflow, chưa có nhánh loại cohort.",
-    "F-09": "Thiếu sàng lọc phản vệ chung có thể chặn CSU dù xét nghiệm đầy đủ; không tự điền Không vào trường thiếu.",
+    "F-09": "Định tuyến theo mẫu mạn giữ rule phản vệ ngoài phạm vi CSU.",
     "F-10": "CIndU được chọn trước CSU khi cùng khớp; điều kiện cohort và biểu diễn đồng mắc chưa chốt.",
     "F-11": "ASST null có thể kích hoạt fallback ngoài CSU; rule UNKNOWN ưu tiên cao vẫn có thể chặn fallback.",
-    "F-12": "Công thức HATT thiếu kiểm tra kiểu: chuỗi/list/object có thể crash; boolean có thể bị kết luận sốc sai.",
+    "F-12": "Dữ liệu HATT sai kiểu cần rà soát, không dùng để kết luận sốc.",
     "F-13": "Lý do UNKNOWN có thể bị lẫn với lỗi kiểu từ nhánh OR đã đủ bằng chứng, làm sai lý do cần rà soát.",
 }
 STATUS_HELP = {
     "CLASSIFIED": "Hệ thống đã xác định nhóm phân loại từ dữ liệu đã nhập.",
+    "THEODOIPV": "Đủ dữ kiện đánh giá nhưng chưa đạt tiêu chí sốc hoặc phản vệ; tiếp tục theo dõi.",
     "INSUFFICIENT_DATA": "Thiếu dữ kiện hoặc chưa đủ thời gian; xem rule chặn và trường cần bổ sung.",
     "NEEDS_REVIEW": "Chưa có kết luận bệnh: có xung đột hoặc dữ liệu cần rà soát; xem điều kiện và trace của các rule chặn.",
     "UNRESOLVED": "Không có rule đích phù hợp sau đánh giá hiện tại.",
 }
 STATUS_LABELS = {
     "CLASSIFIED": "ĐÃ PHÂN LOẠI",
+    "THEODOIPV": "THEO DÕI PHẢN VỆ",
     "INSUFFICIENT_DATA": "CHƯA ĐỦ DỮ KIỆN",
     "NEEDS_REVIEW": "CẦN RÀ SOÁT",
     "UNRESOLVED": "CHƯA XÁC ĐỊNH PHÂN LOẠI",
@@ -42,7 +44,8 @@ STATUS_LABELS = {
 LAYERS = (
     ("T1 · Sốc phản vệ", ("R-SOC",)),
     ("T2 · Phản vệ và theo dõi", ("R01-PV", "R02-PV", "R03-PV", "R-PV-THEODOI")),
-    ("T3 · Mày đay cấp", ("R-SANGLOC-CAP", "R01-CAP-NANG", "R01-CAP-THUONG")),
+    ("T3 · Mày đay cấp", ("R-SANGLOC-CAP", "R01-CAP-NANG-NGUA", "R02-CAP-NANG-PHUMACH",
+                           "R03-CAP-NANG-CONLAI", "R01-CAP-THUONG")),
     ("T4 · Mày đay cảm ứng mạn tính — CIndU", (
         "R-CindU-00", "R-CindU-01", "R-CindU-02", "R-CindU-03", "R-CindU-04",
     )),
@@ -70,7 +73,7 @@ def parse_patient(text: str) -> Dict[str, Any]:
     patient = data.get("du_lieu", data)
     if not isinstance(patient, dict):
         raise ValueError("du_lieu phải là một JSON object.")
-    metadata = {"nhan", "expected_engine", "workflow_gap", "id", "mo_ta"}
+    metadata = {"nhan", "expected_engine", "workflow_gap", "id", "mo_ta", "form_type"}
     return {key: value for key, value in patient.items() if key not in metadata}
 
 
@@ -196,11 +199,11 @@ def render() -> None:
     st.set_page_config(page_title="Rule-based · Mề đay", page_icon="🔎", layout="wide")
     st.title("Hệ thốngRule-based mề đay")
     st.caption("Chọn bệnh án giả định, phân loại và đối chiếu dữ kiện với kết luận.")
-    st.warning("Dữ liệu giả định · Còn lỗi F-01 (cấp thường), F-12 (huyết áp). Xem lưu ý theo ca.")
+    st.warning("Dữ liệu giả định · Các khác biệt CIndU/CSU và mapping RAW vẫn cần rà soát. Xem lưu ý theo ca.")
     with st.expander("Cách đọc kết quả và check logic"):
         st.markdown(
             "1. Chọn đầu ra và ca giả định; bấm **Phân loại và giải thích**.\n"
-            "2. Xem trạng thái, rule được chọn và rule chặn; mở **6 tầng phân loại** để đối chiếu điều kiện.\n"
+            "2. Xem trạng thái, rule được chọn và rule chặn; mở **Điều kiện theo mẫu** để đối chiếu.\n"
             "3. Sửa một biến mỗi lần, thử trước/tại/sau ngưỡng hoặc xóa một trường rồi chạy lại.\n"
             "4. Kết quả kỳ vọng chỉ thuộc **ca gốc**; JSON đã sửa có thể có kết quả riêng. Ghi ca sai lệch (lưu **JSON đã sửa + kết quả mong đợi + kết quả thực tế**) để re-check."
         )
@@ -210,23 +213,32 @@ def render() -> None:
         st.caption("INVALID_DATA / OUT_OF_SCOPE thuộc pipeline chưa triển khai; JSON sai hiện được demo báo lỗi nhập.")
         st.caption("Hướng dẫn và nhật ký thay đổi: docs/05_changelog.md. Phân tích đầy đủ: docs/06_rule_logic_review.md.")
     try:
-        engine = ClinicalRuleEngine(str(ROOT / "rules/classification_rules.yaml"))
+        engines = load_engines()
         fixture = json.loads((ROOT / "data/synthetic/rule_logic_cases.json").read_text(encoding="utf-8"))
     except (ValueError, OSError) as exc:
         st.error(f"Không nạp được cấu hình demo ({type(exc).__name__}). Kiểm tra YAML và bộ ca giả định.")
         return
 
+    st.sidebar.header("Chọn nội dung minh họa")
+    form_type = st.sidebar.selectbox(
+        "Mẫu bệnh án", ["phan_ve", "cap", "man"],
+        format_func=lambda value: {"phan_ve": "Phản vệ", "cap": "Mày đay cấp", "man": "Mày đay mạn"}[value],
+        key="form_type", on_change=clear_result,
+    )
+    engine = engines[form_type]
     rules = {rule["rule_id"]: rule for rule in engine.rules}
     targets = [rule for rule in engine.rules if "target_label" in rule]
     labels = list(dict.fromkeys(rule["target_label"] for rule in targets))
-    st.sidebar.header("Chọn nội dung minh họa")
+    if st.session_state.get("output_label") not in ["Tất cả"] + labels:
+        st.session_state["output_label"] = "Tất cả"
     selected_label = st.sidebar.selectbox(
         "Đầu ra cần minh họa", ["Tất cả"] + labels, key="output_label", on_change=clear_result,
     )
     selected_rules = {rule["rule_id"] for rule in targets if rule["target_label"] == selected_label}
-    cases = [case for case in fixture["cases"] if selected_label == "Tất cả"
-             or case["expected_engine"].get("matched_rule_id") in selected_rules
-             or selected_rules.intersection(case["expected_engine"].get("rule_results", {}))]
+    cases = [case for case in fixture["cases"] if case["form_type"] == form_type
+             and (selected_label == "Tất cả"
+                  or case["expected_engine"].get("matched_rule_id") in selected_rules
+                  or selected_rules.intersection(case["expected_engine"].get("rule_results", {})))]
     if not cases:
         st.warning("Chưa có ca minh họa cho đầu ra này trong bộ dữ liệu hiện tại.")
         return
@@ -235,7 +247,7 @@ def render() -> None:
         st.session_state["case_id"] = cases[0]["id"]
     case_id = st.sidebar.selectbox(
         "Bệnh án giả định", list(by_id), key="case_id", on_change=clear_result,
-        format_func=lambda identifier: f"{identifier} · {by_id[identifier]['mo_ta']}",
+        format_func=lambda identifier: f"{identifier} · {by_id[identifier]['mo_ta']}" if identifier in by_id else identifier,
     )
     selected_case = by_id[case_id]
     if st.session_state.get("loaded_case") != case_id:
@@ -244,12 +256,12 @@ def render() -> None:
         clear_result()
     st.session_state.setdefault("result", None)
     st.session_state.setdefault("run_error", None)
-    st.sidebar.caption(f"{len(fixture['cases'])} ca · YAML {engine.rules_version}")
+    st.sidebar.caption(f"{len(cases)} ca trong mẫu · YAML {engine.rules_version}")
     st.sidebar.caption("Chỉ sử dụng bệnh án giả định trong demo này.")
 
     input_tab, editor_tab, layers_tab, catalog_tab, diagrams_tab = st.tabs([
-        "Bệnh án & kết quả", "Chỉnh sửa dữ liệu (tùy chọn)", "6 tầng phân loại",
-        "14 mặt bệnh & điều kiện", "Workflow & diagram",
+        "Bệnh án & kết quả", "Chỉnh sửa dữ liệu (tùy chọn)", "Điều kiện theo mẫu",
+        "Danh mục kết luận", "Workflow & diagram",
     ])
     with editor_tab:
         st.subheader("Chỉnh sửa JSON bệnh án")
@@ -282,12 +294,11 @@ def render() -> None:
                 )
             else:
                 try:
-                    st.session_state["result"] = engine.classify_patient(patient)
+                    st.session_state["result"] = classify_form(form_type, patient, engines)
                 except (TypeError, ValueError, OverflowError, RecursionError) as exc:
-                    # F-12 remains in the engine; the demo must show the failure, not invent a label.
                     st.session_state["run_error"] = (
                         f"Engine không hoàn tất ({type(exc).__name__}). Kiểm tra kiểu dữ liệu; "
-                        "lỗi công thức HATT F-12 đã được ghi nhận. Không có kết luận bệnh."
+                        "không có kết luận bệnh."
                     )
         result = st.session_state["result"]
         highlights = evidence_highlights(result, rules) if result else {}
@@ -312,16 +323,15 @@ def render() -> None:
             elif result is None:
                 st.info("Bấm Phân loại và giải thích để xem kết quả cho JSON hiện tại.")
             else:
-                st.subheader("KẾT LUẬN: " + (result["predicted_label"] or "Chưa kết luận bệnh").upper())
+                title = "Theo dõi phản vệ" if result["status"] == "THEODOIPV" else (result["predicted_label"] or "Chưa kết luận bệnh")
+                st.subheader("KẾT LUẬN: " + title.upper())
                 st.markdown(f"**Trạng thái:** {STATUS_LABELS[result['status']]}")
                 st.caption(f"Mức ưu tiên: {result['priority']}")
                 explanation = f"**{STATUS_LABELS[result['status']]}** — {STATUS_HELP[result['status']]}"
                 if result["status"] == "NEEDS_REVIEW":
                     st.error(explanation)
-                elif result["status"] in {"INSUFFICIENT_DATA", "UNRESOLVED"}:
+                elif result["status"] in {"INSUFFICIENT_DATA", "UNRESOLVED", "THEODOIPV"}:
                     st.warning(explanation)
-                if current_patient and isinstance(current_patient.get("huyet_ap_tam_thu_thap_nhat"), bool):
-                    st.error("**F-12 · HATT boolean: nhãn bên dưới không đáng tin cậy.** Engine có thể coi true/false là số khi tính công thức; cần sửa kiểu dữ liệu và chạy lại.")
                 if not result["missing_fields"]:
                     st.write(result["decision_trace"])
                 if result["missing_fields"]:
@@ -348,12 +358,12 @@ def render() -> None:
         st.subheader("Pha 1 · Đánh giá điều kiện và phụ thuộc")
         st.markdown(
             "**Mục tiêu của pha này là biết từng rule TRUE, FALSE hay UNKNOWN; chưa chọn nhãn bệnh.**\n\n"
-            "Ví dụ `R-SOC` (sốc phản vệ) cần kết quả `R02-PV` hoặc `R03-PV` (phản vệ):\n\n"
+            "Ví dụ trong mẫu phản vệ, `R-SOC` cần kết quả `R01-PV`, `R02-PV` hoặc `R03-PV`:\n\n"
             "1. Khi gặp một rule được tham chiếu nhưng chưa tính, engine tính rule đó trước.\n"
             "2. Kết quả được lưu vào **cache — bảng nhớ tạm**, chẳng hạn `R02-PV = TRUE`.\n"
             "3. `R-SOC` lấy kết quả đã lưu, kết hợp điều kiện huyết áp để đánh giá sốc. "
             "Rule khác cần `R02-PV` cũng dùng lại kết quả, không tính lại trong lần chạy đó.\n"
-            "4. Engine tiếp tục tính các rule còn lại: phản vệ, cấp, CIndU, CSU và theo dõi; "
+            "4. Engine tiếp tục tính các rule còn lại trong mẫu đã chọn; "
             "không dừng ngay khi một rule khớp."
         )
         st.info(
@@ -369,6 +379,9 @@ def render() -> None:
         )
         st.caption("TRUE = đủ bằng chứng đúng · FALSE = đủ bằng chứng sai · UNKNOWN = chưa đánh giá được. Không coi UNKNOWN là FALSE.")
         for title, identifiers in LAYERS:
+            identifiers = [identifier for identifier in identifiers if identifier in rules]
+            if not identifiers:
+                continue
             with st.expander(title, expanded=True):
                 for identifier in identifiers:
                     rule = rules[identifier]
@@ -395,7 +408,7 @@ def render() -> None:
 
     with catalog_tab:
         st.subheader("Mỗi output và các rule liên quan tới output đó")
-        st.caption("Hai nhãn theo dõi có target_status INSUFFICIENT_DATA; predicted_label của kết quả không phải nhãn bệnh.")
+        st.caption("Theo dõi phản vệ có trạng thái THEODOIPV; thiếu dữ kiện có trạng thái INSUFFICIENT_DATA.")
         for label in labels:
             associated = [rule for rule in targets if rule["target_label"] == label]
             with st.expander(label, expanded=label == selected_label):
@@ -404,12 +417,10 @@ def render() -> None:
                              f"{STATUS_LABELS[rule.get('target_status', 'CLASSIFIED')]}")
                     st.write(rule.get("decision_trace", ""))
                     st.json(rule["conditions"])
-                if label == "Mày đay cấp thông thường":
-                    st.warning("F-01: chưa có ca JSON thỏa rule cấp thường; danh mục này mô tả rule đang có, không xác nhận nhánh đã hoạt động.")
 
     with diagrams_tab:
         st.subheader("Workflow đề xuất và phạm vi đang chạy")
-        st.write("Demo chạy: JSON CANONICAL → engine → giải thích. RAW validation, preprocessing, re-check, anonymization và đánh giá batch chưa được nối.")
+        st.write("Demo chạy: chọn mẫu → JSON CANONICAL → engine của mẫu → giải thích. RAW validation, preprocessing, re-check, anonymization và đánh giá batch chưa được nối.")
         diagram_name = st.selectbox("Diagram Archify", ["Luồng phân tầng", "Cây CSU", "Quy trình chuẩn"])
         diagram_files = {
             "Luồng phân tầng": "rule-based-phan-tang.svg",

@@ -36,6 +36,24 @@
       "items": { "type": "string" }
     },
     "tiep_tuc_theo_doi_chua_du_du_kien": { "type": ["boolean", "null"] },
+    "tac_nhan_hit_vao_pv": {
+      "type": ["string", "null"],
+      "enum": ["Có", "Không", "unknown", "N/A", null]
+    },
+    "yeu_to_nghi_ngo_pv_thuc_an": { "$ref": "#/definitions/yeu_to_nghi_ngo" },
+    "yeu_to_nghi_ngo_pv_thuoc": { "$ref": "#/definitions/yeu_to_nghi_ngo" },
+    "yeu_to_nghi_ngo_pv_con_trung_dot": { "$ref": "#/definitions/yeu_to_nghi_ngo" },
+    "yeu_to_nghi_ngo_pv_khac": { "$ref": "#/definitions/yeu_to_nghi_ngo" },
+    "trieu_chung_da_hien_tai_pv": { "$ref": "#/definitions/trieu_chung_pv" },
+    "trieu_chung_ho_hap_hien_tai_pv": { "$ref": "#/definitions/trieu_chung_pv" },
+    "trieu_chung_tuan_hoan_hien_tai_pv": { "$ref": "#/definitions/trieu_chung_pv" },
+    "trieu_chung_tieu_hoa_hien_tai_pv": {
+      "type": ["object", "null"],
+      "properties": {
+        "dau_bung_quan_that": { "type": ["boolean", "null"] },
+        "non_so_lan": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
     "thoi_gian_khoi_phat_pv": { "type": ["number", "null"] },
     "hien_tai_co_san_phu_pv": {
       "type": ["string", "null"],
@@ -107,5 +125,21 @@
     "theo_doi_phan_ve_dieu_tri": { "type": ["array", "null"] },
     "ket_qua_cuoi_ngay_pv": { "type": ["object", "null"] },
     "ket_qua_cuoi_dot_pv": { "type": ["object", "null"] }
+  },
+  "definitions": {
+    "yeu_to_nghi_ngo": {
+      "type": ["object", "null"],
+      "properties": {
+        "co_khong": { "type": ["string", "null"], "enum": ["Có", "Không", "unknown", "N/A", null] },
+        "ghi_ro": { "type": ["string", "null"] }
+      }
+    },
+    "trieu_chung_pv": {
+      "type": ["object", "null"],
+      "properties": {
+        "danh_sach_chon": { "type": "array", "items": { "type": "string" } },
+        "khac_ghi_ro": { "type": ["string", "null"] }
+      }
+    }
   }
 }

@@ -1,0 +1,105 @@
+version: "1.3.0"
+module: "cap"
+description: "Mày đay cấp"
+
+rules:
+  - rule_id: "R-SANGLOC-CAP"
+    name: "Điều kiện tiên quyết Mày đay cấp"
+    is_base_condition: true
+    conditions:
+      all_of:
+        - field: "hien_tai_co_san_phu"
+          operator: "=="
+          value: "Có"
+        - field: "dac_diem_san_phu_cap"
+          operator: "contains_any"
+          item_field: "dang_ton_thuong"
+          value: ["Hình vòng (bờ rõ)", "Hình tròn (bờ rõ)", "Hình bản đồ (bờ rõ)"]
+        - field: "anh_san_phu"
+          operator: "=="
+          value: "Có"
+        - field: "thoi_gian_khoi_phat_gio"
+          operator: "<="
+          value: 1008
+
+  - rule_id: "R01-CAP-NANG-NGUA"
+    name: "Mày đay cấp có ngứa nhiều"
+    target_label: "Mày đay cấp có dấu hiệu nặng"
+    priority: 4
+    conditions:
+      all_of:
+        - ref_rule: "R-SANGLOC-CAP"
+        - field: "trieu_chung_da_hien_tai.danh_sach_chon"
+          operator: "contains"
+          value: "Ngứa nhiều"
+    decision_trace: "Mày đay cấp kèm ngứa nhiều."
+
+  - rule_id: "R02-CAP-NANG-PHUMACH"
+    name: "Mày đay cấp có phù mạch đáng kể"
+    target_label: "Mày đay cấp có dấu hiệu nặng"
+    priority: 4
+    conditions:
+      all_of:
+        - ref_rule: "R-SANGLOC-CAP"
+        - any_of:
+            - field: "trieu_chung_da_hien_tai.danh_sach_chon"
+              operator: "contains"
+              value: "Phù mạch đáng kể"
+            - field: "so_lan_phu_mach_nang_can_vien"
+              operator: ">="
+              value: 1
+            - field: "vi_tri_phu_mach.danh_sach_chon"
+              operator: "contains_any"
+              value: ["Mi mắt", "Lưỡi", "Thanh quản", "Môi"]
+            - field: "dau_hieu_nang_chi_tiet"
+              operator: "contains"
+              value: "Phù mạch đáng kể"
+    decision_trace: "Mày đay cấp kèm dấu phù mạch đáng kể, ở vị trí nguy hiểm hoặc cần vào viện."
+
+  - rule_id: "R03-CAP-NANG-CONLAI"
+    name: "Mày đay cấp có dấu hiệu nặng khác"
+    target_label: "Mày đay cấp có dấu hiệu nặng"
+    priority: 4
+    conditions:
+      all_of:
+        - ref_rule: "R-SANGLOC-CAP"
+        - field: "trieu_chung_da_hien_tai.danh_sach_chon"
+          operator: "contains"
+          value: "Sẩn phù"
+        - any_of:
+            - field: "muc_do_lan_rong_va_phan_bo_ton_thuong.muc_do_lan_rong"
+              operator: "=="
+              value: ">50% BSA"
+            - field: "so_luong_san_phu"
+              operator: "=="
+              value: ">50 nốt"
+            - field: "trieu_chung_tieu_hoa_hien_tai.non"
+              operator: "=="
+              value: true
+            - field: "trieu_chung_tieu_hoa_hien_tai.dau_bung_quan_that"
+              operator: "=="
+              value: true
+            - field: "trieu_chung_tieu_hoa_hien_tai.buon_non_tieu_chay"
+              operator: "=="
+              value: true
+            - field: "trieu_chung_ho_hap_hien_tai.danh_sach_chon"
+              operator: "contains_any"
+              value: ["Thở khò khè", "Nghẹn họng"]
+    decision_trace: "Mày đay cấp có sẩn phù và dấu hiệu tiêu hóa, hô hấp hoặc lan rộng."
+
+  - rule_id: "R01-CAP-THUONG"
+    name: "Mày đay cấp thông thường"
+    target_label: "Mày đay cấp thông thường"
+    priority: 5
+    conditions:
+      all_of:
+        - ref_rule: "R-SANGLOC-CAP"
+        - field: "trieu_chung_da_hien_tai.danh_sach_chon"
+          operator: "contains"
+          value: "Sẩn phù"
+        - not:
+            any_of:
+              - ref_rule: "R01-CAP-NANG-NGUA"
+              - ref_rule: "R02-CAP-NANG-PHUMACH"
+              - ref_rule: "R03-CAP-NANG-CONLAI"
+    decision_trace: "Sẩn phù cấp tính không có dấu hiệu nặng sau khi đánh giá đủ dữ kiện."

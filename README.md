@@ -128,17 +128,17 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s tests -v
 ```
 
 ```python
-from src.classify import ClinicalRuleEngine
+from src.pipeline import classify_form, load_engines
 
-engine = ClinicalRuleEngine("rules/classification_rules.yaml")
-result = engine.classify_patient(canonical_patient_data)
+engines = load_engines()
+result = classify_form("phan_ve", canonical_patient_data, engines)
 ```
 
 Kết quả giữ sáu trường public hiện có và bổ sung kết quả từng luật, luật khớp/chặn, trường thiếu, trace không chứa giá trị bệnh án, version và SHA-256 của YAML. Lõi trả `CLASSIFIED`, `INSUFFICIENT_DATA`, `NEEDS_REVIEW` hoặc `UNRESOLVED`; các gate pipeline còn mở được ghi ở `docs/03_implementation_readiness.md`.
 
 ## 7. Demo Streamlit
 
-Demo ở `main.py` dùng 138 ca giả định và engine hiện tại, trình bày hai pha tính phụ thuộc/chọn kết luận cùng sáu tầng trong workflow. Danh mục có **14 đầu ra: 12 nhãn bệnh và 2 nhãn theo dõi**, không phải 14 bệnh. Có thể chọn ca, sửa JSON, xem rule/điều kiện/trace và đối chiếu ba diagram Archify.
+Demo ở `main.py` dùng 138 ca giả định, chọn rõ một trong ba mẫu Phản vệ, Cấp, Mạn rồi chạy đúng bộ YAML của mẫu đó. Có thể chọn ca, sửa JSON, xem rule/điều kiện/trace và đối chiếu ba diagram. `THEODOIPV` là cảnh báo theo dõi khi đã đủ dữ kiện loại trừ tiêu chí; `INSUFFICIENT_DATA` giữ danh sách trường thiếu.
 
 ```sh
 source .venv/bin/activate
@@ -151,7 +151,7 @@ Mở địa chỉ localhost mà Streamlit in ra. [Streamlit 1.50.0](https://pypi
 
 Input demo là object CANONICAL hoặc envelope `{"du_lieu": {...}}`; metadata/nhãn thật không được truyền vào suy diễn. Demo không tự mapping RAW hoặc điền trường thiếu. Đổi input sẽ xóa kết quả cũ, cần bấm phân loại lại. Các bước validator/preprocessing/batch chưa triển khai được ghi rõ; diagram thể hiện workflow đề xuất, còn kết quả từng rule lấy trực tiếp từ engine.
 
-Nhánh cấp thường chưa khả đạt (F-01), lỗi công thức HATT (F-12) và các lệch còn mở được hiển thị khi review ca giả định. Demo bắt lỗi thực thi để tiếp tục sử dụng giao diện, không sửa kết quả bệnh hoặc giả lập một pipeline đã hoàn thiện. Xem [báo cáo logic](docs/06_rule_logic_review.md) trước khi diễn giải đầu ra.
+Nhánh cấp thường đã có ca khớp với shape schema; HATT sai kiểu được giữ ở trạng thái cần rà soát. Các lệch CIndU/CSU và mapping RAW còn mở được ghi tại [báo cáo logic](docs/06_rule_logic_review.md). Demo vẫn chưa nối pipeline RAW.
 
-Kiểm tra sau khi cài dependency trong `.venv`: 43 test methods, 41 đạt và 2 `expectedFailure` cho lỗi engine F-12 còn mở. Mười test giao diện dùng `streamlit.testing.v1.AppTest`, không cần thêm pytest. Thư mục `tests/` được bỏ khỏi `.gitignore` để các test đi cùng source khi commit. Ý nghĩa hiển thị, ca thực hành và ngày/tác giả sửa đổi được ghi trong [changelog và hướng dẫn demo](docs/05_changelog.md).
+Bộ `unittest` dùng môi trường ảo hiện có; test giao diện dùng `streamlit.testing.v1.AppTest`. Ý nghĩa hiển thị, ca thực hành và lịch sử sửa đổi được ghi trong [changelog và hướng dẫn demo](docs/05_changelog.md).
 

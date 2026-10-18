@@ -2,6 +2,8 @@
 
 **Trạng thái:** đặc tả quy trình đề xuất, ngày 09/10/2026; chưa phải pipeline đã triển khai. Tài liệu chuẩn hóa bản tóm tắt của người dùng và các phát hiện trong [explore_codebase.md](explore_codebase.md), đối chiếu [đặc tả luật](01_rules.md), `schema/`, từ điển dữ liệu và source tại commit `34a1ad1`.
 
+**Cập nhật 18/10/2026:** Lõi đã tách thành ba YAML và ba instance của cùng `ClinicalRuleEngine`; demo định tuyến bằng loại mẫu được chọn rõ ràng. Mẫu Phản vệ dùng `THEODOIPV` khi các rule sốc/phản vệ đều FALSE, giữ `INSUFFICIENT_DATA` với `missing_fields` nếu còn UNKNOWN. Quyết định chuyên môn mới: HATT `<70` từ lúc sinh đến `<1` tuổi; dấu `Ngứa nhiều`/`Phù mạch đáng kể` trong `trieu_chung_da_hien_tai.danh_sach_chon`; nhánh `R03-CAP-NANG-CONLAI` còn bắt buộc danh sách này có `Sẩn phù`. Các đoạn mô tả engine toàn cục và số liệu 10/10 bên dưới là lịch sử của phiên bản 1.2.1.
+
 Mục tiêu là dữ liệu có hợp đồng rõ ràng, suy diễn đúng phụ thuộc và thứ tự ưu tiên, kết quả tái lập được. AI hỗ trợ đọc tài liệu, đề xuất và kiểm tra; người phụ trách dữ liệu/chuyên môn chốt ý nghĩa biến, mapping và tiêu chí nghiệp vụ. Khi chạy một bộ luật đã chốt, không cần AI tự diễn giải lại từng bệnh án.
 
 ## 1. Hai phần công việc phải tách biệt

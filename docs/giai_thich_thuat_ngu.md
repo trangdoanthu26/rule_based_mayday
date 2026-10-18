@@ -1,5 +1,7 @@
 # Giải thích thuật ngữ và phân nhóm bệnh án synthetic
 
+**Cập nhật 18/10/2026:** Phần giải thích và thống kê phiên bản 1.2.1 bên dưới là ảnh chụp lịch sử ngày 10/10. Demo hiện chọn rõ mẫu Phản vệ, Cấp hoặc Mạn, dùng ba YAML phiên bản 1.3.0. Xem [đặc tả hiện hành](01_rules.md) và [báo cáo cập nhật](06_rule_logic_review.md) trước khi diễn giải kết quả mới.
+
 ## Specs và chuẩn bị môi trường trước khi chạy
 
 **Bổ sung hướng dẫn:** 10/10/2026, 09:18:36 (UTC+07:00). **Người sửa đổi:** Đồng Minh Dương.
@@ -11,7 +13,7 @@
 | Thư viện | `PyYAML==6.0.3`, `streamlit==1.50.0` trong [requirements.txt](../requirements.txt); pip tự cài phụ thuộc của chúng. |
 | Thư mục chạy | Root `rule_based_mayday/`, nơi có `main.py`, `requirements.txt`, `src/`, `rules/`, `data/`, `docs/` và `tests/`. Mở terminal tại đây trước khi chạy lệnh. |
 | Môi trường ảo | `.venv` riêng cho mỗi máy/OS; không copy `.venv` của người khác hoặc commit nó lên Git. |
-| Dữ liệu/cấu hình | Giữ `rules/classification_rules.yaml`, `data/synthetic/rule_logic_cases.json` và `docs/diagrams/` cùng source. Không cần bệnh án thật. |
+| Dữ liệu/cấu hình | Giữ ba file `rules/phan_ve_rules.yaml`, `rules/cap_rules.yaml`, `rules/man_rules.yaml`, `data/synthetic/rule_logic_cases.json` và `docs/diagrams/` cùng source. Không cần bệnh án thật. |
 | Kết nối | Cần truy cập PyPI khi cài dependency. Demo chạy local, không cần API key hoặc dịch vụ AI để suy diễn. |
 | Trình duyệt | Chrome/Edge/Firefox để mở `http://127.0.0.1:8501`; không cần extension ChatGPT hoặc cài Graphviz cho demo này. |
 
@@ -86,7 +88,7 @@ Các lệnh tạo/kích hoạt và cách gọi trực tiếp Python trong môi t
 
 **Ngày ghi nhận:** 10/10/2026, 06:47:31 (UTC+07:00). **Người ghi:** Đồng Minh Dương.
 
-**Nguồn:** [main.py](../main.py), [bộ luật](../rules/classification_rules.yaml) và dữ liệu trong `data/synthetic/`. Số liệu dưới đây được chạy lại trực tiếp bằng `ClinicalRuleEngine` trong `.venv`, chỉ truyền `du_lieu`, không dùng nhãn/kỳ vọng làm dữ kiện. YAML phiên bản **1.2.1**; SHA-256: `aff477a8d5e698ed8c03559272c67a9f1e747fe77f693148e469257624dd9ff6`.
+**Nguồn lịch sử:** [main.py](../main.py), bộ luật 1.2.1 trước khi tách và dữ liệu trong `data/synthetic/`. Số liệu dưới đây được chạy lại trực tiếp bằng `ClinicalRuleEngine` trong `.venv`, chỉ truyền `du_lieu`, không dùng nhãn/kỳ vọng làm dữ kiện. SHA-256 của YAML lịch sử: `aff477a8d5e698ed8c03559272c67a9f1e747fe77f693148e469257624dd9ff6`.
 
 ## 1. ISSUE_HELP là gì?
 
@@ -223,7 +225,7 @@ File phản vệ mang tên “20” nhưng thực tế có 19 record. ID legacy 
 
 ## 5. LAYERS là gì và sáu tầng hoạt động thế nào?
 
-`LAYERS` trong `main.py` là tuple chứa **tên tầng + danh sách rule ID**, dùng để nhóm và hiển thị giao diện. Nó không tạo sáu engine riêng, không tính lại điều kiện và không quyết định nhãn. Toàn hệ thống đang dùng một `ClinicalRuleEngine` đọc YAML.
+`LAYERS` trong `main.py` là tuple chứa **tên tầng + danh sách rule ID**, dùng để nhóm và hiển thị giao diện. Nó không tính lại điều kiện và không quyết định nhãn. Từ phiên bản 1.3.0, demo dùng ba instance `ClinicalRuleEngine`, mỗi instance chỉ đọc YAML của mẫu đã chọn; bảng sáu tầng dưới đây mô tả phiên bản 1.2.1 trước khi tách.
 
 | Tầng | Rule trong giao diện | Vai trò |
 | --- | --- | --- |

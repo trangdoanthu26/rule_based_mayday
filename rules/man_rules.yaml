@@ -1,0 +1,272 @@
+version: "1.3.0"
+module: "man"
+description: "Mày đay mạn CIndU và CSU"
+
+rules:
+  # TẦNG 4: MÀY ĐAY CẢM ỨNG MẠN TÍNH (CIndU - CHRONIC INDUCIBLE URTICARIA)
+  # =========================================================================
+  - rule_id: "R-CindU-00"
+    name: "Điều kiện tiên quyết CIndU"
+    is_base_condition: true
+    conditions:
+      all_of:
+        - field: "thoi_gian_khoi_phat_tuan"
+          operator: ">"
+          value: 6
+        - field: "hoan_canh_xuat_hien_san_phu"
+          operator: "contains"
+          value: "Khi có các yếu tố kích thích"
+
+  - rule_id: "R-CindU-01"
+    name: "Mày đay CIndU da vẽ nổi"
+    target_label: "Mày đay CindU da vẽ nổi"
+    priority: 6
+    conditions:
+      all_of:
+        - ref_rule: "R-CindU-00"
+        - field: "da_ve_noi_ket_qua"
+          operator: "=="
+          value: "(+)"
+    decision_trace: "Mày đay mạn tính > 6 tuần xuất hiện khi có kích thích cơ học và FricTest dương tính."
+
+  - rule_id: "R-CindU-02"
+    name: "Mày đay CIndU Cholinergic"
+    target_label: "Mày đay CindU Choline (do nóng)"
+    priority: 6
+    conditions:
+      all_of:
+        - ref_rule: "R-CindU-00"
+        - field: "cholinergic_ket_qua"
+          operator: "=="
+          value: "(+)"
+    decision_trace: "Mày đay mạn tính xuất hiện khi nóng bức, gắng sức, ra mồ hôi và test kích thích Cholinergic dương tính."
+
+  - rule_id: "R-CindU-03"
+    name: "Mày đay CIndU do lạnh"
+    target_label: "Mày đay CindU do lạnh"
+    priority: 6
+    conditions:
+      all_of:
+        - ref_rule: "R-CindU-00"
+        - any_of:
+            - field: "lanh_temptest_ket_qua"
+              operator: "=="
+              value: "(+)"
+            - field: "lanh_cucda_ket_qua"
+              operator: "=="
+              value: "(+)"
+    decision_trace: "Mày đay mạn tính xuất hiện khi tiếp xúc nhiệt độ lạnh và test lạnh (TempTest / Ice cube) dương tính."
+
+  - rule_id: "R-CindU-04"
+    name: "Mày đay CIndU khác"
+    target_label: "Mày đay CindU khác"
+    priority: 6
+    conditions:
+      all_of:
+        - ref_rule: "R-CindU-00"
+        - field: "da_ve_noi_ket_qua"
+          operator: "!="
+          value: "(+)"
+        - field: "cholinergic_ket_qua"
+          operator: "!="
+          value: "(+)"
+        - field: "lanh_temptest_ket_qua"
+          operator: "!="
+          value: "(+)"
+        - any_of:
+            - field: "ap_luc_cham_ket_qua"
+              operator: "=="
+              value: "(+)"
+            - field: "anh_sang_ket_qua"
+              operator: "=="
+              value: "(+)"
+            - field: "nuoc_ket_qua"
+              operator: "=="
+              value: "(+)"
+            - field: "khac_ket_qua"
+              operator: "=="
+              value: "(+)"
+    decision_trace: "Mày đay cảm ứng mạn tính do yếu tố kích thích đặc thù khác (áp lực chậm, ánh sáng mặt trời, nước hoặc rung chấn)."
+
+  # =========================================================================
+  # TẦNG 5: MÀY ĐAY TỰ PHÁT MẠN TÍNH (CSU - CHRONIC SPONTANEOUS URTICARIA)
+  # =========================================================================
+  - rule_id: "R-CSU-00"
+    name: "Điều kiện tiên quyết CSU"
+    is_base_condition: true
+    conditions:
+      all_of:
+        - field: "thoi_gian_khoi_phat_tuan"
+          operator: ">"
+          value: 6
+        - field: "tuoi"
+          operator: ">="
+          value: 16
+        - field: "luu_huyet_thanh"
+          operator: "=="
+          value: "Có"
+        - field: "thoi_gian_ngung_khang_histamine_asst"
+          operator: ">="
+          value: 8
+        - field: "thoi_gian_ngung_corticoid_asst"
+          operator: ">="
+          value: 30
+
+  # Phân chia Giai đoạn 1 (ASST +) và Giai đoạn 2 (ASST -)
+  - rule_id: "R-GD-01"
+    name: "CSU Giai đoạn 1 (ASST dương tính)"
+    is_base_condition: true
+    conditions:
+      all_of:
+        - ref_rule: "R-CSU-00"
+        - field: "asst_ket_qua"
+          operator: "=="
+          value: "(+)"
+
+  - rule_id: "R-GD-02"
+    name: "CSU Giai đoạn 2 (ASST âm tính, đạt chuẩn Stella)"
+    is_base_condition: true
+    conditions:
+      all_of:
+        - ref_rule: "R-CSU-00"
+        - field: "asst_ket_qua"
+          operator: "=="
+          value: "(−)"
+        - any_of:
+            - field: "stella_dat"
+              operator: "=="
+              value: true
+            - field: "ige_toan_phan"
+              operator: "<"
+              value: 40
+
+  # --- Cây phân loại thể bệnh ELISA ---
+  - rule_id: "R-CSU-T1-01"
+    name: "Mày đay CSU Type I (Giai đoạn 1)"
+    target_label: "Mày đay CSU type 1"
+    priority: 7
+    conditions:
+      all_of:
+        - ref_rule: "R-GD-01"
+        - field: "so_ngay_theo_doi"
+          operator: ">="
+          value: 60
+        - field: "igg_khang_fceria_ket_qua"
+          operator: "=="
+          value: "(−)"
+        - field: "igg_khang_ige_ket_qua"
+          operator: "=="
+          value: "(−)"
+        - field: "ige_khang_il24_ket_qua"
+          operator: "=="
+          value: "(+)"
+    decision_trace: "CSU GĐ1 (ASST +) theo dõi >= 60 ngày: IgG kháng FcεRIα/IgE âm tính, IgE kháng IL-24 dương tính (Autoallergic Endotype)."
+
+  - rule_id: "R-CSU-T1-02"
+    name: "Mày đay CSU Type I (Giai đoạn 2)"
+    target_label: "Mày đay CSU type 1"
+    priority: 7
+    conditions:
+      all_of:
+        - ref_rule: "R-GD-02"
+        - field: "ige_khang_il24_ket_qua"
+          operator: "=="
+          value: "(+)"
+    decision_trace: "CSU GĐ2 (ASST − đạt chuẩn Stella): Kháng thể IgE kháng IL-24 dương tính (Autoallergic Endotype)."
+
+  - rule_id: "R-CSU-T2-01"
+    name: "Mày đay CSU Type IIb (Tự miễn)"
+    target_label: "Mày đay CSU type 2"
+    priority: 7
+    conditions:
+      all_of:
+        - ref_rule: "R-GD-01"
+        - field: "so_ngay_theo_doi"
+          operator: ">="
+          value: 60
+        - any_of:
+            - field: "igg_khang_fceria_ket_qua"
+              operator: "=="
+              value: "(+)"
+            - field: "igg_khang_ige_ket_qua"
+              operator: "=="
+              value: "(+)"
+        - field: "ige_khang_il24_ket_qua"
+          operator: "=="
+          value: "(−)"
+    decision_trace: "CSU GĐ1 (ASST +) theo dõi >= 60 ngày: Tự kháng thể IgG dương tính và IgE kháng IL-24 âm tính (Autoimmune Endotype)."
+
+  - rule_id: "R-CSU-OVL-01"
+    name: "Mày đay CSU Chồng lấp (Overlap)"
+    target_label: "Mày đay CSU overlap"
+    priority: 7
+    conditions:
+      all_of:
+        - ref_rule: "R-GD-01"
+        - field: "so_ngay_theo_doi"
+          operator: ">="
+          value: 60
+        - any_of:
+            - field: "igg_khang_fceria_ket_qua"
+              operator: "=="
+              value: "(+)"
+            - field: "igg_khang_ige_ket_qua"
+              operator: "=="
+              value: "(+)"
+        - field: "ige_khang_il24_ket_qua"
+          operator: "=="
+          value: "(+)"
+    decision_trace: "CSU GĐ1 (ASST +) theo dõi >= 60 ngày: Đồng thời dương tính với cả tự kháng thể IgG và IgE kháng IL-24."
+
+  - rule_id: "R-CSU-UNK-01"
+    name: "Mày đay CSU Không xác định (Giai đoạn 1)"
+    target_label: "Mày đay CSU unknown"
+    priority: 7
+    conditions:
+      all_of:
+        - ref_rule: "R-GD-01"
+        - field: "so_ngay_theo_doi"
+          operator: ">="
+          value: 60
+        - field: "igg_khang_fceria_ket_qua"
+          operator: "=="
+          value: "(−)"
+        - field: "igg_khang_ige_ket_qua"
+          operator: "=="
+          value: "(−)"
+        - field: "ige_khang_il24_ket_qua"
+          operator: "=="
+          value: "(−)"
+    decision_trace: "CSU GĐ1 điểm dừng: Cả tự kháng thể IgG và IgE kháng IL-24 đều âm tính."
+
+  - rule_id: "R-CSU-UNK-02"
+    name: "Mày đay CSU Không xác định (Giai đoạn 2)"
+    target_label: "Mày đay CSU unknown"
+    priority: 7
+    conditions:
+      all_of:
+        - ref_rule: "R-GD-02"
+        - field: "ige_khang_il24_ket_qua"
+          operator: "=="
+          value: "(−)"
+    decision_trace: "CSU GĐ2 điểm dừng: Test ASST âm tính và IgE kháng IL-24 âm tính."
+
+  # =========================================================================
+  # TẦNG 6: MẶC ĐỊNH / CHƯA ĐỦ DỮ LIỆU ĐỂ PHÂN LOẠI
+  # =========================================================================
+  - rule_id: "R-DEFAULT"
+    name: "Chưa đủ dữ liệu phân loại, tiếp tục theo dõi"
+    target_label: "Chưa phân loại (Tiếp tục theo dõi)"
+    target_status: "INSUFFICIENT_DATA"
+    priority: 8
+    conditions:
+      any_of:
+        - field: "asst_ket_qua"
+          operator: "=="
+          value: null
+        - all_of:
+            - ref_rule: "R-GD-01"
+            - field: "so_ngay_theo_doi"
+              operator: "<"
+              value: 60
+    decision_trace: "Dữ liệu chưa đủ điều kiện phân type chuyên sâu (thiếu kết quả ASST, chưa đủ 60 ngày theo dõi hoặc thiếu kết quả ELISA)."
