@@ -12,7 +12,7 @@
 | Python | Đã kiểm tra Python **3.9.6**. Streamlit 1.50.0 yêu cầu Python >=3.9, loại trừ 3.9.7 theo [metadata PyPI](https://pypi.org/project/streamlit/1.50.0/). Phiên bản khác cần cài dependency và chạy test để xác nhận tương thích. |
 | Thư viện | `PyYAML==6.0.3`, `streamlit==1.50.0` trong [requirements.txt](../requirements.txt); pip tự cài phụ thuộc của chúng. |
 | Thư mục chạy | Root `rule_based_mayday/`, nơi có `main.py`, `requirements.txt`, `src/`, `rules/`, `data/`, `docs/` và `tests/`. Mở terminal tại đây trước khi chạy lệnh. |
-| Môi trường ảo | `.venv` riêng cho mỗi máy/OS; không copy `.venv` của người khác hoặc commit nó lên Git. |
+| Môi trường ảo | `mayday_rb` riêng cho mỗi máy/OS; không copy `mayday_rb` của người khác hoặc commit nó lên Git. |
 | Dữ liệu/cấu hình | Giữ ba file `rules/phan_ve_rules.yaml`, `rules/cap_rules.yaml`, `rules/man_rules.yaml`, `data/synthetic/rule_logic_cases.json` và `docs/diagrams/` cùng source. Không cần bệnh án thật. |
 | Kết nối | Cần truy cập PyPI khi cài dependency. Demo chạy local, không cần API key hoặc dịch vụ AI để suy diễn. |
 | Trình duyệt | Chrome/Edge/Firefox để mở `http://127.0.0.1:8501`; không cần extension ChatGPT hoặc cài Graphviz cho demo này. |
@@ -23,8 +23,8 @@ Chạy lần đầu tại root repo, trước khi đã kích hoạt môi trườ
 
 ```sh
 python3 --version
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv mayday_rb
+source mayday_rb/bin/activate
 python -c "import sys; print(sys.executable); assert sys.prefix != sys.base_prefix"
 python -m pip install -r requirements.txt
 python -m pip check
@@ -32,7 +32,7 @@ python -m unittest discover -s tests -v
 python -m streamlit run main.py --server.address 127.0.0.1 --server.port 8501 --browser.gatherUsageStats false
 ```
 
-Nếu chọn một phiên bản Python cụ thể đã cài trên máy, dùng executable tương ứng ở bước tạo, ví dụ `python3.12 -m venv .venv`. Không tạo lại đè môi trường đang dùng bằng Python khác; cần một môi trường mới riêng cho phiên bản đó.
+Nếu chọn một phiên bản Python cụ thể đã cài trên máy, dùng executable tương ứng ở bước tạo, ví dụ `python3.12 -m venv mayday_rb`. Không tạo lại đè môi trường đang dùng bằng Python khác; cần một môi trường mới riêng cho phiên bản đó.
 
 ### Windows — PowerShell
 
@@ -40,8 +40,8 @@ Mở PowerShell tại root repo. Các lệnh sau dùng Python 3 được Python 
 
 ```powershell
 py -3 --version
-py -3 -m venv .venv
-.\.venv\Scripts\Activate.ps1
+py -3 -m venv mayday_rb
+.\mayday_rb\Scripts\Activate.ps1
 python -c "import sys; print(sys.executable); assert sys.prefix != sys.base_prefix"
 python -m pip install -r requirements.txt
 python -m pip check
@@ -49,15 +49,15 @@ python -m unittest discover -s tests -v
 python -m streamlit run main.py --server.address 127.0.0.1 --server.port 8501 --browser.gatherUsageStats false
 ```
 
-Nếu không có lệnh `py`, kiểm tra `python --version` rồi dùng `python -m venv .venv`. Nếu có nhiều phiên bản, có thể chọn rõ bằng `py -3.12 -m venv .venv` khi Python 3.12 đã cài. Dòng in `sys.executable` phải trỏ vào `.venv\Scripts\python.exe`, không phải Python toàn hệ thống.
+Nếu không có lệnh `py`, kiểm tra `python --version` rồi dùng `python -m venv mayday_rb`. Nếu có nhiều phiên bản, có thể chọn rõ bằng `py -3.12 -m venv mayday_rb` khi Python 3.12 đã cài. Dòng in `sys.executable` phải trỏ vào `mayday_rb\Scripts\python.exe`, không phải Python toàn hệ thống.
 
-Nếu PowerShell chặn `Activate.ps1`, chuyển sang CMD ở mục dưới hoặc gọi trực tiếp Python của `.venv`; không cần đổi execution policy:
+Nếu PowerShell chặn `Activate.ps1`, chuyển sang CMD ở mục dưới hoặc gọi trực tiếp Python của `mayday_rb`; không cần đổi execution policy:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe -m pip check
-.\.venv\Scripts\python.exe -m unittest discover -s tests -v
-.\.venv\Scripts\python.exe -m streamlit run main.py --server.address 127.0.0.1 --server.port 8501 --browser.gatherUsageStats false
+.\mayday_rb\Scripts\python.exe -m pip install -r requirements.txt
+.\mayday_rb\Scripts\python.exe -m pip check
+.\mayday_rb\Scripts\python.exe -m unittest discover -s tests -v
+.\mayday_rb\Scripts\python.exe -m streamlit run main.py --server.address 127.0.0.1 --server.port 8501 --browser.gatherUsageStats false
 ```
 
 ### Windows — Command Prompt (CMD)
@@ -66,8 +66,8 @@ Mở CMD tại root repo; không dùng lệnh `source` của macOS/Linux:
 
 ```bat
 py -3 --version
-py -3 -m venv .venv
-.venv\Scripts\activate.bat
+py -3 -m venv mayday_rb
+mayday_rb\Scripts\activate.bat
 python -c "import sys; print(sys.executable); assert sys.prefix != sys.base_prefix"
 python -m pip install -r requirements.txt
 python -m pip check
@@ -77,9 +77,9 @@ python -m streamlit run main.py --server.address 127.0.0.1 --server.port 8501 --
 
 ### Mở lại demo và đọc kết quả kiểm tra
 
-- Khi `.venv` đã có và dependency đã cài, lần mở terminal tiếp theo chỉ cần kích hoạt đúng theo shell, rồi chạy `python -m streamlit run main.py --server.address 127.0.0.1 --server.port 8501`. Không cần tạo lại `.venv` mỗi lần.
+- Khi `mayday_rb` đã có và dependency đã cài, lần mở terminal tiếp theo chỉ cần kích hoạt đúng theo shell, rồi chạy `python -m streamlit run main.py --server.address 127.0.0.1 --server.port 8501`. Không cần tạo lại `mayday_rb` mỗi lần.
 - Mở URL Streamlit in ra; dừng server bằng **Ctrl+C**, sau đó gõ `deactivate` để thoát môi trường đã kích hoạt. Nếu cổng 8501 đang có server khác, chọn `--server.port 8502` và mở URL tương ứng.
-- Lệnh cài đúng là **`python -m pip install -r requirements.txt`**, không phải `pip install -m requirements.txt`. Nếu thiếu module, kiểm tra executable và cài lại trong đúng `.venv`.
+- Lệnh cài đúng là **`python -m pip install -r requirements.txt`**, không phải `pip install -m requirements.txt`. Nếu thiếu module, kiểm tra executable và cài lại trong đúng `mayday_rb`.
 - Bản đã kiểm tra gần nhất có **43 test methods: 41 đạt, 2 expectedFailure** của F-12 còn mở; `OK (expected failures=2)` không có nghĩa engine hết lỗi. Số test có thể đổi khi cộng tác viên thêm/sửa code.
 
 Các lệnh tạo/kích hoạt và cách gọi trực tiếp Python trong môi trường dựa trên [tài liệu Python venv](https://docs.python.org/3/library/venv.html). Hướng dẫn dưới đây giải thích dữ liệu, kết quả và cách check logic sau khi demo đã mở.
@@ -88,7 +88,7 @@ Các lệnh tạo/kích hoạt và cách gọi trực tiếp Python trong môi t
 
 **Ngày ghi nhận:** 10/10/2026, 06:47:31 (UTC+07:00). **Người ghi:** Đồng Minh Dương.
 
-**Nguồn lịch sử:** [main.py](../main.py), bộ luật 1.2.1 trước khi tách và dữ liệu trong `data/synthetic/`. Số liệu dưới đây được chạy lại trực tiếp bằng `ClinicalRuleEngine` trong `.venv`, chỉ truyền `du_lieu`, không dùng nhãn/kỳ vọng làm dữ kiện. SHA-256 của YAML lịch sử: `aff477a8d5e698ed8c03559272c67a9f1e747fe77f693148e469257624dd9ff6`.
+**Nguồn lịch sử:** [main.py](../main.py), bộ luật 1.2.1 trước khi tách và dữ liệu trong `data/synthetic/`. Số liệu dưới đây được chạy lại trực tiếp bằng `ClinicalRuleEngine` trong `mayday_rb`, chỉ truyền `du_lieu`, không dùng nhãn/kỳ vọng làm dữ kiện. SHA-256 của YAML lịch sử: `aff477a8d5e698ed8c03559272c67a9f1e747fe77f693148e469257624dd9ff6`.
 
 ## 1. ISSUE_HELP là gì?
 
@@ -272,6 +272,6 @@ Vì vậy, **tầng là cách tổ chức nghiệp vụ/hiển thị; status là
 3. Mở **Sáu tầng suy diễn**, xem rule cơ sở/tham chiếu và trace của rule khớp/chặn. `matched_rule_ids` là các rule đích TRUE, không phải tất cả đều là nhãn chính.
 4. Nếu sửa JSON, kỳ vọng ca gốc không tự cập nhật; sửa một biến mỗi lần và ghi kỳ vọng cho biến thể trước khi chạy lại. Chọn ca mới sẽ nạp lại JSON và xóa kết quả cũ.
 
-Lần chạy đầu, dùng đầy đủ các lệnh tạo `.venv`, cài dependency và chạy test ở phần **Specs và chuẩn bị môi trường trước khi chạy** đầu tài liệu; chọn đúng macOS/Linux, PowerShell hoặc CMD.
+Lần chạy đầu, dùng đầy đủ các lệnh tạo `mayday_rb`, cài dependency và chạy test ở phần **Specs và chuẩn bị môi trường trước khi chạy** đầu tài liệu; chọn đúng macOS/Linux, PowerShell hoặc CMD.
 
 Số liệu là ảnh chụp của engine/YAML tại ngày ghi nhận; cần chạy lại khi code/rule đổi. Không sửa `main.py`, engine hoặc các fixture trong tác vụ viết tài liệu này; chưa thực hiện mapping legacy, xác nhận chuyên môn hay kiểm tra bệnh án thật.

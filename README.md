@@ -122,9 +122,9 @@ Ngoài ra, số lượng bệnh án ở một số lớp còn nhỏ, đặc bi�
 Số liệu 53 ca ở trên là kết quả lịch sử, chưa được chạy lại theo hợp đồng lõi mới. Engine nhận một dictionary CANONICAL; mapping hồ sơ legacy, validation/schema, preprocessing, anonymization, batch và evaluator chưa được nối vào pipeline.
 
 ```sh
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s tests -v
+python3 -m venv mayday_rb
+mayday_rb/bin/python -m pip install -r requirements.txt
+PYTHONDONTWRITEBYTECODE=1 mayday_rb/bin/python -m unittest discover -s tests -v
 ```
 
 ```python
@@ -141,17 +141,17 @@ Kết quả giữ sáu trường public hiện có và bổ sung kết quả t�
 Demo ở `main.py` dùng 138 ca giả định, chọn rõ một trong ba mẫu Phản vệ, Cấp, Mạn rồi chạy đúng bộ YAML của mẫu đó. Có thể chọn ca, sửa JSON, xem rule/điều kiện/trace và đối chiếu ba diagram. `THEODOIPV` là cảnh báo theo dõi khi đã đủ dữ kiện loại trừ tiêu chí; `INSUFFICIENT_DATA` giữ danh sách trường thiếu.
 
 ```sh
-source .venv/bin/activate
+source mayday_rb/bin/activate
 python -m pip install -r requirements.txt
 python -m unittest discover -s tests -v
 python -m streamlit run main.py --server.address 127.0.0.1
 ```
 
-Mở địa chỉ localhost mà Streamlit in ra. [Streamlit 1.50.0](https://pypi.org/project/streamlit/1.50.0/) hỗ trợ Python 3.9.6 của `.venv` hiện tại; PyYAML giữ phiên bản 6.0.3. Không cần cài Graphviz hay thư viện vẽ riêng để xem SVG có sẵn.
+Mở địa chỉ localhost mà Streamlit in ra. [Streamlit 1.50.0](https://pypi.org/project/streamlit/1.50.0/) hỗ trợ Python 3.9.6 của `mayday_rb` hiện tại; PyYAML giữ phiên bản 6.0.3. Không cần cài Graphviz hay thư viện vẽ riêng để xem SVG có sẵn.
 
 Input demo là object CANONICAL hoặc envelope `{"du_lieu": {...}}`; metadata/nhãn thật không được truyền vào suy diễn. Demo không tự mapping RAW hoặc điền trường thiếu. Đổi input sẽ xóa kết quả cũ, cần bấm phân loại lại. Các bước validator/preprocessing/batch chưa triển khai được ghi rõ; diagram thể hiện workflow đề xuất, còn kết quả từng rule lấy trực tiếp từ engine.
 
 Nhánh cấp thường đã có ca khớp với shape schema; HATT sai kiểu được giữ ở trạng thái cần rà soát. Các lệch CIndU/CSU và mapping RAW còn mở được ghi tại [báo cáo logic](docs/06_rule_logic_review.md). Demo vẫn chưa nối pipeline RAW.
 
-Bộ `unittest` dùng môi trường ảo hiện có; test giao diện dùng `streamlit.testing.v1.AppTest`. Ý nghĩa hiển thị, ca thực hành và lịch sử sửa đổi được ghi trong [changelog và hướng dẫn demo](docs/05_changelog.md).
+Bộ `unittest` dùng `mayday_rb`; test giao diện dùng `streamlit.testing.v1.AppTest`. Ý nghĩa hiển thị, ca thực hành và lịch sử sửa đổi được ghi trong [changelog và hướng dẫn demo](docs/05_changelog.md).
 
