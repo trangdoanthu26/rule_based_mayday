@@ -1,5 +1,3 @@
-"""Streamlit demo of the existing engine, not the unimplemented RAW pipeline."""
-
 import csv
 import io
 import json
@@ -179,6 +177,7 @@ def patient_html(patient: Dict[str, Any], highlights: Optional[Dict[str, str]] =
                     field == item[0] or field.startswith(item[0] + ".") for field in highlights
                 ))
             for key, item in items:
+                key = str(key)
                 field = f"{path}.{key}" if path else key
                 rendered_paths.add(field)
                 state = highlights.get(field, "")
@@ -226,8 +225,9 @@ def patient_html(patient: Dict[str, Any], highlights: Optional[Dict[str, str]] =
 
 
 def render() -> None:
-    st.set_page_config(page_title="Hệ thống Rule-based Mày đay", page_icon="🩺", layout="wide")
-    st.title("HỆ THỐNG RULE-BASED MÀY ĐAY")
+    st.set_page_config(page_title="Rule-based Mề đay", page_icon="🔎", layout="wide")
+    st.title("Hệ thống Rule-based mề đay")
+    st.caption("Chọn bệnh án giả định, phân loại và đối chiếu dữ kiện với kết luận.")
     st.warning("Dữ liệu giả định · Các khác biệt CIndU/CSU và mapping RAW vẫn cần rà soát. Xem lưu ý theo ca.")
     with st.expander("Cách sử dụng web · Cách đọc kết quả", expanded=True):
         st.markdown(
@@ -404,7 +404,8 @@ def render() -> None:
                 if result["missing_fields"]:
                     st.write("**Trường cần bổ sung:**")
                     field_labels = clinical_field_labels()
-                    for field in result["missing_fields"]:
+                    for raw_field in result["missing_fields"]:
+                        field = str(raw_field)
                         st.write("• " + " › ".join(field_labels.get(part, part) for part in field.split(".")))
                 with st.expander("Kết quả và trace đầy đủ"):
                     st.write("**Rule được chọn:**", result["matched_rule_id"] or "Không có")
