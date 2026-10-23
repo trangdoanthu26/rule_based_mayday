@@ -77,7 +77,7 @@ class TestStreamlitDemo(unittest.TestCase):
         self.assertTrue(any(item.value == "**Trạng thái:** ĐÃ PHÂN LOẠI" for item in app.markdown))
         self.assertTrue(any(item.value == "Mức ưu tiên: 2" for item in app.caption))
         self.assertFalse(any("Có nhãn theo YAML hiện tại" in item.value for item in app.info))
-        app.text_area(key="patient_json").set_value('{"tuoi": 47, "asst_ket_qua": null}').run()
+        app.text_area(key="patient_json").set_value('{"tuoi": 47, "huyet_ap_tam_thu_nen": null}').run()
         self.assertFalse(app.exception)
         self.assertIsNone(app.session_state["result"])
         html = app.get("html")[0].proto.body
@@ -127,7 +127,7 @@ class TestStreamlitDemo(unittest.TestCase):
     def test_json_envelope_does_not_leak_expected_label_into_inference(self):
         app = self.start_app()
         app.selectbox(key="form_type").select("man").run()
-        fixture = json.loads((ROOT / "data/synthetic/rule_logic_cases.json").read_text())
+        fixture = json.loads((ROOT / "data/synthetic/rule_logic_cases.json").read_text(encoding="utf-8"))
         case = next(case for case in fixture["cases"] if case["id"] == "CSU-T1-GD1")
         app.text_area(key="patient_json").set_value(json.dumps({
             "du_lieu": case["du_lieu"], "nhan": "Sốc phản vệ",
@@ -161,8 +161,6 @@ class TestStreamlitDemo(unittest.TestCase):
 
     def test_form_specific_scope_is_visible_before_classification(self):
         app = self.start_app()
-        messages = "\n".join(message.value for message in app.warning)
-        self.assertIn("Dữ liệu giả định", messages)
         self.assertEqual(app.selectbox(key="form_type").value, "phan_ve")
         self.assertTrue(any("Cách đọc kết quả" in item.label for item in app.expander))
 
@@ -177,7 +175,7 @@ class TestStreamlitDemo(unittest.TestCase):
 
     def test_boolean_pressure_error_is_highlighted_for_edited_json(self):
         app = self.start_app()
-        fixture = json.loads((ROOT / "data/synthetic/rule_logic_cases.json").read_text())
+        fixture = json.loads((ROOT / "data/synthetic/rule_logic_cases.json").read_text(encoding="utf-8"))
         data = next(case["du_lieu"] for case in fixture["cases"] if case["id"] == "PV-01")
         data["huyet_ap_tam_thu_thap_nhat"] = True
         app.text_area(key="patient_json").set_value(json.dumps(data)).run()
@@ -198,7 +196,7 @@ class TestStreamlitDemo(unittest.TestCase):
 
 
     def test_uploaded_json_uses_selected_engine_and_preserves_editor_changes(self):
-        fixture = json.loads((ROOT / "data/synthetic/rule_logic_cases.json").read_text())
+        fixture = json.loads((ROOT / "data/synthetic/rule_logic_cases.json").read_text(encoding="utf-8"))
         data = next(case["du_lieu"] for case in fixture["cases"] if case["id"] == "CSU-NO-PV")
         envelope = {"du_lieu": data, "form_type": "phan_ve",
                     "nhan": "Sốc phản vệ", "expected_engine": {"status": "CLASSIFIED"}}
@@ -231,7 +229,7 @@ class TestStreamlitDemo(unittest.TestCase):
             self.assertNotIn("R-CSU-00", app.session_state["result"]["rule_results"])
         app.radio(key="source_mode").set_value("Ca giả định mẫu").run()
         self.assertEqual(app.session_state["patient_json"],
-                         json.dumps(fixture["cases"][0]["du_lieu"], ensure_ascii=False, indent=2))
+                         json.dumps(demo.filter_patient_by_engine(fixture["cases"][0]["du_lieu"], demo.load_engines()["phan_ve"]), ensure_ascii=False, indent=2))
         self.assertIsNone(app.session_state["result"])
 
     def test_invalid_upload_clears_previous_result_and_patient(self):

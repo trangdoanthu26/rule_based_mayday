@@ -91,10 +91,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
-          "R02-PV": true,
-          "R03-PV": true,
+          "R02-PV-2/4-CO-QUAN": true,
+          "R03-PV-DUONG-HIT": true,
           "R-SOC": false
         },
         "predicted_label": "Phản vệ"
@@ -189,9 +189,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R01-PV",
+        "matched_rule_id": "R01-PV-KHONG-DI-NGUYEN",
         "rule_results": {
-          "R01-PV": true
+          "R01-PV-KHONG-DI-NGUYEN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -285,8 +285,8 @@
         "status": "THEODOIPV",
         "matched_rule_id": "R-PV-THEODOI",
         "rule_results": {
-          "R02-PV": false,
-          "R03-PV": false,
+          "R02-PV-2/4-CO-QUAN": false,
+          "R03-PV-DUONG-HIT": false,
           "R-PV-THEODOI": true
         },
         "predicted_label": null
@@ -382,7 +382,7 @@
         "status": "THEODOIPV",
         "matched_rule_id": "R-PV-THEODOI",
         "rule_results": {
-          "R02-PV": false,
+          "R02-PV-2/4-CO-QUAN": false,
           "R-PV-THEODOI": true
         },
         "predicted_label": null
@@ -477,7 +477,7 @@
         "status": "THEODOIPV",
         "matched_rule_id": "R-PV-THEODOI",
         "rule_results": {
-          "R02-PV": false,
+          "R02-PV-2/4-CO-QUAN": false,
           "R-PV-THEODOI": true
         },
         "predicted_label": null
@@ -570,9 +570,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -664,9 +664,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -760,7 +760,7 @@
         "status": "THEODOIPV",
         "matched_rule_id": "R-PV-THEODOI",
         "rule_results": {
-          "R03-PV": false,
+          "R03-PV-DUONG-HIT": false,
           "R-PV-THEODOI": true
         },
         "predicted_label": null
@@ -853,9 +853,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R03-PV",
+        "matched_rule_id": "R03-PV-DUONG-HIT",
         "rule_results": {
-          "R03-PV": true
+          "R03-PV-DUONG-HIT": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -947,9 +947,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R03-PV",
+        "matched_rule_id": "R03-PV-DUONG-HIT",
         "rule_results": {
-          "R03-PV": true
+          "R03-PV-DUONG-HIT": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -1324,9 +1324,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -1420,9 +1420,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -1516,9 +1516,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -1612,9 +1612,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -1708,9 +1708,9 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -1900,10 +1900,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -1997,10 +1997,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -2190,10 +2190,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -2287,10 +2287,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -2480,10 +2480,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -2577,10 +2577,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -2770,10 +2770,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -2867,10 +2867,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3060,10 +3060,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3157,10 +3157,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3350,10 +3350,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3447,10 +3447,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3640,10 +3640,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3737,10 +3737,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -3930,10 +3930,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -4027,10 +4027,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -4124,10 +4124,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -4509,10 +4509,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
@@ -4606,10 +4606,10 @@
       },
       "expected_engine": {
         "status": "CLASSIFIED",
-        "matched_rule_id": "R02-PV",
+        "matched_rule_id": "R02-PV-2/4-CO-QUAN",
         "rule_results": {
           "R-SOC": false,
-          "R02-PV": true
+          "R02-PV-2/4-CO-QUAN": true
         },
         "predicted_label": "Phản vệ"
       },
