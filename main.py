@@ -1059,17 +1059,39 @@ def render() -> None:
                 for rule_id, rule in rules.items():
                     value = result["rule_results"][rule_id]
                     if value is True or rule_id in result["blocking_rule_ids"]:
-                        role = ("Kết luận chính" if rule_id == result["matched_rule_id"] else
-                                "Chặn / xung đột" if rule_id in result["blocking_rule_ids"] else "Khớp")
-                        eval_text = "UNKNOWN" if value is None else "TRUE" if value else "FALSE"
-                        active_rules_rows.append({
-                            "Mã Rule": rule_id,
-                            "Nội dung": rule["name"],
-                            "Đánh giá": eval_text,
-                            "Vai trò": role,
-                        })
+                        role = ("⭐ Kết luận chính" if rule_id == result["matched_rule_id"] else
+                                "⚠️ Chặn / xung đột" if rule_id in result["blocking_rule_ids"] else "🎯 Khớp")
+                        eval_text = "Chưa rõ" if value is None else "ĐẠT" if value else "Không đạt"
+                        role_color = "#1e40af" if "Kết luận" in role else "#b45309" if "Chặn" in role else "#0284c7"
+                        eval_badge = '<span style="background:#dcfce7; color:#15803d; font-weight:700; padding:2px 7px; border-radius:4px; font-size:0.72rem; white-space:nowrap;">ĐẠT</span>' if value else f'<span style="background:#f1f5f9; color:#475569; padding:2px 7px; border-radius:4px; font-size:0.72rem; white-space:nowrap;">{eval_text}</span>'
+                        active_rules_rows.append(
+                            f'<tr style="border-bottom: 1px solid #f1f5f9;">'
+                            f'<td style="padding: 0.5rem 0.6rem; font-family: monospace; font-weight: 700; color: #2563eb; font-size: 0.75rem; white-space: nowrap;">{rule_id}</td>'
+                            f'<td style="padding: 0.5rem 0.6rem; color: #1e293b; font-size: 0.775rem; line-height: 1.4;">{rule.get("display_name") or rule["name"]}</td>'
+                            f'<td style="padding: 0.5rem 0.6rem; text-align: center; white-space: nowrap;">{eval_badge}</td>'
+                            f'<td style="padding: 0.5rem 0.6rem; text-align: center; font-weight: 600; font-size: 0.725rem; color: {role_color}; white-space: nowrap;">{role}</td>'
+                            f'</tr>'
+                        )
                 if active_rules_rows:
-                    st.table(active_rules_rows)
+                    active_table_html = (
+                        f'<div style="overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 0.4rem; margin-bottom: 0.8rem; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">'
+                        f'<table style="width: 100%; border-collapse: collapse; font-size: 0.775rem; text-align: left; background: #ffffff;">'
+                        f'<thead>'
+                        f'<tr style="background: #f8fafc; color: #334155; font-weight: 700; border-bottom: 1px solid #e2e8f0;">'
+                        f'<th style="padding: 0.45rem 0.6rem; white-space: nowrap;">Mã Rule</th>'
+                        f'<th style="padding: 0.45rem 0.6rem;">Nội dung</th>'
+                        f'<th style="padding: 0.45rem 0.6rem; text-align: center; white-space: nowrap;">Đánh giá</th>'
+                        f'<th style="padding: 0.45rem 0.6rem; text-align: center; white-space: nowrap;">Vai trò</th>'
+                        f'</tr>'
+                        f'</thead>'
+                        f'<tbody>'
+                        f'{"".join(active_rules_rows)}'
+                        f'</tbody>'
+                        f'</table>'
+                        f'</div>'
+                    )
+                    clean_active_table = "\n".join(line.strip() for line in active_table_html.splitlines())
+                    st.markdown(clean_active_table, unsafe_allow_html=True)
                 else:
                     st.caption("Chưa có quy tắc nào đạt hoặc bị chặn trong lần đánh giá này.")
 
