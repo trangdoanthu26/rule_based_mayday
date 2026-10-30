@@ -931,33 +931,68 @@ def render() -> None:
 
         left, right = st.columns([1.35, 1], gap="large")
 
-        # Cột trái: Dữ liệu bệnh án lâm sàng (Phiếu khám to rõ, JSON thu gọn)
+        # Cột trái: Dữ liệu bệnh án lâm sàng & Tùy chọn đối chiếu JSON
         with left:
-            st.markdown(
-                f"<div style='display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;'>"
-                f"<strong style='font-size:0.95rem; color:#1e40af;'>📋 PHIẾU KHÁM LÂM SÀNG: {case_id}</strong>"
-                f"<span style='background:#e0e7ff; color:#3730a3; padding:2px 8px; border-radius:10px; font-size:0.75rem; font-weight:600;'>{FORM_SHORT_NAMES[form_type]}</span>"
-                f"</div>",
-                unsafe_allow_html=True,
-            )
-            st.caption("Xem thông tin triệu chứng và dấu hiệu lâm sàng bên dưới, sau đó bấm nút Phân loại để chẩn đoán.")
+            hdr_left, hdr_right = st.columns([1.6, 1])
+            with hdr_left:
+                st.markdown(
+                    f"<div style='display:flex; align-items:center; gap:8px; margin-top:2px;'>"
+                    f"<strong style='font-size:0.95rem; color:#1e40af;'>📋 PHIẾU KHÁM: {case_id}</strong>"
+                    f"<span style='background:#e0e7ff; color:#3730a3; padding:2px 8px; border-radius:10px; font-size:0.75rem; font-weight:600;'>{FORM_SHORT_NAMES[form_type]}</span>"
+                    f"</div>",
+                    unsafe_allow_html=True,
+                )
+            with hdr_right:
+                show_json = st.toggle("🔍 Đối chiếu JSON", key="toggle_compare_json", value=False, help="Mở ô JSON xếp bên cạnh phiếu khám để đối chiếu hoặc chỉnh sửa")
 
-            if current_patient is None:
-                st.warning("Không thể hiển thị bệnh án: Dữ liệu chưa hợp lệ. Vui lòng mở rộng ô JSON bên dưới để kiểm tra.")
+            if show_json:
+                st.caption("Chế độ đối chiếu: Phiếu khám thu gọn bên trái, mã JSON hiển thị bên phải.")
             else:
-                try:
-                    display_patient = filter_patient_by_engine(current_patient, engine)
-                    st.html(patient_html(display_patient, highlights))
-                except RecursionError:
-                    st.warning("Không thể hiển thị bệnh án: cấu trúc JSON lồng quá nhiều tầng.")
+                st.caption("Xem thông tin triệu chứng và dấu hiệu lâm sàng bên dưới, sau đó bấm nút Phân loại để chẩn đoán.")
 
-            # Ô JSON bệnh án: Mặc định đóng lại (expanded=False), ấn vào mới sổ ra
-            with st.expander("🛠️ Dữ liệu JSON kỹ thuật (Chỉnh sửa thông số thử nghiệm)", expanded=False):
-                st.caption("Dành cho kỹ thuật / kiểm thử viên: Sửa trực tiếp số đo JSON để thử ca biên. Dữ liệu thay đổi sẽ xóa kết quả cũ.")
+            # Khi show_json=False (mặc định): ẩn cột JSON và bung phiếu khám 100% width
+            if not show_json:
+                st.markdown(
+                    """<style>
+                    div[data-testid="column"]:has(.patient-sheet-wrapper) {
+                        width: 100% !important;
+                        flex: 1 1 100% !important;
+                        max-width: 100% !important;
+                    }
+                    div[data-testid="column"]:has(.json-editor-wrapper) {
+                        display: none !important;
+                    }
+                    </style>""",
+                    unsafe_allow_html=True,
+                )
+
+            preview_col, editor_col = st.columns([1.15, 1], gap="small")
+            with preview_col:
+                st.markdown("<div class='patient-sheet-wrapper'>", unsafe_allow_html=True)
+                if current_patient is None:
+                    st.warning("Không thể hiển thị bệnh án: Dữ liệu chưa hợp lệ. Bật 'Đối chiếu JSON' để kiểm tra.")
+                else:
+                    try:
+                        display_patient = filter_patient_by_engine(current_patient, engine)
+                        st.html(patient_html(display_patient, highlights))
+                    except RecursionError:
+                        st.warning("Không thể hiển thị bệnh án: cấu trúc JSON lồng quá nhiều tầng.")
+                st.markdown("</div>", unsafe_allow_html=True)
+
+            with editor_col:
+                st.markdown("<div class='json-editor-wrapper'>", unsafe_allow_html=True)
+                st.markdown(
+                    "<div style='display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;'>"
+                    "<strong style='font-size:0.8rem; color:#334155;'>Mã JSON (Chỉnh sửa tùy ý):</strong>"
+                    "</div>",
+                    unsafe_allow_html=True,
+                )
                 st.text_area(
-                    "Mã JSON bệnh án", height=280, key="patient_json", on_change=clear_result,
+                    "Mã JSON bệnh án", height=380, key="patient_json", on_change=clear_result,
                     label_visibility="collapsed",
                 )
+                st.caption("Sửa trực tiếp số đo để thử ca biên. Dữ liệu thay đổi sẽ xóa kết quả cũ.")
+                st.markdown("</div>", unsafe_allow_html=True)
 
             # Nút bấm hành động chính: Rõ ràng, nổi bật
             if st.button("⚡ Phân loại và giải thích", key="classify", type="primary", use_container_width=True):
