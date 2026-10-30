@@ -990,7 +990,11 @@ def render() -> None:
                         unsafe_allow_html=True,
                     )
                     st.text_area(
-                        "Mã JSON bệnh án", height=380, key="patient_json", on_change=on_patient_json_change,
+                        "Mã JSON bệnh án",
+                        value=st.session_state.get("patient_json", ""),
+                        height=380,
+                        key="patient_json",
+                        on_change=on_patient_json_change,
                         label_visibility="collapsed",
                     )
                     st.caption("Sửa trực tiếp số đo để thử ca biên. Dữ liệu thay đổi sẽ xóa kết quả cũ.")
