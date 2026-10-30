@@ -424,10 +424,10 @@ def patient_html(patient: Dict[str, Any], highlights: Optional[Dict[str, str]] =
     return (
         '<section class="patient-sheet" aria-label="Bệnh án đang kiểm tra">'
         '<style>'
-        '.patient-sheet{padding:0.6rem 0.8rem;font-size:0.875rem;color:#1e293b;height:380px;max-height:380px;overflow-y:auto;border:1px solid #cbd5e1;border-radius:8px;background:#ffffff;box-sizing:border-box;scrollbar-width:thin}'
+        '.patient-sheet{padding:0.75rem 1rem;font-size:0.875rem;color:#1e293b;min-height:300px;max-height:460px;overflow-y:auto;border:1px solid #cbd5e1;border-radius:8px;background:#ffffff;box-sizing:border-box;scrollbar-width:thin}'
         '.patient-sheet::-webkit-scrollbar{width:6px}'
         '.patient-sheet::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}'
-        '.patient-sheet dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.4rem .8rem;margin:.4rem 0}'
+        '.patient-sheet dl{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:.4rem 1.2rem;margin:.4rem 0}'
         '.patient-sheet dt{font-weight:600;color:#334155;overflow-wrap:anywhere}'
         '.patient-sheet dd{margin:0;color:#0f172a;overflow-wrap:anywhere}'
         '.patient-sheet ul{padding-left:1.1rem;margin:0}'
@@ -931,41 +931,33 @@ def render() -> None:
 
         left, right = st.columns([1.35, 1], gap="large")
 
-        # Cột trái: Dữ liệu bệnh án (Phiếu khám & Mã JSON)
+        # Cột trái: Dữ liệu bệnh án lâm sàng (Phiếu khám to rõ, JSON thu gọn)
         with left:
-            st.markdown("#### Dữ liệu bệnh án (Phiếu khám lâm sàng & Mã JSON)")
-            st.caption("Xem thông tin định dạng phiếu khám bên trái; chỉnh sửa biến bên phải rồi bấm Phân loại.")
+            st.markdown(
+                f"<div style='display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;'>"
+                f"<strong style='font-size:0.95rem; color:#1e40af;'>📋 PHIẾU KHÁM LÂM SÀNG: {case_id}</strong>"
+                f"<span style='background:#e0e7ff; color:#3730a3; padding:2px 8px; border-radius:10px; font-size:0.75rem; font-weight:600;'>{FORM_SHORT_NAMES[form_type]}</span>"
+                f"</div>",
+                unsafe_allow_html=True,
+            )
+            st.caption("Xem thông tin triệu chứng và dấu hiệu lâm sàng bên dưới, sau đó bấm nút Phân loại để chẩn đoán.")
 
-            preview_col, editor_col = st.columns(2, gap="small")
-            with preview_col:
-                st.markdown(
-                    f"<div style='display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;'>"
-                    f"<strong style='font-size:0.8rem; color:#1e40af;'>PHIẾU KHÁM: {case_id}</strong>"
-                    f"<span style='font-size:0.7rem; color:#64748b;'>{FORM_SHORT_NAMES[form_type]}</span>"
-                    f"</div>",
-                    unsafe_allow_html=True,
-                )
-                if current_patient is None:
-                    st.warning("Không thể hiển thị bệnh án: JSON chưa hợp lệ. Sửa dữ liệu ở ô JSON.")
-                else:
-                    try:
-                        display_patient = filter_patient_by_engine(current_patient, engine)
-                        st.html(patient_html(display_patient, highlights))
-                    except RecursionError:
-                        st.warning("Không thể hiển thị bệnh án: cấu trúc JSON lồng quá nhiều tầng.")
+            if current_patient is None:
+                st.warning("Không thể hiển thị bệnh án: Dữ liệu chưa hợp lệ. Vui lòng mở rộng ô JSON bên dưới để kiểm tra.")
+            else:
+                try:
+                    display_patient = filter_patient_by_engine(current_patient, engine)
+                    st.html(patient_html(display_patient, highlights))
+                except RecursionError:
+                    st.warning("Không thể hiển thị bệnh án: cấu trúc JSON lồng quá nhiều tầng.")
 
-            with editor_col:
-                st.markdown(
-                    "<div style='display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;'>"
-                    "<strong style='font-size:0.8rem; color:#334155;'>Mã JSON (Chỉnh sửa tùy ý):</strong>"
-                    "</div>",
-                    unsafe_allow_html=True,
-                )
+            # Ô JSON bệnh án: Mặc định đóng lại (expanded=False), ấn vào mới sổ ra
+            with st.expander("🛠️ Dữ liệu JSON kỹ thuật (Chỉnh sửa thông số thử nghiệm)", expanded=False):
+                st.caption("Dành cho kỹ thuật / kiểm thử viên: Sửa trực tiếp số đo JSON để thử ca biên. Dữ liệu thay đổi sẽ xóa kết quả cũ.")
                 st.text_area(
-                    "Mã JSON bệnh án", height=380, key="patient_json", on_change=clear_result,
+                    "Mã JSON bệnh án", height=280, key="patient_json", on_change=clear_result,
                     label_visibility="collapsed",
                 )
-                st.caption("Sửa trực tiếp số đo để thử ca biên. Dữ liệu thay đổi sẽ xóa kết quả cũ.")
 
             # Nút bấm hành động chính: Rõ ràng, nổi bật
             if st.button("⚡ Phân loại và giải thích", key="classify", type="primary", use_container_width=True):
