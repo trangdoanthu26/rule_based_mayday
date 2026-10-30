@@ -14,7 +14,15 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class TestStreamlitDemo(unittest.TestCase):
     def test_json_editor_and_preview_share_the_clinical_tab(self):
-        app = self.start_app()
+        # Mặc định: Không mở JSON, phiếu khám to rộng, vẫn phân loại bình thường
+        app_default = self.start_app(open_editor=False)
+        self.assertEqual(len(app_default.tabs[0].text_area), 0)
+        self.assertEqual(len(app_default.tabs[0].columns[0].get("html")), 1)
+        app_default.button(key="classify").click().run()
+        self.assertEqual(app_default.session_state["result"]["predicted_label"], "Phản vệ")
+
+        # Khi bật đối chiếu JSON: Hiển thị song song phiếu khám và ô JSON
+        app = self.start_app(open_editor=True)
         self.assertEqual([tab.label for tab in app.tabs],
                          ["Bệnh án & kết quả", "Logic suy luận", "Bảng quy tắc & Mức ưu tiên"])
         self.assertEqual(len(app.tabs[0].text_area), 1)
@@ -87,8 +95,18 @@ class TestStreamlitDemo(unittest.TestCase):
         self.assertFalse(app.get("html"))
         self.assertTrue(any("Không thể hiển thị bệnh án" in item.value for item in app.warning))
 
-    def start_app(self):
-        return AppTest.from_file(str(ROOT / "main.py"), default_timeout=15).run()
+    def start_app(self, open_editor: bool = True):
+        app = AppTest.from_file(str(ROOT / "main.py"), default_timeout=15).run()
+        if open_editor:
+            try:
+                toggles = app.toggle
+                for t in toggles:
+                    if getattr(t, "key", None) == "toggle_compare_json":
+                        t.set_value(True).run()
+                        break
+            except Exception:
+                pass
+        return app
 
     def test_shock_and_only_selected_form_layers_are_displayed(self):
         app = self.start_app()
