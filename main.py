@@ -304,6 +304,11 @@ def clear_result() -> None:
     st.session_state["run_error"] = None
 
 
+def on_patient_json_change() -> None:
+    st.session_state["_saved_patient_json"] = st.session_state.get("patient_json", "")
+    clear_result()
+
+
 def reject_constant(value: str) -> None:
     raise ValueError("JSON không hỗ trợ NaN hoặc Infinity.")
 
@@ -892,7 +897,9 @@ def render() -> None:
         selected_case = by_id[case_id]
         if st.session_state.get("loaded_case") != case_id:
             filtered_du_lieu = filter_patient_by_engine(selected_case["du_lieu"], engine)
-            st.session_state["patient_json"] = json.dumps(filtered_du_lieu, ensure_ascii=False, indent=2)
+            json_str = json.dumps(filtered_du_lieu, ensure_ascii=False, indent=2)
+            st.session_state["patient_json"] = json_str
+            st.session_state["_saved_patient_json"] = json_str
             st.session_state["loaded_case"] = case_id
             clear_result()
 
@@ -912,6 +919,17 @@ def render() -> None:
     input_tab, layers_tab, catalog_tab = st.tabs([
         "Bệnh án & kết quả", "Logic suy luận", "Bảng quy tắc & Mức ưu tiên",
     ])
+
+    # Bảo đảm patient_json luôn có dữ liệu, không bị mất khi bật/tắt công tắc widget
+    if data_source_mode == "Ca giả định mẫu" and (not st.session_state.get("patient_json") or st.session_state.get("patient_json") == "{}"):
+        saved = st.session_state.get("_saved_patient_json")
+        if saved and saved != "{}":
+            st.session_state["patient_json"] = saved
+        elif selected_case and selected_case.get("du_lieu"):
+            filtered_du_lieu = filter_patient_by_engine(selected_case["du_lieu"], engine)
+            json_str = json.dumps(filtered_du_lieu, ensure_ascii=False, indent=2)
+            st.session_state["patient_json"] = json_str
+            st.session_state["_saved_patient_json"] = json_str
 
     try:
         current_patient = parse_patient(st.session_state["patient_json"])
@@ -972,7 +990,7 @@ def render() -> None:
                         unsafe_allow_html=True,
                     )
                     st.text_area(
-                        "Mã JSON bệnh án", height=380, key="patient_json", on_change=clear_result,
+                        "Mã JSON bệnh án", height=380, key="patient_json", on_change=on_patient_json_change,
                         label_visibility="collapsed",
                     )
                     st.caption("Sửa trực tiếp số đo để thử ca biên. Dữ liệu thay đổi sẽ xóa kết quả cũ.")
