@@ -113,9 +113,46 @@ Các kiểm thử bao phủ engine, định tuyến ba phân hệ, ca logic gi�
 └── docs/                    # Workflow, bộ luật, từ điển dữ liệu, changelog
 ```
 
-Các tiện ích validation, tiền xử lý, khử định danh và đánh giá có trong source nhưng chưa được nối thành pipeline tự động từ hồ sơ RAW đến kết quả. Demo không nên được hiểu là đã xử lý đầy đủ workflow đó.
-
 `src/preprocess.py` và `src/anonymize.py` có các hàm tiện ích độc lập nhưng hiện không được gọi bởi demo hoặc `classify_form`; `src/validate.py` và `src/evaluate.py` hiện còn trống. Engine vẫn tự kiểm tra cấu trúc YAML của bộ luật khi nạp, nhưng chưa có bước xác thực hồ sơ bệnh nhân theo JSON Schema. Vì vậy, pipeline tự động từ hồ sơ RAW đến kết quả (bao gồm validation và đánh giá) hiện chưa được triển khai.
+
+### Luồng dữ liệu mục tiêu: RAW → kết quả
+
+Luồng dưới đây mô tả pipeline nên xây dựng khi tích hợp đầy đủ các bước. Đây là **thiết kế mục tiêu**, không phải mô tả những gì demo đang tự động thực hiện.
+
+```text
+Hồ sơ RAW
+   ↓
+Tiếp nhận và kiểm tra định dạng/cấu trúc
+   ↓
+Tách thông tin định danh và nhãn đánh giá khỏi dữ liệu suy luận
+   ↓
+Ánh xạ trường RAW → CANONICAL
+   ↓
+Tiền xử lý và tạo biến dẫn xuất
+   ↓
+Xác thực dữ liệu CANONICAL
+   ↓
+Khử định danh khi phù hợp với mục đích sử dụng
+   ↓
+Định tuyến đúng phân hệ → chạy bộ luật YAML
+   ↓
+Trả kết quả, trạng thái, giải thích, trường thiếu và thông tin phiên bản luật
+
+Bộ dữ liệu có nhãn ──→ đối chiếu với kết quả sau suy luận để đánh giá riêng
+```
+
+1. **Tiếp nhận RAW:** đọc tệp, xác nhận định dạng và cấu trúc cơ bản. Tệp lỗi hoặc không đọc được phải bị từ chối với thông báo rõ ràng.
+2. **Tách dữ liệu:** tách PII (thông tin định danh) và metadata khỏi phần dữ liệu lâm sàng. Nhãn thật, nếu có trong bộ dữ liệu nghiên cứu, phải được giữ riêng và tuyệt đối không gửi vào engine.
+3. **Ánh xạ RAW → CANONICAL:** chuyển tên trường và giá trị theo từng nguồn dữ liệu sang hợp đồng CANONICAL của phân hệ. Ghi nhận giá trị không ánh xạ được; không tự suy diễn giá trị còn thiếu thành “Không”.
+4. **Tiền xử lý:** chuẩn hóa định dạng và tính các biến dẫn xuất mà luật cần. Chỉ thực hiện phép biến đổi đã được quy định, đồng thời giữ khả năng truy vết nguồn gốc dữ liệu.
+5. **Xác thực CANONICAL:** kiểm tra kiểu, miền giá trị, đơn vị và ràng buộc giữa trường trước khi suy luận. Hợp đồng đầu vào suy luận cần tách khỏi schema bệnh án đầy đủ nếu schema đầy đủ yêu cầu chẩn đoán hoặc nhãn không được phép làm đầu vào.
+6. **Khử định danh:** trước khi lưu trữ, chia sẻ hoặc xử lý ngoài môi trường có quyền truy cập phù hợp, loại bỏ/che thông tin nhận dạng không cần thiết. Nếu cần tạo biến từ ngày sinh hoặc thông tin định danh, thực hiện phép tính được cho phép trước khi loại bỏ nguồn đó; không xem khử định danh là bảo đảm chống tái nhận dạng tuyệt đối.
+7. **Định tuyến và suy luận:** chọn đúng một trong ba phân hệ `phan_ve`, `cap`, `man`, rồi gọi engine với dữ liệu CANONICAL đã kiểm tra. Engine trả trạng thái, nhãn nếu đủ căn cứ, luật khớp/chặn, trường thiếu, trace và phiên bản/hash bộ luật.
+8. **Trả và lưu kết quả:** trình bày kết luận cùng giới hạn/cảnh báo; kiểm soát quyền truy cập và lưu vết theo chính sách dữ liệu của hệ thống.
+9. **Đánh giá riêng:** chỉ với bộ dữ liệu có nhãn, so sánh kết quả suy luận với nhãn thật sau khi suy luận hoàn tất để tính các chỉ số. Đây là luồng đánh giá tập dữ liệu, không phải bước bắt buộc cho mỗi hồ sơ sử dụng thông thường.
+
+**Tình trạng triển khai hiện tại:** demo đọc JSON/CSV đơn giản hoặc ca giả định, cho phép chọn phân hệ, rồi chuyển dữ liệu trực tiếp vào engine. Chưa có mapping RAW → CANONICAL, xác thực hồ sơ đầu vào bằng schema, pipeline tiền xử lý/khử định danh tự động hoặc module đánh giá hoàn chỉnh. Các bước này cần được triển khai và kiểm thử trước khi coi luồng trên là pipeline vận hành.
+
 ### Gọi engine từ Python
 
 ```python
