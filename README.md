@@ -1,157 +1,110 @@
-## Kiểm thử hệ thống Rule-Based bằng bệnh án giả lập
+### BẢN TỔNG HỢP TOÀN BỘ QUY TRÌNH XỬ LÝ BỆNH ÁN
+*(Vừa trực quan, dễ hiểu — Vừa đầy đủ mã nguồn và tên trường kỹ thuật)*
 
-### 1. Tạo bộ dữ liệu bệnh án giả lập
+---
 
-Để kiểm thử hệ thống Rule-Based mà không để nhãn bệnh ảnh hưởng đến quá trình suy luận, các bệnh án giả lập được tạo bằng **NotebookLM** dựa trên bảng biến và các giá trị hợp lệ đã được định nghĩa trong nguồn dữ liệu.
+### Sơ đồ luồng 4 chặng từ đầu đến cuối
 
-Mỗi nhóm bệnh được yêu cầu tạo các bệnh án có đặc điểm đa dạng, bao gồm:
+```mermaid
+flowchart TD
+    subgraph C1 ["CHẶNG 1: TIẾP NHẬN & LỌC DỮ LIỆU (main.py)"]
+        A1["Chọn ca mẫu (138 ca)<br/>rule_logic_cases.json"] --> B["Bóc tách nhãn thật & metadata:<br/>nhan, expected_engine, id, mo_ta..."]
+        A2["Tải file mới (.json / .csv)<br/>parse_patient / parse_csv_patient"] --> B
+        B --> C["Khử định danh PII (src/anonymize.py):<br/>ho_ten, so_dien_thoai, bhyt_so_the..."]
+    end
 
-1. **Ca điển hình**: các triệu chứng và thông tin phù hợp rõ ràng với nhóm bệnh.
-2. **Ca điển hình nhưng thay đổi đặc điểm**: thay đổi tuổi, giới tính hoặc yếu tố khởi phát nhưng vẫn đảm bảo phù hợp với bệnh.
-3. **Ca thiếu dữ liệu**: cố ý để trống nhiều biến nhằm kiểm tra khả năng xử lý dữ liệu không đầy đủ.
-4. **Ca sát ranh giới**: tạo các trường hợp có biểu hiện gần với ranh giới phân loại giữa các mức độ bệnh. (chỉ áp dụng với cấp và phản vệ)  ### mình tạo thấy lâu quá nên đã bỏ qua tiêu chí này với các loại còn lại =}}
-6. **Có nhiễu**: bệnh nền, thuốc đang dùng, triệu chứng không liên quan  (chỉ dùng với phản vệ) ### cái này cũng thế
+    subgraph C2 ["CHẶNG 2: ĐỊNH TUYẾN MẪU (src/pipeline.py)"]
+        C --> D["classify_form(form_type, patient, engines)"]
+        D -->|phan_ve| E1["phan_ve_rules.yaml<br/>(Sốc & Phản vệ)"]
+        D -->|cap| E2["cap_rules.yaml<br/>(Mày đay cấp < 6 tuần)"]
+        D -->|man| E3["man_rules.yaml<br/>(CIndU & CSU > 6 tuần)"]
+    end
 
-Bệnh án được tạo dưới dạng JSON với cấu trúc:
+    subgraph C3 ["CHẶNG 3: BỘ MÁY SUY DIỄN (src/classify.py)"]
+        E1 & E2 & E3 --> F1["Pha 1: Đánh giá điều kiện & Phụ thuộc<br/>Logic 3 trạng thái: TRUE, FALSE, UNKNOWN<br/>Tính đệ quy ref_rule & lưu vào Cache"]
+        F1 --> F2["Pha 2: Chọn kết luận theo Ưu tiên<br/>Xét min(priority) của các luật không FALSE<br/>Phân giải xung đột & trích xuất missing_fields"]
+    end
 
-```json
-{
-  "id": "BA_xxx",
-  "nhan": "[TÊN LOẠI]",
-  "du_lieu": {
-    "...": "..."
-  }
-}
+    subgraph C4 ["CHẶNG 4: KẾT QUẢ & GIẢI THÍCH (main.py)"]
+        F2 --> G["Xác định 1 trong 5 trạng thái:<br/>CLASSIFIED | THEODOIPV | INSUFFICIENT_DATA | NEEDS_REVIEW | UNRESOLVED"]
+        G --> H["Hiển thị trên màn hình:<br/>• Kết luận bệnh to rõ & Huy hiệu trạng thái<br/>• Câu giải thích y khoa (decision_trace)<br/>• Danh sách trường cần hỏi thêm (missing_fields)<br/>• Tô màu trực tiếp trên bệnh án: Xanh / Vàng / Đỏ<br/>• Bảng tra cứu các luật đã khớp & Nút tải JSON"]
+    end
 ```
 
-Trong quá trình tạo dữ liệu, các quy tắc sau được áp dụng:
+---
 
-* Khóa `nhan` là nơi duy nhất chứa tên bệnh/nhãn phân loại.
-* Các biến dùng làm nhãn và các trường chẩn đoán như `chan_doan_tuyen_truoc`, `chan_doan_ban_dau_phong_kham`, `chan_doan_tai_kham` được để trống.
-* Các trường ghi chú tự do không chứa tên bệnh hoặc kết luận chẩn đoán.
-* Chỉ sử dụng các giá trị hợp lệ theo bảng biến.
-* Dữ liệu được xây dựng theo hướng hợp lý về mặt lâm sàng.
-* ID của bệnh án được tạo ngẫu nhiên và không chứa thông tin gợi ý về nhãn.
+### Chặng 1: Nạp bệnh án và Làm sạch dữ liệu
 
-### 2. Tách nhãn và chạy Rule-Based
+* **Nơi thực hiện:** Giao diện [`main.py`](file:///c:/Users/Admin/rulebased_may_day/main.py) và module khử định danh [`src/anonymize.py`](file:///c:/Users/Admin/rulebased_may_day/src/anonymize.py).
 
-Sau khi tạo bộ bệnh án, trường `nhan` được **tách riêng khỏi dữ liệu đầu vào**.
+#### 1. Cách bạn đưa bệnh án vào:
+* **Cách 1 (Chọn ca có sẵn):** Chọn từ kho 138 ca bệnh án giả định tại [`data/synthetic/rule_logic_cases.json`](file:///c:/Users/Admin/rulebased_may_day/data/synthetic/rule_logic_cases.json).
+* **Cách 2 (Tải file mới):** Upload file `.json` hoặc `.csv` từ máy tính. Hàm [`parse_csv_patient()`](file:///c:/Users/Admin/rulebased_may_day/main.py#L46-L69) sẽ tự động chuyển đổi kiểu dữ liệu cột chữ sang số hoặc `True`/`False`.
 
-Hệ thống Rule-Based chỉ nhận phần `du_lieu` của từng bệnh án để thực hiện suy luận và đưa ra nhãn dự đoán.
+#### 2. Hệ thống bóc tách những gì để đảm bảo khách quan?
+Hàm [`parse_patient()`](file:///c:/Users/Admin/rulebased_may_day/main.py#L97-L106) tại dòng 104–105 tự động **loại bỏ 6 trường sau** trước khi đưa dữ liệu vào suy luận:
+1. `nhan`: Tên bệnh/đáp án thực tế (Ground Truth) để tránh "nhìn trộm".
+2. `expected_engine`: Kết quả dự đoán mong đợi từ trước.
+3. `workflow_gap`: Mã ghi chú kiểm thử (ví dụ: `F-01`, `F-02`...).
+4. `id`: Mã định danh ca bệnh (ví dụ: `PV-01`, `BA_7642`).
+5. `mo_ta`: Câu mô tả sơ lược ca bệnh.
+6. `form_type`: Tên loại mẫu bệnh án.
 
-Quy trình kiểm thử:
+Đồng thời, module [`src/anonymize.py`](file:///c:/Users/Admin/rulebased_may_day/src/anonymize.py#L40-L69) mã hóa các thông tin nhận dạng cá nhân:
+* `ho_ten` $\rightarrow$ Che đệm (ví dụ: `Nguyễn Văn Anh` $\rightarrow$ `N*** Anh`).
+* `so_dien_thoai` $\rightarrow$ Che giữa (ví dụ: `091****678`).
+* `bhyt_so_the` & `ma_benh_nhan` $\rightarrow$ Băm mã SHA-256 (ví dụ: `PT_E3B0C44298FC1C14`).
+* `dia_chi_so_nha_thon_pho` $\rightarrow$ Đổi thành `[MASKED_STREET]`.
 
-```text
-Bệnh án giả lập
-       │
-       ├── nhan ───────────────► Nhãn thực tế (Ground Truth)
-       │
-       └── du_lieu ─────────────► Rule-Based
-                                      │
-                                      ▼
-                               Nhãn dự đoán
-                                      │
-                                      ▼
-                         So sánh với Ground Truth
-                                      │
-                                      ▼
-                             Confusion Matrix
-```
+---
 
-Cách thực hiện này giúp đánh giá khả năng suy luận của bộ luật mà không đưa trực tiếp nhãn bệnh vào dữ liệu đầu vào.
+### Chặng 2: Định tuyến vào đúng "Phòng chuyên khoa" (Routing)
 
-### 3. Kết quả kiểm thử
+* **Nơi thực hiện:** [`src/pipeline.py`](file:///c:/Users/Admin/rulebased_may_day/src/pipeline.py), hàm [`classify_form()`](file:///c:/Users/Admin/rulebased_may_day/src/pipeline.py#L22-L27).
 
-Bộ kiểm thử gồm **53 bệnh án giả lập**, thuộc 12 nhóm phân loại:
+Bệnh nhân được đưa vào đúng phòng khám bằng cách nạp tệp luật YAML tương ứng:
+1. **Phòng Phản vệ & Sốc:** Nạp [`rules/phan_ve_rules.yaml`](file:///c:/Users/Admin/rulebased_may_day/rules/phan_ve_rules.yaml) (đánh giá nguy cơ tử vong).
+2. **Phòng Mày đay cấp (< 6 tuần):** Nạp [`rules/cap_rules.yaml`](file:///c:/Users/Admin/rulebased_may_day/rules/cap_rules.yaml) (phân biệt cấp nặng hay cấp thường).
+3. **Phòng Mày đay mạn (> 6 tuần):** Nạp [`rules/man_rules.yaml`](file:///c:/Users/Admin/rulebased_may_day/rules/man_rules.yaml) (phân biệt do kích thích CIndU hay tự phát CSU).
 
-* Cấp nặng: 5 ca
-* Cấp thường: 5 ca
-* 8 nhóm con của CindU và CSU: 3 ca/nhóm, tổng cộng 24 ca
-* Phản vệ: 10 ca
-* Sốc phản vệ: 9 ca  ### đang chạy thì hết token =}}
+---
 
-Kết quả cho thấy hệ thống phân loại đúng **43/53 ca**, tương ứng:
+### Chặng 3: Bộ máy suy diễn Rule Engine (Trái tim của hệ thống)
 
-**Accuracy = 81,13%**
+* **Nơi thực hiện:** Lớp [`ClinicalRuleEngine`](file:///c:/Users/Admin/rulebased_may_day/src/classify.py#L12) tại [`src/classify.py`](file:///c:/Users/Admin/rulebased_may_day/src/classify.py).
+* Quá trình suy luận chạy tuần tự qua **2 pha nghiêm ngặt**:
 
-| Nhóm                    | Đúng/Tổng | Recall |
-| ----------------------- | --------: | -----: |
-| Cấp nặng                |       5/5 |   100% |
-| Cấp thường              |       4/5 |    80% |
-| Mày đay CSU overlap     |       3/3 |   100% |
-| Mày đay CSU type 1      |       3/3 |   100% |
-| Mày đay CSU type 2      |       3/3 |   100% |
-| Mày đay CSU unknown     |       3/3 |   100% |
-| Mày đay CIndU Choline   |       3/3 |   100% |
-| Mày đay CIndU da vẽ nổi |       3/3 |   100% |
-| Mày đay CIndU do lạnh   |       3/3 |   100% |
-| Mày đay CIndU khác      |       3/3 |   100% |
-| Phản vệ                 |     10/10 |   100% |
-| Sốc phản vệ             |       0/9 |     0% |
+#### Pha 1: Đánh giá điều kiện & giải quyết phụ thuộc ([`_eval_rule`](file:///c:/Users/Admin/rulebased_may_day/src/classify.py#L230-L240), [`_eval_condition`](file:///c:/Users/Admin/rulebased_may_day/src/classify.py#L251-L395))
+* **Nguyên tắc 3 trạng thái:** Không đoán mò. Mỗi điều kiện chỉ có thể là:
+  - `TRUE` (Đúng - Đủ bằng chứng có triệu chứng).
+  - `FALSE` (Sai - Đã kiểm tra và không có triệu chứng).
+  - `UNKNOWN` (Chưa biết - Do thiếu số đo hoặc nhập sai kiểu. **Tuyệt đối không coi UNKNOWN là FALSE**).
+* **Giải quyết phụ thuộc đệ quy (`ref_rule`):** Ví dụ luật Sốc phản vệ (`R-SOC`) cần biết luật Phản vệ (`R01-PV`, `R02-PV`, `R03-PV`) có đúng không; hệ thống sẽ tính luật Phản vệ trước, lưu kết quả vào bộ nhớ đệm `cache`, rồi mới quay lại tính tiếp `R-SOC`.
 
-### 4. Phân tích Confusion Matrix
+#### Pha 2: Phân giải ưu tiên và chốt kết luận ([`classify_patient`](file:///c:/Users/Admin/rulebased_may_day/src/classify.py#L397-L485))
+Hệ thống tìm các luật thỏa mãn và chọn luật có **`priority` nhỏ nhất** (ưu tiên cao nhất - bệnh nguy hiểm được xử lý trước):
+* **Ưu tiên 1:** Sốc phản vệ (`R-SOC`).
+* **Ưu tiên 2:** Phản vệ (`R01-PV`, `R02-PV`, `R03-PV`).
+* **Ưu tiên 4:** Mày đay cấp có dấu hiệu nặng (Ngứa nhiều, phù mạch thanh quản, lan $>50\%$ người).
+* **Ưu tiên 5:** Mày đay cấp thông thường (chỉ khi loại trừ toàn bộ dấu hiệu nặng).
+* **Ưu tiên 6 & 7:** Mày đay cảm ứng CIndU và mày đay tự phát CSU (phân loại theo test nhiệt/da vẽ nổi hoặc xét nghiệm kháng thể ELISA).
 
-Kết quả confusion matrix cho thấy phần lớn các lớp được phân loại chính xác trên bộ dữ liệu kiểm thử.
+---
 
-Đặc biệt:
+### Chặng 4: Trả kết quả cuối cùng trên màn hình
 
-* Các nhóm **mày đay** được phân loại đúng toàn bộ 24/24 ca.
-* **Cấp nặng** được phân loại đúng 5/5 ca.
-* **Phản vệ** được phân loại đúng 10/10 ca.
-* Có **1 ca cấp thường bị dự đoán thành cấp nặng**.
-* Có **9/9 ca sốc phản vệ bị dự đoán thành phản vệ**.
+* **Nơi thực hiện:** [`main.py`](file:///c:/Users/Admin/rulebased_may_day/main.py#L386-L436).
 
-Lỗi lớn nhất nằm ở cặp **Phản vệ – Sốc phản vệ**. Hệ thống hiện tại đã nhận diện được các ca phản vệ nhưng chưa phân biệt được các ca sốc phản vệ với phản vệ. Do đó, mặc dù accuracy tổng thể đạt 81,13%, **Recall của lớp Sốc phản vệ chỉ đạt 0%**.
+Kết quả trả về cho người dùng gồm **4 thành phần rõ ràng**:
 
-Các chỉ số trung bình theo lớp:
+| Thành phần | Ý nghĩa hiển thị trên giao diện |
+| :--- | :--- |
+| **1. Kết luận chính** | Dòng chữ in hoa to rõ: `KẾT LUẬN: SỐC PHẢN VỆ`, `MÀY ĐAY CẤP CÓ DẤU HIỆU NẶNG`... |
+| **2. Huy hiệu trạng thái** | Gồm 1 trong 5 trạng thái:<br>• **ĐÃ PHÂN LOẠI (`CLASSIFIED`):** Đủ dữ liệu và ra bệnh chính xác.<br>• **THEO DÕI PHẢN VỆ (`THEODOIPV`):** Đã loại trừ sốc/phản vệ nhưng cần theo dõi.<br>• **CHƯA ĐỦ DỮ KIỆN (`INSUFFICIENT_DATA`):** Thiếu thông tin bắt buộc.<br>• **CẦN RÀ SOÁT (`NEEDS_REVIEW`):** Sai kiểu dữ liệu (chữ/số) hoặc xung đột luật.<br>• **CHƯA XÁC ĐỊNH (`UNRESOLVED`):** Bệnh án không khớp với bất kỳ luật nào. |
+| **3. Giải thích lý do** | Đoạn tóm tắt y khoa (`decision_trace`): Nói rõ vì sao lại chẩn đoán như vậy (ví dụ: *"Thỏa mãn tiêu chuẩn phản vệ kèm tụt huyết áp nghiêm trọng theo độ tuổi"*). |
+| **4. Danh sách cần bổ sung** | Nếu rơi vào `INSUFFICIENT_DATA`, hệ thống in danh sách gạch đầu dòng các trường cần hỏi thêm (`missing_fields`), ví dụ: *"Cần bổ sung: Huyết áp tâm thu thấp nhất"*. |
 
-* **Macro Precision ≈ 86,33%**
-* **Macro Recall = 90,00%**
-* **Macro F1 ≈ 87,40%**
-
-Tuy nhiên, các chỉ số tổng hợp cần được diễn giải cùng với confusion matrix. Đặc biệt, Macro Recall cao không phản ánh đầy đủ vấn đề của lớp Sốc phản vệ, do nhiều lớp khác đạt recall 100%.
-
-### 5. Nhận xét
-
-Kết quả kiểm thử cho thấy bộ Rule-Based đã phân biệt tốt các nhóm bệnh có đặc trưng rõ ràng trong bộ dữ liệu giả lập. Tuy nhiên, **khả năng phân biệt giữa phản vệ và sốc phản vệ vẫn là điểm cần cải thiện chính**.
-
-Ngoài ra, số lượng bệnh án ở một số lớp còn nhỏ, đặc biệt các nhóm mày đay chỉ có 3 ca/nhóm. Vì vậy, kết quả 100% trên các lớp này mới phản ánh hiệu năng trên **bộ kiểm thử giả lập hiện tại**, chưa đủ để kết luận về khả năng tổng quát hóa trên dữ liệu bệnh án thực tế.
-
-## 6. Lõi hiện tại và cách chạy
-
-Số liệu 53 ca ở trên là kết quả lịch sử, chưa được chạy lại theo hợp đồng lõi mới. Engine nhận một dictionary CANONICAL; mapping hồ sơ legacy, validation/schema, preprocessing, anonymization, batch và evaluator chưa được nối vào pipeline.
-
-```sh
-python3 -m venv mayday_rb
-mayday_rb/bin/python -m pip install -r requirements.txt
-PYTHONDONTWRITEBYTECODE=1 mayday_rb/bin/python -m unittest discover -s tests -v
-```
-
-```python
-from src.pipeline import classify_form, load_engines
-
-engines = load_engines()
-result = classify_form("phan_ve", canonical_patient_data, engines)
-```
-
-Kết quả giữ sáu trường public hiện có và bổ sung kết quả từng luật, luật khớp/chặn, trường thiếu, trace không chứa giá trị bệnh án, version và SHA-256 của YAML. Lõi trả `CLASSIFIED`, `INSUFFICIENT_DATA`, `NEEDS_REVIEW` hoặc `UNRESOLVED`; các gate pipeline còn mở được ghi ở `docs/03_implementation_readiness.md`.
-
-## 7. Demo Streamlit
-
-Demo ở `main.py` dùng 138 ca giả định, chọn rõ một trong ba mẫu Phản vệ, Cấp, Mạn rồi chạy đúng bộ YAML của mẫu đó. Có thể chọn ca, sửa JSON, xem rule/điều kiện/trace và đối chiếu ba diagram. `THEODOIPV` là cảnh báo theo dõi khi đã đủ dữ kiện loại trừ tiêu chí; `INSUFFICIENT_DATA` giữ danh sách trường thiếu.
-
-```sh
-source mayday_rb/bin/activate
-python -m pip install -r requirements.txt
-python -m unittest discover -s tests -v
-python -m streamlit run main.py --server.address 127.0.0.1
-```
-
-Mở địa chỉ localhost mà Streamlit in ra. [Streamlit 1.50.0](https://pypi.org/project/streamlit/1.50.0/) hỗ trợ Python 3.9.6 của `mayday_rb` hiện tại; PyYAML giữ phiên bản 6.0.3. Không cần cài Graphviz hay thư viện vẽ riêng để xem SVG có sẵn.
-
-Input demo là object CANONICAL hoặc envelope `{"du_lieu": {...}}`; metadata/nhãn thật không được truyền vào suy diễn. Demo không tự mapping RAW hoặc điền trường thiếu. Đổi input sẽ xóa kết quả cũ, cần bấm phân loại lại. Các bước validator/preprocessing/batch chưa triển khai được ghi rõ; diagram thể hiện workflow đề xuất, còn kết quả từng rule lấy trực tiếp từ engine.
-
-Nhánh cấp thường đã có ca khớp với shape schema; HATT sai kiểu được giữ ở trạng thái cần rà soát. Các lệch CIndU/CSU và mapping RAW còn mở được ghi tại [báo cáo logic](docs/06_rule_logic_review.md). Demo vẫn chưa nối pipeline RAW.
-
-Bộ `unittest` dùng `mayday_rb`; test giao diện dùng `streamlit.testing.v1.AppTest`. Ý nghĩa hiển thị, ca thực hành và lịch sử sửa đổi được ghi trong [changelog và hướng dẫn demo](docs/05_changelog.md).
-
+Đồng thời, bảng hồ sơ bệnh án bên cạnh được **tự động tô viền màu**:
+* 🟩 **Màu xanh lá:** Triệu chứng khớp với tiêu chí bệnh (`matched`).
+* 🟨 **Màu vàng:** Trường thông tin bị thiếu cần nhập thêm (`missing`).
+* 🟥 **Màu đỏ:** Dữ liệu bị sai định dạng cần sửa lại (`review`).
