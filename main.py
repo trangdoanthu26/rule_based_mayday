@@ -1,6 +1,8 @@
 import csv
+import hashlib
 import io
 import json
+import math
 import re
 from html import escape
 from pathlib import Path
@@ -9,6 +11,7 @@ from typing import Any, Dict, List, Optional, Set
 import streamlit as st
 
 from src.pipeline import classify_form, load_engines
+from src.patient_input import empty_patient, engine_fields, get_value, is_raw, map_raw, merge_form, raw_patients
 
 
 ROOT = Path(__file__).resolve().parent
@@ -141,7 +144,7 @@ def format_trace_events(events: list, labels: Dict[str, str], engine: Any = None
     }
     rules_by_id = engine._rules_by_id if engine else {}
     rows = []
-    
+
     patient_age = patient_data.get("tuoi") if patient_data else None
 
     for event in events:
@@ -150,10 +153,10 @@ def format_trace_events(events: list, labels: Dict[str, str], engine: Any = None
         op = event.get("operator", "")
         field_path = event.get("field_path")
         res = event.get("result")
-        
+
         rule_def = rules_by_id.get(rule_id, {})
         cond_node = resolve_condition_node(rule_def.get("conditions", {}), cond_path) if rule_def else None
-        
+
         # Nếu đang kiểm tra R-SOC và đã có tuổi bệnh nhân: ẩn bớt các nhánh tuổi không thuộc nhóm của bệnh nhân
         if rule_id == "R-SOC" and patient_age is not None and cond_node and cond_node.get("field") == "tuoi":
             val = cond_node.get("value")
@@ -180,7 +183,7 @@ def format_trace_events(events: list, labels: Dict[str, str], engine: Any = None
         elif field_path:
             field_name = " › ".join(labels.get(part, part) for part in field_path.split("."))
             actual_val = get_nested_val(patient_data, field_path) if patient_data else None
-            
+
             if actual_val is None:
                 actual_text = "Chưa cung cấp"
             elif isinstance(actual_val, bool):
@@ -189,10 +192,10 @@ def format_trace_events(events: list, labels: Dict[str, str], engine: Any = None
                 actual_text = ", ".join(str(x) for x in actual_val) if actual_val else "Không có"
             else:
                 actual_text = str(actual_val)
-                
+
             expected_val = cond_node.get("value") if cond_node else None
             formula = cond_node.get("formula") if cond_node else None
-            
+
             if formula == "70 + 2 * tuoi":
                 calc_val = f"70 + 2*{patient_age} = {70 + 2*patient_age} mmHg" if isinstance(patient_age, (int, float)) else "70 + 2*tuổi"
                 op_text = f"Tụt huyết áp: < {calc_val}"
@@ -222,9 +225,9 @@ def format_trace_events(events: list, labels: Dict[str, str], engine: Any = None
             field_name = "Điều kiện lâm sàng tổng hợp"
             op_text = op_map.get(op, op)
             actual_text = "Đạt" if res is True else "Không đạt"
-            
+
         res_text = "ĐẠT" if res is True else "Không đạt" if res is False else "Chưa có thông tin"
-        
+
         rows.append({
             "Dữ kiện kiểm tra": field_name,
             "Số liệu thực tế của ca bệnh": actual_text,
@@ -347,6 +350,103 @@ def clinical_field_labels() -> Dict[str, str]:
         "khac_ghi_ro": "Thông tin khác", "dac_biet_ghi_ro": "Chi tiết vị trí đặc biệt",
     })
     return labels
+
+
+def render_engine_entry(form_type: str, engine: Any) -> None:
+    st.subheader("Nhập bệnh án theo mẫu engine")
+    st.caption("Điền trực tiếp hoặc bổ sung sau khi tải file. Để trống nếu chưa biết; chọn nhiều mục khi đã ghi nhận triệu chứng.")
+    try:
+        patient = parse_patient(st.session_state["patient_json"])
+    except (ValueError, RecursionError):
+        patient = {}
+        st.info("JSON hiện tại chưa hợp lệ. Có thể tạo lại bệnh án bằng các ô bên dưới.")
+    signature = (form_type, st.session_state["source_mode"], st.session_state["patient_json"])
+    if st.session_state.get("entry_signature") != signature:
+        for key in list(st.session_state):
+            if key.startswith(("entry_value::", "entry_known::")):
+                del st.session_state[key]
+        st.session_state["entry_signature"] = signature
+    labels = clinical_field_labels()
+    fields = engine_fields(form_type, engine)
+    values = {}
+    with st.form(f"engine_entry_{form_type}"):
+        columns = st.columns(2)
+        for index, field in enumerate(fields):
+            path = field["path"]
+            value = get_value(patient, path)
+            label = " › ".join(labels.get(part, part) for part in path.split("."))
+            key = f"entry_value::{form_type}:{path}"
+            with columns[index % 2]:
+                if field["kind"] == "number":
+                    try:
+                        valid = type(value) in (int, float) and math.isfinite(value) and value >= field["minimum"]
+                    except OverflowError:
+                        valid = False
+                    if field["integer"]:
+                        value = int(value) if valid and float(value).is_integer() and value <= 2 ** 53 - 1 else None
+                        minimum, step = int(field["minimum"]), 1
+                    else:
+                        value = float(value) if valid else None
+                        minimum, step = float(field["minimum"]), 0.1
+                    values[path] = st.number_input(label, min_value=minimum, value=value, step=step,
+                                                  key=key, help=path, placeholder="Chưa có dữ liệu")
+                elif field["kind"] == "array":
+                    previous = value if isinstance(value, list) else []
+                    if field["item_field"]:
+                        previous = [row.get(field["item_field"]) for row in previous if isinstance(row, dict)]
+                    previous = [item for item in previous if isinstance(item, str)]
+                    choices = list(dict.fromkeys(field["choices"] + previous))
+                    selected = st.multiselect(label, choices, default=previous, key=key, help=path)
+                    known = st.checkbox("Đã đánh giá mục này (kể cả khi không chọn)", value=isinstance(value, list),
+                                        key=f"entry_known::{form_type}:{path}", help=label)
+                    values[path] = selected if selected or known else None
+                else:
+                    choices = [True, False] if field["kind"] == "boolean" else field["choices"]
+                    if value not in choices or type(value) not in (str, bool):
+                        value = None
+                    options = [None] + choices
+                    values[path] = st.selectbox(
+                        label, options, index=options.index(value), key=key, help=path,
+                        format_func=lambda item: "Chưa có dữ liệu" if item is None else
+                                                "Có" if item is True else "Không" if item is False else item,
+                    )
+        submitted = st.form_submit_button("Áp dụng vào bệnh án", key="apply_engine_form", type="primary")
+    if submitted:
+        st.session_state["patient_json"] = json.dumps(merge_form(patient, fields, values), ensure_ascii=False, indent=2)
+        clear_result()
+        st.rerun()
+    st.download_button("Tải bệnh án JSON theo mẫu", json.dumps({"form_type": form_type, "du_lieu": patient},
+                       ensure_ascii=False, indent=2), file_name=f"benh_an_{form_type}.json", mime="application/json")
+    st.caption("Bấm Áp dụng để cập nhật ô JSON và bản tải xuống; sau đó chạy phân loại tại tab Bệnh án & kết quả.")
+
+
+def render_raw_mapping(raw: Dict[str, Any], form_type: str, engine: Any, upload_id: str, filename: str) -> None:
+    patients = raw_patients(raw)
+    if st.session_state.get("raw_patient") not in patients:
+        st.session_state["raw_patient"] = patients[0]
+    patient = st.sidebar.selectbox("Bệnh nhân trong RAW", patients, key="raw_patient",
+                                   format_func=lambda value: f"Bệnh nhân {patients.index(value) + 1}", on_change=clear_result)
+    visits = [row for row in raw["hanh_chinh"] if row["MA_BN_AN_DANH"] == patient]
+    if st.session_state.get("raw_visit") not in range(len(visits)):
+        st.session_state["raw_visit"] = 0
+    visit = st.sidebar.selectbox("Lượt khám trong RAW", list(range(len(visits))), key="raw_visit", on_change=clear_result,
+                                format_func=lambda index: f"Lượt {index + 1} · {visits[index].get('IN_TIME', 'Chưa có thời điểm')}")
+    context = (upload_id, patient, visit, form_type)
+    if st.session_state.get("raw_context") != context:
+        st.session_state["raw_ige_confirm"] = False
+        st.session_state["raw_context"] = context
+    has_ige = any(row.get("MA_BN_AN_DANH") == patient and row.get("TEST_INDEX_CODE") == "SHM0027"
+                  for row in raw.get("xet_nghiem", []))
+    confirm = st.sidebar.checkbox("Xác nhận mã SHM0027 là IgE toàn phần", key="raw_ige_confirm", on_change=clear_result) if has_ige else False
+    signature = (context, confirm)
+    if st.session_state.get("applied_raw") != signature:
+        mapped = map_raw(raw, patient, visit, form_type, engine, confirm_ige=confirm)
+        if len(patients) == 1 and re.fullmatch(r"benh_nhan_[1-9][0-9]*\.json", filename):
+            mapped["du_lieu"]["ma_benh_nhan"] = Path(filename).stem
+        st.session_state["patient_json"] = json.dumps(mapped["du_lieu"], ensure_ascii=False, indent=2)
+        st.session_state["raw_mapping_report"] = mapped
+        st.session_state["applied_raw"] = signature
+        clear_result()
 
 
 def evidence_highlights(result: Dict[str, Any], rules: Dict[str, Any]) -> Dict[str, str]:
@@ -825,18 +925,27 @@ def render() -> None:
 
     st.session_state.setdefault("result", None)
     st.session_state.setdefault("run_error", None)
-    st.session_state.setdefault("patient_json", "{}")
+    # Giữ JSON khi widget chỉnh sửa bị ẩn bởi công tắc đối chiếu.
+    st.session_state["patient_json"] = st.session_state.get("patient_json", "{}")
 
     # Sidebar: Cột chọn nội dung minh họa của riêng phân hệ đang chọn
     st.sidebar.markdown(f"### 📋 Chọn nội dung minh họa\n**Phân hệ:** {FORM_SHORT_NAMES[form_type]}")
     data_source_mode = st.sidebar.radio(
-        "Nguồn bệnh án", ["Ca giả định mẫu", "Tải file mới (.json, .csv)"],
+        "Chọn nguồn bệnh án", ["Ca giả định mẫu", "Tải file mới (.json, .csv)", "Nhập theo mẫu engine"],
         key="source_mode", on_change=clear_result,
     )
+    if data_source_mode == "Ca giả định mẫu":
+        st.warning("Dữ liệu giả định · Các khác biệt CIndU/CSU vẫn cần rà soát. Xem lưu ý theo ca.")
+    else:
+        st.info("Bệnh án nhập ngoài · Dữ kiện chưa biết được giữ trống; bổ sung tại tab Nhập bệnh án.")
     if st.session_state.get("active_source") != data_source_mode:
         st.session_state["loaded_case"] = None
         st.session_state["loaded_upload"] = None
         st.session_state["patient_json"] = "{}"
+        st.session_state["uploaded_raw"] = None
+        st.session_state["raw_mapping_report"] = None
+        st.session_state["applied_raw"] = None
+        st.session_state["manual_form"] = None
         st.session_state["active_source"] = data_source_mode
         clear_result()
 
@@ -856,10 +965,20 @@ def render() -> None:
             if st.session_state.get("loaded_upload") != upload_key:
                 st.session_state["loaded_upload"] = upload_key
                 st.session_state["patient_json"] = ""
+                st.session_state["uploaded_raw"] = None
+                st.session_state["raw_mapping_report"] = None
+                st.session_state["applied_raw"] = None
                 clear_result()
                 try:
                     if uploaded_file.name.lower().endswith(".json"):
-                        patient_data = parse_patient(uploaded_file.getvalue().decode("utf-8"))
+                        text = uploaded_file.getvalue().decode("utf-8-sig")
+                        decoded = json.loads(text, parse_constant=reject_constant)
+                        if is_raw(decoded):
+                            raw_patients(decoded)
+                            st.session_state["uploaded_raw"] = decoded
+                            patient_data = {}
+                        else:
+                            patient_data = parse_patient(text)
                     else:
                         patient_data = parse_patient(json.dumps(
                             parse_csv_patient(uploaded_file.getvalue()), allow_nan=False,
@@ -869,9 +988,28 @@ def render() -> None:
                     mismatch_warning = check_cross_form_mismatch(form_type, patient_data)
                 except (ValueError, UnicodeError, RecursionError, csv.Error) as exc:
                     st.sidebar.error(f"Không đọc được bệnh án ({type(exc).__name__}). Kiểm tra JSON/CSV.")
+            if st.session_state.get("uploaded_raw") is not None:
+                try:
+                    render_raw_mapping(st.session_state["uploaded_raw"], form_type, engine,
+                                       hashlib.sha256(uploaded_file.getvalue()).hexdigest(), uploaded_file.name)
+                except ValueError:
+                    st.session_state["patient_json"] = ""
+                    st.sidebar.error("Không xác định được bệnh nhân/lượt khám trong RAW. Kiểm tra mã liên kết và các bảng dữ liệu.")
+                    clear_result()
         elif st.session_state.get("loaded_upload") is not None:
             st.session_state["loaded_upload"] = None
             st.session_state["patient_json"] = "{}"
+            st.session_state["uploaded_raw"] = None
+            st.session_state["raw_mapping_report"] = None
+            st.session_state["applied_raw"] = None
+            clear_result()
+    elif data_source_mode == "Nhập theo mẫu engine":
+        case_id = {"phan_ve": "Phản vệ", "cap": "Mày đay cấp", "man": "Mày đay mạn"}[form_type]
+        selected_case = {"mo_ta": f"Bệnh án nhập trực tiếp · {case_id}", "du_lieu": {},
+                         "workflow_gap": None, "expected_engine": {}}
+        if st.session_state.get("manual_form") != form_type:
+            st.session_state["patient_json"] = json.dumps(empty_patient(form_type, engine), ensure_ascii=False, indent=2)
+            st.session_state["manual_form"] = form_type
             clear_result()
     else:
         if st.session_state.get("output_label") not in ["Tất cả"] + labels:
@@ -915,9 +1053,9 @@ def render() -> None:
     if mismatch_warning:
         st.warning(f"⚠️ **Khuyến nghị:** {mismatch_warning}")
 
-    # Khu vực nội dung chính: 3 Tabs chuẩn
-    input_tab, layers_tab, catalog_tab = st.tabs([
-        "Bệnh án & kết quả", "Logic suy luận", "Bảng quy tắc & Mức ưu tiên",
+    # Khu vực nội dung chính và nhập bệnh án
+    input_tab, layers_tab, catalog_tab, entry_tab = st.tabs([
+        "Bệnh án & kết quả", "Logic suy luận", "Bảng quy tắc & Mức ưu tiên", "Nhập bệnh án",
     ])
 
     # Bảo đảm patient_json luôn có dữ liệu, không bị mất khi bật/tắt công tắc widget
@@ -931,6 +1069,9 @@ def render() -> None:
             st.session_state["patient_json"] = json_str
             st.session_state["_saved_patient_json"] = json_str
 
+    with entry_tab:
+        render_engine_entry(form_type, engine)
+
     try:
         current_patient = parse_patient(st.session_state["patient_json"])
     except (ValueError, RecursionError):
@@ -942,8 +1083,18 @@ def render() -> None:
     # TAB 1: BỆNH ÁN & KẾT QUẢ
     # ==========================================
     with input_tab:
-        st.markdown(f"<div style='font-size:0.9rem; color:#475569; margin-bottom:0.5rem;'><strong>Mô tả ca:</strong> {selected_case['mo_ta']}</div>", unsafe_allow_html=True)
-        
+        st.write(selected_case["mo_ta"])
+        report = st.session_state.get("raw_mapping_report")
+        if report:
+            st.info("RAW đã được mapping sang trường engine theo bệnh nhân/lượt khám đã chọn. Bổ sung dữ kiện còn thiếu tại tab Nhập bệnh án.")
+            with st.expander("Nguồn dữ liệu và kết quả mapping RAW"):
+                if report["provenance"]:
+                    st.table(report["provenance"])
+                if report["candidates"]:
+                    st.write("Xét nghiệm IgE cần đối chiếu:")
+                    st.dataframe(report["candidates"], hide_index=True)
+                for warning in report["warnings"]:
+                    st.write("• " + warning)
         result = st.session_state["result"]
         highlights = evidence_highlights(result, rules) if result else {}
 

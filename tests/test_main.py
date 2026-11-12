@@ -24,7 +24,7 @@ class TestStreamlitDemo(unittest.TestCase):
         # Khi bật đối chiếu JSON: Hiển thị song song phiếu khám và ô JSON
         app = self.start_app(open_editor=True)
         self.assertEqual([tab.label for tab in app.tabs],
-                         ["Bệnh án & kết quả", "Logic suy luận", "Bảng quy tắc & Mức ưu tiên"])
+                         ["Bệnh án & kết quả", "Logic suy luận", "Bảng quy tắc & Mức ưu tiên", "Nhập bệnh án"])
         self.assertEqual(len(app.tabs[0].text_area), 1)
         self.assertEqual(len(app.tabs[0].columns[0].get("html")), 1)
         app.button(key="classify").click().run()

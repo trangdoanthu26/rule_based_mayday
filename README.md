@@ -36,7 +36,7 @@ Mở URL được Streamlit in ra trong terminal (thường là `http://localhos
 ## Sử dụng demo
 
 1. Chọn phân hệ bệnh án ở đầu trang.
-2. Ở thanh bên, chọn ca giả định mẫu hoặc tải hồ sơ `.json`/`.csv`.
+2. Ở thanh bên, chọn ca giả định mẫu, tải hồ sơ `.json`/`.csv` hoặc chọn **Nhập theo mẫu engine** và điền tại tab **Nhập bệnh án**.
 3. Kiểm tra dữ liệu hiển thị; có thể bật phần đối chiếu JSON và chỉnh sửa dữ liệu để thử các trường hợp biên.
 4. Chọn **Phân loại và giải thích**.
 5. Đọc trạng thái, kết luận (nếu có), các trường còn thiếu, quy tắc khớp/chặn và tab **Logic suy luận**.
@@ -72,7 +72,7 @@ Hoặc dùng envelope có trường `du_lieu`:
 
 Tên trường và kiểu dữ liệu cần phù hợp với bộ luật của phân hệ. CSV được đọc từ **dòng dữ liệu đầu tiên**; tiêu đề cột phải là tên trường CANONICAL. Giá trị số và `true`/`false` được chuyển đổi tự động; các kiểu dữ liệu lồng nhau nên dùng JSON.
 
-Ứng dụng hiện chưa tự ánh xạ bệnh án RAW/legacy sang CANONICAL, không tự điền giá trị còn thiếu và không thực thi JSON Schema để xác thực upload. Các file trong `schema/` là tài liệu hợp đồng dữ liệu tham khảo, không phải bảo đảm rằng input được runtime xác thực theo schema.
+Với JSON RAW dạng các bảng HIS có `hanh_chinh`, demo cho chọn bệnh nhân/lượt khám và mapping có giới hạn: tuổi, giới tính, HATT thấp nhất trong lượt khám cho Phản vệ và IgE sau xác nhận. Trường không có nguồn giữ `null`; không suy triệu chứng từ ICD hoặc thuốc. Phạm vi mapping và cách bổ sung dữ kiện tại tab **Nhập bệnh án** được ghi trong [hướng dẫn nhập liệu](docs/07_patient_input_mapping.md). Ứng dụng chưa có mapping RAW/legacy tổng quát, không tự điền giá trị còn thiếu và không thực thi JSON Schema để xác thực upload. Các file trong `schema/` là tài liệu hợp đồng dữ liệu tham khảo, không phải bảo đảm rằng input được runtime xác thực theo schema.
 
 ### Trạng thái kết quả
 
@@ -104,6 +104,7 @@ Các kiểm thử bao phủ engine, định tuyến ba phân hệ, ca logic gi�
 ├── src/
 │   ├── classify.py          # Engine nạp và đánh giá luật
 │   ├── pipeline.py          # Nạp engine và định tuyến theo phân hệ
+│   ├── patient_input.py     # Input theo engine và mapping RAW giới hạn
 │   ├── preprocess.py        # Tiền xử lý tiện ích
 │   ├── validate.py          # Tiện ích validation
 │   ├── anonymize.py         # Tiện ích khử định danh
@@ -151,7 +152,7 @@ Bộ dữ liệu có nhãn ──→ đối chiếu với kết quả sau suy lu
 8. **Trả và lưu kết quả:** trình bày kết luận cùng giới hạn/cảnh báo; kiểm soát quyền truy cập và lưu vết theo chính sách dữ liệu của hệ thống.
 9. **Đánh giá riêng:** chỉ với bộ dữ liệu có nhãn, so sánh kết quả suy luận với nhãn thật sau khi suy luận hoàn tất để tính các chỉ số. Đây là luồng đánh giá tập dữ liệu, không phải bước bắt buộc cho mỗi hồ sơ sử dụng thông thường.
 
-**Tình trạng triển khai hiện tại:** demo đọc JSON/CSV đơn giản hoặc ca giả định, cho phép chọn phân hệ, rồi chuyển dữ liệu trực tiếp vào engine. Chưa có mapping RAW → CANONICAL, xác thực hồ sơ đầu vào bằng schema, pipeline tiền xử lý/khử định danh tự động hoặc module đánh giá hoàn chỉnh. Các bước này cần được triển khai và kiểm thử trước khi coi luồng trên là pipeline vận hành.
+**Tình trạng triển khai hiện tại:** demo đọc JSON/CSV đơn giản hoặc ca giả định, cho phép chọn phân hệ, rồi chuyển dữ liệu trực tiếp vào engine. Đã có mapping RAW → CANONICAL giới hạn qua giao diện; chưa có xác thực hồ sơ đầu vào bằng schema, pipeline tiền xử lý/khử định danh tự động hoặc module đánh giá hoàn chỉnh. Các bước này cần được triển khai và kiểm thử trước khi coi luồng trên là pipeline vận hành.
 
 ### Gọi engine từ Python
 
@@ -180,6 +181,7 @@ print(result["status"], result["predicted_label"])
 - [Các ca kiểm thử](docs/04_test_cases.md)
 - [Changelog và hướng dẫn demo](docs/05_changelog.md)
 - [Rà soát logic luật](docs/06_rule_logic_review.md)
+- [Nhập bệnh án và mapping RAW](docs/07_patient_input_mapping.md)
 - [Mức độ sẵn sàng triển khai và các vấn đề còn mở](docs/03_implementation_readiness.md)
 
 ## An toàn dữ liệu và giới hạn sử dụng
