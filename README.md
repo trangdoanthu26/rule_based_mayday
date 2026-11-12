@@ -149,9 +149,11 @@ python -m streamlit run main.py --server.address 127.0.0.1
 
 Mở địa chỉ localhost mà Streamlit in ra. [Streamlit 1.50.0](https://pypi.org/project/streamlit/1.50.0/) hỗ trợ Python 3.9.6 của `mayday_rb` hiện tại; PyYAML giữ phiên bản 6.0.3. Không cần cài Graphviz hay thư viện vẽ riêng để xem SVG có sẵn.
 
-Input demo là object CANONICAL hoặc envelope `{"du_lieu": {...}}`; metadata/nhãn thật không được truyền vào suy diễn. Demo không tự mapping RAW hoặc điền trường thiếu. Đổi input sẽ xóa kết quả cũ, cần bấm phân loại lại. Các bước validator/preprocessing/batch chưa triển khai được ghi rõ; diagram thể hiện workflow đề xuất, còn kết quả từng rule lấy trực tiếp từ engine.
+Input CANONICAL là object hoặc envelope `{"du_lieu": {...}}`; metadata/nhãn thật không được truyền vào suy diễn. Trường thiếu được giữ thiếu. Đổi input sẽ xóa kết quả cũ, cần bấm phân loại lại. Các bước validator/preprocessing/batch chưa triển khai được ghi rõ; diagram thể hiện workflow đề xuất, còn kết quả từng rule lấy trực tiếp từ engine.
 
-Nhánh cấp thường đã có ca khớp với shape schema; HATT sai kiểu được giữ ở trạng thái cần rà soát. Các lệch CIndU/CSU và mapping RAW còn mở được ghi tại [báo cáo logic](docs/06_rule_logic_review.md). Demo vẫn chưa nối pipeline RAW.
+Giao diện hiện có tab **Nhập bệnh án** với ô nhập theo trường YAML/schema của mẫu đã chọn. Chọn nguồn **Nhập theo mẫu engine** để tạo bệnh án mới, hoặc dùng panel bổ sung file vừa upload. Với JSON RAW dạng các bảng HIS, giao diện cho chọn bệnh nhân/lượt khám và mapping các trường có nguồn xác định; dữ liệu thiếu giữ `null`. Phạm vi mapping, xác nhận IgE và cách dùng panel tại [hướng dẫn nhập liệu](docs/07_patient_input_mapping.md). Validator RAW tổng quát và suy diễn triệu chứng từ văn bản vẫn chưa triển khai.
+
+Nhánh cấp thường đã có ca khớp với shape schema; HATT sai kiểu được giữ ở trạng thái cần rà soát. Các lệch CIndU/CSU và phạm vi RAW còn mở được ghi tại [báo cáo logic](docs/06_rule_logic_review.md). Pipeline RAW tổng quát vẫn chưa hoàn thiện.
 
 Bộ `unittest` dùng `mayday_rb`; test giao diện dùng `streamlit.testing.v1.AppTest`. Ý nghĩa hiển thị, ca thực hành và lịch sử sửa đổi được ghi trong [changelog và hướng dẫn demo](docs/05_changelog.md).
 
