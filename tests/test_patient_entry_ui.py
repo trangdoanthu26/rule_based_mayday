@@ -32,6 +32,7 @@ class TestPatientEntryUI(unittest.TestCase):
 
     def test_panel_handles_numbers_outside_widget_limits_without_changing_json(self):
         app = self.start()
+        app.toggle(key="toggle_compare_json").set_value(True).run()
         for data in ({"tuoi": 10 ** 400}, {"trieu_chung_tieu_hoa_hien_tai_pv": {"non_so_lan": 10 ** 20}}):
             with self.subTest(field=list(data)):
                 app.text_area(key="patient_json").set_value(json.dumps(data)).run()
@@ -88,12 +89,36 @@ class TestPatientEntryUI(unittest.TestCase):
             self.assertEqual(data["tuoi"], 31)
             self.assertEqual(data["huyet_ap_tam_thu_thap_nhat"], 115)
             self.assertNotIn("hanh_chinh", data)
+            app.toggle(key="toggle_compare_json").set_value(True).run()
             app.text_area(key="patient_json").set_value('{"tuoi": 45}').run()
+            app.toggle(key="toggle_compare_json").set_value(False).run()
+            app.run()
+            self.assertEqual(json.loads(app.session_state["patient_json"]), {"tuoi": 45})
+            app.toggle(key="toggle_compare_json").set_value(True).run()
+            self.assertEqual(json.loads(app.text_area(key="patient_json").value), {"tuoi": 45})
             app.button(key="classify").click().run()
             self.assertEqual(json.loads(app.session_state["patient_json"]), {"tuoi": 45})
             app.selectbox(key="raw_visit").select(0).run()
             self.assertEqual(json.loads(app.session_state["patient_json"])["tuoi"], 30)
             self.assertIsNone(app.session_state["result"])
+
+    def test_manual_input_survives_json_editor_toggle_and_classification(self):
+        app = self.start()
+        app.radio(key="source_mode").set_value("Nhập theo mẫu engine").run()
+        app.number_input(key=self.key("phan_ve", "tuoi")).set_value(37.0)
+        app.button(key="apply_engine_form").click().run()
+        expected = json.loads(app.session_state["patient_json"])
+        self.assertEqual(expected["tuoi"], 37)
+        app.toggle(key="toggle_compare_json").set_value(True).run()
+        self.assertEqual(json.loads(app.text_area(key="patient_json").value), expected)
+        app.toggle(key="toggle_compare_json").set_value(False).run()
+        app.run()
+        app.button(key="classify").click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(json.loads(app.session_state["patient_json"]), expected)
+        self.assertEqual(app.session_state["result"]["status"], "INSUFFICIENT_DATA")
+        app.toggle(key="toggle_compare_json").set_value(True).run()
+        self.assertEqual(json.loads(app.text_area(key="patient_json").value), expected)
 
     def test_raw_ige_confirmation_is_explicit_and_resets_with_form(self):
         raw = {"hanh_chinh": [{"MA_BN_AN_DANH": "SYN", "TUOI_KHI_VAO_VIEN": 30,

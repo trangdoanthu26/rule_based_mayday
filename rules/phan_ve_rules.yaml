@@ -7,14 +7,18 @@ rules:
   # =========================================================================
   - rule_id: "R-SOC"
     name: "Chẩn đoán Sốc phản vệ"
+    layer: "T1 · Sốc phản vệ"
     target_label: "Sốc phản vệ"
     priority: 1
+    priority_label: "Ưu tiên 1"
+    display_name: "Sốc phản vệ"
+    criteria_text: "R-SOC = (R01-PV-KHONG-DI-NGUYEN hoặc R02-PV-2/4-CO-QUAN hoặc R03-PV-DUONG-HIT) VÀ Tụt huyết áp theo tuổi."
     conditions:
       all_of:
         - any_of:
-            - ref_rule: "R01-PV"
-            - ref_rule: "R02-PV"
-            - ref_rule: "R03-PV"
+            - ref_rule: "R01-PV-KHONG-DI-NGUYEN"
+            - ref_rule: "R02-PV-2/4-CO-QUAN"
+            - ref_rule: "R03-PV-DUONG-HIT"
         - any_of:
             # Từ lúc sinh đến <1 tuổi: HATT < 70 mmHg
             - all_of:
@@ -66,10 +70,14 @@ rules:
   # =========================================================================
   # TẦNG 2: PHẢN VỆ (Ưu tiên 2 - Cấp cứu đe dọa tính mạng)
   # =========================================================================
-  - rule_id: "R01-PV"
+  - rule_id: "R01-PV-KHONG-DI-NGUYEN"
     name: "Phản vệ - Kịch bản 1 (Không rõ dị nguyên)"
+    layer: "T2 · Phản vệ và theo dõi"
     target_label: "Phản vệ"
     priority: 2
+    priority_label: "Ưu tiên 2"
+    display_name: "Phản vệ (Không rõ dị nguyên)"
+    criteria_text: "Không rõ tác nhân dị ứng + Da cấp tính kèm Hô hấp hoặc Tuần hoàn."
     conditions:
       all_of:
         # Không rõ tác nhân dị ứng
@@ -99,10 +107,14 @@ rules:
               value: ["Tụt huyết áp / sốc", "Tím tái", "Ngất"]
     decision_trace: "Xuất hiện triệu chứng Da cấp tính kết hợp suy Hô hấp hoặc Tuần hoàn khi không rõ dị nguyên."
 
-  - rule_id: "R02-PV"
+  - rule_id: "R02-PV-2/4-CO-QUAN"
     name: "Phản vệ - Kịch bản 2 (Dị nguyên nghi ngờ + >= 2/4 hệ cơ quan)"
+    layer: "T2 · Phản vệ và theo dõi"
     target_label: "Phản vệ"
     priority: 2
+    priority_label: "Ưu tiên 2"
+    display_name: "Phản vệ (Dị nguyên nghi ngờ)"
+    criteria_text: "Tiếp xúc thức ăn/thuốc/côn trùng + tổn thương đồng thời >= 2 trong 4 hệ (Da, Hô hấp, Tuần hoàn, Tiêu hóa nặng)."
     conditions:
       all_of:
         # Tiếp xúc tác nhân nguy cơ cao
@@ -145,10 +157,14 @@ rules:
                   value: 2
     decision_trace: "Tiếp xúc dị nguyên nguy cơ cao kèm tổn thương đồng thời từ 2 hệ cơ quan trở lên."
 
-  - rule_id: "R03-PV"
+  - rule_id: "R03-PV-DUONG-HIT"
     name: "Phản vệ - Kịch bản 3 (Dị nguyên đã biết + Tụt HA hoặc Hô hấp ngoài đường hít)"
+    layer: "T2 · Phản vệ và theo dõi"
     target_label: "Phản vệ"
     priority: 2
+    priority_label: "Ưu tiên 2"
+    display_name: "Phản vệ (Dị nguyên đã biết)"
+    criteria_text: "Tiếp xúc dị nguyên đã biết + Hô hấp ngoài đường hít hoặc Tuần hoàn."
     conditions:
       all_of:
         - any_of:
@@ -179,16 +195,20 @@ rules:
 
   - rule_id: "R-PV-THEODOI"
     name: "Theo dõi sát phản vệ"
+    layer: "T2 · Phản vệ và theo dõi"
     target_label: "Theo dõi phản vệ"
     target_status: "THEODOIPV"
     priority: 3
+    priority_label: "Ưu tiên 3"
+    display_name: "Tiếp tục theo dõi phản vệ"
+    criteria_text: "Tự động kích hoạt khi vào bệnh án phản vệ nhưng không đủ tiêu chí Sốc phản vệ và Phản vệ (không cần trường tích tay)."
     conditions:
       not:
         any_of:
           - ref_rule: "R-SOC"
-          - ref_rule: "R01-PV"
-          - ref_rule: "R02-PV"
-          - ref_rule: "R03-PV"
+          - ref_rule: "R01-PV-KHONG-DI-NGUYEN"
+          - ref_rule: "R02-PV-2/4-CO-QUAN"
+          - ref_rule: "R03-PV-DUONG-HIT"
     decision_trace: "Đã đánh giá đủ dữ kiện và chưa đạt tiêu chí sốc hoặc phản vệ; tiếp tục theo dõi."
 
   # =========================================================================

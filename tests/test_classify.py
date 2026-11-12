@@ -28,7 +28,7 @@ class TestRuleConfiguration(RuleEngineTestCase):
 
         self.assertEqual(len(ids), 5)
         self.assertEqual(len(set(ids)), 5)
-        self.assertTrue({"R-SOC", "R01-PV", "R02-PV"}.issubset(ids))
+        self.assertTrue({"R-SOC", "R01-PV-KHONG-DI-NGUYEN", "R02-PV-2/4-CO-QUAN"}.issubset(ids))
         self.assertEqual(engine.rules_version, "1.3.0")
         self.assertEqual(engine._rules_by_id["R-PV-THEODOI"]["target_status"], "THEODOIPV")
         self.assertEqual(engine.rules_sha256, hashlib.sha256(

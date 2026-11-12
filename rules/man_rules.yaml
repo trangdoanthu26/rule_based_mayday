@@ -7,7 +7,11 @@ rules:
   # =========================================================================
   - rule_id: "R-CindU-00"
     name: "Điều kiện tiên quyết CIndU"
+    layer: "T4 · Mày đay cảm ứng mạn tính — CIndU"
     is_base_condition: true
+    priority_label: "Tiên quyết"
+    display_name: "Điều kiện tiên quyết CIndU"
+    criteria_text: "Khởi phát > 6 tuần và xuất hiện khi có các yếu tố kích thích."
     conditions:
       all_of:
         - field: "thoi_gian_khoi_phat_tuan"
@@ -19,8 +23,12 @@ rules:
 
   - rule_id: "R-CindU-01"
     name: "Mày đay CIndU da vẽ nổi"
+    layer: "T4 · Mày đay cảm ứng mạn tính — CIndU"
     target_label: "Mày đay CindU da vẽ nổi"
     priority: 6
+    priority_label: "Nhóm CIndU"
+    display_name: "Mày đay CIndU Da vẽ nổi"
+    criteria_text: "Khởi phát > 6 tuần khi có kích thích cơ học + FricTest dương tính (+)."
     conditions:
       all_of:
         - ref_rule: "R-CindU-00"
@@ -31,8 +39,12 @@ rules:
 
   - rule_id: "R-CindU-02"
     name: "Mày đay CIndU Cholinergic"
+    layer: "T4 · Mày đay cảm ứng mạn tính — CIndU"
     target_label: "Mày đay CindU Choline (do nóng)"
     priority: 6
+    priority_label: "Nhóm CIndU"
+    display_name: "Mày đay CIndU Cholinergic"
+    criteria_text: "Xuất hiện khi nóng bức, gắng sức, mồ hôi + Test kích thích Cholinergic (+)."
     conditions:
       all_of:
         - ref_rule: "R-CindU-00"
@@ -43,8 +55,12 @@ rules:
 
   - rule_id: "R-CindU-03"
     name: "Mày đay CIndU do lạnh"
+    layer: "T4 · Mày đay cảm ứng mạn tính — CIndU"
     target_label: "Mày đay CindU do lạnh"
     priority: 6
+    priority_label: "Nhóm CIndU"
+    display_name: "Mày đay CIndU Do lạnh"
+    criteria_text: "Xuất hiện khi tiếp xúc lạnh + Test cục đá (TempTest / Ice cube) (+)."
     conditions:
       all_of:
         - ref_rule: "R-CindU-00"
@@ -59,8 +75,12 @@ rules:
 
   - rule_id: "R-CindU-04"
     name: "Mày đay CIndU khác"
+    layer: "T4 · Mày đay cảm ứng mạn tính — CIndU"
     target_label: "Mày đay CindU khác"
     priority: 6
+    priority_label: "Nhóm CIndU"
+    display_name: "Mày đay CIndU Thể khác"
+    criteria_text: "Âm tính các test trên nhưng dương tính với áp lực chậm, ánh sáng mặt trời hoặc nước."
     conditions:
       all_of:
         - ref_rule: "R-CindU-00"
@@ -93,7 +113,11 @@ rules:
   # =========================================================================
   - rule_id: "R-CSU-00"
     name: "Điều kiện tiên quyết CSU"
+    layer: "T5 · Mày đay tự phát mạn tính — CSU"
     is_base_condition: true
+    priority_label: "Tiên quyết"
+    display_name: "Điều kiện tiên quyết CSU"
+    criteria_text: "Bệnh > 6 tuần tự phát, tuổi >= 16, lưu huyết thanh, ngừng kháng H1 >= 8 ngày, corticoid >= 30 ngày."
     conditions:
       all_of:
         - field: "thoi_gian_khoi_phat_tuan"
@@ -115,7 +139,11 @@ rules:
   # Phân chia Giai đoạn 1 (ASST +) và Giai đoạn 2 (ASST -)
   - rule_id: "R-GD-01"
     name: "CSU Giai đoạn 1 (ASST dương tính)"
+    layer: "T5 · Mày đay tự phát mạn tính — CSU"
     is_base_condition: true
+    priority_label: "Tiên quyết"
+    display_name: "CSU Giai đoạn 1 (ASST +)"
+    criteria_text: "Đạt R-CSU-00 và ASST dương tính (+)."
     conditions:
       all_of:
         - ref_rule: "R-CSU-00"
@@ -125,7 +153,11 @@ rules:
 
   - rule_id: "R-GD-02"
     name: "CSU Giai đoạn 2 (ASST âm tính, đạt chuẩn Stella)"
+    layer: "T5 · Mày đay tự phát mạn tính — CSU"
     is_base_condition: true
+    priority_label: "Tiên quyết"
+    display_name: "CSU Giai đoạn 2 (ASST -, Stella)"
+    criteria_text: "Đạt R-CSU-00 và ASST âm tính (−), đạt chuẩn Stella hoặc IgE toàn phần < 40."
     conditions:
       all_of:
         - ref_rule: "R-CSU-00"
@@ -143,8 +175,12 @@ rules:
   # --- Cây phân loại thể bệnh ELISA ---
   - rule_id: "R-CSU-T1-01"
     name: "Mày đay CSU Type I (Giai đoạn 1)"
+    layer: "T5 · Mày đay tự phát mạn tính — CSU"
     target_label: "Mày đay CSU type 1"
     priority: 7
+    priority_label: "Nhóm CSU"
+    display_name: "Mày đay CSU Type I (Giai đoạn 1)"
+    criteria_text: "Tự dị ứng: Theo dõi >= 60 ngày, IgG kháng FcεRIα/IgE âm tính (-), IgE kháng IL-24 dương tính (+)."
     conditions:
       all_of:
         - ref_rule: "R-GD-01"
@@ -164,8 +200,12 @@ rules:
 
   - rule_id: "R-CSU-T1-02"
     name: "Mày đay CSU Type I (Giai đoạn 2)"
+    layer: "T5 · Mày đay tự phát mạn tính — CSU"
     target_label: "Mày đay CSU type 1"
     priority: 7
+    priority_label: "Nhóm CSU"
+    display_name: "Mày đay CSU Type I (Giai đoạn 2)"
+    criteria_text: "Tự dị ứng: ASST âm tính đạt chuẩn Stella, IgE kháng IL-24 dương tính (+)."
     conditions:
       all_of:
         - ref_rule: "R-GD-02"
@@ -176,8 +216,12 @@ rules:
 
   - rule_id: "R-CSU-T2-01"
     name: "Mày đay CSU Type IIb (Tự miễn)"
+    layer: "T5 · Mày đay tự phát mạn tính — CSU"
     target_label: "Mày đay CSU type 2"
     priority: 7
+    priority_label: "Nhóm CSU"
+    display_name: "Mày đay CSU Type IIb"
+    criteria_text: "Tự miễn: Tự kháng thể IgG dương tính (+) và IgE kháng IL-24 âm tính (-)."
     conditions:
       all_of:
         - ref_rule: "R-GD-01"
@@ -198,8 +242,12 @@ rules:
 
   - rule_id: "R-CSU-OVL-01"
     name: "Mày đay CSU Chồng lấp (Overlap)"
+    layer: "T5 · Mày đay tự phát mạn tính — CSU"
     target_label: "Mày đay CSU overlap"
     priority: 7
+    priority_label: "Nhóm CSU"
+    display_name: "Mày đay CSU Thể chồng lấp (Overlap)"
+    criteria_text: "Đồng thời dương tính cả tự kháng thể IgG (+) và IgE kháng IL-24 (+)."
     conditions:
       all_of:
         - ref_rule: "R-GD-01"
@@ -220,8 +268,12 @@ rules:
 
   - rule_id: "R-CSU-UNK-01"
     name: "Mày đay CSU Không xác định (Giai đoạn 1)"
+    layer: "T5 · Mày đay tự phát mạn tính — CSU"
     target_label: "Mày đay CSU unknown"
     priority: 7
+    priority_label: "Nhóm CSU"
+    display_name: "Mày đay CSU Không xác định (Giai đoạn 1)"
+    criteria_text: "Theo dõi >= 60 ngày, cả tự kháng thể IgG và IgE kháng IL-24 đều âm tính (-)."
     conditions:
       all_of:
         - ref_rule: "R-GD-01"
@@ -241,8 +293,12 @@ rules:
 
   - rule_id: "R-CSU-UNK-02"
     name: "Mày đay CSU Không xác định (Giai đoạn 2)"
+    layer: "T5 · Mày đay tự phát mạn tính — CSU"
     target_label: "Mày đay CSU unknown"
     priority: 7
+    priority_label: "Nhóm CSU"
+    display_name: "Mày đay CSU Không xác định (Giai đoạn 2)"
+    criteria_text: "Test ASST âm tính và IgE kháng IL-24 âm tính (-)."
     conditions:
       all_of:
         - ref_rule: "R-GD-02"
@@ -256,9 +312,13 @@ rules:
   # =========================================================================
   - rule_id: "R-DEFAULT"
     name: "Chưa đủ dữ liệu phân loại, tiếp tục theo dõi"
+    layer: "T6 · Chưa đủ dữ kiện / ngoại lệ"
     target_label: "Chưa phân loại (Tiếp tục theo dõi)"
     target_status: "INSUFFICIENT_DATA"
     priority: 8
+    priority_label: "Ngoại lệ"
+    display_name: "Chưa phân loại (Tiếp tục theo dõi)"
+    criteria_text: "Hồ sơ mạn tính thiếu kết quả bắt buộc: ASST trống, chưa đủ 60 ngày theo dõi hoặc thiếu ELISA."
     conditions:
       any_of:
         - field: "asst_ket_qua"

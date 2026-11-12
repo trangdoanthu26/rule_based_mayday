@@ -1,159 +1,192 @@
-## Kiểm thử hệ thống Rule-Based bằng bệnh án giả lập
+# Hệ thống Rule-Based hỗ trợ phân loại bệnh án mày đay và phản vệ
 
-### 1. Tạo bộ dữ liệu bệnh án giả lập
+Ứng dụng Python/Streamlit minh họa cách áp dụng bộ quy tắc YAML để suy luận trên dữ liệu bệnh án dạng JSON. Dự án có ba phân hệ độc lập:
 
-Để kiểm thử hệ thống Rule-Based mà không để nhãn bệnh ảnh hưởng đến quá trình suy luận, các bệnh án giả lập được tạo bằng **NotebookLM** dựa trên bảng biến và các giá trị hợp lệ đã được định nghĩa trong nguồn dữ liệu.
+- **Phản vệ và sốc phản vệ**
+- **Mày đay cấp**
+- **Mày đay mạn tính** (CIndU và CSU)
 
-Mỗi nhóm bệnh được yêu cầu tạo các bệnh án có đặc điểm đa dạng, bao gồm:
+Người dùng có thể chọn ca giả định, tải hồ sơ JSON/CSV, xem các quy tắc được đánh giá và đọc giải thích kết quả. Đây là dự án thử nghiệm/phục vụ phát triển, **không phải thiết bị y tế hay công cụ chẩn đoán đã được thẩm định**.
 
-1. **Ca điển hình**: các triệu chứng và thông tin phù hợp rõ ràng với nhóm bệnh.
-2. **Ca điển hình nhưng thay đổi đặc điểm**: thay đổi tuổi, giới tính hoặc yếu tố khởi phát nhưng vẫn đảm bảo phù hợp với bệnh.
-3. **Ca thiếu dữ liệu**: cố ý để trống nhiều biến nhằm kiểm tra khả năng xử lý dữ liệu không đầy đủ.
-4. **Ca sát ranh giới**: tạo các trường hợp có biểu hiện gần với ranh giới phân loại giữa các mức độ bệnh. (chỉ áp dụng với cấp và phản vệ)  ### mình tạo thấy lâu quá nên đã bỏ qua tiêu chí này với các loại còn lại =}}
-6. **Có nhiễu**: bệnh nền, thuốc đang dùng, triệu chứng không liên quan  (chỉ dùng với phản vệ) ### cái này cũng thế
+## Yêu cầu
 
-Bệnh án được tạo dưới dạng JSON với cấu trúc:
+- Python 3.9.6 trở lên
+- pip
+
+Các thư viện trực tiếp được khai báo trong `requirements.txt`: Streamlit 1.50.0 và PyYAML 6.0.3.
+
+## Cài đặt và chạy trên Windows
+
+Từ thư mục gốc của repository, tạo môi trường ảo và cài dependencies:
+
+```powershell
+py -m venv mayday_rb
+.\mayday_rb\Scripts\python.exe -m pip install --upgrade pip
+.\mayday_rb\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+Khởi chạy ứng dụng:
+
+```powershell
+.\mayday_rb\Scripts\python.exe -m streamlit run main.py
+```
+
+Mở URL được Streamlit in ra trong terminal (thường là `http://localhost:8501`). Có thể dừng ứng dụng bằng `Ctrl+C`.
+
+## Sử dụng demo
+
+1. Chọn phân hệ bệnh án ở đầu trang.
+2. Ở thanh bên, chọn ca giả định mẫu, tải hồ sơ `.json`/`.csv` hoặc chọn **Nhập theo mẫu engine** và điền tại tab **Nhập bệnh án**.
+3. Kiểm tra dữ liệu hiển thị; có thể bật phần đối chiếu JSON và chỉnh sửa dữ liệu để thử các trường hợp biên.
+4. Chọn **Phân loại và giải thích**.
+5. Đọc trạng thái, kết luận (nếu có), các trường còn thiếu, quy tắc khớp/chặn và tab **Logic suy luận**.
+
+Demo chỉ chạy bộ luật tương ứng với phân hệ được chọn; việc chọn phân hệ không tự chuyển đổi hoặc ánh xạ dữ liệu từ một biểu mẫu khác.
+
+### Định dạng dữ liệu đầu vào
+
+JSON có thể là object dữ liệu trực tiếp theo cấu trúc CANONICAL mà bộ luật sử dụng:
 
 ```json
 {
-  "id": "BA_xxx",
-  "nhan": "[TÊN LOẠI]",
-  "du_lieu": {
-    "...": "..."
+  "tuoi": 28,
+  "huyet_ap_tam_thu_thap_nhat": 80,
+  "huyet_ap_tam_thu_nen": 120,
+  "trieu_chung_da_hien_tai_pv": {
+    "danh_sach_chon": ["Sẩn phù"]
   }
 }
 ```
 
-Trong quá trình tạo dữ liệu, các quy tắc sau được áp dụng:
+Hoặc dùng envelope có trường `du_lieu`:
 
-* Khóa `nhan` là nơi duy nhất chứa tên bệnh/nhãn phân loại.
-* Các biến dùng làm nhãn và các trường chẩn đoán như `chan_doan_tuyen_truoc`, `chan_doan_ban_dau_phong_kham`, `chan_doan_tai_kham` được để trống.
-* Các trường ghi chú tự do không chứa tên bệnh hoặc kết luận chẩn đoán.
-* Chỉ sử dụng các giá trị hợp lệ theo bảng biến.
-* Dữ liệu được xây dựng theo hướng hợp lý về mặt lâm sàng.
-* ID của bệnh án được tạo ngẫu nhiên và không chứa thông tin gợi ý về nhãn.
+```json
+{
+  "du_lieu": {
+    "tuoi": 28,
+    "huyet_ap_tam_thu_thap_nhat": 80,
+    "huyet_ap_tam_thu_nen": 120
+  }
+}
+```
 
-### 2. Tách nhãn và chạy Rule-Based
+Tên trường và kiểu dữ liệu cần phù hợp với bộ luật của phân hệ. CSV được đọc từ **dòng dữ liệu đầu tiên**; tiêu đề cột phải là tên trường CANONICAL. Giá trị số và `true`/`false` được chuyển đổi tự động; các kiểu dữ liệu lồng nhau nên dùng JSON.
 
-Sau khi tạo bộ bệnh án, trường `nhan` được **tách riêng khỏi dữ liệu đầu vào**.
+Với JSON RAW dạng các bảng HIS có `hanh_chinh`, demo cho chọn bệnh nhân/lượt khám và mapping có giới hạn: tuổi, giới tính, HATT thấp nhất trong lượt khám cho Phản vệ và IgE sau xác nhận. Trường không có nguồn giữ `null`; không suy triệu chứng từ ICD hoặc thuốc. Phạm vi mapping và cách bổ sung dữ kiện tại tab **Nhập bệnh án** được ghi trong [hướng dẫn nhập liệu](docs/07_patient_input_mapping.md). Ứng dụng chưa có mapping RAW/legacy tổng quát, không tự điền giá trị còn thiếu và không thực thi JSON Schema để xác thực upload. Các file trong `schema/` là tài liệu hợp đồng dữ liệu tham khảo, không phải bảo đảm rằng input được runtime xác thực theo schema.
 
-Hệ thống Rule-Based chỉ nhận phần `du_lieu` của từng bệnh án để thực hiện suy luận và đưa ra nhãn dự đoán.
+### Trạng thái kết quả
 
-Quy trình kiểm thử:
+- `CLASSIFIED`: bộ luật chọn được một nhãn phân loại.
+- `THEODOIPV`: nhánh theo dõi phản vệ được kích hoạt; đây không phải nhãn bệnh.
+- `INSUFFICIENT_DATA`: thiếu dữ kiện có thể ảnh hưởng đến kết quả.
+- `NEEDS_REVIEW`: có dữ liệu sai kiểu hoặc kết quả cần người có chuyên môn rà soát.
+- `UNRESOLVED`: chưa có luật đích phù hợp.
+- `INVALID_DATA`, `OUT_OF_SCOPE`: các trạng thái được engine hỗ trợ cho những trường hợp tương ứng.
+
+`UNKNOWN` không được mặc định xem là `FALSE`; do đó thiếu dữ liệu có thể khiến kết quả cần bổ sung hoặc rà soát thay vì đưa ra phân loại.
+
+## Chạy kiểm thử
+
+```powershell
+.\mayday_rb\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+Các kiểm thử bao phủ engine, định tuyến ba phân hệ, ca logic giả định và giao diện Streamlit. Tham khảo kết quả chạy test tại thời điểm hiện tại; các tài liệu trạng thái và rà soát có thể ghi nhận test hoặc vấn đề còn mở.
+
+## Cấu trúc repository
 
 ```text
-Bệnh án giả lập
-       │
-       ├── nhan ───────────────► Nhãn thực tế (Ground Truth)
-       │
-       └── du_lieu ─────────────► Rule-Based
-                                      │
-                                      ▼
-                               Nhãn dự đoán
-                                      │
-                                      ▼
-                         So sánh với Ground Truth
-                                      │
-                                      ▼
-                             Confusion Matrix
+.
+├── main.py                  # Giao diện demo Streamlit
+├── requirements.txt         # Dependencies Python
+├── rules/                   # Bộ luật YAML theo phân hệ
+├── schema/                  # JSON Schema tham khảo theo biểu mẫu
+├── src/
+│   ├── classify.py          # Engine nạp và đánh giá luật
+│   ├── pipeline.py          # Nạp engine và định tuyến theo phân hệ
+│   ├── patient_input.py     # Input theo engine và mapping RAW giới hạn
+│   ├── preprocess.py        # Tiền xử lý tiện ích
+│   ├── validate.py          # Tiện ích validation
+│   ├── anonymize.py         # Tiện ích khử định danh
+│   └── evaluate.py          # Tiện ích đánh giá
+├── data/synthetic/          # Ca giả định và kết quả kiểm thử logic
+├── tests/                   # Bộ kiểm thử unittest
+└── docs/                    # Workflow, bộ luật, từ điển dữ liệu, changelog
 ```
 
-Cách thực hiện này giúp đánh giá khả năng suy luận của bộ luật mà không đưa trực tiếp nhãn bệnh vào dữ liệu đầu vào.
+`src/preprocess.py` và `src/anonymize.py` có các hàm tiện ích độc lập nhưng hiện không được gọi bởi demo hoặc `classify_form`; `src/validate.py` và `src/evaluate.py` hiện còn trống. Engine vẫn tự kiểm tra cấu trúc YAML của bộ luật khi nạp, nhưng chưa có bước xác thực hồ sơ bệnh nhân theo JSON Schema. Vì vậy, pipeline tự động từ hồ sơ RAW đến kết quả (bao gồm validation và đánh giá) hiện chưa được triển khai.
 
-### 3. Kết quả kiểm thử
+### Luồng dữ liệu mục tiêu: RAW → kết quả
 
-Bộ kiểm thử gồm **53 bệnh án giả lập**, thuộc 12 nhóm phân loại:
+Luồng dưới đây mô tả pipeline nên xây dựng khi tích hợp đầy đủ các bước. Đây là **thiết kế mục tiêu**, không phải mô tả những gì demo đang tự động thực hiện.
 
-* Cấp nặng: 5 ca
-* Cấp thường: 5 ca
-* 8 nhóm con của CindU và CSU: 3 ca/nhóm, tổng cộng 24 ca
-* Phản vệ: 10 ca
-* Sốc phản vệ: 9 ca  ### đang chạy thì hết token =}}
+```text
+Hồ sơ RAW
+   ↓
+Tiếp nhận và kiểm tra định dạng/cấu trúc
+   ↓
+Tách thông tin định danh và nhãn đánh giá khỏi dữ liệu suy luận
+   ↓
+Ánh xạ trường RAW → CANONICAL
+   ↓
+Tiền xử lý và tạo biến dẫn xuất
+   ↓
+Xác thực dữ liệu CANONICAL
+   ↓
+Khử định danh khi phù hợp với mục đích sử dụng
+   ↓
+Định tuyến đúng phân hệ → chạy bộ luật YAML
+   ↓
+Trả kết quả, trạng thái, giải thích, trường thiếu và thông tin phiên bản luật
 
-Kết quả cho thấy hệ thống phân loại đúng **43/53 ca**, tương ứng:
-
-**Accuracy = 81,13%**
-
-| Nhóm                    | Đúng/Tổng | Recall |
-| ----------------------- | --------: | -----: |
-| Cấp nặng                |       5/5 |   100% |
-| Cấp thường              |       4/5 |    80% |
-| Mày đay CSU overlap     |       3/3 |   100% |
-| Mày đay CSU type 1      |       3/3 |   100% |
-| Mày đay CSU type 2      |       3/3 |   100% |
-| Mày đay CSU unknown     |       3/3 |   100% |
-| Mày đay CIndU Choline   |       3/3 |   100% |
-| Mày đay CIndU da vẽ nổi |       3/3 |   100% |
-| Mày đay CIndU do lạnh   |       3/3 |   100% |
-| Mày đay CIndU khác      |       3/3 |   100% |
-| Phản vệ                 |     10/10 |   100% |
-| Sốc phản vệ             |       0/9 |     0% |
-
-### 4. Phân tích Confusion Matrix
-
-Kết quả confusion matrix cho thấy phần lớn các lớp được phân loại chính xác trên bộ dữ liệu kiểm thử.
-
-Đặc biệt:
-
-* Các nhóm **mày đay** được phân loại đúng toàn bộ 24/24 ca.
-* **Cấp nặng** được phân loại đúng 5/5 ca.
-* **Phản vệ** được phân loại đúng 10/10 ca.
-* Có **1 ca cấp thường bị dự đoán thành cấp nặng**.
-* Có **9/9 ca sốc phản vệ bị dự đoán thành phản vệ**.
-
-Lỗi lớn nhất nằm ở cặp **Phản vệ – Sốc phản vệ**. Hệ thống hiện tại đã nhận diện được các ca phản vệ nhưng chưa phân biệt được các ca sốc phản vệ với phản vệ. Do đó, mặc dù accuracy tổng thể đạt 81,13%, **Recall của lớp Sốc phản vệ chỉ đạt 0%**.
-
-Các chỉ số trung bình theo lớp:
-
-* **Macro Precision ≈ 86,33%**
-* **Macro Recall = 90,00%**
-* **Macro F1 ≈ 87,40%**
-
-Tuy nhiên, các chỉ số tổng hợp cần được diễn giải cùng với confusion matrix. Đặc biệt, Macro Recall cao không phản ánh đầy đủ vấn đề của lớp Sốc phản vệ, do nhiều lớp khác đạt recall 100%.
-
-### 5. Nhận xét
-
-Kết quả kiểm thử cho thấy bộ Rule-Based đã phân biệt tốt các nhóm bệnh có đặc trưng rõ ràng trong bộ dữ liệu giả lập. Tuy nhiên, **khả năng phân biệt giữa phản vệ và sốc phản vệ vẫn là điểm cần cải thiện chính**.
-
-Ngoài ra, số lượng bệnh án ở một số lớp còn nhỏ, đặc biệt các nhóm mày đay chỉ có 3 ca/nhóm. Vì vậy, kết quả 100% trên các lớp này mới phản ánh hiệu năng trên **bộ kiểm thử giả lập hiện tại**, chưa đủ để kết luận về khả năng tổng quát hóa trên dữ liệu bệnh án thực tế.
-
-## 6. Lõi hiện tại và cách chạy
-
-Số liệu 53 ca ở trên là kết quả lịch sử, chưa được chạy lại theo hợp đồng lõi mới. Engine nhận một dictionary CANONICAL; mapping hồ sơ legacy, validation/schema, preprocessing, anonymization, batch và evaluator chưa được nối vào pipeline.
-
-```sh
-python3 -m venv mayday_rb
-mayday_rb/bin/python -m pip install -r requirements.txt
-PYTHONDONTWRITEBYTECODE=1 mayday_rb/bin/python -m unittest discover -s tests -v
+Bộ dữ liệu có nhãn ──→ đối chiếu với kết quả sau suy luận để đánh giá riêng
 ```
+
+1. **Tiếp nhận RAW:** đọc tệp, xác nhận định dạng và cấu trúc cơ bản. Tệp lỗi hoặc không đọc được phải bị từ chối với thông báo rõ ràng.
+2. **Tách dữ liệu:** tách PII (thông tin định danh) và metadata khỏi phần dữ liệu lâm sàng. Nhãn thật, nếu có trong bộ dữ liệu nghiên cứu, phải được giữ riêng và tuyệt đối không gửi vào engine.
+3. **Ánh xạ RAW → CANONICAL:** chuyển tên trường và giá trị theo từng nguồn dữ liệu sang hợp đồng CANONICAL của phân hệ. Ghi nhận giá trị không ánh xạ được; không tự suy diễn giá trị còn thiếu thành “Không”.
+4. **Tiền xử lý:** chuẩn hóa định dạng và tính các biến dẫn xuất mà luật cần. Chỉ thực hiện phép biến đổi đã được quy định, đồng thời giữ khả năng truy vết nguồn gốc dữ liệu.
+5. **Xác thực CANONICAL:** kiểm tra kiểu, miền giá trị, đơn vị và ràng buộc giữa trường trước khi suy luận. Hợp đồng đầu vào suy luận cần tách khỏi schema bệnh án đầy đủ nếu schema đầy đủ yêu cầu chẩn đoán hoặc nhãn không được phép làm đầu vào.
+6. **Khử định danh:** trước khi lưu trữ, chia sẻ hoặc xử lý ngoài môi trường có quyền truy cập phù hợp, loại bỏ/che thông tin nhận dạng không cần thiết. Nếu cần tạo biến từ ngày sinh hoặc thông tin định danh, thực hiện phép tính được cho phép trước khi loại bỏ nguồn đó; không xem khử định danh là bảo đảm chống tái nhận dạng tuyệt đối.
+7. **Định tuyến và suy luận:** chọn đúng một trong ba phân hệ `phan_ve`, `cap`, `man`, rồi gọi engine với dữ liệu CANONICAL đã kiểm tra. Engine trả trạng thái, nhãn nếu đủ căn cứ, luật khớp/chặn, trường thiếu, trace và phiên bản/hash bộ luật.
+8. **Trả và lưu kết quả:** trình bày kết luận cùng giới hạn/cảnh báo; kiểm soát quyền truy cập và lưu vết theo chính sách dữ liệu của hệ thống.
+9. **Đánh giá riêng:** chỉ với bộ dữ liệu có nhãn, so sánh kết quả suy luận với nhãn thật sau khi suy luận hoàn tất để tính các chỉ số. Đây là luồng đánh giá tập dữ liệu, không phải bước bắt buộc cho mỗi hồ sơ sử dụng thông thường.
+
+**Tình trạng triển khai hiện tại:** demo đọc JSON/CSV đơn giản hoặc ca giả định, cho phép chọn phân hệ, rồi chuyển dữ liệu trực tiếp vào engine. Đã có mapping RAW → CANONICAL giới hạn qua giao diện; chưa có xác thực hồ sơ đầu vào bằng schema, pipeline tiền xử lý/khử định danh tự động hoặc module đánh giá hoàn chỉnh. Các bước này cần được triển khai và kiểm thử trước khi coi luồng trên là pipeline vận hành.
+
+### Gọi engine từ Python
 
 ```python
 from src.pipeline import classify_form, load_engines
 
 engines = load_engines()
-result = classify_form("phan_ve", canonical_patient_data, engines)
+patient_data = {
+    "tuoi": 28,
+    "huyet_ap_tam_thu_thap_nhat": 80,
+    "huyet_ap_tam_thu_nen": 120,
+}
+
+result = classify_form("phan_ve", patient_data, engines)
+print(result["status"], result["predicted_label"])
 ```
 
-Kết quả giữ sáu trường public hiện có và bổ sung kết quả từng luật, luật khớp/chặn, trường thiếu, trace không chứa giá trị bệnh án, version và SHA-256 của YAML. Lõi trả `CLASSIFIED`, `INSUFFICIENT_DATA`, `NEEDS_REVIEW` hoặc `UNRESOLVED`; các gate pipeline còn mở được ghi ở `docs/03_implementation_readiness.md`.
+`form_type` nhận một trong các giá trị `phan_ve`, `cap`, hoặc `man`. `patient_data` cần là object CANONICAL; hàm này không tự đọc envelope `du_lieu`.
 
-## 7. Demo Streamlit
+## Tài liệu liên quan
 
-Demo ở `main.py` dùng 138 ca giả định, chọn rõ một trong ba mẫu Phản vệ, Cấp, Mạn rồi chạy đúng bộ YAML của mẫu đó. Có thể chọn ca, sửa JSON, xem rule/điều kiện/trace và đối chiếu ba diagram. `THEODOIPV` là cảnh báo theo dõi khi đã đủ dữ kiện loại trừ tiêu chí; `INSUFFICIENT_DATA` giữ danh sách trường thiếu.
+- [Tổng quan dự án](docs/00_overview.md)
+- [Bộ quy tắc](docs/01_rules.md)
+- [Workflow](docs/02_workflow.md)
+- [Từ điển dữ liệu](docs/01_data_dictionary/)
+- [Các ca kiểm thử](docs/04_test_cases.md)
+- [Changelog và hướng dẫn demo](docs/05_changelog.md)
+- [Rà soát logic luật](docs/06_rule_logic_review.md)
+- [Nhập bệnh án và mapping RAW](docs/07_patient_input_mapping.md)
+- [Mức độ sẵn sàng triển khai và các vấn đề còn mở](docs/03_implementation_readiness.md)
 
-```sh
-source mayday_rb/bin/activate
-python -m pip install -r requirements.txt
-python -m unittest discover -s tests -v
-python -m streamlit run main.py --server.address 127.0.0.1
-```
+## An toàn dữ liệu và giới hạn sử dụng
 
-Mở địa chỉ localhost mà Streamlit in ra. [Streamlit 1.50.0](https://pypi.org/project/streamlit/1.50.0/) hỗ trợ Python 3.9.6 của `mayday_rb` hiện tại; PyYAML giữ phiên bản 6.0.3. Không cần cài Graphviz hay thư viện vẽ riêng để xem SVG có sẵn.
-
-Input CANONICAL là object hoặc envelope `{"du_lieu": {...}}`; metadata/nhãn thật không được truyền vào suy diễn. Trường thiếu được giữ thiếu. Đổi input sẽ xóa kết quả cũ, cần bấm phân loại lại. Các bước validator/preprocessing/batch chưa triển khai được ghi rõ; diagram thể hiện workflow đề xuất, còn kết quả từng rule lấy trực tiếp từ engine.
-
-Giao diện hiện có tab **Nhập bệnh án** với ô nhập theo trường YAML/schema của mẫu đã chọn. Chọn nguồn **Nhập theo mẫu engine** để tạo bệnh án mới, hoặc dùng panel bổ sung file vừa upload. Với JSON RAW dạng các bảng HIS, giao diện cho chọn bệnh nhân/lượt khám và mapping các trường có nguồn xác định; dữ liệu thiếu giữ `null`. Phạm vi mapping, xác nhận IgE và cách dùng panel tại [hướng dẫn nhập liệu](docs/07_patient_input_mapping.md). Validator RAW tổng quát và suy diễn triệu chứng từ văn bản vẫn chưa triển khai.
-
-Nhánh cấp thường đã có ca khớp với shape schema; HATT sai kiểu được giữ ở trạng thái cần rà soát. Các lệch CIndU/CSU và phạm vi RAW còn mở được ghi tại [báo cáo logic](docs/06_rule_logic_review.md). Pipeline RAW tổng quát vẫn chưa hoàn thiện.
-
-Bộ `unittest` dùng `mayday_rb`; test giao diện dùng `streamlit.testing.v1.AppTest`. Ý nghĩa hiển thị, ca thực hành và lịch sử sửa đổi được ghi trong [changelog và hướng dẫn demo](docs/05_changelog.md).
-
+- Chỉ dùng dữ liệu giả định hoặc dữ liệu đã được phê duyệt và khử định danh phù hợp. Không tải thông tin định danh bệnh nhân thật lên demo nếu chưa có phê duyệt, kiểm soát truy cập và biện pháp bảo vệ dữ liệu thích hợp.
+- Các bộ ca trong repository phục vụ kiểm thử giả định; kết quả trên các ca này không chứng minh độ chính xác hoặc khả năng tổng quát hóa trên bệnh án thực tế.
+- Quy tắc trong YAML và đầu ra của ứng dụng cần được chuyên gia y tế kiểm tra. Không dùng kết quả để thay thế đánh giá lâm sàng, quyết định cấp cứu hoặc hướng dẫn của nhân viên y tế.
+- Các điều kiện chuyên môn, mapping dữ liệu và một số hạn chế triển khai còn được ghi nhận trong tài liệu rà soát; cần giải quyết và thẩm định trước mọi mục đích sử dụng lâm sàng.

@@ -48,7 +48,7 @@ class TestFormRouting(unittest.TestCase):
     def test_r01_with_low_pressure_is_shock(self):
         result = classify_form("phan_ve", self.cases["PV-07"], self.engines)
         self.assertEqual(result["matched_rule_id"], "R-SOC")
-        self.assertIs(result["rule_results"]["R01-PV"], True)
+        self.assertIs(result["rule_results"]["R01-PV-KHONG-DI-NGUYEN"], True)
 
     def test_shock_age_and_pressure_boundaries(self):
         for age, threshold in ((0, 70), (0.05, 70), (0.999, 70),

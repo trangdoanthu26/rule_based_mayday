@@ -5,7 +5,11 @@ description: "Mày đay cấp"
 rules:
   - rule_id: "R-SANGLOC-CAP"
     name: "Điều kiện tiên quyết Mày đay cấp"
+    layer: "T3 · Mày đay cấp"
     is_base_condition: true
+    priority_label: "Ưu tiên 1"
+    display_name: "Điều kiện tiên quyết Mày đay cấp"
+    criteria_text: "Hiện tại có sẩn phù dạng bờ rõ (vòng, tròn, bản đồ) + Có ảnh sẩn phù + Thời gian khởi phát <= 1008 giờ (6 tuần)."
     conditions:
       all_of:
         - field: "hien_tai_co_san_phu"
@@ -24,8 +28,12 @@ rules:
 
   - rule_id: "R01-CAP-NANG-NGUA"
     name: "Mày đay cấp có ngứa nhiều"
+    layer: "T3 · Mày đay cấp"
     target_label: "Mày đay cấp có dấu hiệu nặng"
     priority: 4
+    priority_label: "Ưu tiên 2"
+    display_name: "Mày đay cấp có dấu hiệu nặng (Ngứa nhiều)"
+    criteria_text: "trieu_chung_da_hien_tai = Ngứa nhiều -> Cấp nặng."
     conditions:
       all_of:
         - ref_rule: "R-SANGLOC-CAP"
@@ -36,8 +44,12 @@ rules:
 
   - rule_id: "R02-CAP-NANG-PHUMACH"
     name: "Mày đay cấp có phù mạch đáng kể"
+    layer: "T3 · Mày đay cấp"
     target_label: "Mày đay cấp có dấu hiệu nặng"
     priority: 4
+    priority_label: "Ưu tiên 2"
+    display_name: "Mày đay cấp có dấu hiệu nặng (Phù mạch đáng kể)"
+    criteria_text: "trieu_chung_da_hien_tai = Phù mạch đáng kể (hoặc mi mắt, lưỡi, thanh quản, môi, hoặc vào viện >= 1 lần) -> Cấp nặng."
     conditions:
       all_of:
         - ref_rule: "R-SANGLOC-CAP"
@@ -58,8 +70,12 @@ rules:
 
   - rule_id: "R03-CAP-NANG-CONLAI"
     name: "Mày đay cấp có dấu hiệu nặng khác"
+    layer: "T3 · Mày đay cấp"
     target_label: "Mày đay cấp có dấu hiệu nặng"
     priority: 4
+    priority_label: "Ưu tiên 2"
+    display_name: "Mày đay cấp có dấu hiệu nặng (Dấu hiệu khác)"
+    criteria_text: "Sẩn phù kèm một trong các dấu hiệu: Tiêu hóa (nôn, đau quặn bụng) HOẶC Hô hấp (khò khè, nghẹn họng) HOẶC Diện tích > 50% BSA HOẶC > 50 nốt sẩn phù."
     conditions:
       all_of:
         - ref_rule: "R-SANGLOC-CAP"
@@ -89,8 +105,12 @@ rules:
 
   - rule_id: "R01-CAP-THUONG"
     name: "Mày đay cấp thông thường"
+    layer: "T3 · Mày đay cấp"
     target_label: "Mày đay cấp thông thường"
     priority: 5
+    priority_label: "Ưu tiên 3"
+    display_name: "Mày đay cấp thông thường"
+    criteria_text: "Có sẩn phù VÀ phủ định toàn bộ các tiêu chí nặng ở Bước 1, Bước 2, Bước 3."
     conditions:
       all_of:
         - ref_rule: "R-SANGLOC-CAP"
